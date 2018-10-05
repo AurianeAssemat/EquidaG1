@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
-        <param-value>jdbc:mysql://localhost:3306/Equida18</param-value>
+        <param-value>jdbc:mysql://localhost:3306/Equida18_G1</param-value>
     </context-param>
     <context-param>
         <param-name>utilisateurjdbc</param-name>
