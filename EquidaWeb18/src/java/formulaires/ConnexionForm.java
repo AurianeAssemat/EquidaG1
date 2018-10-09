@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import modele.Compte;
 
@@ -44,7 +47,20 @@ public class ConnexionForm {
             throw new Exception( "Le mot de passe doit contenir au moins 5 caractères." );
         }
     }
-    
+    private String hachageMdpMD5( String mdp ) throws Exception{
+        byte[] passBytes = mdp.getBytes();
+        try {
+            MessageDigest algorithm = MessageDigest.getInstance("MD5");
+            algorithm.reset();
+            algorithm.update(passBytes);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(passBytes);
+            BigInteger number = new BigInteger(1, messageDigest);
+            return number.toString(16) ;
+        } catch (NoSuchAlgorithmException e) {
+            throw new Exception("Erreur lors du hachage");
+        }
+    }
        
     
     
@@ -77,6 +93,13 @@ public class ConnexionForm {
             addErreur(e.getMessage() );
         }
         
+        try {
+             compte.setMdp(hachageMdpMD5( compte.getMdp()));
+        } catch ( Exception e ) {
+            addErreur(e.getMessage() );
+        }
+    
+        
         return compte;
                
     }
@@ -89,7 +112,7 @@ public class ConnexionForm {
         this.erreurs = erreurs;
     }
     
-    private void addErreur( String message ) {
+    public void addErreur( String message ) {
         getErreurs().add(message);
     } 
     

@@ -20,10 +20,11 @@
                 //Client client=(Client)request.getAttribute("client");
              
                 ConnexionForm form = (ConnexionForm)request.getAttribute("form");
-                if(form != null){
+                
+                if(form != null && form.getErreurs() != null){
                     for(int i = 0; i < form.getErreurs().size();i++)
                     {
-                        out.println(form.getErreurs().get(i));
+                        out.println(form.getErreurs().get(i) + "<br/>");
                     }
                 }
             %>

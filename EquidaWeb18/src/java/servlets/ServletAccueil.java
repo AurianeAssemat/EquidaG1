@@ -119,17 +119,21 @@ public class ServletAccueil extends HttpServlet {
         ConnexionForm form = new ConnexionForm();
 	
         Compte compte = form.Connexion(request);
-        compte = CompteDAO.getUnCompte(connection, compte.getLogin(),compte.getMdp());
-        
+        if (form.getErreurs().isEmpty() ){
+            compte = CompteDAO.getUnCompte(connection, compte.getLogin(),compte.getMdp());
+            if(compte == null){
+                form.addErreur("Nom de compte ou mot de passe incorrect !");
+            }
+        }
         request.setAttribute( "form", form );
         
-        if (form.getErreurs().isEmpty() && compte != null || request.getSession().getAttribute("Compte") != null){
+        if (form.getErreurs().isEmpty() ){
             request.getSession().setAttribute("Compte",compte);
             this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp" ).forward( request, response );
         }
         else
         { 
-            request.setAttribute("pLesErreurs", form.getErreurs());
+            //request.setAttribute("pLesErreurs", form.getErreurs());
             this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp" ).forward( request, response );
         }
     

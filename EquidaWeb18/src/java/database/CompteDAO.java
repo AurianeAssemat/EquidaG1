@@ -26,7 +26,7 @@ public class CompteDAO {
     
     
     public static Compte  getUnCompte(Connection connection,String login,String mdp){      
-        Compte unCompte = new Compte();
+        Compte unCompte = null;
         try
         {
             //preparation de la requete     
@@ -36,20 +36,21 @@ public class CompteDAO {
             //executer la requete
             rs=requete.executeQuery();
             
-            rs.next();
+            if(rs.next()){
                     
-            Client unClient = new Client();
-            unClient.setId(rs.getInt("client.id"));
-            unClient.setNom(rs.getString("nom"));
-            unClient.setPrenom(rs.getString("prenom"));
-            unClient.setCopos(rs.getString("copos"));
-            unClient.setMail(rs.getString("mail"));
-            
-            unCompte.setId(rs.getInt("compte.id"));
-            unCompte.setLogin(rs.getString("login"));
-            unCompte.setMdp(rs.getString("mdp"));
-            unCompte.setUnClient(unClient);
-            
+                Client unClient = new Client();
+                unClient.setId(rs.getInt("client.id"));
+                unClient.setNom(rs.getString("nom"));
+                unClient.setPrenom(rs.getString("prenom"));
+                unClient.setCopos(rs.getString("copos"));
+                unClient.setMail(rs.getString("mail"));
+                
+                unCompte = new Compte();
+                unCompte.setId(rs.getInt("compte.id"));
+                unCompte.setLogin(rs.getString("login"));
+                unCompte.setMdp(rs.getString("mdp"));
+                unCompte.setUnClient(unClient);
+            }
             
         }   
         catch (SQLException e) 
