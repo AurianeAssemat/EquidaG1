@@ -67,6 +67,6 @@
                 </tr>
             </tbody>
         </table>
-                 <a href ='../'> Retour</a>
+                 <a href ='../ServletAccueil/Accueil'> Retour</a>
     </body>
 </html>

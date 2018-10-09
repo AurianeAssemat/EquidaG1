@@ -29,8 +29,8 @@
         <servlet-class>servlets.ServletClient</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletCourriel</servlet-name>
-        <servlet-class>servlets.ServletCourriel</servlet-class>
+        <servlet-name>ServletAccueil</servlet-name>
+        <servlet-class>servlets.ServletAccueil</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
@@ -57,6 +57,18 @@
         <url-pattern>/ServletVentes/listerLesClients</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletAccueil</servlet-name>
+        <url-pattern>/ServletAccueil/Connexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAccueil</servlet-name>
+        <url-pattern>/ServletAccueil/Deconnexion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAccueil</servlet-name>
+        <url-pattern>/ServletAccueil/Accueil</url-pattern>Deconnexion
+        </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/ajouterClient</url-pattern>
     </servlet-mapping>
@@ -65,5 +77,5 @@
         <session-timeout>
             30
         </session-timeout>
-    </session-config>
-</web-app>
+    </session-config>/EquidaWeb18/ServletConnexion/Connexion
+    </web-app>
