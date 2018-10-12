@@ -15,8 +15,8 @@ public class Acheteur extends Client {
         super();
     }
 
-    public Acheteur(int id, String nom, String prenom, String copos, String mail) {
-        super(id, nom, prenom, copos, mail);
+    public Acheteur(int id, String nom, String prenom, String copos, String mail, String titre) {
+        super(id, nom, prenom, copos, mail, titre);
         
     }
     

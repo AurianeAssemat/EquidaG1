@@ -16,7 +16,7 @@ public class ClientTest {
     
     public static void main(String[] args) {
         
-        Client unClient = new Client(1, "dupont", "luc","14000","adresse@mail.fr");
+        Client unClient = new Client(1, "dupont", "luc","14000","adresse@mail.fr","Monsieur");
         unClient.setUnPays(new Pays("FRA", "FRANCE"));     
         System.out.println(unClient.getNom() + "  " + unClient.getUnPays().getNom());
         
