@@ -63,6 +63,10 @@
         <url-pattern>/ServletVentes/listerLesClients</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/listerLesChevaux</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
         <url-pattern>/ServletAccueil/Connexion</url-pattern>
     </servlet-mapping>
