@@ -32,10 +32,16 @@
         <servlet-name>ServletAccueil</servlet-name>
         <servlet-class>servlets.ServletAccueil</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <servlet-class>servlets.ServletAdministrateur</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesVentes</url-pattern>
@@ -71,6 +77,11 @@
     <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/ajouterClient</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/ListerCategVente</url-pattern>
     </servlet-mapping>
     
     <session-config>
