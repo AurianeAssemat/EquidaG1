@@ -12,6 +12,7 @@
         Compte compte = (Compte)request.getSession().getAttribute("Compte");
         if(compte != null){
             out.println("<ul><li>" + compte.getUnClient().getPrenom() +" "+ compte.getUnClient().getNom() + "</br>");
+            out.println("<a href ='../ServletAccueil/Profil'> Information personnelle</a><br/>");
             out.println("<a href ='../ServletAccueil/Deconnexion'> Deconnexion</a></li>");
         }else{
             out.println("<ul><li><a href ='../ServletAccueil/Connexion'> Connexion</a></li>");

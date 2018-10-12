@@ -73,7 +73,13 @@
     <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
         <url-pattern>/ServletAccueil/Accueil</url-pattern>Deconnexion
-        </servlet-mapping>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAccueil</servlet-name>
+        <url-pattern>/ServletAccueil/Profil</url-pattern>Deconnexion
+    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/ajouterClient</url-pattern>
