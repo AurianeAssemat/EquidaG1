@@ -72,6 +72,10 @@
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/ajouterClient</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient/listerLesClients</url-pattern>
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>

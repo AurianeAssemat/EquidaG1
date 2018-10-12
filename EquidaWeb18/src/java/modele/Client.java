@@ -20,18 +20,41 @@ public class Client {
     private String copos ;
     private String ville;
     private String mail;
+    private String titre;
     private Pays unPays ;
     private ArrayList<CategVente> lesCategVentes ;
 
     public Client() {
     }
 
-    public Client(int id, String nom, String prenom,String copos,String mail) {
+    public Client(int id, String nom, String prenom, String rue, String copos, String ville, String mail, String titre) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.rue = rue;
+        this.copos = copos;
+        this.ville = ville;
+        this.mail = mail;
+        this.titre = titre;
+    }
+
+    public Client(int id, String nom, String prenom, String copos, String mail, String titre) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.copos = copos;
         this.mail = mail;
+        this.titre = titre;
+    }
+    
+    
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public int getId() {
