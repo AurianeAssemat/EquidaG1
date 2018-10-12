@@ -101,6 +101,14 @@ public class ServletAccueil extends HttpServlet {
         {                   
             this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp" ).forward( request, response );
         }
+        
+        if(url.equals("/EquidaWeb18/ServletAccueil/Profil"))
+        {                   
+            Compte compte = (Compte)request.getSession().getAttribute("Compte");
+            request.setAttribute("pInformationPersonnelle", compte);
+            
+            this.getServletContext().getRequestDispatcher("/vues/Profil.jsp" ).forward( request, response );
+        }
     }
 
     /**

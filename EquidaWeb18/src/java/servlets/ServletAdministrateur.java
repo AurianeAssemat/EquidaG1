@@ -32,7 +32,7 @@ import modele.Vente;
  * Fonctionnalités implémentées :
  *      ajouter un nouveau client
  */
-public class ServletClient extends HttpServlet {
+public class ServletAdministrateur extends HttpServlet {
     
     Connection connection ;
       
@@ -86,30 +86,12 @@ public class ServletClient extends HttpServlet {
         
        String url = request.getRequestURI();
        
-       if(url.equals("/EquidaWeb18/ServletClient/ajouterClient"))
-        {                   
-            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
-            request.setAttribute("pLesPays", lesPays);
-            
+       if(url.equals("/EquidaWeb18/ServletAdministrateur/ListerCategVente"))
+        {   
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-            request.setAttribute("pLesCategVente", lesCategVentes);
-            this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp" ).forward( request, response );
+            request.setAttribute("pLesCategVentes", lesCategVentes);
+            this.getServletContext().getRequestDispatcher("/vues/ventes/listerLesCategVentes.jsp" ).forward( request, response );
         }
-       //modification lister les clients en tant que directeur
-       if(url.equals("/EquidaWeb18/ServletClient/listerLesClients"))
-        {  
-            System.out.println("DANS LISTER LES CLIENTS");
-           
-            
-            ArrayList<Client> lesClients = ClientDAO.getLesClients(connection);
-            request.setAttribute("pLesClients", lesClients);
-            getServletContext().getRequestDispatcher("/vues/listerLesClients.jsp").forward(request, response);
-            
-        }
-       
-       
-       
-       
     }
 
     /**
@@ -120,37 +102,12 @@ public class ServletClient extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+    /*@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               
-         /* Préparation de l'objet formulaire */
-        ClientForm form = new ClientForm();
-		
-        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
-        Client unClient = form.ajouterClient(request);
-        
-        /* Stockage du formulaire et de l'objet dans l'objet request */
-        request.setAttribute( "form", form );
-        request.setAttribute( "pClient", unClient );
-		
-        if (form.getErreurs().isEmpty()){
-            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
-            ClientDAO.ajouterClient(connection, unClient);
-            this.getServletContext().getRequestDispatcher("/vues/clientConsulter.jsp" ).forward( request, response );
-        }
-        else
-        { 
-		// il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
-            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
-            request.setAttribute("pLesPays", lesPays);
-            
-            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-            request.setAttribute("pLesCategVente", lesCategVentes);
-           this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp" ).forward( request, response );
-        }
+      
     
-    }
+    }*/
 
     /**
      * Returns a short description of the servlet.
