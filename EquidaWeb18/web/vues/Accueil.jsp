@@ -15,31 +15,8 @@
     </head>
     <body>
         <h1>PAGE D'ACCUEIL EQUIDA</h1>
+        <jsp:include page="/vues/MenuNavigation.jsp" />
         
-        <%
-            
-            Compte compte = (Compte)request.getSession().getAttribute("Compte");
-            if(compte != null){
-                out.println("Bonjour , "+ compte.getUnClient().getPrenom() +" . "+ compte.getUnClient().getNom());
-                %>
-               
-                <a href ='../ServletAccueil/Deconnexion'> Deconnexion</a>
-                
-                <%
-            }else{
-                %>
-                <p>Connexion</p>
-                <a href ='../ServletAccueil/Connexion'> Connexion</a>
-                
-                <%
-            }
         
-        %>
-        
-        <ul>
-            <li><a href ='../ServletVentes/listerLesVentes'> Ventes</a></li>
-            <li><a href ='../ServletVentes/listerLesVendeurs'> Vendeurs</a></li>
-            <li><a href ='../ServletVentes/listerLesAcheteurs'> Acheteurs</a></li>
-        </ul> 
     </body>
 </html>
