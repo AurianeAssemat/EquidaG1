@@ -82,7 +82,11 @@
                         
                         out.println("<td><a href ='../ServletVentes/listerLesCourriel?codeVente="+ uneVente.getId()+ "'>");
                         out.println("Lister les Couriels envoyés");
-                        out.println("</td>");       
+                        out.println("</td>");      
+                        
+                        out.println("<td><a href ='../ServletVentes/listerLesChevaux?codeVente="+ uneVente.getId()+ "'>");
+                        out.println("Lister les Chevaux");
+                        out.println("</td>");
                     }
                     %>
                 </tr>

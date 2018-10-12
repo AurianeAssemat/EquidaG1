@@ -11,6 +11,7 @@ import database.AcheteurDAO;
 import database.VenteDAO;
 import database.CategVenteDAO;
 import database.CourrielDAO;
+import database.LotDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -26,6 +27,7 @@ import modele.Acheteur;
 import modele.Vente;
 import modele.Courriel;
 import modele.CategVente;
+import modele.Lot;
 /**
  *
  * @author Zakina
@@ -153,6 +155,15 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesCourriels.jsp").forward(request, response);
         }
         
+        if(url.equals("/EquidaWeb18/ServletVentes/listerLesChevaux"))
+        {  
+            String codeVente = (String)request.getParameter("codeVente");
+           
+            
+            ArrayList<Lot> lesLots = LotDAO.getLesLots(connection, codeVente);
+            request.setAttribute("pLesLots", lesLots);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
+        }
         
     }
 
