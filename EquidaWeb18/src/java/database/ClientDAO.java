@@ -37,14 +37,18 @@ public class ClientDAO {
             // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requete=connection.prepareStatement("INSERT INTO CLIENT ( nom, prenom, rue, copos, ville, codePays)\n" +
-                    "VALUES (?,?,?,?,?,?)", requete.RETURN_GENERATED_KEYS );
+
+            requete=connection.prepareStatement("INSERT INTO CLIENT ( nom, prenom, rue, copos, ville, mail, codePays, titre )\n" +
+                    "VALUES (?,?,?,?,?,?,?,?)", requete.RETURN_GENERATED_KEYS );
             requete.setString(1, unClient.getNom());
             requete.setString(2, unClient.getPrenom());
             requete.setString(3, unClient.getRue());
             requete.setString(4, unClient.getCopos());
             requete.setString(5, unClient.getVille());
-            requete.setString(6, unClient.getUnPays().getCode());
+            requete.setString(6, unClient.getMail());
+            requete.setString(7, unClient.getUnPays().getCode());
+            requete.setString(8, unClient.getTitre());
+            
 
            /* Exécution de la requête */
             requete.executeUpdate();
@@ -65,6 +69,41 @@ public class ClientDAO {
                  requete2.executeUpdate();
             }
             
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return unClient ;    
+    }
+    
+   public static Client  getUnClient(Connection connection, int idClient ){      
+        Client unClient = new  Client();
+        try
+        {
+            //preparation de la requete 
+            requete=connection.prepareStatement("SELECT * FROM client, pays WHERE client.codePays = pays.code AND client.id = ?; ");
+            requete.setInt(1, idClient);
+            //executer la requete
+            rs=requete.executeQuery();
+             
+            //On hydrate l'objet métier Client avec les résultats de la requête 
+                
+                unClient.setNom(rs.getString("nom"));
+                unClient.setPrenom(rs.getString("prenom"));
+                unClient.setNom(rs.getString("rue"));
+                unClient.setCopos(rs.getString("copos"));
+                unClient.setNom(rs.getString("ville"));
+                unClient.setMail(rs.getString("mail"));
+                unClient.setTitre (rs.getString("titre"));
+                
+                Pays p = new Pays();
+                p.setCode(rs.getString("code"));
+                p.setNom(rs.getString("nom"));
+                
+                unClient.setUnPays(p);
+               
         }   
         catch (SQLException e) 
         {
@@ -113,4 +152,6 @@ public class ClientDAO {
         }
         return lesClients ;    
     }
+    
+    
 }

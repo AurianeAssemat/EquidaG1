@@ -95,12 +95,11 @@ public class ServletClient extends HttpServlet {
             request.setAttribute("pLesCategVente", lesCategVentes);
             this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp" ).forward( request, response );
         }
-       //modification lister les clients en tant que directeur
+       //lister les clients en tant que directeur
        if(url.equals("/EquidaWeb18/ServletClient/listerLesClients"))
         {  
             System.out.println("DANS LISTER LES CLIENTS");
            
-            
             ArrayList<Client> lesClients = ClientDAO.getLesClients(connection);
             request.setAttribute("pLesClients", lesClients);
             getServletContext().getRequestDispatcher("/vues/listerLesClients.jsp").forward(request, response);
@@ -132,11 +131,18 @@ public class ServletClient extends HttpServlet {
         
         /* Stockage du formulaire et de l'objet dans l'objet request */
         request.setAttribute( "form", form );
-        request.setAttribute( "pClient", unClient );
+        //request.setAttribute( "pClient", unClient );
 		
         if (form.getErreurs().isEmpty()){
+            
             // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
-            ClientDAO.ajouterClient(connection, unClient);
+            
+            Client clientVerif = ClientDAO.ajouterClient(connection, unClient);
+           
+            //verif l'insertion de données
+            ClientDAO.getUnClient(connection, clientVerif.getId());
+            
+            request.setAttribute( "pClient", unClient );
             this.getServletContext().getRequestDispatcher("/vues/clientConsulter.jsp" ).forward( request, response );
         }
         else

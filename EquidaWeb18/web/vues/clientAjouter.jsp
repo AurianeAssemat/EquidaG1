@@ -31,12 +31,15 @@
                 <label for="prenom">PRENOM : </label>
                 <input id="prenom"  type="text"  name="prenom" size="30" maxlength="30">      
                  </br>
+                 
+                <label for="civilite">Civilité : </label>
+                <input id="civilite"  type="text"  name="civilite" size="20" maxlength="20">
+                </br>
                 
                 <label for="rue">rue : </label>
                 <input id="rue"  type="text"  name="rue" size="30" maxlength="50">
                  </br>
                                
-                
                 <label for="copos">Code postal : </label>
                 <input id="copos"  type="text"  name="copos" size="5" maxlength="5">
                 </br>
@@ -45,19 +48,22 @@
                 <input id="ville"  type="text"  name="ville" size="40" maxlength="40">
                 </br>
                 
+                <label for="ville">Mail : </label>
+                <input id="mail"  type="text"  name="mail" size="40" maxlength="40">
+                </br>
+                
                 <%-- Champ Liste des pays --%>
                 <label for="pays">Pays : </label>
-                <input list="listePays" name="pays" id="choix_pays">
-               
-                <datalist id="codePays">
+                <select id="codePays" name="codePays">
+                
                     <%
                         ArrayList<Pays> lesPays = (ArrayList)request.getAttribute("pLesPays");
                         for (int i=0; i<lesPays.size();i++){
                             Pays p = lesPays.get(i);
-                            out.println("<option value='" + p.getCode()+"'>" + p.getNom()+"</option>" );
+                            out.println("<option value='"+p.getCode()+"'>" + p.getNom()+"</option>");
                         }
                     %>
-                </datalist>
+                </select>
                 </br>            
                 
                 <label for="categVente">Categorie Vente : </label>

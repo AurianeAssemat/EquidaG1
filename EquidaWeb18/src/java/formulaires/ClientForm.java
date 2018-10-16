@@ -44,7 +44,7 @@ public class ClientForm {
         throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
         }
     }
-
+    
     private void setErreur( String champ, String message ) {
     erreurs.put(champ, message );
     }    
@@ -68,7 +68,12 @@ public class ClientForm {
         String rue = getDataForm( request, "rue" );
         String copos = getDataForm( request, "copos");
         String ville = getDataForm( request, "ville" );
-        String pays = getDataForm( request, "pays" );
+        
+        String pays = getDataForm( request, "codePays" );
+        Pays unPays = new Pays(pays);
+        
+        String titre = getDataForm( request, "civilite" );
+        String mail = getDataForm( request, "mail" );
         
         // Traitement de la liste à choix multiple
         //Pour chq catégorie selectionné, on instancie une nouvelle catégorie et on l'ajoute au client
@@ -100,7 +105,9 @@ public class ClientForm {
         unClient.setRue(rue);
         unClient.setCopos(copos);
         unClient.setVille(ville);
-        unClient.setUnPays(new Pays(pays));
+        unClient.setTitre(titre);
+        unClient.setMail(mail);
+        unClient.setUnPays(unPays);
                
        
         return unClient ;
