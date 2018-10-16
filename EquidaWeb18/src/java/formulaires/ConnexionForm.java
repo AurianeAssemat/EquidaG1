@@ -37,6 +37,7 @@ public class ConnexionForm {
     
 
     private void validationLogin( String login ) throws Exception {
+        
         if ( login == null || login.length() < 3 ) {
             throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
         }
