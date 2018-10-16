@@ -35,7 +35,7 @@ public class ChevauxDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from Cheval,TypeCheval where Cheval.typChe = typeCheval.id");          
+            requete=connection.prepareStatement("select * from Cheval,TypeCheval where Cheval.typ_id = typeCheval.id");          
             //executer la requete
             rs=requete.executeQuery();
             
@@ -48,9 +48,9 @@ public class ChevauxDAO {
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setSire(rs.getString("sire"));
                 
-                if(rs.getString("typChe") != ""){
+                if(rs.getString("typ_id") != ""){
                     requete=connection.prepareStatement("select * from TypeCheval where id = ?");  
-                    requete.setString(1, rs.getString("typChe"));
+                    requete.setString(1, rs.getString("typ_id"));
                     
                     ResultSet rtc = requete.executeQuery();
                     
@@ -95,7 +95,8 @@ public class ChevauxDAO {
                     uneMere.setSire(rm.getString("sire"));
                     unCheval.setMere(uneMere);
                 }
-                requete=connection.prepareStatement("select * from Course,Participer where cou_id = course.id AND che_id = ?");          
+                
+                requete=connection.prepareStatement("select * from Course,Participer where cour_id = course.id AND che_id = ?");          
                 requete.setString(1, rs.getString("id"));
                 //executer la requete
                 ResultSet rco=requete.executeQuery();
@@ -113,7 +114,7 @@ public class ChevauxDAO {
                     unCheval.addUneParticipation(uneParticipation);
                 }
                 
-               
+              
                         
                 lesChevaux.add(unCheval);
             }

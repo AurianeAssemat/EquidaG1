@@ -15,10 +15,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
-        <title>LISTE DES CHEVAUX</title>
+        <title>LISTE MES CHEVAUX</title>
     </head>
     <body>
-        <h1>LISTE DES CHEVAUX</h1>
+        <h1>LISTE MES CHEVAUX</h1>
         
          <%
         ArrayList<Cheval> lesChevaux = (ArrayList)request.getAttribute("pLesChevaux");

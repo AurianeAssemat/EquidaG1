@@ -39,7 +39,7 @@ public class LotDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from Lot,Cheval,TypeCheval where Lot.che_id = Cheval.id AND Cheval.typChe = typeCheval.id AND ven_id = ?");          
+            requete=connection.prepareStatement("select * from Lot,Cheval,TypeCheval where Lot.che_id = Cheval.id AND Cheval.typ_id = typeCheval.id AND vend_id = ?");          
             requete.setString(1, codevente);
             //executer la requete
             rs=requete.executeQuery();
@@ -58,9 +58,9 @@ public class LotDAO {
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setSire(rs.getString("sire"));
                 
-                if(rs.getString("typChe") != ""){
+                if(rs.getString("typ_id") != ""){
                     requete=connection.prepareStatement("select * from TypeCheval where id = ?");  
-                    requete.setString(1, rs.getString("typChe"));
+                    requete.setString(1, rs.getString("typ_id"));
                     
                     ResultSet rtc = requete.executeQuery();
                     
@@ -105,7 +105,7 @@ public class LotDAO {
                     uneMere.setSire(rm.getString("sire"));
                     unCheval.setMere(uneMere);
                 }
-                requete=connection.prepareStatement("select * from Course,Participer where cou_id = course.id AND che_id = ?");          
+                requete=connection.prepareStatement("select * from Course,Participer where cour_id = course.id AND che_id = ?");          
                 requete.setString(1, rs.getString("id"));
                 //executer la requete
                 ResultSet rco=requete.executeQuery();
