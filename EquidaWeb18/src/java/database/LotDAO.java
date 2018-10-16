@@ -117,7 +117,6 @@ public class LotDAO {
                     uneCourse.setDate(rco.getString("date"));
                     
                     Participer uneParticipation = new Participer();
-                    uneParticipation.setId(rco.getInt("Participer.id"));
                     uneParticipation.setPlace(rco.getInt("place"));
                     uneParticipation.setUneCourse(uneCourse);
                     
