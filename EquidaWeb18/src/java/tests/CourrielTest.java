@@ -15,7 +15,7 @@ import modele.Courriel;
 public class CourrielTest {
     public static void main(String[] args) {
         
-        Courriel unCourriel = new Courriel(1, "05/09/2018", "un Objet","Un coirps");
+        Courriel unCourriel = new Courriel(1, "05/09/2018", "un Objet","Un corps");
         unCourriel.setUneVente(new Vente(10, "vente", "05/09/2018"));     
         System.out.println(unCourriel.getDate() + "  " + unCourriel.getObjet() + "  " + unCourriel.getCorps());
         

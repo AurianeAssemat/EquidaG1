@@ -12,6 +12,7 @@ import database.VenteDAO;
 import database.CategVenteDAO;
 import database.ChevauxDAO;
 import database.CourrielDAO;
+import database.LieuDAO;
 import database.LotDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,8 +29,10 @@ import modele.Acheteur;
 import modele.Vente;
 import modele.Courriel;
 import modele.CategVente;
+import modele.Lieu;
 import modele.Cheval;
 import modele.Compte;
+
 import modele.Lot;
 /**
  *
@@ -102,6 +105,7 @@ public class ServletVentes extends HttpServlet {
             String codeCat = (String)request.getParameter("codeCat");
             ArrayList<Vente> lesVentes;
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
             if(codeCat == null| codeCat == ""){
                 lesVentes = VenteDAO.getLesVentes(connection);
             }else{
@@ -110,7 +114,7 @@ public class ServletVentes extends HttpServlet {
             }
             request.setAttribute("pLesVentes", lesVentes);
             request.setAttribute("pLesCategVentes", lesCategVentes);
-            
+            request.setAttribute("pLesLieux", lesLieux);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesVentes.jsp").forward(request, response);
         }
         
