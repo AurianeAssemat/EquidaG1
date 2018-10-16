@@ -11,45 +11,35 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modele.Lot;
+import modele.CategVente;
+import modele.Client;
+import modele.Pays;
+import modele.Vente;
 import modele.Cheval;
-import modele.TypeCheval;
-import modele.Participer;
 import modele.Course;
+import modele.Lot;
+import modele.Participer;
+import modele.TypeCheval;
 /**
  *
- * @author Zakina
- * 22/06/2017
- * Classe faisant la liaison entre la table Vente et la classe Vente
+ * @author slam
  */
-public class LotDAO {
-
+public class ChevauxDAO {
     
     Connection connection=null;
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    /* @author Zakina - 22/06/2017
-    /* Méthode permettant de lister toutes les ventes enregistrées en base, triées par date décroissante.
-    /* Pour chaque vente, on récupère aussi sa catégorie.
-    /* La liste des vente est stockée dans une ArrayList
-    */
-    public static ArrayList<Lot>  getLesLots(Connection connection,String codevente){      
-        ArrayList<Lot> lesLots = new  ArrayList<Lot>();
+    public static ArrayList<Cheval>  getLesChevaux(Connection connection,String codeAcheteur){      
+        ArrayList<Cheval> lesChevaux = new  ArrayList<Cheval>();
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from Lot,Cheval,TypeCheval where Lot.che_id = Cheval.id AND Cheval.typ_id = typeCheval.id AND vend_id = ?");          
-            requete.setString(1, codevente);
+            requete=connection.prepareStatement("select * from Cheval,TypeCheval where Cheval.typ_id = typeCheval.id");          
             //executer la requete
             rs=requete.executeQuery();
             
-            //On hydrate l'objet métier Client avec les résultats de la requête
             while ( rs.next() ) {  
-                Lot unLot = new Lot();
-                unLot.setId(rs.getInt("id"));
-                unLot.setPrixDepart(rs.getFloat("prixDepart"));
-                
                 
                 
                 Cheval unCheval = new Cheval();
@@ -105,6 +95,7 @@ public class LotDAO {
                     uneMere.setSire(rm.getString("sire"));
                     unCheval.setMere(uneMere);
                 }
+                
                 requete=connection.prepareStatement("select * from Course,Participer where cour_id = course.id AND che_id = ?");          
                 requete.setString(1, rs.getString("id"));
                 //executer la requete
@@ -123,15 +114,16 @@ public class LotDAO {
                     unCheval.addUneParticipation(uneParticipation);
                 }
                 
-                unLot.setCheval(unCheval);
+              
                         
-                lesLots.add(unLot);
+                lesChevaux.add(unCheval);
             }
-        }   
+        }    
         catch (SQLException e) 
         {
             e.printStackTrace();
         }
-        return lesLots ;    
+        return lesChevaux ;    
     } 
+    
 }
