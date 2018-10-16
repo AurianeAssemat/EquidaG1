@@ -57,20 +57,31 @@ public class LienMenu {
         lesEnfants.add(unEnfant);
     }
     
-     public String getRender() {
+     public String getDropdownHTML() {
         String render ="";
-        if(lien != null){
-            render += "<li><a href ='" + lien + "'> " + nom + "</a></li>";
-        }else{
-            render += "<li>" + nom + "</li>";
-        }
         
         if(!lesEnfants.isEmpty()){
-            render += "<ul>";
-            for(int i = 0; i < lesEnfants.size();i++){
-                render +=  lesEnfants.get(i).getRender();
+            render += "<ul id = \""+nom+"\" class = \"dropdown-content\">\n";
+            for(int i = 0;i < lesEnfants.size();i++){
+                render += "<li><a href = \""+lesEnfants.get(i).getLien()+"\">"+lesEnfants.get(i).getNom()+"</a></li>\n";
             }
+
             render += "</ul>";
+        }
+        
+        
+        return render ;
+    }
+     
+     public String getNavHTML() {
+        String render ="";
+        
+        if(!lesEnfants.isEmpty()){
+            render += "<li><a class = \"dropdown-button\"  \n" +
+"               data-activates = \""+nom+"\">"+nom+"<i class = \"material-icons\n" +
+"               right\">arrow_drop_down</i></a></li>";
+        }else{
+            render += "<li><a href='" + lien + "'>"+nom+"</a></li>";
         }
         
         
