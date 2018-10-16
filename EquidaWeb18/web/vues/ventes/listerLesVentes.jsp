@@ -53,8 +53,12 @@
                    <tr>             
                        <th>id</th>
                        <th>nom</th>
-                       <th>date début</th>
-                       <th>catégorie</th>  
+                       <th>DateDébutVente</th>
+                       <th>DateFinVente</th>
+                       <th>DateDébutInscription</th>
+                       <th>Lieu</th>
+                       <th>Catégorie</th>  
+                     
                        <th></th>
                <br>
                <br>
@@ -74,14 +78,27 @@
                            out.println("<td>");
                            out.println(uneVente.getNom());
                            out.println("</td>");
-
+                                                          
                            out.println("<td>");
                            out.println(uneVente.getDateDebutVente());
+                           out.println("</td>");
+                           
+                           out.println("<td>");
+                           out.println(uneVente.getDateFinVente());
+                           out.println("</td>");
+                         
+                           out.println("<td>");
+                           out.println(uneVente.getdateDebutInscrip());
+                           out.println("</td>");
+                     
+                           out.println("<td>");
+                           out.println(uneVente.getUnLieu().getVille() );
                            out.println("</td>");
 
                            out.println("<td>");
                            out.println(uneVente.getUneCategVente().getLibelle());
                            out.println("</td>");
+                           
 
                            out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat="+ uneVente.getUneCategVente().getCode()+ "'>");
                            out.println("Lister les clients interessés");
@@ -90,7 +107,7 @@
                            out.println("<td><a href ='../ServletVentes/listerLesCourriel?codeVente="+ uneVente.getId()+ "'>");
                            out.println("Lister les Couriels envoyés");
                            out.println("</td>");      
-
+                           
                            out.println("<td><a href ='../ServletVentes/listerLesChevaux?codeVente="+ uneVente.getId()+ "'>");
                            out.println("Lister les Chevaux");
                            out.println("</td>");
