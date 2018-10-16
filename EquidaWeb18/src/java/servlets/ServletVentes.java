@@ -29,6 +29,7 @@ import modele.Vente;
 import modele.Courriel;
 import modele.CategVente;
 import modele.Cheval;
+import modele.Compte;
 import modele.Lot;
 /**
  *
@@ -166,14 +167,34 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesLots", lesLots);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
         }
-         if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
+        if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
         {  
-            String codeAcheteur = (String)request.getParameter("codeAcheteur");
-           
-            
-            ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, codeAcheteur);
-            request.setAttribute("pLesChevaux", lesChevaux);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+            Compte compte = (Compte)request.getSession().getAttribute("Compte");
+            if(compte != null){
+                int codeAcheteur = compte.getUnClient().getId();
+
+
+                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                request.setAttribute("pLesChevaux", lesChevaux);
+                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+            }
+        }
+         
+        if(url.equals("/EquidaWeb18/ServletVentes/SupprimerMesChevaux"))
+        {  
+            Compte compte = (Compte)request.getSession().getAttribute("Compte");
+            if(compte != null){
+                int codeCheval = Integer.parseInt(request.getParameter("codeCheval"));
+                if(codeCheval == 2){
+                    ChevauxDAO.DeleteUnChevaux(connection,codeCheval);
+
+
+                    int codeAcheteur = compte.getUnClient().getId();
+                    ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                    request.setAttribute("pLesChevaux", lesChevaux);
+                    getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+                }
+            }
         }
     }
 
