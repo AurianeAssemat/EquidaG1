@@ -98,12 +98,12 @@ INSERT INTO `lieu` (`ville`, `nbBoxes`,commentaire) VALUES
 ('Cherbourg',15, 'Vente d''élevage'),
 ('Bayeux',30, 'Vente d''été');
 
-INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`) VALUES
-(30917, 'Garibaldi Princess', '2017-03-09', 'ELVG'),
-(90217, 'Mixing brain', '2017-09-02', 'XFEV'),
-(210717, 'Rapsberry Sailing', '2017-07-17', 'ETE'),
-(210817, 'Jelly Bay', '2017-08-17', 'ETE'),
-(250217, 'Djezair Star', '2017-02-25', 'XFEV');
+INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, lie_id, dateFinVente, dateDebutInscrip) VALUES
+(30917, 'Garibaldi Princess', '2017-03-09', 'ELVG', 2, '2017-05-09', '2017-01-09'),
+(90217, 'Mixing brain', '2017-09-02', 'XFEV', 1, '2017-09-02', '2017-05-02'),
+(210717, 'Rapsberry Sailing', '2017-07-17', 'ETE', 2, '2017-07-17', '2017-02-17'),
+(210817, 'Jelly Bay', '2017-08-17', 'ETE', 3, '2017-12-17', '2017-01-17'),
+(250217, 'Djezair Star', '2017-02-25', 'XFEV', 2, '2017-04-25', '2017-01-25');
 
 INSERT INTO `Courriel` (`date`, `objet`,corps) VALUES
 ('2018-08-05','Objet1', 'corps 1'),

@@ -48,6 +48,8 @@
                   <i class="material-icons right">send</i>
                 </button>
            </form>
+                    
+            
            <table  class="table table-bordered table-striped table-condensed">  
                <thead>
                    <tr>             
@@ -111,11 +113,20 @@
                            out.println("<td><a href ='../ServletVentes/listerLesChevaux?codeVente="+ uneVente.getId()+ "'>");
                            out.println("Lister les Chevaux");
                            out.println("</td>");
+                           
+                            out.println("<td>");
+                            out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerUneVente?codeVente="+ uneVente.getId()+ "'><i class=\"material-icons\">delete</i></a>");
+                            out.println("</td>");
+
+                            out.println("<td>");
+                            out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">create</i></a>");
+                            out.println("</td>");
                        }
                        %>
                    </tr>
                </tbody>
            </table>
+                   <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
                    </div>
         </div>
     </body>
