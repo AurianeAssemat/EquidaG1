@@ -20,6 +20,7 @@ public class Cheval {
     private Cheval mere;
     private TypeCheval typeCheval;
     private ArrayList<Participer> lesParticipation ;
+    private ArrayList<Lot> lesLot ;
     
     public Cheval() {
     }
@@ -105,5 +106,18 @@ public class Cheval {
             lesParticipation = new ArrayList<Participer>();
         }
         lesParticipation.add(uneParticipation);
+    }
+     public ArrayList<Lot> getLesLot() {
+        return lesLot;
+    }
+
+    public void setLesLot(ArrayList<Lot> lesLot) {
+        this.lesLot = lesLot;
+    }
+    public void addUnLot(Lot unLot){
+        if (lesLot == null){
+            lesLot = new ArrayList<Lot>();
+        }
+        lesLot.add(unLot);
     }
 }

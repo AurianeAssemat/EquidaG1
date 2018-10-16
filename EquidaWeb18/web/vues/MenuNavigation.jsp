@@ -25,7 +25,11 @@
     client.addUnEnfant(acheteurs);
 
 %>
+
+
+
 <div class="row">
+    
     <div class = "col s12 m12 l12">
 
         <%
@@ -36,7 +40,6 @@
 
        <nav>
           <div class = "nav-wrapper">
-             <a href = "#" class = "brand-logo">Equida</a>
              <ul id = "nav-mobile" class = "right hide-on-med-and-down">  
                 <%
                 for(int i = 0; i < lien.size();i++){
@@ -44,26 +47,23 @@
                 }
                 %>
              </ul>
+             <ul>
+                <%
+                Compte compte = (Compte)request.getSession().getAttribute("Compte");
+                if(compte != null){
+                    
+            
+                    out.println("<li><a href ='../ServletAccueil/Profil'> <i class=\"material-icons\">account_circle</i></a></li>");
+                    out.println("<li><a href ='../ServletAccueil/Deconnexion'> <i class=\"material-icons\">exit_to_app</i></a></li>");
+                    out.println("" + compte.getUnClient().getPrenom() +" "+ compte.getUnClient().getNom() + "");
+                }else{
+                    out.println("<li><a href ='../ServletAccueil/Connexion'> <i class=\"material-icons\">account_circle</i></a></li>");
+
+
+                }
+                %>
+             </ul>
           </div>
        </nav>
     </div>
 </div>
-
-      <%
-          /*Compte compte = (Compte)request.getSession().getAttribute("Compte");
-          if(compte != null){
-              out.println("<ul><li>" + compte.getUnClient().getPrenom() +" "+ compte.getUnClient().getNom() + "</br>");
-              out.println("<a href ='../ServletAccueil/Profil'> Information personnelle</a><br/>");
-              out.println("<a href ='../ServletAccueil/Deconnexion'> Deconnexion</a></li>");
-          }else{
-              out.println("<ul><li><a href ='../ServletAccueil/Connexion'> Connexion</a></li></ul>");
-          }*/
-
-
-          
-
-
-
-          
-
-      %>

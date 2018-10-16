@@ -18,6 +18,8 @@ public class Vente {
     private CategVente uneCategVente;
     private Lieu unLieu;
     private ArrayList<Courriel> lesCourriels ;
+    private String dateFinVente;
+    private String dateDebutInscrip;
     
     public Vente() {
     }
@@ -82,5 +84,20 @@ public class Vente {
         }
         lesCourriels.add(unCourriel);
     }
-    
+
+    public String getDateFinVente() {
+        return dateFinVente;
+    }
+
+    public void setDateFinVente(String dateFinVente) {
+        this.dateFinVente = dateFinVente;
+    }
+
+    public String getdateDebutInscrip() {
+        return dateDebutInscrip;
+    }
+
+    public void setdateDebutInscrip(String dateDebutInscrip) {
+        this.dateDebutInscrip = dateDebutInscrip;
+    }
 }

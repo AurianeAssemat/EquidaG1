@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modele.CategVente;
 import modele.Client;
+import modele.Lieu;
 import modele.Pays;
 import modele.Vente;
 
@@ -39,22 +40,31 @@ public class VenteDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from vente, CategVente where codeCategVente=code order by dateDebut desc");          
+            requete=connection.prepareStatement("select * from vente, CategVente , Lieu where codeCategVente=code AND vente.lie_id = lieu.id order by dateDebut desc");          
             //executer la requete
             rs=requete.executeQuery();
             
             //On hydrate l'objet métier Client avec les résultats de la requête
             while ( rs.next() ) {  
                 Vente uneVente = new Vente();
-                uneVente.setId(rs.getInt("id"));
+                uneVente.setId(rs.getInt("vente.id"));
                 uneVente.setNom(rs.getString("nom"));
                 uneVente.setDateDebutVente(rs.getString("dateDebut"));
+                uneVente.setDateFinVente(rs.getString("dateFinVente"));
+                uneVente.setdateDebutInscrip(rs.getString("dateDebutInscrip"));
                 
                 CategVente uneCateg = new CategVente();
                 uneCateg.setCode(rs.getString("code"));  // on aurait aussi pu prendre CodeCateg
                 uneCateg.setLibelle(rs.getString("libelle"));
                 
                 uneVente.setUneCategVente(uneCateg);
+                
+                
+                Lieu unLieu = new Lieu();
+                unLieu.setId(rs.getInt("Lieu.id"));  
+                unLieu.setVille(rs.getString("ville"));
+                
+                uneVente.setUnLieu(unLieu);
                 lesVentes.add(uneVente);
             }
         }   
