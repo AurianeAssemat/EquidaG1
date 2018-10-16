@@ -72,5 +72,26 @@ public class CourrielDAO {
             e.printStackTrace();
         }
         return lesCourriels ;    
-    } 
+    }
+    
+    // Méthode permettant d'insérer un courriel en base à partir de l'objet couriel passé en paramètre
+    // Cette méthode renvoie l'objet courriel
+    public static Courriel ajouterCourriel(Connection connection, Courriel courriel){      
+        try
+        {
+            requete=connection.prepareStatement("INSERT INTO Courriel (objet, corps, ven_id) VALUES (?, ?, ?)");
+            requete.setString(1, courriel.getObjet());
+            requete.setString(2, courriel.getCorps());
+            requete.setString(3, Integer.toString(courriel.getUneVente().getId()));
+
+           /* Exécution de la requête */
+            requete.executeUpdate(); 
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return courriel;    
+    }
 }

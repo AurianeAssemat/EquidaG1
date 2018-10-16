@@ -12,6 +12,8 @@ import database.VenteDAO;
 import database.CategVenteDAO;
 import database.CourrielDAO;
 import database.LotDAO;
+import database.PieceJointeDAO;
+import formulaires.CourrielForm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -28,6 +30,7 @@ import modele.Vente;
 import modele.Courriel;
 import modele.CategVente;
 import modele.Lot;
+import modele.PieceJointe;
 /**
  *
  * @author Zakina
@@ -165,6 +168,16 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
         }
         
+        if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
+        {  
+           ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+           request.setAttribute("pLesVentes", lesVentes);
+           
+           ArrayList<PieceJointe> lesPiecesJointes = PieceJointeDAO.getLesPiecesJointes(connection);
+           request.setAttribute("pLesPiecesJointes", lesPiecesJointes);
+            
+           getServletContext().getRequestDispatcher("/vues/ventes/envoyerMail.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -179,6 +192,23 @@ public class ServletVentes extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        /* Préparation de l'objet formulaire */
+        CourrielForm form = new CourrielForm();
+        
+         /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute("form", form);
+        
+        Courriel courriel = form.ajouterCourriel(request);
+        
+        if (form.getErreurs().isEmpty()){
+            
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+            
+            CourrielDAO.ajouterCourriel(connection, courriel);
+            
+            response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesCourriel?codeVente=" + courriel.getUneVente().getId());
+        }
     }
 
     /**
