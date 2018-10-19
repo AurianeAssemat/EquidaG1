@@ -62,7 +62,7 @@ INSERT INTO `client` (`id`, `nom`, `prenom`, `rue`, `copos`, `ville`, `mail`, `c
 (49, 'Trieste', 'Thierry', 'du tertre', '14000', 'Tologne', '', 'FRA'),
 (50, 'Bertrand', 'Alexandre', '8 rue des Hortensias', '50000', 'Cherbourg', '', 'FRA');
 
-INSERT INTO `Acheteur` (`ach_id`) VALUES
+INSERT INTO `acheteur` (`ach_id`) VALUES
 (1),
 (5),
 (10),
@@ -71,7 +71,7 @@ INSERT INTO `Acheteur` (`ach_id`) VALUES
 (8),
 (9);
 
-INSERT INTO `Vendeur` (`ven_id`) VALUES
+INSERT INTO `vendeur` (`ven_id`) VALUES
 (5),
 (6),
 (7),
@@ -105,17 +105,17 @@ INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, lie_id, dateFin
 (210817, 'Jelly Bay', '2017-08-17', 'ETE', 3, '2017-12-17', '2017-01-17'),
 (250217, 'Djezair Star', '2017-02-25', 'XFEV', 2, '2017-04-25', '2017-01-25');
 
-INSERT INTO `Courriel` (`date`, `objet`,corps) VALUES
+INSERT INTO `courriel` (`date`, `objet`,corps) VALUES
 ('2018-08-05','Objet1', 'corps 1'),
 ('2018-04-06','Objet2', 'corps 2'),
 ('2018-02-08','Objet3', 'corps 3');
 
-INSERT INTO `PieceJointe` (`chemin`, `description`) VALUES
+INSERT INTO `piecejointe` (`chemin`, `description`) VALUES
 ('image/image.png','une image' ),
 ('document/text.txt','un text' ),
 ('document/fichier.pdf','un pdf');
 
-INSERT INTO `Joindre` (`pie_id`, `cou_id`) VALUES
+INSERT INTO `joindre` (`pie_id`, `cou_id`) VALUES
 (1,1),
 (1,2),
 (2,1),

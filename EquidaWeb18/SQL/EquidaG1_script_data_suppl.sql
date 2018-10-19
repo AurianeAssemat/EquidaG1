@@ -26,6 +26,6 @@ INSERT INTO `lieu` (`id`, `ville`, `nbBoxes`, `commentaire`) VALUES
 (9, 'Bordeaux', 16, '');
 
 
-INSERT INTO `lieu` ( `login`, `mdp`, `cli_id`) VALUES
-('aaa', 'c5fe25896e49ddfe996db7508cf00534', '', 1),
-('bbb', 'c5fe25896e49ddfe996db7508cf00534', '', 2);
+INSERT INTO `compte` ( `login`, `mdp`, `cli_id`) VALUES
+('aaa', 'c5fe25896e49ddfe996db7508cf00534', 1),
+('bbb', 'c5fe25896e49ddfe996db7508cf00534', 2);

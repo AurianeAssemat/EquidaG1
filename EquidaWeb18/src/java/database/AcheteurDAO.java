@@ -33,7 +33,7 @@ public class AcheteurDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from Acheteur, client,pays where codePays = code AND ach_id = id;");          
+            requete=connection.prepareStatement("select * from acheteur, client,pays where codePays = code AND ach_id = id;");          
             //executer la requete
             rs=requete.executeQuery();
             

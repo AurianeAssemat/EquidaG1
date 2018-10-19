@@ -40,7 +40,7 @@ public class VenteDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from vente, CategVente , Lieu where codeCategVente=code AND vente.lie_id = lieu.id order by dateDebut desc");          
+            requete =connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id order by dateDebut desc");          
             //executer la requete
             rs=requete.executeQuery();
             
@@ -61,7 +61,7 @@ public class VenteDAO {
                 
                 
                 Lieu unLieu = new Lieu();
-                unLieu.setId(rs.getInt("Lieu.id"));  
+                unLieu.setId(rs.getInt("lieu.id"));  
                 unLieu.setVille(rs.getString("ville"));
                 
                 uneVente.setUnLieu(unLieu);
@@ -85,7 +85,7 @@ public class VenteDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from vente, CategVente where codeCategVente=code AND codeCategVente= ? order by dateDebut desc");          
+            requete=connection.prepareStatement("select * from vente, categvente where codeCategVente=code AND codeCategVente= ? order by dateDebut desc");          
             requete.setString(1, codeCateg);
             //executer la requete
             rs=requete.executeQuery();
