@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
     <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="NomPage" value="Liste les ventes" />
+        <jsp:param name="NomPage" value="Lister mes Chevaux" />
     </jsp:include>
     
     <body>
@@ -26,7 +26,7 @@
                ArrayList<Cheval> lesChevaux = (ArrayList)request.getAttribute("pLesChevaux");
                %>
 
-                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light red" href='../ServletVentes/chevalAjouter'><i class="material-icons">add</i></a>
                <table  class="table table-bordered table-striped table-condensed">  
                    <thead>
                        <tr>             
