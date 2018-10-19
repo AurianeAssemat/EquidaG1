@@ -13,7 +13,7 @@
         <title>Consultation Client</title>
     </head>
     <body>
-        <h1>Infos clients</h1>
+        <h1>Infos client</h1>
         
          <%
         Client unClient = (Client)request.getAttribute("pClient");
