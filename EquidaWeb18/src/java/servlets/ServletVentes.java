@@ -126,18 +126,19 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesVentes.jsp").forward(request, response);
         }
         
-        
-        
-         if(url.equals("/EquidaWeb18/ServletVentes/listerLesAcheteurs"))
+        // Récup et affichage des clients interessés par une certaine catégorie de ventes
+        if(url.equals("/EquidaWeb18/ServletVentes/listerLesClients"))
         {  
             System.out.println("DANS LISTER LES CLIENTS");
+            String codeCat = (String)request.getParameter("codeCat");
            
             
-            ArrayList<Acheteur> lesAcheteurs = AcheteurDAO.getLesAcheteurs(connection);
-            
-            request.setAttribute("pLesAcheteurs", lesAcheteurs);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesAcheteurs.jsp").forward(request, response);
+            ArrayList<Client> lesClients = VenteDAO.getLesClients(connection, codeCat);
+            request.setAttribute("pLesClients", lesClients);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesClients.jsp").forward(request, response);
         }
+        
+         
         
         if(url.equals("/EquidaWeb18/ServletVentes/listerLesCourriel"))
         {  
@@ -163,8 +164,6 @@ public class ServletVentes extends HttpServlet {
             Compte compte = (Compte)request.getSession().getAttribute("Compte");
             if(compte != null){
                 int codeAcheteur = compte.getUnClient().getId();
-
-
                 ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
                 request.setAttribute("pLesChevaux", lesChevaux);
                 getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
@@ -176,15 +175,15 @@ public class ServletVentes extends HttpServlet {
             Compte compte = (Compte)request.getSession().getAttribute("Compte");
             if(compte != null){
                 int codeCheval = Integer.parseInt(request.getParameter("codeCheval"));
-                if(codeCheval == 2){
-                    ChevauxDAO.DeleteUnChevaux(connection,codeCheval);
+                
+                ChevauxDAO.DeleteUnChevaux(connection,codeCheval);
 
-
-                    int codeAcheteur = compte.getUnClient().getId();
-                    ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
-                    request.setAttribute("pLesChevaux", lesChevaux);
-                    getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
-                }
+                
+                int codeAcheteur = compte.getUnClient().getId();
+                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                request.setAttribute("pLesChevaux", lesChevaux);
+                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+                
             }
         }
         

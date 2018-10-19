@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import database.AcheteurDAO;
 import database.CategVenteDAO;
 import database.ClientDAO;
 import database.PaysDAO;
@@ -21,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modele.Acheteur;
 import modele.CategVente;
 import modele.Client;
 import modele.Pays;
@@ -108,16 +110,15 @@ public class ServletClient extends HttpServlet {
             
         }
        
-       // Récup et affichage des clients interessés par une certaine catégorie de ventes
-        if(url.equals("/EquidaWeb18/ServletClient/listerLesClients"))
+       if(url.equals("/EquidaWeb18/ServletClient/listerLesAcheteurs"))
         {  
             System.out.println("DANS LISTER LES CLIENTS");
-            String codeCat = (String)request.getParameter("codeCat");
            
             
-            ArrayList<Client> lesClients = VenteDAO.getLesClients(connection, codeCat);
-            request.setAttribute("pLesClients", lesClients);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesClients.jsp").forward(request, response);
+            ArrayList<Acheteur> lesAcheteurs = AcheteurDAO.getLesAcheteurs(connection);
+            
+            request.setAttribute("pLesAcheteurs", lesAcheteurs);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesAcheteurs.jsp").forward(request, response);
         }
         
         if(url.equals("/EquidaWeb18/ServletClient/listerLesVendeurs"))
