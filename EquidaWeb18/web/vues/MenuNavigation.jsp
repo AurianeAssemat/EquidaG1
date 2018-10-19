@@ -22,13 +22,13 @@
     LienMenu client = new LienMenu(null, "Clients" );
     lien.add(client);
     
-    LienMenu clients = new LienMenu("../ServletVentes/listerLesClients", "Clients" );
+    LienMenu clients = new LienMenu("../ServletClient/listerLesClients", "Clients" );
     client.addUnEnfant(clients);
 
-    LienMenu vendeurs = new LienMenu("../ServletVentes/listerLesVendeurs", "Vendeurs" );
+    LienMenu vendeurs = new LienMenu("../ServletClient/listerLesVendeurs", "Vendeurs" );
     client.addUnEnfant(vendeurs);
     
-    LienMenu acheteurs = new LienMenu("../ServletVentes/listerLesAcheteurs", "Acheteurs" );
+    LienMenu acheteurs = new LienMenu("../ServletClient/listerLesAcheteurs", "Acheteurs" );
     client.addUnEnfant(acheteurs);
     
     LienMenu ajoutClient = new LienMenu("../ServletClient/ajouterClient", "Ajouter un client" );

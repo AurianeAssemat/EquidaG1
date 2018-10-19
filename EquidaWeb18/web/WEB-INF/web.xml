@@ -54,12 +54,12 @@
         <url-pattern>/ServletVentes/listerLesCourriel</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/listerLesVendeurs</url-pattern>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient/listerLesVendeurs</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/listerLesAcheteurs</url-pattern>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient/listerLesAcheteurs</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>

@@ -9,6 +9,7 @@ import database.CategVenteDAO;
 import database.ClientDAO;
 import database.PaysDAO;
 import database.Utilitaire;
+import database.VendeurDAO;
 import database.VenteDAO;
 import formulaires.ClientForm;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import modele.CategVente;
 import modele.Client;
 import modele.Pays;
+import modele.Vendeur;
 import modele.Vente;
 
 /**
@@ -106,7 +108,28 @@ public class ServletClient extends HttpServlet {
             
         }
        
-       
+       // Récup et affichage des clients interessés par une certaine catégorie de ventes
+        if(url.equals("/EquidaWeb18/ServletClient/listerLesClients"))
+        {  
+            System.out.println("DANS LISTER LES CLIENTS");
+            String codeCat = (String)request.getParameter("codeCat");
+           
+            
+            ArrayList<Client> lesClients = VenteDAO.getLesClients(connection, codeCat);
+            request.setAttribute("pLesClients", lesClients);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesClients.jsp").forward(request, response);
+        }
+        
+        if(url.equals("/EquidaWeb18/ServletClient/listerLesVendeurs"))
+        {  
+            System.out.println("DANS LISTER LES CLIENTS");
+           
+            
+            ArrayList<Vendeur> lesVendeurs = VendeurDAO.getLesVendeurs(connection);
+            
+            request.setAttribute("pLesVendeurs", lesVendeurs);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesVendeurs.jsp").forward(request, response);
+        }
        
        
     }

@@ -125,28 +125,7 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesVentes.jsp").forward(request, response);
         }
         
-        // Récup et affichage des clients interessés par une certaine catégorie de ventes
-        if(url.equals("/EquidaWeb18/ServletVentes/listerLesClients"))
-        {  
-            System.out.println("DANS LISTER LES CLIENTS");
-            String codeCat = (String)request.getParameter("codeCat");
-           
-            
-            ArrayList<Client> lesClients = VenteDAO.getLesClients(connection, codeCat);
-            request.setAttribute("pLesClients", lesClients);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesClients.jsp").forward(request, response);
-        }
         
-        if(url.equals("/EquidaWeb18/ServletVentes/listerLesVendeurs"))
-        {  
-            System.out.println("DANS LISTER LES CLIENTS");
-           
-            
-            ArrayList<Vendeur> lesVendeurs = VendeurDAO.getLesVendeurs(connection);
-            
-            request.setAttribute("pLesVendeurs", lesVendeurs);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesVendeurs.jsp").forward(request, response);
-        }
         
          if(url.equals("/EquidaWeb18/ServletVentes/listerLesAcheteurs"))
         {  
