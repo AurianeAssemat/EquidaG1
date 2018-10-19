@@ -63,6 +63,7 @@ CREATE TABLE cheval (
 	pere int(11),
 	mere int(11),
 	typ_id int(11),
+	archiver int(11),
 	PRIMARY KEY (id),
 	FOREIGN KEY (typ_id) REFERENCES typecheval(id),
 	FOREIGN KEY (pere) REFERENCES cheval(id),
@@ -93,11 +94,16 @@ ADD dateFinVente date ;
 ALTER TABLE vente 
 ADD dateDebutInscrip date ;
 
+ALTER TABLE vente 
+ADD archiver int(11) ;
+
+
 CREATE TABLE lot (
 	id int(11),
 	vent_id int(11),
 	che_id int(11),
 	vend_id int(11),
+	archiver int(11),
 	prixDepart int,
 	PRIMARY KEY (id, vent_id),
 	FOREIGN KEY (vent_id) REFERENCES vente(id),

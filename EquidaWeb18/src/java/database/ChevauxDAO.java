@@ -5,6 +5,7 @@
  */
 package database;
 
+import static database.ClientDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,13 +30,52 @@ public class ChevauxDAO {
     Connection connection=null;
     static PreparedStatement requete=null;
     static ResultSet rs=null;
+    public static Cheval ajouterCheval(Connection connection, Cheval unCheval){      
+        int idGenere = -1;
+        try
+        {
+            //preparation de la requete
+            // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
+            // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
+            // supprimer ce paramètre en cas de requête sans auto_increment.
+
+            requete=connection.prepareStatement("INSERT INTO cheval ( nom, sexe, sire, typ_id,pere,mere)\n" +
+                    "VALUES (?,?,?,?)", requete.RETURN_GENERATED_KEYS );
+            requete.setString(1, unCheval.getNom());
+            requete.setString(2, unCheval.getSexe());
+            requete.setString(3, unCheval.getSire());
+            requete.setString(7, unCheval.getTypeCheval().getId());
+            /*requete.setString(4, unCheval.getPere());
+            requete.setString(4, unCheval.getMere());*/
+
+           /* Exécution de la requête */
+            requete.executeUpdate();
+            
+             // Récupération de id auto-généré par la bdd dans la table client
+            rs = requete.getGeneratedKeys();
+            while ( rs.next() ) {
+                idGenere = rs.getInt( 1 );
+                unCheval.setId(idGenere);
+            }
+            
+            // ajout des enregistrement dans la table clientcategvente
+           
+            
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return unCheval ;    
+    }
     
     public static ArrayList<Cheval>  getLesChevaux(Connection connection,String codeAcheteur){      
         ArrayList<Cheval> lesChevaux = new  ArrayList<Cheval>();
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from Cheval,TypeCheval ,lot where Cheval.typ_id = typeCheval.id AND vend_id = ? AND che_id = cheval.id AND Cheval.archiver != 1");
+            requete=connection.prepareStatement("select * from cheval,typecheval ,lot where cheval.typ_id = typecheval.id AND vend_id = ? AND che_id = cheval.id AND cheval.archiver != 1");
             requete.setString(1, codeAcheteur);
             //executer la requete
             rs=requete.executeQuery();
@@ -50,7 +90,7 @@ public class ChevauxDAO {
                 unCheval.setSire(rs.getString("sire"));
                 
                 if(rs.getString("typ_id") != ""){
-                    requete=connection.prepareStatement("select * from TypeCheval where id = ?");  
+                    requete=connection.prepareStatement("select * from typecheval where id = ?");  
                     requete.setString(1, rs.getString("typ_id"));
                     
                     ResultSet rtc = requete.executeQuery();
@@ -66,7 +106,7 @@ public class ChevauxDAO {
                 }
                 
                 if(rs.getInt("pere") != 0){
-                    requete=connection.prepareStatement("select * from Cheval where id = ?");  
+                    requete=connection.prepareStatement("select * from cheval where id = ?");  
                     requete.setString(1, rs.getString("pere"));
                     
                     ResultSet rp = requete.executeQuery();
@@ -82,7 +122,7 @@ public class ChevauxDAO {
                 }
                 
                 if(rs.getInt("mere") != 0){
-                    requete=connection.prepareStatement("select * from Cheval where id = ?");  
+                    requete=connection.prepareStatement("select * from cheval where id = ?");  
                     requete.setString(1, rs.getString("mere"));
                     
                     ResultSet rm = requete.executeQuery();
@@ -97,13 +137,13 @@ public class ChevauxDAO {
                     unCheval.setMere(uneMere);
                 }
                 
-                requete=connection.prepareStatement("select * from Course,Participer where cour_id = course.id AND che_id = ?");          
+                requete=connection.prepareStatement("select * from course,participer where cour_id = course.id AND che_id = ?");          
                 requete.setString(1, rs.getString("id"));
                 //executer la requete
                 ResultSet rco=requete.executeQuery();
                 while ( rco.next() ) {  
                     Course uneCourse = new Course();
-                    uneCourse.setId(rco.getInt("Course.id"));
+                    uneCourse.setId(rco.getInt("course.id"));
                     uneCourse.setLieu(rco.getString("lieu"));
                     uneCourse.setNom(rco.getString("nom"));
                     uneCourse.setDate(rco.getString("date"));
@@ -132,7 +172,7 @@ public class ChevauxDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("UPDATE Cheval SET archiver = 1 WHERE cheval.id = ?");
+            requete=connection.prepareStatement("UPDATE cheval SET archiver = 1 WHERE cheval.id = ?");
             requete.setInt(1, codeCheval);
             //executer la requete
             requete.executeUpdate();

@@ -5,10 +5,12 @@
  */
 package servlets;
 
+import database.AcheteurDAO;
 import database.CategVenteDAO;
 import database.ClientDAO;
 import database.PaysDAO;
 import database.Utilitaire;
+import database.VendeurDAO;
 import database.VenteDAO;
 import formulaires.ClientForm;
 import java.io.IOException;
@@ -20,9 +22,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modele.Acheteur;
 import modele.CategVente;
 import modele.Client;
 import modele.Pays;
+import modele.Vendeur;
 import modele.Vente;
 
 /**
@@ -106,7 +110,27 @@ public class ServletClient extends HttpServlet {
             
         }
        
-       
+       if(url.equals("/EquidaWeb18/ServletClient/listerLesAcheteurs"))
+        {  
+            System.out.println("DANS LISTER LES CLIENTS");
+           
+            
+            ArrayList<Acheteur> lesAcheteurs = AcheteurDAO.getLesAcheteurs(connection);
+            
+            request.setAttribute("pLesAcheteurs", lesAcheteurs);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesAcheteurs.jsp").forward(request, response);
+        }
+        
+        if(url.equals("/EquidaWeb18/ServletClient/listerLesVendeurs"))
+        {  
+            System.out.println("DANS LISTER LES CLIENTS");
+           
+            
+            ArrayList<Vendeur> lesVendeurs = VendeurDAO.getLesVendeurs(connection);
+            
+            request.setAttribute("pLesVendeurs", lesVendeurs);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesVendeurs.jsp").forward(request, response);
+        }
        
        
     }
