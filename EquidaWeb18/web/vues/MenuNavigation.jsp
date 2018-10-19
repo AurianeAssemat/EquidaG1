@@ -14,16 +14,25 @@
     
     LienMenu ventes = new LienMenu("../ServletVentes/listerLesVentes", "Ventes" );
     lien.add(ventes);
-
+    
+    LienMenu MesChevaux = new LienMenu("../ServletVentes/listerMesChevaux", "Mes chevaux" );
+    lien.add(MesChevaux);
+    
+    
     LienMenu client = new LienMenu(null, "Clients" );
     lien.add(client);
+    
+    LienMenu clients = new LienMenu("../ServletVentes/listerLesClients", "Clients" );
+    client.addUnEnfant(clients);
 
     LienMenu vendeurs = new LienMenu("../ServletVentes/listerLesVendeurs", "Vendeurs" );
     client.addUnEnfant(vendeurs);
-
+    
     LienMenu acheteurs = new LienMenu("../ServletVentes/listerLesAcheteurs", "Acheteurs" );
     client.addUnEnfant(acheteurs);
-
+    
+    LienMenu ajoutClient = new LienMenu("../ServletClient/ajouterClient", "Ajouter un client" );
+    client.addUnEnfant(ajoutClient);
 %>
 
 

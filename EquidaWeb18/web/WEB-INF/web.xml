@@ -6,15 +6,18 @@
     </context-param>
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
-        <param-value>jdbc:mysql://localhost:3306/Equida18_G1</param-value>
+        <param-value>jdbc:mysql://localhost/Equida18_G1</param-value>
+        <!--<param-value>jdbc:mysql://172.20.0.241/EQUIG1</param-value>-->
     </context-param>
     <context-param>
         <param-name>utilisateurjdbc</param-name>
         <param-value>root</param-value>
+        <!--<param-value>ADM_EQUIG1</param-value>-->
     </context-param>
     <context-param>
         <param-name>motdepassejdbc</param-name>
         <param-value/>
+        <!--<param-value>mpEquida01</param-value>-->
     </context-param>
     <!--  écouteurs -->
     <listener>
@@ -68,11 +71,20 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/SupprimerMesChevaux</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesChevaux</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesEncheres</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/chevalAjouter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
