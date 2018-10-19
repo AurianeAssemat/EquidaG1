@@ -71,7 +71,10 @@
                         
                         out.println("<td>");
                         out.println(unClient.getMail());
-                        out.println("</td></tr>");
+                        out.println("</td>");
+                        
+                        out.println("<td> <a href ='../ServletClient/clientModif?id="+ unClient.getId()+ "'>Modifier</a></td></tr>");
+                        
                     }
                     %>
                 

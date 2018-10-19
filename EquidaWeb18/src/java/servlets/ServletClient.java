@@ -85,7 +85,7 @@ public class ServletClient extends HttpServlet {
        
         
        String url = request.getRequestURI();
-       
+       //ajout d'un client
        if(url.equals("/EquidaWeb18/ServletClient/ajouterClient"))
         {                   
             ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
@@ -95,6 +95,7 @@ public class ServletClient extends HttpServlet {
             request.setAttribute("pLesCategVente", lesCategVentes);
             this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp" ).forward( request, response );
         }
+       
        //lister les clients en tant que directeur
        if(url.equals("/EquidaWeb18/ServletClient/listerLesClients"))
         {  
@@ -105,10 +106,29 @@ public class ServletClient extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/listerLesClients.jsp").forward(request, response);
             
         }
-       
-       
-       
-       
+       //System.out.println("URL=" + url);
+        //MODIFICATION DE 1 CLIENT 
+       if(url.equals("/EquidaWeb18/ServletClient/clientModif"))
+       {
+           
+           ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+           request.setAttribute("pLesPays", lesPays);
+           
+           ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+           request.setAttribute("pLesCategVente", lesCategVentes);
+           
+           System.out.println("param " + request.getParameter("id"));
+           int idClient = Integer.parseInt(request.getParameter("id"));
+           System.out.println("id client "+ idClient);
+           
+           Client unClient = ClientDAO.getUnClient(connection, idClient );
+           unClient.setId(idClient);
+           request.setAttribute("pClient", unClient);
+           //System.out.println("client " + unClient);
+           //Client clientModif = ClientDAO.modifUnClient(connection, idClient);
+           
+           getServletContext().getRequestDispatcher("/vues/clientModif.jsp").forward(request, response);
+       }
     }
 
     /**
@@ -122,7 +142,8 @@ public class ServletClient extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               
+        
+        
          /* Préparation de l'objet formulaire */
         ClientForm form = new ClientForm();
 		
@@ -132,18 +153,30 @@ public class ServletClient extends HttpServlet {
         /* Stockage du formulaire et de l'objet dans l'objet request */
         request.setAttribute( "form", form );
         //request.setAttribute( "pClient", unClient );
-		
+	
         if (form.getErreurs().isEmpty()){
             
             // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
-            
-            Client clientVerif = ClientDAO.ajouterClient(connection, unClient);
-           
-            //verif l'insertion de données
-            ClientDAO.getUnClient(connection, clientVerif.getId());
-            
-            request.setAttribute( "pClient", unClient );
-            this.getServletContext().getRequestDispatcher("/vues/clientConsulter.jsp" ).forward( request, response );
+            Client clientConsult ;
+            System.out.println("avant modif");
+            if (unClient.getId() != 0 ){
+                System.out.println("modif");
+                clientConsult = ClientDAO.modifierClient(connection, unClient);
+                
+
+            }else {
+                System.out.println("ajout");
+                clientConsult = ClientDAO.ajouterClient(connection, unClient);
+                //System.out.println(request);
+            }
+                
+                //verif l'insertion de données
+                ClientDAO.getUnClient(connection, clientConsult.getId());
+
+                //variable du client contenant toutes ces informations
+                request.setAttribute( "pClient", clientConsult );
+                this.getServletContext().getRequestDispatcher("/vues/clientConsulter.jsp" ).forward( request, response );
+                
         }
         else
         { 
