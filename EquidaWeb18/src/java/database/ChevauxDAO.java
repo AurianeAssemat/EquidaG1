@@ -75,7 +75,8 @@ public class ChevauxDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from Cheval,TypeCheval where Cheval.typ_id = typeCheval.id");          
+            requete=connection.prepareStatement("select * from Cheval,TypeCheval ,lot where Cheval.typ_id = typeCheval.id AND vend_id = ? AND che_id = cheval.id AND Cheval.archiver != 1");
+            requete.setString(1, codeAcheteur);
             //executer la requete
             rs=requete.executeQuery();
             
@@ -164,6 +165,25 @@ public class ChevauxDAO {
             e.printStackTrace();
         }
         return lesChevaux ;    
+    } 
+    
+    
+    public static void  DeleteUnChevaux(Connection connection,int codeCheval){      
+      
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("UPDATE Cheval SET archiver = 1 WHERE cheval.id = ?");
+            requete.setInt(1, codeCheval);
+            //executer la requete
+            requete.executeUpdate();
+            
+        }    
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+           
     } 
     
 }

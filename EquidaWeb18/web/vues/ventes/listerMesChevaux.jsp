@@ -12,125 +12,141 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        <title>LISTE MES CHEVAUX</title>
-    </head>
+    <jsp:include page="/vues/Header.jsp" >
+        <jsp:param name="NomPage" value="Liste les ventes" />
+    </jsp:include>
+    
     <body>
-        <h1>LISTE MES CHEVAUX</h1>
         
-         <%
-        ArrayList<Cheval> lesChevaux = (ArrayList)request.getAttribute("pLesChevaux");
-        %>
+        <jsp:include page="/vues/MenuNavigation.jsp" />
         
-        
-        <table  class="table table-bordered table-striped table-condensed">  
-            <thead>
-                <tr>             
-                    
-             
-                    <th>Nom</th>
-                    <th>Sexe</th>  
-                    <th>Sire</th>
-                    <th>Type de cheval</th>
-                    <th>Nom du pere</th>
-                    <th>Sire du pere</th>
-                    <th>Nom de la mere</th>
-                    <th>Sire de la mere</th>
-                    <th>Course</th>
-                    <th></th>
-            <br>
-            <br>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <%
-                    for(int i = 0; i < lesChevaux.size();i++)
-                    {
-                        
-                   
-                        Cheval unCheval = lesChevaux.get(i);
+        <div class="container">
+            <div class="row">
+                <%
+               ArrayList<Cheval> lesChevaux = (ArrayList)request.getAttribute("pLesChevaux");
+               %>
 
-                       
+                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+               <table  class="table table-bordered table-striped table-condensed">  
+                   <thead>
+                       <tr>             
 
-                        out.println("<tr><td>");
-                        out.println(unCheval.getNom());
-                        out.println("</td>");
-                        
-                        out.println("<td>");
-                        out.println(unCheval.getSexe());
-                        out.println("</td>");
-                        
-                        out.println("<td>");
-                        out.println(unCheval.getSire());
-                        out.println("</td>");
-                        
-                        out.println("<td>");
-                        out.println(unCheval.getTypeCheval().getLibelle());
-                        out.println("</td>");
-                              
-                        
-                        if(unCheval.getPere() != null){
-                            out.println("<td>");
-                            out.println(unCheval.getPere().getNom());
-                            out.println("</td>");
 
-                            out.println("<td>");
-                            out.println(unCheval.getPere().getSire());
-                            out.println("</td>");
-                        }else{
-                            out.println("<td>");
-                            out.println("</td>");
-                            out.println("<td>");
-                            out.println("</td>");
-                        }
-                        
-                        if(unCheval.getMere() != null){
-                            out.println("<td>");
-                            out.println(unCheval.getMere().getNom());
-                            out.println("</td>");
+                           <th>Nom</th>
+                           <th>Sexe</th>  
+                           <th>Sire</th>
+                           <th>Type de cheval</th>
+                           <th>Nom du pere</th>
+                           <th>Sire du pere</th>
+                           <th>Nom de la mere</th>
+                           <th>Sire de la mere</th>
+                           <th>Course</th>
+                           <th></th>
+                   <br>
+                   <br>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr>
+                           <%
+                           for(int i = 0; i < lesChevaux.size();i++)
+                           {
 
-                            out.println("<td>");
-                            out.println(unCheval.getMere().getSire());
-                            out.println("</td>");
-                        }else{
-                            out.println("<td>");
-                            out.println("</td>");
-                            out.println("<td>");
-                            out.println("</td>");
-                        }
-                        
-                        
-                        out.println("<td>");
-                        if(unCheval.getLesParticipation() != null){
-                            for(int j = 0; j < unCheval.getLesParticipation().size();j++)
-                            {
-                                out.println("Place n°");
-                                out.println(unCheval.getLesParticipation().get(j).getPlace());
-                                out.println(" dans la ");
-                                out.println(unCheval.getLesParticipation().get(j).getUneCourse().getNom());
-                                out.println(" à ");
-                                out.println(unCheval.getLesParticipation().get(j).getUneCourse().getLieu());
-                                out.println(" le ");
-                                out.println(unCheval.getLesParticipation().get(j).getUneCourse().getDate());
-                                out.println("<br/>");
-                            }
-                        }else{
-                              out.println("<td>");
-                            out.println("</td>");  
-                                
-                        }
-                        out.println("</td>");
-                        out.println("</tr>");
-                        
-                    }
-                    
-                    %>
-                </tr>
-            </tbody>
-        </table>
-        <a href ='../ServletVentes/listerLesVentes'> Retour</a>
+
+                               Cheval unCheval = lesChevaux.get(i);
+
+
+
+                               out.println("<tr><td>");
+                               out.println(unCheval.getNom());
+                               out.println("</td>");
+
+                               out.println("<td>");
+                               out.println(unCheval.getSexe());
+                               out.println("</td>");
+
+                               out.println("<td>");
+                               out.println(unCheval.getSire());
+                               out.println("</td>");
+
+                               out.println("<td>");
+                               out.println(unCheval.getTypeCheval().getLibelle());
+                               out.println("</td>");
+
+
+                               if(unCheval.getPere() != null){
+                                   out.println("<td>");
+                                   out.println(unCheval.getPere().getNom());
+                                   out.println("</td>");
+
+                                   out.println("<td>");
+                                   out.println(unCheval.getPere().getSire());
+                                   out.println("</td>");
+                               }else{
+                                   out.println("<td>");
+                                   out.println("</td>");
+                                   out.println("<td>");
+                                   out.println("</td>");
+                               }
+
+                               if(unCheval.getMere() != null){
+                                   out.println("<td>");
+                                   out.println(unCheval.getMere().getNom());
+                                   out.println("</td>");
+
+                                   out.println("<td>");
+                                   out.println(unCheval.getMere().getSire());
+                                   out.println("</td>");
+                               }else{
+                                   out.println("<td>");
+                                   out.println("</td>");
+                                   out.println("<td>");
+                                   out.println("</td>");
+                               }
+
+
+                               out.println("<td>");
+                               if(unCheval.getLesParticipation() != null){
+                                   for(int j = 0; j < unCheval.getLesParticipation().size();j++)
+                                   {
+                                       out.println("Place n°");
+                                       out.println(unCheval.getLesParticipation().get(j).getPlace());
+                                       out.println(" dans la ");
+                                       out.println(unCheval.getLesParticipation().get(j).getUneCourse().getNom());
+                                       out.println(" à ");
+                                       out.println(unCheval.getLesParticipation().get(j).getUneCourse().getLieu());
+                                       out.println(" le ");
+                                       out.println(unCheval.getLesParticipation().get(j).getUneCourse().getDate());
+                                       out.println("<br/>");
+                                   }
+                               }else{
+                                     out.println("<td>");
+                                   out.println("</td>");  
+
+                               }
+                               
+                               out.println("<td>");
+                               out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerMesChevaux?codeCheval="+ unCheval.getId()+ "'><i class=\"material-icons\">delete</i></a>");
+                               out.println("</td>");
+                               
+                               out.println("<td>");
+                               out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">create</i></a>");
+                               out.println("</td>");
+                               
+                               
+                               out.println("</td>");
+                               out.println("</tr>");
+
+                           }
+
+                           %>
+                       </tr>
+                   </tbody>
+               </table>
+               
+               
+              
+            </div>
+        </div>
     </body>
 </html>

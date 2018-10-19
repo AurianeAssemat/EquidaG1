@@ -23,7 +23,7 @@ public class LieuDAO {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    // récupération des Lieus
+    // récupération des Lieux
     public static ArrayList<Lieu> getLesLieux(Connection connection) {      
         ArrayList<Lieu> lesLieux = new  ArrayList<Lieu>();
         try

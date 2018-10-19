@@ -30,21 +30,20 @@
                     }
                 }
                 %>
-
                 <form class="col s6 push-s3" action="Connexion" method="POST">
                     <div class="row">
                         <h2>Connexion</h2>
                     </div>
                     <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="Nom de compte" id="login" type="text" class="validate">
+                        <div class="input-field col s12">
+                            <input placeholder="Nom de compte" id="login" name="login" type="text" class="validate">
                             <label for="login">Nom de compte :</label>
                         </div>
                     </div>
                     
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="mdp" type="password" class="validate" maxlength="30">
+                            <input id="mdp" type="password" name="mdp" class="validate" maxlength="30">
                             <label for="mdp">Mot de passe</label>
                         </div>
                     </div>

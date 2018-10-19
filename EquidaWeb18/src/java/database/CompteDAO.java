@@ -29,28 +29,30 @@ public class CompteDAO {
         Compte unCompte = null;
         try
         {
-            //preparation de la requete     
-            requete=connection.prepareStatement("select * from compte,Client where cli_id = Client.id AND login = ? AND mdp = ?");          
-            requete.setString(1, login);
-            requete.setString(2, mdp);
-            //executer la requete
-            rs=requete.executeQuery();
             
-            if(rs.next()){
-                    
-                Client unClient = new Client();
-                unClient.setId(rs.getInt("client.id"));
-                unClient.setNom(rs.getString("nom"));
-                unClient.setPrenom(rs.getString("prenom"));
-                unClient.setCopos(rs.getString("copos"));
-                unClient.setMail(rs.getString("mail"));
-                
-                unCompte = new Compte();
-                unCompte.setId(rs.getInt("compte.id"));
-                unCompte.setLogin(rs.getString("login"));
-                unCompte.setMdp(rs.getString("mdp"));
-                unCompte.setUnClient(unClient);
-            }
+            //preparation de la requete   
+            
+                requete=connection.prepareStatement("select * from compte,Client where cli_id = Client.id AND login = ? AND mdp = ?");          
+                requete.setString(1, login);
+                requete.setString(2, mdp);
+                //executer la requete
+                rs=requete.executeQuery();
+
+                if(rs.next()){
+
+                    Client unClient = new Client();
+                    unClient.setId(rs.getInt("client.id"));
+                    unClient.setNom(rs.getString("nom"));
+                    unClient.setPrenom(rs.getString("prenom"));
+                    unClient.setCopos(rs.getString("copos"));
+                    unClient.setMail(rs.getString("mail"));
+
+                    unCompte = new Compte();
+                    unCompte.setId(rs.getInt("compte.id"));
+                    unCompte.setLogin(rs.getString("login"));
+                    unCompte.setMdp(rs.getString("mdp"));
+                    unCompte.setUnClient(unClient);
+                }
             
         }   
         catch (SQLException e) 
