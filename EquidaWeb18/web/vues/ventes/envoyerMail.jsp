@@ -3,6 +3,7 @@
     Created on : 12 oct. 2018, 06:46:05
     Author     : leneveuT
 --%>
+<%@page import="formulaires.CourrielForm"%>
 <%@page import="modele.Vente"%>
 <%@page import="modele.PieceJointe"%>
 <%@page import="java.util.ArrayList"%>
@@ -19,7 +20,28 @@
         <div class="container">
             <h3>Envoyer mail</h3>
             
-            <div class="row">
+            <%
+                CourrielForm form = (CourrielForm)request.getAttribute("form");
+            
+                if(form != null && form.getErreurs() != null){
+            %>
+            <div class="card-panel red lighten-1">
+                    <ul>
+                        <%
+                        for(int i = 0; i < form.getErreurs().size();i++)
+                        {
+                        
+                            out.println("<li>" + form.getErreurs().get(i) + "<li/>");
+                        }
+                        %>
+                    </ul>
+            </div>
+            <%
+                }
+            %>
+ 
+                    
+           <div class="row">
                 <form  action="envoyerMail" method="post" class="col s12">
                     <div class="row">
                         <div class="input-field col-s6">

@@ -218,6 +218,9 @@ public class ServletVentes extends HttpServlet {
         
         Courriel courriel = form.ajouterCourriel(request);
         
+        /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute("form", form);
+        
         if (form.getErreurs().isEmpty()){
             
             // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
@@ -225,6 +228,14 @@ public class ServletVentes extends HttpServlet {
             CourrielDAO.ajouterCourriel(connection, courriel);
             
             response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesCourriel?codeVente=" + courriel.getUneVente().getId());
+        } else {
+           ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+           request.setAttribute("pLesVentes", lesVentes);
+           
+           ArrayList<PieceJointe> lesPiecesJointes = PieceJointeDAO.getLesPiecesJointes(connection);
+           request.setAttribute("pLesPiecesJointes", lesPiecesJointes);
+            
+           getServletContext().getRequestDispatcher("/vues/ventes/envoyerMail.jsp").forward(request, response);
         }
     }
 

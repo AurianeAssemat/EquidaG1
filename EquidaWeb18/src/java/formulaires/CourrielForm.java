@@ -5,7 +5,7 @@
  */
 package formulaires;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import modele.Courriel;
@@ -17,7 +17,7 @@ import modele.Vente;
  */
 public class CourrielForm {
     private String resultat;
-    private Map<String, String> erreurs = new HashMap<String, String>();
+    private ArrayList< String> erreurs = new ArrayList< String>();
     
     public String getResultat() {
         return resultat;
@@ -27,21 +27,21 @@ public class CourrielForm {
         this.resultat = resultat;
     }
 
-    public Map<String, String> getErreurs() {
+    public ArrayList<String> getErreurs() {
         return erreurs;
     }
 
-    public void setErreurs(Map<String, String> erreurs) {
+    public void setErreurs(ArrayList<String> erreurs) {
         this.erreurs = erreurs;
     }
     
-    private void setErreur( String champ, String message ) {
-    erreurs.put(champ, message );
+    private void addErreur(String message) {
+        getErreurs().add(message);
     }   
     
     private static String getDataForm( HttpServletRequest request, String nomChamp ) {
-        String valeur = request.getParameter( nomChamp );
-        if ( valeur == null || valeur.trim().length() == 0 ) {
+        String valeur = request.getParameter(nomChamp);
+        if (valeur == null || valeur.trim().length() == 0) {
             return null;
         } else {
             return valeur.trim();
@@ -50,21 +50,25 @@ public class CourrielForm {
     
     //méthode de validation du champ de saisie objet
     private void validationObjet(String objet) throws Exception {
-        if (objet != null && objet.length() < 3 ) {
-        throw new Exception( "L'objet doit contenir au moins 3 caractères." );
+        if (objet == null) {
+            throw new Exception( "L'objet ne doit pas être vide" );
+        } else if (objet.length() < 3) {
+            throw new Exception( "L'objet doit contenir au moins 3 caractères." );
         }
     }
     
     //méthode de validation du champ de saisie corps
     private void validationCorps(String corps) throws Exception {
-        if (corps != null && corps.length() < 3 ) {
-        throw new Exception( "L'e corps doit contenir au moins 3 caractères." );
+        if (corps == null) {
+            throw new Exception( "Le corps ne doit pas être vide." );
+        } else if (corps.length() < 3) {
+            throw new Exception( "Le corps doit contenir au moins 3 caractères." );
         }
     }
     
     public Courriel ajouterCourriel(HttpServletRequest request) {
       
-        Courriel courriel  = new Courriel();
+        Courriel courriel = new Courriel();
         
         String objet = getDataForm(request, "objet");
         String corps = getDataForm(request, "corps");
@@ -73,28 +77,20 @@ public class CourrielForm {
         Vente vente = new Vente();
         vente.setId(venteId);
         
-        System.out.println(vente.getId());
-
         try {
-             validationObjet(objet);
+            validationObjet(objet);
         } catch (Exception e) {
-            setErreur("objet", e.getMessage() );
+            addErreur(e.getMessage());
         }
         courriel.setObjet(objet);
         
         try {
              validationCorps(corps);
         } catch (Exception e) {
-            setErreur("corps", e.getMessage() );
+            addErreur(e.getMessage());
         }
         courriel.setCorps(corps);
 
-        if (erreurs.isEmpty()) {
-            resultat = "Succès de l'ajout.";
-        } else {
-            resultat = "Échec de l'ajout.";
-        }
-        
         courriel.setUneVente(vente);
       
         return courriel;
