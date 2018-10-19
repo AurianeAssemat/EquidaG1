@@ -43,13 +43,13 @@
                            TypeCheval unTypeCheval = lesTypeChevaux.get(i);
                            out.println("<tr><td>");
                            out.println(unTypeCheval.getId());
-                           out.println("</td></tr>");
+                           out.println("</td>");
                            
-                           out.println("<tr><td>");
+                           out.println("<td>");
                            out.println(unTypeCheval.getLibelle());
-                           out.println("</td></tr>");
+                           out.println("</td>");
                            
-                           out.println("<tr><td>");
+                           out.println("<td>");
                            out.println(unTypeCheval.getDescription());
                            out.println("</td></tr>");
                        }
