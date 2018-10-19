@@ -35,26 +35,23 @@
             <tbody>
                 <tr>
                     <%
-                    for(int i = 0; i < lesEncheres.size();i++)
-                    {
-        
+                    
                     out.println("<tr><td>");
-                    out.println(lesEncheres.get(i).getUnLot().getCheval().getNom());
+                    out.println(lesEncheres.get(0).getUnLot().getCheval().getNom());
                     out.println("</td>");
                     
                     out.println("<tr><td>");
-                    out.println(lesEncheres.get(i).getUnLot().getCheval().getSire());
+                    out.println(lesEncheres.get(0).getUnLot().getCheval().getSire());
                     out.println("</td>");
                     
                     out.println("<tr><td>");
-                    out.println(lesEncheres.get(i).getUnLot().getCheval().getPere().getNom());
+                    out.println(lesEncheres.get(0).getUnLot().getCheval().getPere().getNom());
                     out.println("</td>");
                     
                     out.println("<tr><td>");
-                    out.println(lesEncheres.get(i).getUnLot().getCheval().getMere().getNom());
+                    out.println(lesEncheres.get(0).getUnLot().getCheval().getMere().getNom());
                     out.println("</td>");
                     
-                    }
                     %>
                 </tr>
             </tbody>
