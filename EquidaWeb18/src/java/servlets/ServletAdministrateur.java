@@ -8,7 +8,9 @@ package servlets;
 import database.ChevauxDAO;
 import database.CategVenteDAO;
 import database.TypeChevalDAO;
+
 import database.CourseDAO;
+
 import database.Utilitaire;
 import formulaires.ClientForm;
 import java.io.IOException;
