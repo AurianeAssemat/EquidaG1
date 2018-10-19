@@ -10,37 +10,38 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modele.TypeCheval;
+import modele.Course;
 
 /**
  *
  * @author slam
  */
-public class TypeChevalDAO {
+public class CourseDAO {
 
     Connection connection=null;
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
 
-     public static ArrayList<TypeCheval>  getLesTypeChevaux(Connection connection){      
+     public static ArrayList<Course>  getLesCourses(Connection connection){      
 
-        ArrayList<TypeCheval> lesTypeChevaux = new  ArrayList<TypeCheval>();
+        ArrayList<Course> lesCourses = new  ArrayList<Course>();
         try
         {
 
-            requete=connection.prepareStatement("select * from TypeCheval");
+            requete=connection.prepareStatement("select * from Course");
             //executer la requete
             rs=requete.executeQuery();
             
             while ( rs.next() ) {  
                 
-                TypeCheval unTypeCheval = new TypeCheval();
-                unTypeCheval.setId(rs.getString("id"));
-                unTypeCheval.setLibelle(rs.getString("libelle"));
-                unTypeCheval.setDescription(rs.getString("description"));
+                Course uneCourse = new Course();
+                uneCourse.setId(rs.getInt("id"));
+                uneCourse.setNom(rs.getString("nom"));
+                uneCourse.setLieu(rs.getString("lieu"));
+                uneCourse.setDate(rs.getString("date"));
 
-                lesTypeChevaux.add(unTypeCheval);
+                lesCourses.add(uneCourse);
                 
             }
         }    
@@ -48,6 +49,6 @@ public class TypeChevalDAO {
         {
             e.printStackTrace();
         }
-        return lesTypeChevaux ;    
+        return lesCourses ;    
     } 
 }

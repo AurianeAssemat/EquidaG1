@@ -21,8 +21,11 @@
     LienMenu parametres = new LienMenu(null, "Paramètres");
     lien.add(parametres);
     
-    LienMenu paramChevaux = new LienMenu("../ServletAdministrateur/listerParamTypeCheval", "Chevaux");
-    parametres.addUnEnfant(paramChevaux);
+    LienMenu paramTypeChevaux = new LienMenu("../ServletAdministrateur/listerParamTypeCheval", "Chevaux");
+    parametres.addUnEnfant(paramTypeChevaux);
+    
+    LienMenu paramCourse = new LienMenu("../ServletAdministrateur/listerParamCourse", "Courses");
+    parametres.addUnEnfant(paramCourse);
     
     LienMenu client = new LienMenu(null, "Clients" );
     lien.add(client);
