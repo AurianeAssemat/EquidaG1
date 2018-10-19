@@ -6,79 +6,97 @@
 <%@page import="modele.Client"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>lister les clients</title>
-    </head>
+    <jsp:include page="/vues/Header.jsp" >
+        <jsp:param name="NomPage" value="Liste les ventes" />
+    </jsp:include>
+    
     <body>
-        <h1>LISTE DES CLIENTS</h1>
-         <%
-        ArrayList<Client> lesClients = (ArrayList)request.getAttribute("pLesClients");
-        %>
-        <table  class="table table-bordered table-striped table-condensed">  
-            <thead>
-                <tr>             
-                    <th>nom</th>
-                    <th>prenom</th>
-                    <th>Civilité</th>
-                    <th>ville</th>
-                    <th>rue</th>
-                    <th>Code Postal</th>
-                    <th>pays</th>
-                    <th>E-mail</th> 
-            <br>
-            <br>
-                </tr>
-            </thead>
-            <tbody>
-                
-                    <%
-                    for(int i = 0; i < lesClients.size();i++)
-                    {
-                        
-                        Client unClient = lesClients.get(i);
+        
+        <jsp:include page="/vues/MenuNavigation.jsp" />
+        
+        <div class="container">
+            <div class="row">
+                <%
+                ArrayList<Client> lesClients = (ArrayList)request.getAttribute("pLesClients");
+                %>
+                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <table  class="table table-bordered table-striped table-condensed">  
+                    <thead>
+                        <tr>             
+                            <th>nom</th>
+                            <th>prenom</th>
+                            <th>Civilité</th>
+                            <th>ville</th>
+                            <th>rue</th>
+                            <th>Code Postal</th>
+                            <th>pays</th>
+                            <th>E-mail</th> 
+                    <br>
+                    <br>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                        out.println("<tr><td>");
-                        out.println(unClient.getNom());
-                        out.println("</td>");
+                            <%
+                            for(int i = 0; i < lesClients.size();i++)
+                            {
 
-                        out.println("<td>");
-                        out.println(unClient.getPrenom());
-                        out.println("</td>");
-                        
-                        out.println("<td>");
-                        out.println(unClient.getTitre());
-                        out.println("</td>");
-                        
-                        out.println("<td>");
-                        out.println(unClient.getVille());
-                        out.println("</td>");
-                        
-                        out.println("<td>");
-                        out.println(unClient.getRue());
-                        out.println("</td>");
-                        
-                        out.println("<td>");
-                        out.println(unClient.getCopos());
-                        out.println("</td>");
-                        
-                        out.println("<td>");
-                        out.println(unClient.getUnPays().getNom());
-                        out.println("</td>");
-                        
-                        out.println("<td>");
-                        out.println(unClient.getMail());
-                        out.println("</td>");
-                        
-                        out.println("<td> <a href ='../ServletClient/clientModif?id="+ unClient.getId()+ "'>Modifier</a></td></tr>");
-                        
-                    }
-                    %>
-                
-            </tbody>
-        </table>
+                                Client unClient = lesClients.get(i);
+
+                                out.println("<tr><td>");
+                                out.println(unClient.getNom());
+                                out.println("</td>");
+
+                                out.println("<td>");
+                                out.println(unClient.getPrenom());
+                                out.println("</td>");
+
+                                out.println("<td>");
+                                if(unClient.getTitre() != null){
+                                    out.println(unClient.getTitre());
+                                }
+                                out.println("</td>");
+                                
+                                out.println("<td>");
+                                if(unClient.getVille() != null){
+                                    out.println(unClient.getVille());
+                                }
+                                out.println("</td>");
+                                           
+                                out.println("<td>");
+                                if(unClient.getRue() != null){
+                                    out.println(unClient.getRue());
+                                }
+                                out.println("</td>");
+
+                                out.println("<td>");
+                                out.println(unClient.getCopos());
+                                out.println("</td>");
+
+                                out.println("<td>");
+                                out.println(unClient.getUnPays().getNom());
+                                out.println("</td>");
+
+                                out.println("<td>");
+                                out.println(unClient.getMail());
+                                out.println("</td>");
+                                
+                                out.println("<td>");
+                               out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">delete</i></a>");
+                               out.println("</td>");
+                               
+                               out.println("<td>");
+                               out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletClient/clientModif?id="+ unClient.getId()+ "'><i class=\"material-icons\">create</i></a>");
+                               out.println("</td></tr>");
+                               
+                            }
+                            %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+>>>>>>> ddcaae51a8de572ced6a690fc840d4b458c986f9
     </body>
 </html>
