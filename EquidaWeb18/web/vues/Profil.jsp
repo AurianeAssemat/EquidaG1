@@ -25,54 +25,52 @@
 
                <table  class="table table-bordered table-striped table-condensed">  
                    <thead>
-                       <tr>
+                        <tr>
                            <th>Nom de compte :</th>   
                            <%
                                out.println("<th>"+ compte.getLogin() +"</th>");
                            %>
-                       </tr>
-                       <tr>
-                           <th>Civilité :</th>     
-                           <%
-                               //out.println("<th>"+ compte.getUnClient().getTitre() +"</th>");
+                        </tr>
+                        <%
+                        if(compte.getUnClient().getTitre() != null){
+                            out.println("<tr><th>Civilité :</th>  <th>"+ compte.getUnClient().getTitre() +"</th></tr>");
+                        }
+                        %>
+                        <tr>
+                            <th>Nom :</th>     
+                            <%
+                                out.println("<th>"+ compte.getUnClient().getNom() +"</th>");
                            %>
-                       </tr>
-                       <tr>
-                           <th>Nom :</th>     
-                           <%
-                               out.println("<th>"+ compte.getUnClient().getNom() +"</th>");
-                           %>
-                       </tr>
-                       <tr>
+                        </tr>
+                        <tr>
                            <th>Prenom :</th>     
                            <%
                                out.println("<th>"+ compte.getUnClient().getPrenom() +"</th>");
                            %>
-                       </tr>
-                       <tr>
-                           <th>Adresse :</th>     
-                           <%
-                               out.println("<th>"+ compte.getUnClient().getRue() +"</th>");
-                           %>
-                       </tr>
-                       <tr>
-                           <th>Code Postal :</th>     
-                           <%
+                        </tr>
+                        <%
+                        if(compte.getUnClient().getRue() != null){
+                            out.println("<tr><th>Adresse :</th>  <th>"+ compte.getUnClient().getRue() +"</th></tr>");
+                        }
+                        %>
+                       
+                        <tr>
+                            <th>Code Postal :</th>     
+                            <%
                                out.println("<th>"+ compte.getUnClient().getCopos() +"</th>");
-                           %>
-                       </tr>
-                       <tr>
-                           <th>Ville :</th>     
-                           <%
-                               out.println("<th>"+ compte.getUnClient().getVille() +"</th>");;
-                           %>
-                       </tr>
-                       <tr>
-                           <th>E-mail :</th>     
-                           <%
-                               out.println("<th>"+ compte.getUnClient().getMail() +"</th>");
-                           %>
-                       </tr>
+                            %>
+                        </tr>
+                        <%
+                        if(compte.getUnClient().getVille() != null){
+                            out.println("<tr><th>Ville :</th>  <th>"+ compte.getUnClient().getVille() +"</th></tr>");
+                        }
+                        %>
+                        <%
+                        if(compte.getUnClient().getMail() != null &&compte.getUnClient().getMail() != "" ){
+                            out.println("<tr><th>E-mail :</th>  <th>"+ compte.getUnClient().getMail() +"</th></tr>");
+                        }
+                        %>
+                        
                    </tbody>
                </table>
             </div>
