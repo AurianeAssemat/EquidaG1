@@ -5,6 +5,7 @@
  */
 package database;
 
+import static database.ClientDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +30,45 @@ public class ChevauxDAO {
     Connection connection=null;
     static PreparedStatement requete=null;
     static ResultSet rs=null;
+    public static Cheval ajouterCheval(Connection connection, Cheval unCheval){      
+        int idGenere = -1;
+        try
+        {
+            //preparation de la requete
+            // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
+            // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
+            // supprimer ce paramètre en cas de requête sans auto_increment.
+
+            requete=connection.prepareStatement("INSERT INTO Cheval ( nom, sexe, sire, typ_id,pere,mere)\n" +
+                    "VALUES (?,?,?,?)", requete.RETURN_GENERATED_KEYS );
+            requete.setString(1, unCheval.getNom());
+            requete.setString(2, unCheval.getSexe());
+            requete.setString(3, unCheval.getSire());
+            requete.setString(7, unCheval.getTypeCheval().getId());
+            /*requete.setString(4, unCheval.getPere());
+            requete.setString(4, unCheval.getMere());*/
+
+           /* Exécution de la requête */
+            requete.executeUpdate();
+            
+             // Récupération de id auto-généré par la bdd dans la table client
+            rs = requete.getGeneratedKeys();
+            while ( rs.next() ) {
+                idGenere = rs.getInt( 1 );
+                unCheval.setId(idGenere);
+            }
+            
+            // ajout des enregistrement dans la table clientcategvente
+           
+            
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return unCheval ;    
+    }
     
     public static ArrayList<Cheval>  getLesChevaux(Connection connection,String codeAcheteur){      
         ArrayList<Cheval> lesChevaux = new  ArrayList<Cheval>();

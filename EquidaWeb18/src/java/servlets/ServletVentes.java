@@ -11,9 +11,14 @@ import database.AcheteurDAO;
 import database.VenteDAO;
 import database.CategVenteDAO;
 import database.ChevauxDAO;
+import database.ClientDAO;
 import database.CourrielDAO;
 import database.LieuDAO;
 import database.LotDAO;
+import database.PaysDAO;
+import database.TypeChevalDAO;
+import formulaires.ChevalForm;
+import formulaires.ClientForm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -34,6 +39,8 @@ import modele.Cheval;
 import modele.Compte;
 
 import modele.Lot;
+import modele.Pays;
+import modele.TypeCheval;
 /**
  *
  * @author Zakina
@@ -200,6 +207,15 @@ public class ServletVentes extends HttpServlet {
                 }
             }
         }
+          if(url.equals("/EquidaWeb18/ServletVentes/chevalAjouter"))
+        {                   
+            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+            request.setAttribute("pLesPays", lesPays);
+            
+            ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeCheval(connection);
+            request.setAttribute("pLesTypeCheval", lesTypeCheval);
+            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp" ).forward( request, response );
+        }
     }
 
     /**
@@ -213,7 +229,35 @@ public class ServletVentes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ChevalForm form = new ChevalForm();
+		
+        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+        Cheval unCheval = form.ajouterCheval(request);
+        
+        /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute( "form", form );
+        //request.setAttribute( "pClient", unClient );
+		
+        if (form.getErreurs().isEmpty()){
+            
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+            
+            Cheval chevalVerif = ChevauxDAO.ajouterCheval(connection, unCheval);
+           
+            //verif l'insertion de données
+            ClientDAO.getUnClient(connection, chevalVerif.getId());
+            
+            request.setAttribute( "pCheval", unCheval );
+            this.getServletContext().getRequestDispatcher("/vues/chevalConsulter.jsp" ).forward( request, response );
+        }
+        else
+        { 
+		// il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+            
+            ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeCheval(connection);
+            request.setAttribute("plesTypeCheval", lesTypeCheval);
+           this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp" ).forward( request, response );
+        }
     }
 
     /**
