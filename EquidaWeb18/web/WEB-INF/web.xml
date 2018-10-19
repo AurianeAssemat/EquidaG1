@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
-        <param-value>jdbc:mysql://172.20.0.241/EQUIG1</param-value>
+        <param-value>jdbc:mysql://localhost/Equida18_G1</param-value>
         <!--<param-value>jdbc:mysql://172.20.0.241/EQUIG1</param-value>-->
     </context-param>
     <context-param>
@@ -77,6 +77,10 @@
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesChevaux</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/listerLesEncheres</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>

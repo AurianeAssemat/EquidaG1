@@ -36,7 +36,7 @@ CREATE TABLE donner (
 	FOREIGN KEY (rol_code) REFERENCES role(code)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE client
+ALTER TABLE client 
 ADD titre varchar(20);
 
 
@@ -96,7 +96,6 @@ ADD dateDebutInscrip date ;
 
 ALTER TABLE vente 
 ADD archiver int(11) ;
-
 
 
 CREATE TABLE lot (
