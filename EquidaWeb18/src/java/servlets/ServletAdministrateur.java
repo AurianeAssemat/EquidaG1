@@ -8,6 +8,8 @@ package servlets;
 import database.ChevauxDAO;
 import database.CategVenteDAO;
 import database.TypeChevalDAO;
+import database.CourseDAO;
+import database.Utilitaire;
 import formulaires.ClientForm;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import modele.Cheval;
 import modele.CategVente;
 import modele.TypeCheval;
+import modele.Course;
 
 /**
  *
@@ -86,10 +89,20 @@ public class ServletAdministrateur extends HttpServlet {
         {  
             System.out.println("DANS PARAMETRES DES RACES");
            
-            ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeCheval(connection);
+            ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
             
             request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
             getServletContext().getRequestDispatcher("/vues/params/listerParamTypeCheval.jsp").forward(request, response);
+        }
+       
+       if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCourse"))
+        {  
+            System.out.println("DANS PARAMETRES DES COURSES");
+           
+            ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
+            
+            request.setAttribute("pLesCourses", lesCourses);
+            getServletContext().getRequestDispatcher("/vues/params/listerParamCourse.jsp").forward(request, response);
         }
     }
     
