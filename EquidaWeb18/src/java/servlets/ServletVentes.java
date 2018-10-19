@@ -12,6 +12,7 @@ import database.VenteDAO;
 import database.CategVenteDAO;
 import database.ChevauxDAO;
 import database.CourrielDAO;
+import database.EnchereDAO;
 import database.LotDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,6 +30,7 @@ import modele.Vente;
 import modele.Courriel;
 import modele.CategVente;
 import modele.Cheval;
+import modele.Enchere;
 import modele.Lot;
 /**
  *
@@ -175,8 +177,17 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesChevaux", lesChevaux);
             getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
         }
+         if(url.equals("/EquidaWeb18/ServletVentes/listerLesEncheres"))
+         {
+             System.out.println("LISTER LES ENCHERES");
+            String idLot = (String)request.getParameter("idLot");
+           
+            
+            ArrayList<Enchere> lesEncheres = EnchereDAO.getLesEncheres(connection, idLot);
+            request.setAttribute("pLesEncheres", lesEncheres);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesEncheres.jsp").forward(request, response);
+         }
     }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *

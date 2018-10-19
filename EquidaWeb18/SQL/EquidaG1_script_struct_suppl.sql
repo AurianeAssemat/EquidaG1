@@ -2,7 +2,7 @@
 CREATE TABLE compte (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	login varchar(30),
-	mdp varchar(30),
+	mdp varchar(50),
 	cli_id int(11),
 	PRIMARY KEY (id),
 	FOREIGN KEY (cli_id) REFERENCES client(id)
@@ -35,6 +35,9 @@ CREATE TABLE donner (
 	FOREIGN KEY (per_code) REFERENCES permissions(code),
 	FOREIGN KEY (rol_code) REFERENCES role(code)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE client 
+ADD titre varchar(20);
 
 
 CREATE TABLE typecheval (
