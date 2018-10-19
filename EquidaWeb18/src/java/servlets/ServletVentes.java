@@ -13,11 +13,8 @@ import database.CategVenteDAO;
 import database.ChevauxDAO;
 import database.ClientDAO;
 import database.CourrielDAO;
-<<<<<<< HEAD
 import database.EnchereDAO;
-=======
 import database.LieuDAO;
->>>>>>> 3105b4a2dd354b5bd0a890d5fd38d773f54035c2
 import database.LotDAO;
 import database.PaysDAO;
 import database.TypeChevalDAO;
@@ -40,12 +37,8 @@ import modele.Courriel;
 import modele.CategVente;
 import modele.Lieu;
 import modele.Cheval;
-<<<<<<< HEAD
 import modele.Enchere;
-=======
 import modele.Compte;
-
->>>>>>> 3105b4a2dd354b5bd0a890d5fd38d773f54035c2
 import modele.Lot;
 import modele.Pays;
 import modele.TypeCheval;
