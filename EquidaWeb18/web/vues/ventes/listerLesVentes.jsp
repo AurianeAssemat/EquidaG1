@@ -53,11 +53,11 @@
            <table  class="table table-bordered table-striped table-condensed">  
                <thead>
                    <tr>             
-                       <th>id</th>
-                       <th>nom</th>
-                       <th>DateDébutVente</th>
-                       <th>DateFinVente</th>
-                       <th>DateDébutInscription</th>
+                       <th>Numéro</th>
+                       <th>Nom</th>
+                       <th>Date de Début de la Vente</th>
+                       <th>Date de Fin de la Vente</th>
+                       <th>Date de Début de l'Inscription</th>
                        <th>Lieu</th>
                        <th>Catégorie</th>  
                      
