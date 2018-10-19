@@ -18,6 +18,11 @@
     LienMenu MesChevaux = new LienMenu("../ServletVentes/listerMesChevaux", "Mes chevaux" );
     lien.add(MesChevaux);
     
+    LienMenu parametres = new LienMenu(null, "Paramètres");
+    lien.add(parametres);
+    
+    LienMenu paramChevaux = new LienMenu("../ServletAdministrateur/listerParamTypeCheval", "Chevaux");
+    parametres.addUnEnfant(paramChevaux);
     
     LienMenu client = new LienMenu(null, "Clients" );
     lien.add(client);

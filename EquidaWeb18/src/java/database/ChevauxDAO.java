@@ -127,7 +127,6 @@ public class ChevauxDAO {
         return lesChevaux ;    
     } 
     
-    
     public static void  DeleteUnChevaux(Connection connection,int codeCheval){      
       
         try

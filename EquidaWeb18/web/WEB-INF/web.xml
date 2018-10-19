@@ -98,6 +98,11 @@
     </servlet-mapping>
     
     <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/listerParamTypeCheval</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/listerLesClients</url-pattern>
     </servlet-mapping>
