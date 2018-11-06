@@ -79,7 +79,7 @@ public class CourrielDAO {
         try
         {
             //preparation de la requete 
-            requete=connection.prepareStatement("SELECT * FROM courriel WHERE courriel.id = ?");
+            requete=connection.prepareStatement("SELECT * FROM courriel, vente WHERE courriel.id = ? AND courriel.ven_id = vente.id");
             requete.setString(1, id);
             //executer la requete
             rs=requete.executeQuery();
@@ -89,6 +89,12 @@ public class CourrielDAO {
                   courriel.setId(rs.getInt("id"));
                   courriel.setObjet(rs.getString("objet"));
                   courriel.setCorps(rs.getString("corps"));
+                  courriel.setDate(rs.getString("date"));
+                  
+                  Vente vente = new Vente();
+                  vente.setNom(rs.getString("nom"));
+                  
+                  courriel.setUneVente(vente);
              }
         }   
         catch (SQLException e) 

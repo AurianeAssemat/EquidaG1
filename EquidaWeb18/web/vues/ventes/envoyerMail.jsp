@@ -20,6 +20,8 @@
                 
             %>
             <h3>Envoi du mail</h3>
+            <p><% out.println("Vente du " + courriel.getDate()); %></p>
+            <p><% out.println(courriel.getUneVente().getNom()); %><p>
             <p>
             <%
                  out.println("Objet : " + courriel.getObjet()); 
