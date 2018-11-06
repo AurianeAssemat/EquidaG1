@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="modele.Cheval"%>
+<%@page import="modele.Lot"%>
 <%@page import="modele.Enchere"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
