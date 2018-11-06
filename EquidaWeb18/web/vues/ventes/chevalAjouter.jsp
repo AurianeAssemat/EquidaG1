@@ -18,7 +18,7 @@
         <title>Ajouter un Cheval</title>
     </head>
     <body>
-        <h1>NOUVEAU CHEVAL</h1>
+        <h1>UN NOUVEAU CHEVAL</h1>
         
         <%
               
