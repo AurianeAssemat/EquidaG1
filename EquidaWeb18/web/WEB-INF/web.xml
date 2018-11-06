@@ -180,6 +180,11 @@
         <url-pattern>/ServletAdministrateur/listerParamCategVente</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/listerParamPays</url-pattern>
+    </servlet-mapping>
+    
     <!--Servlet ajouter -->
     
     <servlet-mapping>
@@ -200,6 +205,11 @@
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
         <url-pattern>/ServletAdministrateur/lieuAjouter</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/PaysAjouter</url-pattern>
     </servlet-mapping>
        
     <!-- -->

@@ -33,6 +33,9 @@
     LienMenu paramLieu = new LienMenu("../ServletAdministrateur/listerParamLieu", "Lieu de vente");
     parametres.addUnEnfant(paramLieu);
     
+    LienMenu paramPays = new LienMenu("../ServletAdministrateur/listerParamPays", "Pays");
+    parametres.addUnEnfant(paramPays);
+    
     LienMenu client = new LienMenu(null, "Clients" );
     lien.add(client);
     
