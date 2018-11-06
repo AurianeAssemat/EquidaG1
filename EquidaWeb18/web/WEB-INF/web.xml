@@ -102,6 +102,10 @@
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/ajouterClient</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient/clientModif</url-pattern>
+    </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>

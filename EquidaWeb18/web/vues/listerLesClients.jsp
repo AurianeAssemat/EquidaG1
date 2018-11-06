@@ -21,7 +21,10 @@
                 <%
                 ArrayList<Client> lesClients = (ArrayList)request.getAttribute("pLesClients");
                 %>
-                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <div class="col s1 offset-s11"> 
+                    <a class="btn-floating btn-large waves-effect waves-light red"href='../ServletClient/ajouterClient'><i class="material-icons">add</i></a>
+                </div> 
+                
                 <table  class="table table-bordered table-striped table-condensed">  
                     <thead>
                         <tr>             
@@ -88,14 +91,15 @@
                                out.println("</td>");
                                
                                out.println("<td>");
-                               out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">create</i></a>");
+                               out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletClient/clientModif?id="+ unClient.getId()+ "'><i class=\"material-icons\">create</i></a>");
                                out.println("</td></tr>");
+                               
                             }
                             %>
-
                     </tbody>
                 </table>
             </div>
         </div>
+>>>>>>> ddcaae51a8de572ced6a690fc840d4b458c986f9
     </body>
 </html>

@@ -62,7 +62,9 @@ public class ClientForm {
     public Client ajouterClient( HttpServletRequest request ) {
       
         Client unClient  = new Client();
-         
+        
+        //int id = unClient.getId();
+        String id = getDataForm( request, "id" );
         String nom = getDataForm( request, "nom" );
         String prenom = getDataForm( request, "prenom");
         String rue = getDataForm( request, "rue" );
@@ -100,7 +102,8 @@ public class ClientForm {
             resultat = "Échec de l'ajout.";
         }
          
-      
+        unClient.setId(Integer.parseInt(id));
+        unClient.setNom(nom);
         unClient.setPrenom(prenom);
         unClient.setRue(rue);
         unClient.setCopos(copos);
@@ -108,8 +111,8 @@ public class ClientForm {
         unClient.setTitre(titre);
         unClient.setMail(mail);
         unClient.setUnPays(unPays);
-               
-       
+        
+        
         return unClient ;
     }
     
