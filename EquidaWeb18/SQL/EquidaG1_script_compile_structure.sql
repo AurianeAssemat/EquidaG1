@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `categvente` (
 
 CREATE TABLE IF NOT EXISTS `pays` (
   `code` varchar(3) NOT NULL,
-  `nom` varchar(30) NOT NULL,
+  `nom` varchar(100) NOT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

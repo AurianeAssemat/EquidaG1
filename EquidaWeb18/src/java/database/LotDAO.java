@@ -39,7 +39,7 @@ public class LotDAO {
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from lot,cheval,typecheval where lot.che_id = cheval.id AND cheval.typ_id = typecheval.id AND vend_id = ?");          
+            requete=connection.prepareStatement("select * from lot,cheval,typecheval where lot.che_id = cheval.id AND cheval.typ_id = typecheval.id AND vent_id = ?");          
             requete.setString(1, codevente);
             //executer la requete
             rs=requete.executeQuery();

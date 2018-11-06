@@ -138,27 +138,7 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesClients.jsp").forward(request, response);
         }
         
-        if(url.equals("/EquidaWeb18/ServletVentes/listerLesVendeurs"))
-        {  
-            System.out.println("DANS LISTER LES CLIENTS");
-           
-            
-            ArrayList<Vendeur> lesVendeurs = VendeurDAO.getLesVendeurs(connection);
-            
-            request.setAttribute("pLesVendeurs", lesVendeurs);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesVendeurs.jsp").forward(request, response);
-        }
-        
-         if(url.equals("/EquidaWeb18/ServletVentes/listerLesAcheteurs"))
-        {  
-            System.out.println("DANS LISTER LES CLIENTS");
-           
-            
-            ArrayList<Acheteur> lesAcheteurs = AcheteurDAO.getLesAcheteurs(connection);
-            
-            request.setAttribute("pLesAcheteurs", lesAcheteurs);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesAcheteurs.jsp").forward(request, response);
-        }
+         
         
         if(url.equals("/EquidaWeb18/ServletVentes/listerLesCourriel"))
         {  
@@ -184,8 +164,6 @@ public class ServletVentes extends HttpServlet {
             Compte compte = (Compte)request.getSession().getAttribute("Compte");
             if(compte != null){
                 int codeAcheteur = compte.getUnClient().getId();
-
-
                 ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
                 request.setAttribute("pLesChevaux", lesChevaux);
                 getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
@@ -197,15 +175,15 @@ public class ServletVentes extends HttpServlet {
             Compte compte = (Compte)request.getSession().getAttribute("Compte");
             if(compte != null){
                 int codeCheval = Integer.parseInt(request.getParameter("codeCheval"));
-                if(codeCheval == 2){
-                    ChevauxDAO.DeleteUnChevaux(connection,codeCheval);
+                
+                ChevauxDAO.DeleteUnChevaux(connection,codeCheval);
 
-
-                    int codeAcheteur = compte.getUnClient().getId();
-                    ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
-                    request.setAttribute("pLesChevaux", lesChevaux);
-                    getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
-                }
+                
+                int codeAcheteur = compte.getUnClient().getId();
+                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                request.setAttribute("pLesChevaux", lesChevaux);
+                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+                
             }
         }
         
@@ -214,7 +192,7 @@ public class ServletVentes extends HttpServlet {
             ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
             request.setAttribute("pLesPays", lesPays);
             
-            ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeCheval(connection);
+            ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
             request.setAttribute("pLesTypeCheval", lesTypeCheval);
             this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp" ).forward( request, response );
         }
@@ -267,7 +245,7 @@ public class ServletVentes extends HttpServlet {
         { 
 		// il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
             
-            ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeCheval(connection);
+            ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
             request.setAttribute("plesTypeCheval", lesTypeCheval);
            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp" ).forward( request, response );
         }

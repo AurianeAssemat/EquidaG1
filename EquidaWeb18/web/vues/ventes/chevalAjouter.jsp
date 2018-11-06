@@ -12,12 +12,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ajouter un Cheval</title>
     </head>
     <body>
-        <h1>NOUVEAU CHEVAL</h1>
+        <h1>UN NOUVEAU CHEVAL</h1>
         
         <%
               

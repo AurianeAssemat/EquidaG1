@@ -39,6 +39,15 @@ INSERT INTO `categvente` (`code`, `libelle`) VALUES
 ('ELVG', 'Vente d\'élevage'),
 ('ETE', 'Vente d\'été'),
 ('XFEV', 'Vente mixte de février');
+
+--
+-- Déchargement des données de la table `pays`
+--
+
+INSERT INTO `pays` (`code`, `nom`) VALUES
+('ENG', 'Angleterre'),
+('FRA', 'France');
+
 --
 -- Déchargement des données de la table `client`
 --
@@ -217,6 +226,26 @@ INSERT INTO `joindre` (`pie_id`, `cou_id`) VALUES
 (1, 2),
 (2, 1),
 (2, 2);
+
+--
+-- Déchargement des données de la table `compte`
+--
+
+INSERT INTO `compte` (`id`, `login`, `mdp`, `cli_id`) VALUES
+(1, 'aaa', 'c5fe25896e49ddfe996db7508cf00534', 1),
+(2, 'bbb', 'c5fe25896e49ddfe996db7508cf00534', 2),
+(3, 'vendeur', 'e3a52ab799d4bdecb23304d51e66b68a', 5);
+
+--
+-- Déchargement des données de la table `typecheval`
+--
+
+INSERT INTO `joindre` (`pie_id`, `cou_id`) VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2);
+
 
 --
 -- Déchargement des données de la table `cheval`
