@@ -74,9 +74,35 @@ public class CourrielDAO {
         return lesCourriels ;    
     }
     
+     public static Courriel getCourriel(Connection connection, String id){      
+       Courriel courriel = new Courriel();
+        try
+        {
+            //preparation de la requete 
+            requete=connection.prepareStatement("SELECT * FROM courriel WHERE courriel.id = ?");
+            requete.setString(1, id);
+            //executer la requete
+            rs=requete.executeQuery();
+             
+             while ( rs.next() ) {  
+                  
+                  courriel.setId(rs.getInt("id"));
+                  courriel.setObjet(rs.getString("objet"));
+                  courriel.setCorps(rs.getString("corps"));
+             }
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return courriel;    
+    }
+    
     // Méthode permettant d'insérer un courriel en base à partir de l'objet couriel passé en paramètre
     // Cette méthode renvoie l'objet courriel
-    public static Courriel ajouterCourriel(Connection connection, Courriel courriel){      
+    public static Courriel ajouterCourriel(Connection connection, Courriel courriel){
+        int idGenere = -1;
         try
         {
             requete=connection.prepareStatement("INSERT INTO Courriel (objet, corps, ven_id) VALUES (?, ?, ?)");
@@ -86,6 +112,13 @@ public class CourrielDAO {
 
            /* Exécution de la requête */
             requete.executeUpdate(); 
+            
+            // Récupération de id auto-généré par la bdd dans la table courriel
+            rs = requete.getGeneratedKeys();
+            while ( rs.next() ) {
+                idGenere = rs.getInt(1);
+                courriel.setId(idGenere);
+            }
         }   
         catch (SQLException e) 
         {

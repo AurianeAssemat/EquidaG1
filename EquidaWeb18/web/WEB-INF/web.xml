@@ -72,6 +72,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/creerMail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/envoyerMail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

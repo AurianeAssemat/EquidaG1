@@ -176,7 +176,7 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
         }
 
-        if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
+        if(url.equals("/EquidaWeb18/ServletVentes/creerMail"))
         {  
            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
            request.setAttribute("pLesVentes", lesVentes);
@@ -184,9 +184,21 @@ public class ServletVentes extends HttpServlet {
            ArrayList<PieceJointe> lesPiecesJointes = PieceJointeDAO.getLesPiecesJointes(connection);
            request.setAttribute("pLesPiecesJointes", lesPiecesJointes);
             
+           getServletContext().getRequestDispatcher("/vues/ventes/creerMail.jsp").forward(request, response);
+        }
+        if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
+        {  
+           
+           String id = (String)request.getParameter("id");
+           
+           Courriel courriel = CourrielDAO.getCourriel(connection, id);
+           
+           request.setAttribute("pCourriel", courriel);
+           
            getServletContext().getRequestDispatcher("/vues/ventes/envoyerMail.jsp").forward(request, response);
         }
-         if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
+        
+        if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
         {  
             String codeAcheteur = (String)request.getParameter("codeAcheteur");
            
@@ -227,7 +239,7 @@ public class ServletVentes extends HttpServlet {
             
             CourrielDAO.ajouterCourriel(connection, courriel);
             
-            response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesCourriel?codeVente=" + courriel.getUneVente().getId());
+            response.sendRedirect("/EquidaWeb18/ServletVentes/envoyerMail?id=" + courriel.getId());
         } else {
            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
            request.setAttribute("pLesVentes", lesVentes);
@@ -235,7 +247,7 @@ public class ServletVentes extends HttpServlet {
            ArrayList<PieceJointe> lesPiecesJointes = PieceJointeDAO.getLesPiecesJointes(connection);
            request.setAttribute("pLesPiecesJointes", lesPiecesJointes);
             
-           getServletContext().getRequestDispatcher("/vues/ventes/envoyerMail.jsp").forward(request, response);
+           getServletContext().getRequestDispatcher("/vues/ventes/creerMail.jsp").forward(request, response);
         }
     }
 
