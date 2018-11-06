@@ -39,8 +39,6 @@
     LienMenu acheteurs = new LienMenu("../ServletClient/listerLesAcheteurs", "Acheteurs" );
     client.addUnEnfant(acheteurs);
     
-    LienMenu ajoutClient = new LienMenu("../ServletClient/ajouterClient", "Ajouter un client" );
-    client.addUnEnfant(ajoutClient);
 %>
 
 
