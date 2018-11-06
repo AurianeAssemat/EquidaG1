@@ -12,7 +12,6 @@ import database.TypeChevalDAO;
 import database.CourseDAO;
 
 import database.Utilitaire;
-import formulaires.ClientForm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -22,7 +21,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.Cheval;
 import modele.CategVente;
 import modele.TypeCheval;
 import modele.Course;
@@ -80,32 +78,51 @@ public class ServletAdministrateur extends HttpServlet {
         
        String url = request.getRequestURI();
        
-       if(url.equals("/EquidaWeb18/ServletAdministrateur/ListerCategVente"))
+       if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCategVente"))
         {   
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
             request.setAttribute("pLesCategVentes", lesCategVentes);
-            this.getServletContext().getRequestDispatcher("/vues/ventes/listerLesCategVentes.jsp" ).forward( request, response );
+            this.getServletContext().getRequestDispatcher("/vues/params/listerParamCategVente.jsp" ).forward( request, response );
+        }
+       
+       if(url.equals("/EquidaWeb18/ServletAdministrateur/categVenteAjouter"))
+        {                   
+            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+            request.setAttribute("pLesCategVentes", lesCategVentes);
+            this.getServletContext().getRequestDispatcher("/vues/categVenteAjouter.jsp" ).forward( request, response );
         }
        
        if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval"))
         {  
-            System.out.println("DANS PARAMETRES DES RACES");
-           
             ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
-            
             request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
             getServletContext().getRequestDispatcher("/vues/params/listerParamTypeCheval.jsp").forward(request, response);
         }
        
+       if(url.equals("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter"))
+        {  
+            ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
+            request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
+            getServletContext().getRequestDispatcher("/vues/typeChevalAjouter.jsp").forward(request, response);
+        }
+       
        if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCourse"))
         {  
-            System.out.println("DANS PARAMETRES DES COURSES");
-           
-            ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
             
+            ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
             request.setAttribute("pLesCourses", lesCourses);
             getServletContext().getRequestDispatcher("/vues/params/listerParamCourse.jsp").forward(request, response);
         }
+       
+       if(url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter"))
+        {  
+            
+            ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
+            request.setAttribute("pLesCourses", lesCourses);
+            getServletContext().getRequestDispatcher("/vues/courseAjouter.jsp").forward(request, response);
+        }
+       
+       
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
