@@ -23,17 +23,12 @@ SET time_zone = "+00:00";
 --
 
 --
--- Déchargement des données de la table `acheteur`
+-- Déchargement des données de la table `pays`
 --
 
-INSERT INTO `acheteur` (`ach_id`) VALUES
-(1),
-(5),
-(7),
-(8),
-(9),
-(10),
-(12);
+INSERT INTO `pays` (`code`, `nom`) VALUES
+('ENG', 'Angleterre'),
+('FRA', 'France');
 
 --
 -- Déchargement des données de la table `categvente`
@@ -44,20 +39,6 @@ INSERT INTO `categvente` (`code`, `libelle`) VALUES
 ('ELVG', 'Vente d\'élevage'),
 ('ETE', 'Vente d\'été'),
 ('XFEV', 'Vente mixte de février');
-
---
--- Déchargement des données de la table `cheval`
---
-
-INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`, `archiver`) VALUES
-(1, 'Houri', 'M', '0808.158.020Z', NULL, NULL, 5, NULL),
-(2, 'Hussa', 'F', '0808.285.020Z', NULL, NULL, 2, NULL),
-(3, 'Valdack', 'M', '0808.187.020Z', 1, 4, 4, NULL),
-(4, 'Trais d\'or', 'M', '0808.985.020Z', 1, 5, 6, NULL),
-(5, 'Herricka', 'F', '0808.000.020Z', 1, 2, 1, NULL),
-(6, 'Nuage', 'M', '0808.158.020Z', 7, 5, 3, NULL),
-(7, 'Desperado', 'M', '0808.367.020Z', 1, 2, 2, NULL);
-
 --
 -- Déchargement des données de la table `client`
 --
@@ -115,6 +96,41 @@ INSERT INTO `client` (`id`, `nom`, `prenom`, `rue`, `copos`, `ville`, `mail`, `c
 (50, 'Bertrand', 'Alexandre', '8 rue des Hortensias', '50000', 'Cherbourg', '', 'FRA', NULL);
 
 --
+-- Déchargement des données de la table `compte`
+--
+
+INSERT INTO `compte` (`id`, `login`, `mdp`, `cli_id`) VALUES
+(1, 'aaa', 'c5fe25896e49ddfe996db7508cf00534', 1),
+(2, 'bbb', 'c5fe25896e49ddfe996db7508cf00534', 2),
+(3, 'vendeur', 'e3a52ab799d4bdecb23304d51e66b68a', 5);
+
+--
+-- Déchargement des données de la table `acheteur`
+--
+
+INSERT INTO `acheteur` (`ach_id`) VALUES
+(1),
+(5),
+(7),
+(8),
+(9),
+(10),
+(12);
+
+--
+-- Déchargement des données de la table `vendeur`
+--
+
+INSERT INTO `vendeur` (`ven_id`) VALUES
+(5),
+(6),
+(7),
+(15),
+(16),
+(17),
+(18);
+
+--
 -- Déchargement des données de la table `clientcategvente`
 --
 
@@ -134,32 +150,16 @@ INSERT INTO `clientcategvente` (`codeClient`, `codeCategVente`) VALUES
 (6, 'XFEV');
 
 --
--- Déchargement des données de la table `compte`
+-- Déchargement des données de la table `typecheval`
 --
 
-INSERT INTO `compte` (`id`, `login`, `mdp`, `cli_id`) VALUES
-(1, 'aaa', 'c5fe25896e49ddfe996db7508cf00534', 1),
-(2, 'bbb', 'c5fe25896e49ddfe996db7508cf00534', 2),
-(3, 'vendeur', 'e3a52ab799d4bdecb23304d51e66b68a', 5);
-
---
--- Déchargement des données de la table `courriel`
---
-
-INSERT INTO `courriel` (`id`, `date`, `objet`, `corps`, `ven_id`) VALUES
-(1, '2018-08-05', 'Objet1', 'corps 1', 250217),
-(2, '2018-04-06', 'Objet2', 'corps 2', 30917),
-(3, '2018-02-08', 'Objet3', 'corps 3', 210817);
-
---
--- Déchargement des données de la table `joindre`
---
-
-INSERT INTO `joindre` (`pie_id`, `cou_id`) VALUES
-(1, 1),
-(1, 2),
-(2, 1),
-(2, 2);
+INSERT INTO `typecheval` (`id`, `libelle`, `description`) VALUES
+(1, 'cheval à l\'entraînement', 'pur-sang arabe de plus de deux ans ayant déjà participé à des courses'),
+(2, 'étalon', 'cheval dédié à la reproduction'),
+(3, 'Inédit', 'pur-sang anglais de deux ans n’ayant pas encore participé à une course mais déjà travaillé sur le plan de la condition physique'),
+(4, 'poulinière', 'jument dédiée à la reproduction'),
+(5, 'pur-sang anglais', 'pur-sang anglais'),
+(6, 'Yearling', 'pur-sang anglais âgé d’un an');
 
 --
 -- Déchargement des données de la table `lieu`
@@ -176,55 +176,6 @@ INSERT INTO `lieu` (`id`, `ville`, `nbBoxes`, `commentaire`) VALUES
 (8, 'Dijon', 30, ''),
 (9, 'Bordeaux', 16, '');
 
---
--- Déchargement des données de la table `lot`
---
-
-INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `archiver`, `prixDepart`) VALUES
-(1, 30917, 7, 5, NULL, 15000),
-(2, 210717, 1, 5, NULL, 18000);
-
---
--- Déchargement des données de la table `pays`
---
-
-INSERT INTO `pays` (`code`, `nom`) VALUES
-('ENG', 'Angleterre'),
-('FRA', 'France');
-
---
--- Déchargement des données de la table `piecejointe`
---
-
-INSERT INTO `piecejointe` (`id`, `chemin`, `description`) VALUES
-(1, 'image/image.png', 'une image'),
-(2, 'document/text.txt', 'un text'),
-(3, 'document/fichier.pdf', 'un pdf');
-
---
--- Déchargement des données de la table `typecheval`
---
-
-INSERT INTO `typecheval` (`id`, `libelle`, `description`) VALUES
-(1, 'cheval à l\'entraînement', 'pur-sang arabe de plus de deux ans ayant déjà participé à des courses'),
-(2, 'étalon', 'cheval dédié à la reproduction'),
-(3, 'Inédit', 'pur-sang anglais de deux ans n’ayant pas encore participé à une course mais déjà travaillé sur le plan de la condition physique'),
-(4, 'poulinière', 'jument dédiée à la reproduction'),
-(5, 'pur-sang anglais', 'pur-sang anglais'),
-(6, 'Yearling', 'pur-sang anglais âgé d’un an');
-
---
--- Déchargement des données de la table `vendeur`
---
-
-INSERT INTO `vendeur` (`ven_id`) VALUES
-(5),
-(6),
-(7),
-(15),
-(16),
-(17),
-(18);
 
 --
 -- Déchargement des données de la table `vente`
@@ -238,6 +189,57 @@ INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, `lie_id`, `date
 (210717, 'Rapsberry Sailing', '2017-07-17', 'ETE', 2, '2017-07-17', '2017-02-17', NULL),
 (210817, 'Jelly Bay', '2017-08-17', 'ETE', 3, '2017-12-17', '2017-01-17', NULL),
 (250217, 'Djezair Star', '2017-02-25', 'XFEV', 2, '2017-04-25', '2017-01-25', NULL);
+
+--
+-- Déchargement des données de la table `courriel`
+--
+
+INSERT INTO `courriel` (`id`, `date`, `objet`, `corps`, `ven_id`) VALUES
+(1, '2018-08-05', 'Objet1', 'corps 1', 250217),
+(2, '2018-04-06', 'Objet2', 'corps 2', 30917),
+(3, '2018-02-08', 'Objet3', 'corps 3', 210817);
+
+--
+-- Déchargement des données de la table `piecejointe`
+--
+
+INSERT INTO `piecejointe` (`id`, `chemin`, `description`) VALUES
+(1, 'image/image.png', 'une image'),
+(2, 'document/text.txt', 'un text'),
+(3, 'document/fichier.pdf', 'un pdf');
+
+--
+-- Déchargement des données de la table `joindre`
+--
+
+INSERT INTO `joindre` (`pie_id`, `cou_id`) VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2);
+
+--
+-- Déchargement des données de la table `cheval`
+--
+
+INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`, `archiver`) VALUES
+(1, 'Houri', 'M', '0808.158.020Z', NULL, NULL, 5, NULL),
+(2, 'Hussa', 'F', '0808.285.020Z', NULL, NULL, 2, NULL),
+(3, 'Valdack', 'M', '0808.187.020Z', 1, NULL, 4, NULL),
+(4, 'Trais d\'or', 'M', '0808.985.020Z', 1, NULL, 6, NULL),
+(5, 'Herricka', 'F', '0808.000.020Z', 1, 2, 1, NULL),
+(6, 'Nuage', 'M', '0808.158.020Z', 4, 5, 3, NULL),
+(7, 'Desperado', 'M', '0808.367.020Z', 1, 2, 2, NULL);
+
+
+--
+-- Déchargement des données de la table `lot`
+--
+
+INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `archiver`, `prixDepart`) VALUES
+(1, 30917, 7, 5, NULL, 15000),
+(2, 210717, 1, 5, NULL, 18000);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
