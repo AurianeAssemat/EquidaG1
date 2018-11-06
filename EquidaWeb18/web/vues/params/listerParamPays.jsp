@@ -1,38 +1,39 @@
 <%-- 
-    Document   : Lister les Ventes 
-    Created on : 22/06/2017, 07:43
+    Document   : listerParamPays
+    Created on : 6 nov. 2018, 14:49:02
     Author     : Coco
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="modele.CategVente"%>
+<%@page import="modele.Pays"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="NomPage" value="Liste des paramètres des courses" />
+        <jsp:param name="NomPage" value="Liste des paramètres des pays" />
     </jsp:include>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>LISTE DES VENTES</title>
+        <title>LISTE DES PAYS</title>
     </head>
     <body>
         <jsp:include page="/vues/MenuNavigation.jsp" />   
         <div class="container">
         <div class="row">
             <div class="col s1 offset-s11">
-                <a href='../ServletAdministrateur/categVenteAjouter' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <a href='../ServletAdministrateur/paysAjouter' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
         <%
-        ArrayList<CategVente> lesCategVentes = (ArrayList)request.getAttribute("pLesCategVentes");
+        ArrayList<Pays> lesPays = (ArrayList)request.getAttribute("pLesPays");
         %>
         
        
         <table  class="table table-bordered table-striped table-condensed">  
             <thead>
                 <tr>             
-                    <th>Code</th>
-                    <th>libelle</th>
+                    <th>Code du pays</th>
+                    <th>Nom</th>
             <br>
             <br>
                 </tr>
@@ -40,17 +41,17 @@
             <tbody>
                 <tr>
                     <%
-                    for(int i = 0; i < lesCategVentes.size();i++)
+                    for(int i = 0; i < lesPays.size();i++)
                     {
-                        CategVente uneCategVente = lesCategVentes.get(i);
+                        Pays unPays = lesPays.get(i);
                         
                         out.println("<tr><td>");
-                        out.print(uneCategVente.getCode());
+                        out.print(unPays.getCode());
                         out.println("</td>");
                         
                         out.println("<td>");
-                        out.print(uneCategVente.getLibelle());
-                        out.println("</td>");
+                        out.print(unPays.getNom());
+                        out.println("</td>"); 
                         
                         out.println("<td>");
                         out.println("<a class=\"waves-effect waves-light btn-small\" href ='#' ><i class=\"material-icons\">delete</i></a>");
@@ -71,3 +72,4 @@
         </div>
     </body>
 </html>
+
