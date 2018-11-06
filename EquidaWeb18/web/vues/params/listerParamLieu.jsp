@@ -1,38 +1,41 @@
 <%-- 
-    Document   : Lister les Ventes 
-    Created on : 22/06/2017, 07:43
+    Document   : listerParamLieu
+    Created on : 6 nov. 2018, 14:06:22
     Author     : Coco
 --%>
 
 <%@page import="java.util.ArrayList"%>
-<%@page import="modele.CategVente"%>
+<%@page import="modele.Lieu"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="NomPage" value="Liste des paramètres des courses" />
+        <jsp:param name="NomPage" value="Liste des paramètres des lieux de vente" />
     </jsp:include>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>LISTE DES VENTES</title>
+        <title>LISTE DES LIEUX DE VENTES</title>
     </head>
     <body>
         <jsp:include page="/vues/MenuNavigation.jsp" />   
         <div class="container">
         <div class="row">
             <div class="col s1 offset-s11">
-                <a href='../ServletAdministrateur/categVenteAjouter' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <a href='../ServletAdministrateur/lieuAjouter' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
         <%
-        ArrayList<CategVente> lesCategVentes = (ArrayList)request.getAttribute("pLesCategVentes");
+        ArrayList<Lieu> lesLieux = (ArrayList)request.getAttribute("pLesLieux");
         %>
         
        
         <table  class="table table-bordered table-striped table-condensed">  
             <thead>
                 <tr>             
-                    <th>Code</th>
-                    <th>libelle</th>
+                    <th>ID</th>
+                    <th>Ville</th>
+                    <th>Nombre de boxes</th>
+                    <th>Commentaires</th>
             <br>
             <br>
                 </tr>
@@ -40,16 +43,24 @@
             <tbody>
                 <tr>
                     <%
-                    for(int i = 0; i < lesCategVentes.size();i++)
+                    for(int i = 0; i < lesLieux.size();i++)
                     {
-                        CategVente uneCategVente = lesCategVentes.get(i);
+                        Lieu unLieu = lesLieux.get(i);
                         
                         out.println("<tr><td>");
-                        out.print(uneCategVente.getCode());
+                        out.print(unLieu.getId());
                         out.println("</td>");
                         
                         out.println("<td>");
-                        out.print(uneCategVente.getLibelle());
+                        out.print(unLieu.getVille());
+                        out.println("</td>");
+                        
+                        out.println("<td>");
+                        out.print(unLieu.getNbBoxes());
+                        out.println("</td>");
+                        
+                        out.println("<td>");
+                        out.print(unLieu.getCommentaire());
                         out.println("</td>");
                         
                         out.println("<td>");

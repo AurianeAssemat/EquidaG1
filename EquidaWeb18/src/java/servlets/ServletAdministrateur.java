@@ -8,10 +8,10 @@ package servlets;
 import database.ChevauxDAO;
 import database.CategVenteDAO;
 import database.TypeChevalDAO;
-
 import database.CourseDAO;
-
 import database.Utilitaire;
+import database.LieuDAO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -21,9 +21,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import modele.CategVente;
 import modele.TypeCheval;
 import modele.Course;
+import modele.Lieu;
 
 /**
  *
@@ -114,6 +116,14 @@ public class ServletAdministrateur extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/params/listerParamCourse.jsp").forward(request, response);
         }
        
+       if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamLieu"))
+        {  
+            
+            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+            request.setAttribute("pLesLieux", lesLieux);
+            getServletContext().getRequestDispatcher("/vues/params/listerParamLieu.jsp").forward(request, response);
+        }
+       
        if(url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter"))
         {  
             
@@ -122,7 +132,13 @@ public class ServletAdministrateur extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/courseAjouter.jsp").forward(request, response);
         }
        
-       
+       if(url.equals("/EquidaWeb18/ServletAdministrateur/lieuAjouter"))
+        {  
+            
+            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+            request.setAttribute("pLeslieux", lesLieux);
+            getServletContext().getRequestDispatcher("/vues/lieuAjouter.jsp").forward(request, response);
+        }
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

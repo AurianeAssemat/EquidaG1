@@ -23,21 +23,12 @@
     <listener>
         <listener-class>database.InitConnexion</listener-class>
     </listener>
+    
+<!--Servlet vente-->  
+  
     <servlet>
         <servlet-name>ServletVentes</servlet-name>
         <servlet-class>servlets.ServletVentes</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServletClient</servlet-name>
-        <servlet-class>servlets.ServletClient</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServletAccueil</servlet-name>
-        <servlet-class>servlets.ServletAccueil</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServletAdministrateur</servlet-name>
-        <servlet-class>servlets.ServletAdministrateur</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -45,67 +36,124 @@
         <url-pattern>/ServletVentes</url-pattern>
     </servlet-mapping>
     
-    <servlet-mapping>
-        <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/listerLesVentes</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/listerLesCourriel</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletClient</servlet-name>
-        <url-pattern>/ServletClient/listerLesVendeurs</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletClient</servlet-name>
-        <url-pattern>/ServletClient/listerLesAcheteurs</url-pattern>
-    </servlet-mapping>
+    <!--Servlet lister-->
+    
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerMesChevaux</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesClients</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/SupprimerMesChevaux</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesChevaux</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesEncheres</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/listerLesVentes</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/listerLesCourriel</url-pattern>
+    </servlet-mapping>
+    
+    <!--Servlet supprimer-->
+    
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/SupprimerMesChevaux</url-pattern>
+    </servlet-mapping>
+    
+    <!--Servlet ajouter-->
+    
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/chevalAjouter</url-pattern>
     </servlet-mapping>
+    
+<!--Servlet client --> 
+       
+    <servlet>
+        <servlet-name>ServletClient</servlet-name>
+        <servlet-class>servlets.ServletClient</servlet-class>
+    </servlet>
+    
+    <!--Servlet lister-->
     <servlet-mapping>
-        <servlet-name>ServletAccueil</servlet-name>
-        <url-pattern>/ServletAccueil/Connexion</url-pattern>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient/listerLesVendeurs</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
-        <servlet-name>ServletAccueil</servlet-name>
-        <url-pattern>/ServletAccueil/Deconnexion</url-pattern>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient/listerLesAcheteurs</url-pattern>
     </servlet-mapping>
+    
     <servlet-mapping>
-        <servlet-name>ServletAccueil</servlet-name>
-        <url-pattern>/ServletAccueil/Accueil</url-pattern>Deconnexion
-        </servlet-mapping>
+        <servlet-name>ServletClient</servlet-name>
+        <url-pattern>/ServletClient/listerLesClients</url-pattern>
+    </servlet-mapping>
+     
+    <!--Servlet ajouter-->        
+    
     <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/ajouterClient</url-pattern>
     </servlet-mapping>
+    
+    <!--Servlet Modifier-->          
+    
     <servlet-mapping>
         <servlet-name>ServletClient</servlet-name>
         <url-pattern>/ServletClient/clientModif</url-pattern>
     </servlet-mapping>
+    
+<!--Servlet accueil -->    
+
+    <servlet>
+        <servlet-name>ServletAccueil</servlet-name>
+        <servlet-class>servlets.ServletAccueil</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAccueil</servlet-name>
+        <url-pattern>/ServletAccueil/Connexion</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAccueil</servlet-name>
+        <url-pattern>/ServletAccueil/Deconnexion</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAccueil</servlet-name>
+        <url-pattern>/ServletAccueil/Accueil</url-pattern>Deconnexion
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAccueil</servlet-name>
+        <url-pattern>/ServletAccueil/Profil</url-pattern>Deconnexion
+    </servlet-mapping>
+          
+<!--Servlet administrateur-->   
+       
+    <servlet>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <servlet-class>servlets.ServletAdministrateur</servlet-class>
+    </servlet>   
+    
+    <!--Servlet lister -->
     
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
@@ -119,17 +167,12 @@
     
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
-        <url-pattern>/ServletAdministrateur/typeChevalAjouter</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>ServletAdministrateur</servlet-name>
         <url-pattern>/ServletAdministrateur/listerParamCourse</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
-        <url-pattern>/ServletAdministrateur/courseAjouter</url-pattern>
+        <url-pattern>/ServletAdministrateur/listerParamLieu</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
@@ -137,20 +180,30 @@
         <url-pattern>/ServletAdministrateur/listerParamCategVente</url-pattern>
     </servlet-mapping>
     
+    <!--Servlet ajouter -->
+    
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/typeChevalAjouter</url-pattern>
+    </servlet-mapping>
+ 
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/courseAjouter</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
         <url-pattern>/ServletAdministrateur/categVenteAjouter</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> 
     
     <servlet-mapping>
-        <servlet-name>ServletClient</servlet-name>
-        <url-pattern>/ServletClient/listerLesClients</url-pattern>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/lieuAjouter</url-pattern>
     </servlet-mapping>
+       
+    <!-- -->
     
-    <servlet-mapping>
-        <servlet-name>ServletAccueil</servlet-name>
-        <url-pattern>/ServletAccueil/Profil</url-pattern>Deconnexion
-    </servlet-mapping>
     
     <session-config>
         <session-timeout>

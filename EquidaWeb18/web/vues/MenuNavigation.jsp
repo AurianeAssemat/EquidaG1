@@ -30,6 +30,9 @@
     LienMenu paramCategVente = new LienMenu("../ServletAdministrateur/listerParamCategVente", "Categorie de vente");
     parametres.addUnEnfant(paramCategVente);
     
+    LienMenu paramLieu = new LienMenu("../ServletAdministrateur/listerParamLieu", "Lieu de vente");
+    parametres.addUnEnfant(paramLieu);
+    
     LienMenu client = new LienMenu(null, "Clients" );
     lien.add(client);
     
