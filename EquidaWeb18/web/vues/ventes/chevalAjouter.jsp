@@ -13,56 +13,92 @@
 <!DOCTYPE html>
 <html>
     
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ajouter un Cheval</title>
-    </head>
+    <jsp:include page="/vues/Header.jsp" >
+        <jsp:param name="NomPage" value="Ajouter un cheval" />
+    </jsp:include>
+    
     <body>
-        <h1>UN NOUVEAU CHEVAL</h1>
+        <jsp:include page="/vues/MenuNavigation.jsp" />
         
-        <%
-              
-                ChevalForm form = (ChevalForm)request.getAttribute("form");
-            %>
-        
-        <form class="form-inline" action="ajouterCheval" method="POST">
-                <label for="nom">NOM : </label>
-                <input id="nom" type="text" name="nom"  size="30" maxlength="30">
-                </br>
-                
-                <INPUT type= "radio" name="sexe" value="M"> MALE
-                <INPUT type= "radio" name="sexe" value="F"> FEMELLE
-                </br>
-                
-                <label for="nom">SIRE : </label>
-                <input id="sire" type="text" name="sire"  size="30" maxlength="30">
-                </br>
-               
-                <label for="typ_id">TYPE DU CHEVAL : </label>
-                <select id='typ_id' name="typ_id" size="5">
+        <div class="container">
+            <div class="row">
                 <%
-                        ArrayList<TypeCheval> lesTypeCheval = (ArrayList)request.getAttribute("pLesTypeCheval");
-                        for (int i=0; i<lesTypeCheval.size();i++){
-                            TypeCheval tc = lesTypeCheval.get(i);
-                            out.println("<option value ='" + tc.getId() + "'>" + tc.getLibelle() + "</option>"); 
-                           
-                        }
-                    %>
-                </select></br>
-                
-                <label for="siremere">SIRE MERE : </label>
-                <input id="siremere" type="text" name="siremere"  size="30" maxlength="30">
-                </br>
-                <label for="sirepere">SIRE PERE : </label>
-                <input id="sirepere" type="text" name="sirepere"  size="30" maxlength="30">
-                </br>
+            
+                ChevalForm form = (ChevalForm)request.getAttribute("form");
                 
                 
-                
-                
-                <input type="submit" name="valider" id="valider" value="Valider"/>
-        </form>
+                if(form != null && form.getErreurs() != null){
+                    for(int i = 0; i < form.getErreurs().size();i++)
+                    {
+                        out.println(form.getErreurs().get(i) + "<br/>");
+                    }
+                }
+                %>
+                <form class="form-inline" action="chevalAjouter" method="POST">
                     
-                
+                    
+                    
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Nom" id="nom" name="nom" type="text" class="validate">
+                            <label for="nom">Nom</label>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row">    
+                        <div class="input-field col s1">                 
+                            <input id="choice_1" name="sexe" value="M" type="radio" checked/>   
+                            <label for="choice_1">Male</label>
+                        </div>
+                        <div class="input-field col s1">
+                            <input id="choice_2" name="sexe" value="F" type="radio" />  
+                            <label for="choice_2">Femelle</label>
+                        </div>
+                    </div>
+                    <div class="row">    
+                        <div class="input-field col s12">
+                            <input placeholder="Sire" id="sire" name="sire" type="text" class="validate">
+                            <label for="sire">Sire</label>
+                        </div>
+                    </div>
+                    
+                    <div class="row">    
+                        <div class="input-field col s6">
+                            <input placeholder="Sire du père" id="sirepere" name="sirepere" type="text" class="validate">
+                            <label for="sirepere">Sire du père</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="Sire de la mère" id="siremere" name="siremere" type="text" class="validate">
+                            <label for="siremere">Sire de la mère</label>
+                        </div>
+                    </div>   
+                    
+                    <div class="row">  
+                        <div class="input-field col s12">
+                            <select id='typ_id' name="typ_id">
+                                <option value="" disabled selected>Choose your option</option>
+                                <%
+                                    ArrayList<TypeCheval> lesTypeCheval = (ArrayList)request.getAttribute("pLesTypeCheval");
+                                    for (int i=0; i<lesTypeCheval.size();i++){
+                                        TypeCheval tc = lesTypeCheval.get(i);
+                                        out.println("<option value ='" + tc.getId() + "'>" + tc.getLibelle() + "</option>"); 
+
+                                    }
+                                %>
+                                
+                                
+                            </select>
+                            <label>Type de cheval :</label>
+                        </div>
+                    </div>
+
+
+                    <button class="btn waves-effect waves-light" type="submit" >Ajouter
+                        <i class="material-icons right">send</i>
+                    </button>
+                </form>
+            </div>           
+        </div>        
     </body>
 </html>

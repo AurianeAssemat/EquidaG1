@@ -188,7 +188,8 @@ public class ServletVentes extends HttpServlet {
         }
         
           if(url.equals("/EquidaWeb18/ServletVentes/chevalAjouter"))
-        {                   
+        {              
+            
             ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
             request.setAttribute("pLesPays", lesPays);
             
@@ -224,12 +225,23 @@ public class ServletVentes extends HttpServlet {
         /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
         Cheval unCheval = form.ajouterCheval(request);
         
+        
         /* Stockage du formulaire et de l'objet dans l'objet request */
         request.setAttribute( "form", form );
         //request.setAttribute( "pClient", unClient );
 		
         if (form.getErreurs().isEmpty()){
-            
+            if(unCheval.getMere() != null){
+                unCheval.setMere(ChevauxDAO.getCheval(connection,unCheval.getMere().getSire()));
+            }else{
+                unCheval.setMere(null);
+            }
+
+            if(unCheval.getPere() != null){
+                unCheval.setPere(ChevauxDAO.getCheval(connection,unCheval.getPere().getSire()));
+            }else{
+                unCheval.setPere(null);
+            }
             // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
             
             Cheval chevalVerif = ChevauxDAO.ajouterCheval(connection, unCheval);
@@ -238,15 +250,16 @@ public class ServletVentes extends HttpServlet {
             ClientDAO.getUnClient(connection, chevalVerif.getId());
             
             request.setAttribute( "pCheval", unCheval );
-            this.getServletContext().getRequestDispatcher("/vues/chevalConsulter.jsp" ).forward( request, response );
+            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalConsulter.jsp" ).forward( request, response );
         }
         else
         { 
-		// il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+            request.setAttribute("pLesPays", lesPays);
             
             ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
-            request.setAttribute("plesTypeCheval", lesTypeCheval);
-           this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp" ).forward( request, response );
+            request.setAttribute("pLesTypeCheval", lesTypeCheval);
+            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp" ).forward( request, response );
         }
     }
 
