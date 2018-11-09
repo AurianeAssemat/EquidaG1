@@ -213,6 +213,41 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesEncheres.jsp").forward(request, response);
          }
 
+         
+         //MODIFICATION DE 1 CHEVAL
+       /*if(url.equals("/EquidaWeb18/ServletVentes/chevalModif"))
+       {
+           
+           ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
+           request.setAttribute("pLesTypeCheval", lesTypeCheval); 
+           
+           System.out.println("param " + request.getParameter("id"));
+           int idCheval = Integer.parseInt(request.getParameter("id"));
+           System.out.println("id cheval "+ idCheval);
+           
+           Cheval unCheval = ChevauxDAO.getUnCheval(connection, idCheval );
+           getUnCheval.setId(idCheval);
+           request.setAttribute("pClient", unClient);
+           //System.out.println("client " + unClient);
+           //Client clientModif = ClientDAO.modifUnClient(connection, idClient);
+           
+           getServletContext().getRequestDispatcher("/vues/ventes/chevalModif.jsp").forward(request, response);
+       }*/
+        if(url.equals("/EquidaWeb18/ServletVentes/chevalModif"))
+        {                                        
+           ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
+           request.setAttribute("pLesTypeCheval", lesTypeCheval); 
+           
+           int codeCheval = Integer.parseInt(request.getParameter("id"));
+           System.out.println("code "+codeCheval);
+           Cheval unCheval = ChevauxDAO.getUnCheval(connection, codeCheval );
+           unCheval.setId(codeCheval);
+           request.setAttribute("pCheval", unCheval);
+           
+           getServletContext().getRequestDispatcher("/vues/ventes/chevalModif.jsp").forward(request, response);
+        }
+         
+
     }
     
     /**
@@ -227,6 +262,7 @@ public class ServletVentes extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+
         String url = request.getRequestURI();
         
         if(url.equals("/EquidaWeb18/ServletVentes/ajouterVente")){
@@ -289,7 +325,37 @@ public class ServletVentes extends HttpServlet {
                this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp" ).forward( request, response );
             }
         }
-    
+        /*if(url.equals("/EquidaWeb18/ServletVentes/chevalAjouter")){ 
+        
+            ChevalForm form = new ChevalForm();
+             Stockage du formulaire et de l'objet dans l'objet request 
+            request.setAttribute( "form", form );
+            //request.setAttribute( "pClient", unClient );
+            Cheval chevalConsult;
+            if (form.getErreurs().isEmpty()){
+
+                if(unCheval.getId() != 0 ){
+                    chevalConsult = ChevauxDAO.modifierCheval(connection, unCheval);
+
+                }else{
+                // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+                Cheval chevalVerif = ChevauxDAO.ajouterCheval(connection, unCheval);
+                //verif l'insertion de données
+                ClientDAO.getUnClient(connection, chevalVerif.getId()); 
+                request.setAttribute( "pCheval", unCheval );
+                this.getServletContext().getRequestDispatcher("/vues/ventes/chevalConsulter.jsp" ).forward( request, response );
+                }
+                }
+            else
+            { 
+                    // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+
+                ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
+                request.setAttribute("plesTypeCheval", lesTypeCheval);
+               this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp" ).forward( request, response );
+
+            }
+        }*/
     }
     /**
      * Returns a short description of the servlet.
