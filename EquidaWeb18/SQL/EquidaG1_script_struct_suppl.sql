@@ -56,18 +56,20 @@ CREATE TABLE concerner (
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE cheval (
-	id int(11) NOT NULL,
+	id int(11) NOT NULL AUTO_INCREMENT,
 	nom varchar(30) NOT NULL,
 	sexe varchar(1) NOT NULL,
 	sire varchar(13) NOT NULL,
 	pere int(11),
 	mere int(11),
 	typ_id int(11),
-	archiver int(11),
+	archiver int(11) DEFAULT 0,
+	cli_id int(11),
 	PRIMARY KEY (id),
 	FOREIGN KEY (typ_id) REFERENCES typecheval(id),
 	FOREIGN KEY (pere) REFERENCES cheval(id),
 	FOREIGN KEY (mere) REFERENCES cheval(id)
+	FOREIGN KEY (cli_id) REFERENCES Client(id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE course (
@@ -79,7 +81,7 @@ CREATE TABLE course (
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE participer (
-	che_id int(11),
+	che_id int(11) AUTO_INCREMENT,
 	cour_id int(11),
 	place int(3),
 	PRIMARY KEY (che_id, cour_id),
@@ -99,7 +101,7 @@ ADD archiver int(11) ;
 
 
 CREATE TABLE lot (
-	id int(11),
+	id int(11) AUTO_INCREMENT,
 	vent_id int(11),
 	che_id int(11),
 	vend_id int(11),
@@ -112,7 +114,7 @@ CREATE TABLE lot (
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE enchere (
-	id int(11),
+	id int(11) AUTO_INCREMENT,
 	lot_id int(11),
 	lotvent_id int(11),
 	ach_id int(11),

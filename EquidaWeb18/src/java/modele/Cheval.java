@@ -21,6 +21,7 @@ public class Cheval {
     private TypeCheval typeCheval;
     private ArrayList<Participer> lesParticipation ;
     private ArrayList<Lot> lesLot ;
+    private Client proprietaire;
     
     public Cheval() {
     }
@@ -119,5 +120,13 @@ public class Cheval {
             lesLot = new ArrayList<Lot>();
         }
         lesLot.add(unLot);
+    }
+
+    public Client getProprietaire() {
+        return proprietaire;
+    }
+
+    public void setProprietaire(Client proprietaire) {
+        this.proprietaire = proprietaire;
     }
 }

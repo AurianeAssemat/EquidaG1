@@ -70,7 +70,7 @@ public class ClientForm {
         String rue = getDataForm( request, "rue" );
         String copos = getDataForm( request, "copos");
         String ville = getDataForm( request, "ville" );
-        
+  
         String pays = getDataForm( request, "codePays" );
         Pays unPays = new Pays(pays);
         

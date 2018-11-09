@@ -257,7 +257,7 @@ INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`, `ar
 (3, 'Valdack', 'M', '0808.187.020Z', 1, NULL, 4, NULL),
 (4, 'Trais d\'or', 'M', '0808.985.020Z', 1, NULL, 6, NULL),
 (5, 'Herricka', 'F', '0808.000.020Z', 1, 2, 1, NULL),
-(6, 'Nuage', 'M', '0808.158.020Z', 4, 5, 3, NULL),
+(6, 'Nuage', 'M', '0808.154.020Z', 4, 5, 3, NULL),
 (7, 'Desperado', 'M', '0808.367.020Z', 1, 2, 2, NULL);
 
 
@@ -267,7 +267,19 @@ INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`, `ar
 
 INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `archiver`, `prixDepart`) VALUES
 (1, 30917, 7, 5, NULL, 15000),
+(1, 210717, 6, 5, NULL, 1000),
+(2, 30917, 4, 15, NULL, 8000),
 (2, 210717, 1, 5, NULL, 18000);
+
+--
+-- Déchargement des données de la table `enchere`
+--
+
+INSERT INTO `enchere` (`id`, `lot_id`, `lotvent_id`, `ach_id`, `montant`) VALUES
+(1, 1, 30917, 10, 17000),
+(2, 1, 30917, 9, 20000),
+(3, 2, 210717, 9, 32000),
+(4, 2, 210717, 7, 35000);
 
 COMMIT;
 
