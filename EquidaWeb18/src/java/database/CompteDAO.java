@@ -32,7 +32,7 @@ public class CompteDAO {
             
             //preparation de la requete   
             
-                requete=connection.prepareStatement("select * from compte,Client where cli_id = Client.id AND login = ? AND mdp = ?");          
+                requete=connection.prepareStatement("select * from compte,client where cli_id = client.id AND login = ? AND mdp = ?");          
                 requete.setString(1, login);
                 requete.setString(2, mdp);
                 //executer la requete

@@ -41,6 +41,7 @@
                     <th>Sire de la mere</th>
                     <th>Course</th>
                     <th></th>
+                    <th></th>
             <br>
             <br>
                 </tr>
@@ -129,6 +130,9 @@
                         out.println("</td>");
                         out.println("</tr>");
                         
+                        out.println("<td><a href ='../ServletVentes/listerLesEncheres?idLot="+ unLot.getId()+ "&idVente="+unLot.getUneVente().getId()+"'>");
+                        out.println("Lister les Encheres");
+                        out.println("</td>");
                     }
                     
                     %>

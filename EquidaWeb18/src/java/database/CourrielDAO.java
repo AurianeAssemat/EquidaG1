@@ -52,7 +52,7 @@ public class CourrielDAO {
                 unCourriel.setObjet(rs.getString("objet"));
                 unCourriel.setCorps(rs.getString("corps"));
                 
-                requete=connection.prepareStatement("select * from pieceJointe ,joindre where `pie_id` = pieceJointe.id AND `cou_id` = ?");          
+                requete=connection.prepareStatement("select * from piecejointe ,joindre where `pie_id` = piecejointe.id AND `cou_id` = ?");          
                 requete.setString(1, "" + unCourriel.getId());
                 
                 ResultSet rsc =requete.executeQuery();

@@ -27,7 +27,7 @@
            %>
 
            <form class="form-inline" action="listerLesVentes" method="GET">
-                <div class="col s3">
+                <div class="col s5">
                     <select name="codeCat" size="1">
                         <option value="">Toutes les ventes</option>
                         <%
@@ -43,19 +43,23 @@
                     </select>
                     <label for="codeCat">Categorie : </label>
                 </div>
-                    
-                <button class="btn waves-effect waves-light" type="submit">Filtrer
-                  <i class="material-icons right">send</i>
-                </button>
-           </form>
-           <table  class="table table-bordered table-striped table-condensed">  
-               <thead>
-                   <tr>             
-                       <th>id</th>
-                       <th>nom</th>
-                       <th>DateDébutVente</th>
-                       <th>DateFinVente</th>
-                       <th>DateDébutInscription</th>
+                <div class="col s2">    
+                    <button class="btn waves-effect waves-light" type="submit">Filtrer
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+            <div class="col s1 offset-s4">  
+                    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+            </div>  
+            <table  class="table table-bordered table-striped table-condensed">  
+                <thead>
+                    <tr>             
+                       <th>Numéro</th>
+                       <th>Nom</th>
+                       <th>Date de Début de la Vente</th>
+                       <th>Date de Fin de la Vente</th>
+                       <th>Date de Début de l'Inscription</th>
                        <th>Lieu</th>
                        <th>Catégorie</th>  
                      
@@ -111,11 +115,20 @@
                            out.println("<td><a href ='../ServletVentes/listerLesChevaux?codeVente="+ uneVente.getId()+ "'>");
                            out.println("Lister les Chevaux");
                            out.println("</td>");
+                           
+                            out.println("<td>");
+                            out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerUneVente?codeVente="+ uneVente.getId()+ "'><i class=\"material-icons\">delete</i></a>");
+                            out.println("</td>");
+
+                            out.println("<td>");
+                            out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">create</i></a>");
+                            out.println("</td>");
                        }
                        %>
                    </tr>
                </tbody>
            </table>
+                   
                    </div>
         </div>
     </body>

@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `categvente` (
 
 CREATE TABLE IF NOT EXISTS `pays` (
   `code` varchar(3) NOT NULL,
-  `nom` varchar(30) NOT NULL,
+  `nom` varchar(100) NOT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -26,14 +26,14 @@ CREATE TABLE IF NOT EXISTS `client` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 
-CREATE TABLE IF NOT EXISTS `Acheteur` (
+CREATE TABLE IF NOT EXISTS `acheteur` (
   ach_id int(11),
   PRIMARY KEY (`ach_id`),
   FOREIGN KEY (ach_id) REFERENCES client (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-CREATE TABLE IF NOT EXISTS `Vendeur` (
+CREATE TABLE IF NOT EXISTS `vendeur` (
   ven_id int(11),
   PRIMARY KEY (`ven_id`),
   FOREIGN KEY (ven_id) REFERENCES client (id)
@@ -54,7 +54,6 @@ CREATE TABLE IF NOT EXISTS `lieu` (
   `ville` varchar(30) NOT NULL,
   `nbBoxes` int(11) NOT NULL,
   `commentaire` varchar(100) NOT NULL,
-  lie_id int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -67,22 +66,22 @@ CREATE TABLE IF NOT EXISTS `vente` (
   lie_id int(11),
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_Ven_Categ` FOREIGN KEY (`codeCategVente`) REFERENCES `categvente` (`code`),
-  FOREIGN KEY (lie_id) REFERENCES Lieu (id)
+  FOREIGN KEY (lie_id) REFERENCES lieu (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-CREATE TABLE IF NOT EXISTS `Courriel` (
+CREATE TABLE IF NOT EXISTS `courriel` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
   `objet` varchar(100) NOT NULL,
   `corps` varchar(500) NOT NULL,
   ven_id int(11),
   PRIMARY KEY (`id`),
-  FOREIGN KEY (ven_id) REFERENCES Vente (id)
+  FOREIGN KEY (ven_id) REFERENCES vente (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-CREATE TABLE IF NOT EXISTS `PieceJointe` (
+CREATE TABLE IF NOT EXISTS `piecejointe` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `chemin` varchar(100) NOT NULL,
   `description` varchar(500) NOT NULL,
@@ -90,10 +89,10 @@ CREATE TABLE IF NOT EXISTS `PieceJointe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-CREATE TABLE IF NOT EXISTS `Joindre` (
+CREATE TABLE IF NOT EXISTS `joindre` (
   `pie_id` int(11),
   cou_id int(11),
   PRIMARY KEY (`cou_id`,pie_id),
-  FOREIGN KEY (pie_id) REFERENCES PieceJointe (id),
-  FOREIGN KEY (cou_id) REFERENCES Courriel (id)
+  FOREIGN KEY (pie_id) REFERENCES piecejointe (id),
+  FOREIGN KEY (cou_id) REFERENCES courriel (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
