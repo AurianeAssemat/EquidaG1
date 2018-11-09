@@ -84,21 +84,12 @@ public class ConnexionForm {
 
         try {
              validationLogin( compte.getLogin() );
-        } catch ( Exception e ) {
-            addErreur(e.getMessage() );
-        }
-        
-        try {
              validationMdp( compte.getMdp() );
-        } catch ( Exception e ) {
-            addErreur(e.getMessage() );
-        }
-        
-        try {
              compte.setMdp(hachageMdpMD5( compte.getMdp()));
         } catch ( Exception e ) {
             addErreur(e.getMessage() );
         }
+        
     
         
         return compte;

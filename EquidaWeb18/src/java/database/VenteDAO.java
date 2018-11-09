@@ -10,7 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import modele.CategVente;
 import modele.Client;
 import modele.Lieu;
@@ -74,6 +77,8 @@ public class VenteDAO {
         }
         return lesVentes ;    
     } 
+    
+    
     
     /* @author Zakina - 22/06/2017
     /* Méthode permettant de lister toutes les ventes avec un certain codeCateg, triées par date décroissante.
@@ -167,8 +172,48 @@ public class VenteDAO {
         return lesClients ;    
     } 
     
-    
-    
-    
-    
+      
+    public static Vente ajouterVente(Connection connection, Vente uneVente){      
+        try
+        {
+            //preparation de la requete
+            // id (clé primaire de la table vente) est en auto_increment,donc on ne renseigne pas cette valeur
+            // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
+            // supprimer ce paramètre en cas de requête sans auto_increment.
+            
+            requete=connection.prepareStatement("INSERT INTO VENTE (id, nom, dateDebut, codeCategVente, lie_id, dateFinVente, dateDebutInscrip)\n" +
+                    "VALUES (?,?,?,?,?,?,?)");
+            requete.setInt(1,uneVente.getId());
+            requete.setString(2, uneVente.getNom());
+            requete.setDate(3, java.sql.Date.valueOf(uneVente.getDateDebutVente()));
+            requete.setDate(6, java.sql.Date.valueOf(uneVente.getDateFinVente()));
+            requete.setDate(7, java.sql.Date.valueOf(uneVente.getdateDebutInscrip()));
+            
+            if(uneVente.getUneCategVente() != null){
+                requete.setString(4, uneVente.getUneCategVente().getCode());
+            }else{
+                requete.setString(4, "AUT");
+            }
+            if(uneVente.getUnLieu() != null){
+                requete.setInt(5,uneVente.getUnLieu().getId());
+            }else{
+                requete.setString(5, null);
+            }
+
+           /* Exécution de la requête */
+            requete.executeUpdate();
+            
+            
+            
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return uneVente ;    
+    }
 }
+
+    
+    

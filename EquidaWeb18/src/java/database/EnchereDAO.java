@@ -18,10 +18,11 @@ import modele.TypeCheval;
 import modele.Participer;
 import modele.Course;
 import modele.Enchere;
+import modele.Vente;
 
 /**
  *
- * @author slam
+ * @author Assemat 19-10-2018
  */
 public class EnchereDAO {
     
@@ -33,13 +34,14 @@ public class EnchereDAO {
     /* Méthode permettant de lister toutes les encheres enregistrées en base pour un cheval.
     /* La liste des encheres est stockée dans une ArrayList
     */
-    public static ArrayList<Enchere>  getLesEncheres(Connection connection, String idlot){      
+    public static ArrayList<Enchere>  getLesEncheres(Connection connection, String idlot, String idvente){      
         ArrayList<Enchere> lesEncheres = new  ArrayList<Enchere>();
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from enchere, lot, cheval, acheteur, client where lot.id = enchere.lot_id AND lot.vent_id = enchere.lotvent_id AND acheteur.ach_id = enchere.ach_id AND client.id = acheteur.ach_id AND lot.che_id = cheval.id AND lot.id = ?");          
+            requete=connection.prepareStatement("select * from enchere, lot, cheval, acheteur, client where lot.id = enchere.lot_id AND lot.vent_id = enchere.lotvent_id AND acheteur.ach_id = enchere.ach_id AND client.id = acheteur.ach_id AND lot.che_id = cheval.id AND lot.id = ? AND lot.vent_id = ?");          
             requete.setString(1, idlot);
+            requete.setString(1, idvente);
             //executer la requete
             rs=requete.executeQuery();
             
@@ -54,6 +56,9 @@ public class EnchereDAO {
                 Lot unLot = new Lot();
                 unLot.setId(rs.getInt("id"));
                 unLot.setPrixDepart(rs.getFloat("prixDepart"));
+                
+                Vente uneVente = new Vente();
+                uneVente.setId(rs.getInt("vent_id"));
                 
                 Cheval unCheval = new Cheval() ;
                 unCheval.setId(rs.getInt("id"));
