@@ -16,6 +16,7 @@ import modele.Cheval;
 import modele.TypeCheval;
 import modele.Participer;
 import modele.Course;
+import modele.Vente;
 /**
  *
  * @author Zakina
@@ -124,6 +125,10 @@ public class LotDAO {
                 }
                 
                 unLot.setCheval(unCheval);
+                
+                Vente uneVente = new Vente();
+                uneVente.setId(Integer.parseInt(codevente));
+                unLot.setUneVente(uneVente);
                         
                 lesLots.add(unLot);
             }

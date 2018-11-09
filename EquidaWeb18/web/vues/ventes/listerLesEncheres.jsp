@@ -38,22 +38,38 @@
             <tbody>
                 <tr>
                     <%
-                    
-                    out.println("<tr><td>");
-                    out.println(lesEncheres.get(0).getUnLot().getCheval().getNom());
-                    out.println("</td>");
-                    
-                    out.println("<tr><td>");
-                    out.println(lesEncheres.get(0).getUnLot().getCheval().getSire());
-                    out.println("</td>");
-                    
-                    out.println("<tr><td>");
-                    out.println(lesEncheres.get(0).getUnLot().getCheval().getPere().getNom());
-                    out.println("</td>");
-                    
-                    out.println("<tr><td>");
-                    out.println(lesEncheres.get(0).getUnLot().getCheval().getMere().getNom());
-                    out.println("</td>");
+                    for(int i = 0; i < 1;i++)
+                    {
+                        Enchere uneEnchere = lesEncheres.get(i);
+                        
+                        out.println("<tr><td>");
+                        out.println(uneEnchere.getUnLot().getCheval().getNom());
+                        out.println("</td>");
+
+                        out.println("<tr><td>");
+                        out.println(uneEnchere.getUnLot().getCheval().getSire());
+                        out.println("</td>");
+
+                        if(uneEnchere.getUnLot().getCheval().getPere() != null){
+                            out.println("<tr><td>");
+                            out.println(uneEnchere.getUnLot().getCheval().getPere().getNom());
+                            out.println("</td>");
+                        
+                        }else{
+                            out.println("<td>");
+                            out.println("</td>");
+                        }
+                        
+                        if(uneEnchere.getUnLot().getCheval().getMere() != null){
+                            out.println("<tr><td>");
+                            out.println(uneEnchere.getUnLot().getCheval().getMere().getNom());
+                            out.println("</td>");
+                        
+                        }else{
+                            out.println("<td>");
+                            out.println("</td>");
+                        }
+                    }
                     
                     %>
                 </tr>

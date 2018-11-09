@@ -6,6 +6,7 @@
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="modele.Lot"%>
+<%@page import="modele.Vente"%>
 <%@page import="modele.Cheval"%>
 <%@page import="modele.Course"%>
 <%@page import="modele.Participer"%>
@@ -107,7 +108,6 @@
                             out.println("</td>");
                         }
                         
-                        
                         out.println("<td>");
                         if(unCheval.getLesParticipation() != null){
                             for(int j = 0; j < unCheval.getLesParticipation().size();j++)
@@ -123,14 +123,14 @@
                                 out.println("<br/>");
                             }
                         }else{
-                              out.println("<td>");
+                            out.println("<td>");
                             out.println("</td>");  
                                 
                         }
                         out.println("</td>");
                         out.println("</tr>");
                         
-                        out.println("<td><a href ='../ServletVentes/listerLesEncheres?idLot="+ unLot.getId()+ "&idVente="+unLot.getUneVente().getId()+"'>");
+                        out.println("<td><a href ='../ServletVentes/listerLesEncheres?idLot="+unLot.getId()+"&idVente="+unLot.getUneVente().getId()+"'>"); //
                         out.println("Lister les Encheres");
                         out.println("</td>");
                     }
