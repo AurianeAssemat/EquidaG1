@@ -21,7 +21,10 @@
                 <%
                 ArrayList<Client> lesClients = (ArrayList)request.getAttribute("pLesClients");
                 %>
-                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <div class="col s1 offset-s11"> 
+                    <a class="btn-floating btn-large waves-effect waves-light red"href='../ServletClient/ajouterClient'><i class="material-icons">add</i></a>
+                </div> 
+                
                 <table  class="table table-bordered table-striped table-condensed">  
                     <thead>
                         <tr>             

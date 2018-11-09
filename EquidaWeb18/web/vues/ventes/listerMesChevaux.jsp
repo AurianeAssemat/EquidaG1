@@ -25,11 +25,13 @@
                 <%
                ArrayList<Cheval> lesChevaux = (ArrayList)request.getAttribute("pLesChevaux");
                %>
-
-                <a class="btn-floating btn-large waves-effect waves-light red" href='../ServletVentes/chevalAjouter'><i class="material-icons">add</i></a>
-               <table  class="table table-bordered table-striped table-condensed">  
-                   <thead>
-                       <tr>             
+                <div class="col s1 offset-s11">  
+                    <a class="btn-floating btn-large waves-effect waves-light red" href='../ServletVentes/chevalAjouter'><i class="material-icons">add</i></a>
+                </div> 
+                
+                <table  class="table table-bordered table-striped table-condensed">  
+                    <thead>
+                        <tr>             
 
 
                            <th>Nom</th>

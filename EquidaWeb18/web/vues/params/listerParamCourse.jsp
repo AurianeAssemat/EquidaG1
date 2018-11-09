@@ -12,16 +12,20 @@
     <jsp:include page="/vues/Header.jsp" >
         <jsp:param name="NomPage" value="Liste des paramètres des courses" />
     </jsp:include>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Paramètre des courses</title>
     </head>
+    
     <body>
         <jsp:include page="/vues/MenuNavigation.jsp" />
-        
        
         <div class="container">
             <div class="row">
+                <div class="col s1 offset-s11">
+                    <a href='../ServletAdministrateur/courseAjouter' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
                 <%
             ArrayList<Course> lesCourses = (ArrayList)request.getAttribute("pLesCourses");
             %>
@@ -56,14 +60,24 @@
                            
                            out.println("<td>");
                            out.println(uneCourse.getDate());
-                           out.println("</td></tr>");
+                           out.println("</td>");
                            
+                           out.println("<td>");
+                           out.println("<a class=\"waves-effect waves-light btn-small\" href ='#' ><i class=\"material-icons\">delete</i></a>");
+                           out.println("</td>");
                            
+                           out.println("<td>");
+                           out.println("<a class=\"waves-effect waves-light btn-small\"  href ='#'><i class=\"material-icons\">create</i></a>");
+                           out.println("</td>");
+                        
+                           out.println("</tr>");                           
                        }
                        %>
                    </tr>
                </tbody>
             </table>
+            
+ 
             </div>
         </div>
     </body>

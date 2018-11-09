@@ -17,7 +17,7 @@ import modele.Vente;
 
 /**
  *
- * @author Zakina
+ * @author Coco
  */
 public class PaysDAO {
     
@@ -28,14 +28,10 @@ public class PaysDAO {
      public static ArrayList<Pays>  getLesPays(Connection connection){      
         ArrayList<Pays> lesPays = new  ArrayList<Pays>();
         try
-        {
-            //preparation de la requete     
+        {   
             requete=connection.prepareStatement("select * from pays");
-            
-            //executer la requete
             rs=requete.executeQuery();
-            
-            //On hydrate l'objet métier Client avec les résultats de la requête
+
             while ( rs.next() ) {  
                 Pays unPays = new Pays();
                 unPays.setCode(rs.getString("code"));
@@ -46,7 +42,6 @@ public class PaysDAO {
         catch (SQLException e) 
         {
             e.printStackTrace();
-            //out.println("Erreur lors de l’établissement de la connexion");
         }
         return lesPays ;    
     } 

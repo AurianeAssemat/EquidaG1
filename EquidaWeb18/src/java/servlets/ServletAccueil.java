@@ -8,6 +8,7 @@ package servlets;
 import database.CategVenteDAO;
 import database.CompteDAO;
 import database.PaysDAO;
+import database.VenteDAO;
 import database.Utilitaire;
 
 import formulaires.ConnexionForm;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import modele.CategVente;
 import modele.Compte;
 import modele.Pays;
-
+import modele.Vente;
 
 /**
  *
@@ -98,7 +99,9 @@ public class ServletAccueil extends HttpServlet {
         }
         
         if(url.equals("/EquidaWeb18/ServletAccueil/Accueil"))
-        {                   
+        {     
+            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+            request.setAttribute("pLesVentes", lesVentes);
             this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp" ).forward( request, response );
         }
         
