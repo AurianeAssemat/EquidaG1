@@ -42,11 +42,7 @@
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerMesChevaux</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/listerLesClients</url-pattern>
-    </servlet-mapping>
+   
     
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
@@ -151,12 +147,12 @@
     
     <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
-        <url-pattern>/ServletAccueil/Accueil</url-pattern>Deconnexion
+        <url-pattern>/ServletAccueil/Accueil</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
-        <url-pattern>/ServletAccueil/Profil</url-pattern>Deconnexion
+        <url-pattern>/ServletAccueil/Profil</url-pattern>
     </servlet-mapping>
           
 <!--Servlet administrateur-->   
@@ -225,12 +221,12 @@
         <url-pattern>/ServletAdministrateur/PaysAjouter</url-pattern>
     </servlet-mapping>
        
-    <!-- -->
+
     
     
     <session-config>
         <session-timeout>
             30
         </session-timeout>
-    </session-config>/EquidaWeb18/ServletConnexion/Connexion
+    </session-config>
     </web-app>
