@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import modele.CategVente;
 import modele.Courriel;
 import modele.Vente;
 import modele.PieceJointe;
@@ -79,7 +80,7 @@ public class CourrielDAO {
         try
         {
             //preparation de la requete 
-            requete=connection.prepareStatement("SELECT * FROM courriel, vente WHERE courriel.id = ? AND courriel.ven_id = vente.id");
+            requete=connection.prepareStatement("SELECT * FROM courriel, vente, categvente WHERE courriel.id = ? AND courriel.ven_id = vente.id AND categvente.code = vente.codeCategVente");
             requete.setString(1, id);
             //executer la requete
             rs=requete.executeQuery();
@@ -91,8 +92,13 @@ public class CourrielDAO {
                   courriel.setCorps(rs.getString("corps"));
                   courriel.setDate(rs.getString("date"));
                   
+                  CategVente categVente = new CategVente();
+                  categVente.setCode(rs.getString("categvente.code"));
+                  categVente.setLibelle(rs.getString("categvente.libelle"));
+                  
                   Vente vente = new Vente();
                   vente.setNom(rs.getString("nom"));
+                  vente.setUneCategVente(categVente);
                   
                   courriel.setUneVente(vente);
              }

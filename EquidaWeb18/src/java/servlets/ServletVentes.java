@@ -11,6 +11,7 @@ import database.AcheteurDAO;
 import database.VenteDAO;
 import database.CategVenteDAO;
 import database.ChevauxDAO;
+import database.ClientDAO;
 import database.CourrielDAO;
 import database.LieuDAO;
 import database.LotDAO;
@@ -193,7 +194,12 @@ public class ServletVentes extends HttpServlet {
            
            Courriel courriel = CourrielDAO.getCourriel(connection, id);
            
+            System.out.println(courriel.getUneVente().getUneCategVente().getCode());
+           
+           ArrayList<Client> clients = VenteDAO.getLesClients(connection, courriel.getUneVente().getUneCategVente().getCode());
+           
            request.setAttribute("pCourriel", courriel);
+           request.setAttribute("pClients", clients);
            
            getServletContext().getRequestDispatcher("/vues/ventes/envoyerMail.jsp").forward(request, response);
         }

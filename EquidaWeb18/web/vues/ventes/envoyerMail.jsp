@@ -3,6 +3,8 @@
     Created on : 6 nov. 2018, 13:28:44
     Author     : slam
 --%>
+<%@page import="modele.Client"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="modele.Courriel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,18 +40,22 @@
                     
                     <div class="row">
                         <div class="input-field col-s6">
-                            <select multiple>
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                                </select>
-                            <label>Materialize Multiple Select</label>
+                            <select name="venteId" multiple>
+                                <%
+                                    ArrayList<Client> clients = (ArrayList)request.getAttribute("pClients");
+                                    for (int i=0; i < clients.size(); i++){
+                                        Client client = clients.get(i);
+                                        out.println("<option value ='" + client.getId()+ "'>" + client.getPrenom() + " " + client.getNom()+ "</option>"); 
+
+                                    }
+                                %>
+                            </select>
+                            <label>Liste des clients intéressés par la vente :</label>
                         </div>
                     </div>
-                       <div class="input-field col-s6">
-                             <button class="btn waves-effect waves-light" type="submit" name="action">Envoyer</button>
-                       </div>        
+                    <div class="input-field col-s6">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Envoyer</button>
+                    </div>        
                 </form>
             </div>
         </div>
