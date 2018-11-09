@@ -166,7 +166,110 @@ public class ChevauxDAO {
         }
         return lesChevaux ;    
     } 
-    
+     public static Cheval  getUnCheval(Connection connection,int codeCheval){      
+        try
+        {
+            //preparation de la requete    
+            requete=connection.prepareStatement("select * from cheval where cheval.id = ?");
+            requete.setInt(1, codeCheval);
+            //executer la requete
+            rs=requete.executeQuery();
+            Cheval unCheval = new Cheval();
+                    
+            while ( rs.next() ) {  
+                
+                
+                unCheval = new Cheval();
+                unCheval.setId(rs.getInt("id"));
+                unCheval.setNom(rs.getString("nom"));
+                unCheval.setSexe(rs.getString("sexe"));
+                unCheval.setSire(rs.getString("sire"));
+                
+                if(rs.getString("typ_id") != ""){
+                    requete=connection.prepareStatement("select * from typecheval where id = ?");  
+                    requete.setString(1, rs.getString("typ_id"));
+                    
+                    ResultSet rtc = requete.executeQuery();
+                    
+                    rtc.next();
+                            
+                    TypeCheval unTypeCheval = new TypeCheval();
+                    unTypeCheval.setId(rtc.getString("id"));
+                    unTypeCheval.setLibelle(rtc.getString("libelle"));
+                    unTypeCheval.setDescription(rtc.getString("description"));
+
+                    unCheval.setTypeCheval(unTypeCheval);
+                }
+                
+                if(rs.getInt("pere") != 0){
+                    requete=connection.prepareStatement("select * from cheval where id = ?");  
+                    requete.setString(1, rs.getString("pere"));
+                    
+                    ResultSet rp = requete.executeQuery();
+                    
+                    rp.next();
+                            
+                    Cheval unPere = new Cheval();
+                    unPere.setId(rp.getInt("id"));
+                    unPere.setNom(rp.getString("nom"));
+                    unPere.setSexe(rp.getString("sexe"));
+                    unPere.setSire(rp.getString("sire"));
+                    unCheval.setPere(unPere);
+                }
+                
+                if(rs.getInt("mere") != 0){
+                    requete=connection.prepareStatement("select * from cheval where id = ?");  
+                    requete.setString(1, rs.getString("mere"));
+                    
+                    ResultSet rm = requete.executeQuery();
+                    
+                    rm.next();
+                            
+                    Cheval uneMere = new Cheval();
+                    uneMere.setId(rm.getInt("id"));
+                    uneMere.setNom(rm.getString("nom"));
+                    uneMere.setSexe(rm.getString("sexe"));
+                    uneMere.setSire(rm.getString("sire"));
+                    unCheval.setMere(uneMere);
+                }
+                               
+            }
+            return unCheval ;
+        }    
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return null;    
+    } 
+     public static Cheval  modifierCheval(Connection connection, Cheval unCheval){      
+        
+        try
+        {
+            //preparation de la requete 
+            requete=connection.prepareStatement(" UPDATE cheval SET nom = ?, sexe = ?, sire = ?, pere = ?, mere = ?, typ_id= ?, archiver= 0 WHERE id = ?; ");
+      
+            requete.setString(1, unCheval.getNom());
+            requete.setString(2, unCheval.getSexe());
+            requete.setString(3, unCheval.getSire());
+            requete.setInt(4, unCheval.getPere().getId());
+            requete.setInt(5, unCheval.getMere().getId());
+            requete.setString(7, unCheval.getTypeCheval().getId());
+            requete.setInt(9, unCheval.getId());
+            System.out.println(requete);
+            /* Exécution de la requête */
+            requete.executeUpdate();
+            
+            //System.out.println("requete " +requete);
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return unCheval ; 
+    }
+     
     public static void  DeleteUnChevaux(Connection connection,int codeCheval){      
       
         try
@@ -182,7 +285,9 @@ public class ChevauxDAO {
         {
             e.printStackTrace();
         }
-           
+        
+        
     } 
+    
     
 }

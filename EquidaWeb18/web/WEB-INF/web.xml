@@ -67,6 +67,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/chevalModif</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesClients</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
