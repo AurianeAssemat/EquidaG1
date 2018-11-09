@@ -159,6 +159,7 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesLots", lesLots);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
         }
+        
         if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
         {  
             Compte compte = (Compte)request.getSession().getAttribute("Compte");
@@ -220,6 +221,14 @@ public class ServletVentes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+       String url = request.getRequestURI();
+       
+       if(url.equals("/EquidaWeb18/ServletVentes/chevalAjouter"))
+        {     
+        
+        
+        
         ChevalForm form = new ChevalForm();
 		
         /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
@@ -249,14 +258,17 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("plesTypeCheval", lesTypeCheval);
            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp" ).forward( request, response );
         }
-    }
+        }
+       
+       
+        
 
     /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
-    @Override
+    }
     public String getServletInfo() {
         return "Short description";
     }

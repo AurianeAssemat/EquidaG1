@@ -50,5 +50,24 @@ public class CourseDAO {
             e.printStackTrace();
         }
         return lesCourses ;    
+    }
+     /*
+    public static void  DeleteUneCourse(Connection connection, String codeCourse){      
+      
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("DELETE FROM course WHERE course.id = ?");
+            requete.setInt(1, codeCourse);
+            //executer la requete
+            requete.executeUpdate();
+            
+        }    
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+           
     } 
+    */
 }

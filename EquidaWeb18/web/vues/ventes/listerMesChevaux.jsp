@@ -128,7 +128,7 @@
                                }
                                
                                out.println("<td>");
-                               out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerMesChevaux?codeCheval="+ unCheval.getId()+ "'><i class=\"material-icons\">delete</i></a>");
+                               out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerMesChevaux?codeCheval=" + unCheval.getId()+ "'><i class=\"material-icons\">delete</i></a>");
                                out.println("</td>");
                                
                                out.println("<td>");

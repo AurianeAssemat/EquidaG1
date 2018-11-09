@@ -6,24 +6,21 @@
 
 <%@page import="modele.TypeCheval"%>
 <%@page import="modele.CategVente"%>
-<%@page import="modele.CategVente"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="formulaires.ChevalForm"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ajouter un Cheval</title>
+        <title>Ajouter un cheval</title>
     </head>
     <body>
         <h1>UN NOUVEAU CHEVAL</h1>
         
-        <%
-              
+        <%       
                 ChevalForm form = (ChevalForm)request.getAttribute("form");
-            %>
+        %>
         
         <form class="form-inline" action="ajouterCheval" method="POST">
                 <label for="nom">NOM : </label>
@@ -62,7 +59,5 @@
                 
                 <input type="submit" name="valider" id="valider" value="Valider"/>
         </form>
-                    
-                
     </body>
 </html>

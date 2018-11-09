@@ -5,17 +5,17 @@
  */
 package formulaires;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import modele.Cheval;
 import modele.TypeCheval;
 
 /**
  *
  * @author slam
  */
-public class ChevalForm {
+public class TypeChevalForm {
     private String resultat;
     private Map<String, String> erreurs = new HashMap<String, String>();
 
@@ -36,9 +36,9 @@ public class ChevalForm {
     }
     
     //méthode de validation du champ de saisie nom
-    private void validationNom( String nom ) throws Exception {
-        if ( nom != null && nom.length() < 3 ) {
-        throw new Exception( "Le nom du cheval doit contenir au moins 3 caractères." );
+    private void validationLibelle( String libelle ) throws Exception {
+        if ( libelle != null && libelle.length() < 2 ) {
+        throw new Exception( "Le nom de la race du cheval doit contenir au moins 3 caractères." );
         }
     }
     
@@ -55,29 +55,21 @@ public class ChevalForm {
         }   
     }
     
-    public Cheval ajouterCheval( HttpServletRequest request ) {
+    public TypeCheval typeChevalAjouter( HttpServletRequest request ) {
       
-        Cheval unCheval  = new Cheval();
+        TypeCheval unTypeCheval  = new TypeCheval();
          
-        String nom = getDataForm( request, "nom" );
-        String sexe = getDataForm( request, "sexe" );
-        String sire = getDataForm( request, "sire" );
-        String mere = getDataForm( request, "mere" );
-        String pere = getDataForm( request, "pere" );
+        String id = getDataForm( request, "id" );
         
-        String typeCheval = getDataForm( request, "typ_id" );
-        TypeCheval unTypeCheval = new TypeCheval();
-        unTypeCheval.setId(typeCheval);
-        // Traitement de la liste à choix multiple
-        //Pour chq catégorie selectionné, on instancie une nouvelle catégorie et on l'ajoute au client
-        
-       
+        String libelle = getDataForm( request, "libelle" );
+        String description = getDataForm( request, "description" );
+    
         try {
-             validationNom( nom );
+             validationLibelle( libelle );
         } catch ( Exception e ) {
-            setErreur( "nom", e.getMessage() );
+            setErreur( "libelle", e.getMessage() );
         }
-        unCheval.setNom(nom);
+        unTypeCheval.setLibelle(libelle);
 
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'ajout.";
@@ -85,18 +77,10 @@ public class ChevalForm {
             resultat = "Échec de l'ajout.";
         }
          
-      
-        unCheval.setSexe(sexe);
-        unCheval.setTypeCheval(unTypeCheval);
-        unCheval.setSexe(sexe);
-        unCheval.setSire(sire);
-        /*unCheval.setMere(mere);
-        unCheval.setPere(pere);*/
-               
-       
-        return unCheval ;
+        unTypeCheval.setId(Integer.parseInt(id));
+        unTypeCheval.setLibelle(libelle);
+        unTypeCheval.setDescription(description);
+     
+        return unTypeCheval ;
     }
-}  
-
-    
-
+}

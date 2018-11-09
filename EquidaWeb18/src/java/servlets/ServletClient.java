@@ -97,7 +97,7 @@ public class ServletClient extends HttpServlet {
             
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
             request.setAttribute("pLesCategVente", lesCategVentes);
-            this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp" ).forward( request, response );
+            this.getServletContext().getRequestDispatcher("/vues/clients/clientAjouter.jsp" ).forward( request, response );
         }
        
        //lister les clients en tant que directeur
@@ -107,7 +107,7 @@ public class ServletClient extends HttpServlet {
            
             ArrayList<Client> lesClients = ClientDAO.getLesClients(connection);
             request.setAttribute("pLesClients", lesClients);
-            getServletContext().getRequestDispatcher("/vues/listerLesClients.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/vues/clients/listerLesClients.jsp").forward(request, response);
             
         }
 
@@ -157,7 +157,7 @@ public class ServletClient extends HttpServlet {
            //System.out.println("client " + unClient);
            //Client clientModif = ClientDAO.modifUnClient(connection, idClient);
            
-           getServletContext().getRequestDispatcher("/vues/clientModif.jsp").forward(request, response);
+           getServletContext().getRequestDispatcher("/vues/clients/clientModif.jsp").forward(request, response);
        }
 
     }
@@ -195,18 +195,19 @@ public class ServletClient extends HttpServlet {
                 clientConsult = ClientDAO.modifierClient(connection, unClient);
                 
 
-            }else {
+            }else 
+            {
                 System.out.println("ajout");
                 clientConsult = ClientDAO.ajouterClient(connection, unClient);
                 //System.out.println(request);
             }
                 
                 //verif l'insertion de données
-                ClientDAO.getUnClient(connection, clientConsult.getId());
+        ClientDAO.getUnClient(connection, clientConsult.getId());
 
-                //variable du client contenant toutes ces informations
-                request.setAttribute( "pClient", clientConsult );
-                this.getServletContext().getRequestDispatcher("/vues/clientConsulter.jsp" ).forward( request, response );
+         //variable du client contenant toutes ces informations
+        request.setAttribute( "pClient", clientConsult );
+        this.getServletContext().getRequestDispatcher("/vues/clients/clientConsulter.jsp" ).forward( request, response );
                 
         }
         else
@@ -217,7 +218,7 @@ public class ServletClient extends HttpServlet {
             
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
             request.setAttribute("pLesCategVente", lesCategVentes);
-           this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp" ).forward( request, response );
+           this.getServletContext().getRequestDispatcher("/vues/clients/clientAjouter.jsp" ).forward( request, response );
         }
     
     }
