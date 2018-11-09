@@ -36,7 +36,7 @@
             </p>
            <div class="row">
                
-                <form  action="#" class="col s12">
+                <form  method="post" action="envoyerMail" class="col s12">
                     
                     <div class="row">
                         <div class="input-field col-s6">

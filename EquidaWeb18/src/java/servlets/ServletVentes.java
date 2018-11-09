@@ -327,10 +327,12 @@ public class ServletVentes extends HttpServlet {
            getServletContext().getRequestDispatcher("/vues/ventes/creerMail.jsp").forward(request, response);
         }
     }
+        
+        if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail")){
+          getServletContext().getRequestDispatcher("/vues/ventes/confirmationMail.jsp").forward(request, response);           
+        }
 
 
-        
-        
         if(url.equals("/EquidaWeb18/ServletVentes/ajouterVente")){
             /* Préparation de l'objet formulaire */
             VenteForm form = new VenteForm();
