@@ -13,7 +13,7 @@ import database.CategVenteDAO;
 import database.ChevauxDAO;
 import database.CourrielDAO;
 import database.LieuDAO;
-import database.LotDAO;
+import formulaires.VenteForm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -29,11 +29,8 @@ import modele.Acheteur;
 import modele.Vente;
 import modele.Courriel;
 import modele.CategVente;
-
 import modele.Lieu;
-
 import modele.Cheval;
-
 import modele.Lot;
 /**
  *
@@ -115,7 +112,7 @@ public class ServletVentes extends HttpServlet {
             }
             request.setAttribute("pLesVentes", lesVentes);
             request.setAttribute("pLesCategVentes", lesCategVentes);
-            request.setAttribute("pLesLieux", lesLieux);
+            
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesVentes.jsp").forward(request, response);
         }
         
@@ -162,25 +159,24 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesCourriels", lesCourriels);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesCourriels.jsp").forward(request, response);
         }
-        
-        if(url.equals("/EquidaWeb18/ServletVentes/listerLesChevaux"))
-        {  
-            String codeVente = (String)request.getParameter("codeVente");
-           
+        if(url.equals("/EquidaWeb18/ServletVentes/ajouterVente"))
+        {                   
+            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+            request.setAttribute("pLesLieux", lesLieux);
             
-            ArrayList<Lot> lesLots = LotDAO.getLesLots(connection, codeVente);
-            request.setAttribute("pLesLots", lesLots);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
+            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+            request.setAttribute("pLesCategVente", lesCategVentes);
+            this.getServletContext().getRequestDispatcher("/vues/VenteAjouter.jsp" ).forward( request, response );
         }
          if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
         {  
             String codeAcheteur = (String)request.getParameter("codeAcheteur");
-           
+        
             
             ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, codeAcheteur);
             request.setAttribute("pLesChevaux", lesChevaux);
             getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
-        }
+    }
     }
 
     /**
@@ -194,9 +190,35 @@ public class ServletVentes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+    
+ /* Préparation de l'objet formulaire */
+        VenteForm form = new VenteForm();
+        
+        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+        Vente uneVente = form.ajouterVente(request);
+	
+        request.setAttribute( "form", form );
+        
+        if (form.getErreurs().isEmpty()){
+            
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos de la vente
+            
+            Vente VenteVerif = VenteDAO.ajouterVente(connection, uneVente);
 
+            request.setAttribute( "pVente", uneVente );
+            this.getServletContext().getRequestDispatcher("/vues/venteConsulter.jsp" ).forward( request, response );
+        }
+        else
+        { 
+            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+            request.setAttribute("pLesLieux", lesLieux);
+            
+            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+            request.setAttribute("pLesCategVente", lesCategVentes);
+            this.getServletContext().getRequestDispatcher("/vues/VenteAjouter.jsp" ).forward( request, response );
+        }
+    
+    }
     /**
      * Returns a short description of the servlet.
      *

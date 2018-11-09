@@ -39,6 +39,7 @@ public class LieuDAO {
                 unLieu.setVille(rs.getString("ville"));
                 unLieu.setNbBoxes(rs.getInt("nbBoxes"));
                 unLieu.setCommentaire(rs.getString("commentaire"));
+                lesLieux.add(unLieu);
             }
         }   
         catch (SQLException e) 
