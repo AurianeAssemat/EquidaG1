@@ -10,7 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import modele.CategVente;
 import modele.Client;
 import modele.Lieu;
@@ -74,6 +77,8 @@ public class VenteDAO {
         }
         return lesVentes ;    
     } 
+    
+    
     
     /* @author Zakina - 22/06/2017
     /* Méthode permettant de lister toutes les ventes avec un certain codeCateg, triées par date décroissante.
