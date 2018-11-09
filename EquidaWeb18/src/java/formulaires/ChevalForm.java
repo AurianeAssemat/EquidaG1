@@ -5,20 +5,20 @@
  */
 package formulaires;
 
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import modele.CategVente;
+import modele.Cheval;
 import modele.Client;
 import modele.Pays;
+import modele.TypeCheval;
 
 /**
  *
- * @author Zakina
+ * @author slam
  */
-public class ClientForm {
-    
+public class ChevalForm {
     private String resultat;
     private Map<String, String> erreurs      = new HashMap<String, String>();
 
@@ -41,7 +41,7 @@ public class ClientForm {
     //méthode de validation du champ de saisie nom
     private void validationNom( String nom ) throws Exception {
         if ( nom != null && nom.length() < 3 ) {
-        throw new Exception( "Le nom d'utilisateur doit contenir au moins 3 caractères." );
+        throw new Exception( "Le nom du cheval doit contenir au moins 3 caractères." );
         }
     }
     
@@ -58,43 +58,29 @@ public class ClientForm {
         }   
     }
     
-    
-    public Client ajouterClient( HttpServletRequest request ) {
+    public Cheval ajouterCheval( HttpServletRequest request ) {
       
-        Client unClient  = new Client();
-        
-        //int id = unClient.getId();
-        String id = getDataForm( request, "id" );
+        Cheval unCheval  = new Cheval();
+         
         String nom = getDataForm( request, "nom" );
-        String prenom = getDataForm( request, "prenom");
-        String rue = getDataForm( request, "rue" );
-        String copos = getDataForm( request, "copos");
-        String ville = getDataForm( request, "ville" );
+        String sexe = getDataForm( request, "sexe" );
+        String sire = getDataForm( request, "sire" );
+        String mere = getDataForm( request, "mere" );
+        String pere = getDataForm( request, "pere" );
         
-        String pays = getDataForm( request, "codePays" );
-        Pays unPays = new Pays(pays);
-        
-        String titre = getDataForm( request, "civilite" );
-        String mail = getDataForm( request, "mail" );
-        
+        String typeCheval = getDataForm( request, "typ_id" );
+        TypeCheval unTypeCheval = new TypeCheval();
+        unTypeCheval.setId(typeCheval);
         // Traitement de la liste à choix multiple
         //Pour chq catégorie selectionné, on instancie une nouvelle catégorie et on l'ajoute au client
-        CategVente uneCategVente ;
-        String[] categVente = request.getParameterValues("categVente");
-        for (int i=0; i<categVente.length; i++){
-            uneCategVente = new CategVente();
-            uneCategVente.setCode(categVente[i]);
-            unClient.addUneCategVente(uneCategVente);
-        }
         
- 
        
         try {
              validationNom( nom );
         } catch ( Exception e ) {
             setErreur( "nom", e.getMessage() );
         }
-        unClient.setNom(nom);
+        unCheval.setNom(nom);
 
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'ajout.";
@@ -102,21 +88,17 @@ public class ClientForm {
             resultat = "Échec de l'ajout.";
         }
          
-        unClient.setId(Integer.parseInt(id));
-        unClient.setNom(nom);
-        unClient.setPrenom(prenom);
-        unClient.setRue(rue);
-        unClient.setCopos(copos);
-        unClient.setVille(ville);
-        unClient.setTitre(titre);
-        unClient.setMail(mail);
-        unClient.setUnPays(unPays);
-        
-        
-        return unClient ;
+      
+        unCheval.setSexe(sexe);
+        unCheval.setTypeCheval(unTypeCheval);
+        unCheval.setSexe(sexe);
+        unCheval.setSire(sire);
+        /*unCheval.setMere(mere);
+        unCheval.setPere(pere);*/
+               
+       
+        return unCheval ;
     }
-    
-    
+}
     
 
-}

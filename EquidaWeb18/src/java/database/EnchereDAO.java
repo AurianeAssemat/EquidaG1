@@ -11,55 +11,63 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import modele.Acheteur;
 import modele.Lot;
 import modele.Cheval;
 import modele.TypeCheval;
 import modele.Participer;
 import modele.Course;
+import modele.Enchere;
+import modele.Vente;
+
 /**
  *
- * @author Zakina
- * 22/06/2017
- * Classe faisant la liaison entre la table Vente et la classe Vente
+ * @author Assemat 19-10-2018
  */
-public class LotDAO {
-
+public class EnchereDAO {
     
     Connection connection=null;
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    /* @author Zakina - 22/06/2017
-    /* Méthode permettant de lister toutes les ventes enregistrées en base, triées par date décroissante.
-    /* Pour chaque vente, on récupère aussi sa catégorie.
-    /* La liste des vente est stockée dans une ArrayList
+    /* @author Assemat - 19/10/2018
+    /* Méthode permettant de lister toutes les encheres enregistrées en base pour un cheval.
+    /* La liste des encheres est stockée dans une ArrayList
     */
-    public static ArrayList<Lot>  getLesLots(Connection connection,String codevente){      
-        ArrayList<Lot> lesLots = new  ArrayList<Lot>();
+    public static ArrayList<Enchere>  getLesEncheres(Connection connection, String idlot, String idvente){      
+        ArrayList<Enchere> lesEncheres = new  ArrayList<Enchere>();
         try
         {
             //preparation de la requete     
-            requete=connection.prepareStatement("select * from lot,cheval,typecheval where lot.che_id = cheval.id AND cheval.typ_id = typecheval.id AND vent_id = ?");          
-            requete.setString(1, codevente);
+            requete=connection.prepareStatement("select * from enchere, lot, cheval, acheteur, client where lot.id = enchere.lot_id AND lot.vent_id = enchere.lotvent_id AND acheteur.ach_id = enchere.ach_id AND client.id = acheteur.ach_id AND lot.che_id = cheval.id AND lot.id = ? AND lot.vent_id = ?");          
+            requete.setString(1, idlot);
+            requete.setString(1, idvente);
             //executer la requete
             rs=requete.executeQuery();
             
-            //On hydrate l'objet métier Client avec les résultats de la requête
-            while ( rs.next() ) {  
+            //On hydrate l'objet métier Enchere avec les résultats de la requête
+            while ( rs.next() ) {
+                
+                Enchere uneEnchere = new Enchere();
+                
+                uneEnchere.setNumero(rs.getInt("numero"));
+                uneEnchere.setMontant(rs.getInt("montant"));
+                
                 Lot unLot = new Lot();
                 unLot.setId(rs.getInt("id"));
                 unLot.setPrixDepart(rs.getFloat("prixDepart"));
                 
+                Vente uneVente = new Vente();
+                uneVente.setId(rs.getInt("vent_id"));
                 
-                
-                Cheval unCheval = new Cheval();
+                Cheval unCheval = new Cheval() ;
                 unCheval.setId(rs.getInt("id"));
                 unCheval.setNom(rs.getString("nom"));
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setSire(rs.getString("sire"));
                 
                 if(rs.getString("typ_id") != ""){
-                    requete=connection.prepareStatement("select * from typecheval where id = ?");  
+                    requete=connection.prepareStatement("select * from TypeCheval where id = ?");  
                     requete.setString(1, rs.getString("typ_id"));
                     
                     ResultSet rtc = requete.executeQuery();
@@ -75,7 +83,7 @@ public class LotDAO {
                 }
                 
                 if(rs.getInt("pere") != 0){
-                    requete=connection.prepareStatement("select * from cheval where id = ?");  
+                    requete=connection.prepareStatement("select * from Cheval where id = ?");  
                     requete.setString(1, rs.getString("pere"));
                     
                     ResultSet rp = requete.executeQuery();
@@ -91,7 +99,7 @@ public class LotDAO {
                 }
                 
                 if(rs.getInt("mere") != 0){
-                    requete=connection.prepareStatement("select * from cheval where id = ?");  
+                    requete=connection.prepareStatement("select * from Cheval where id = ?");  
                     requete.setString(1, rs.getString("mere"));
                     
                     ResultSet rm = requete.executeQuery();
@@ -105,33 +113,26 @@ public class LotDAO {
                     uneMere.setSire(rm.getString("sire"));
                     unCheval.setMere(uneMere);
                 }
-                requete=connection.prepareStatement("select * from course,participer where cour_id = course.id AND che_id = ?");          
-                requete.setString(1, rs.getString("id"));
-                //executer la requete
-                ResultSet rco=requete.executeQuery();
-                while ( rco.next() ) {  
-                    Course uneCourse = new Course();
-                    uneCourse.setId(rco.getInt("course.id"));
-                    uneCourse.setLieu(rco.getString("lieu"));
-                    uneCourse.setNom(rco.getString("nom"));
-                    uneCourse.setDate(rco.getString("date"));
-                    
-                    Participer uneParticipation = new Participer();
-                    uneParticipation.setPlace(rco.getInt("place"));
-                    uneParticipation.setUneCourse(uneCourse);
-                    
-                    unCheval.addUneParticipation(uneParticipation);
-                }
                 
                 unLot.setCheval(unCheval);
-                        
-                lesLots.add(unLot);
+                uneEnchere.setUnLot(unLot);
+                
+                Acheteur unAcheteur = new Acheteur();
+                unAcheteur.setId(rs.getInt("id"));
+                unAcheteur.setNom(rs.getString("nom"));
+                unAcheteur.setPrenom(rs.getString("prenom"));
+                uneEnchere.setUnAcheteur(unAcheteur);
+                
+                lesEncheres.add(uneEnchere);
+                
             }
-        }   
+            
+        }
+            
         catch (SQLException e) 
         {
             e.printStackTrace();
         }
-        return lesLots ;    
-    } 
+        return lesEncheres ;
+    }
 }

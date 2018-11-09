@@ -22,12 +22,12 @@
         <table  class="table table-bordered table-striped table-condensed">  
             <thead>
                 <tr>             
-                    <th>id</th>
-                    <th>nom</th>
-                    <th>prenomt</th>
-                    <th>pays</th>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Pays</th>
                     <th>Code Postal</th> 
-                    <th>E-mail</th> 
+                    <th>E-mail</th>  
             <br>
             <br>
                 </tr>

@@ -38,7 +38,7 @@ public class ClientDAO {
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
 
-            requete=connection.prepareStatement("INSERT INTO CLIENT ( nom, prenom, rue, copos, ville, mail, codePays, titre )\n" +
+            requete=connection.prepareStatement("INSERT INTO client ( nom, prenom, rue, copos, ville, mail, codePays, titre )\n" +
                     "VALUES (?,?,?,?,?,?,?,?)", requete.RETURN_GENERATED_KEYS );
             requete.setString(1, unClient.getNom());
             requete.setString(2, unClient.getPrenom());
@@ -49,7 +49,7 @@ public class ClientDAO {
             requete.setString(7, unClient.getUnPays().getCode());
             requete.setString(8, unClient.getTitre());
             
-
+            
            /* Exécution de la requête */
             requete.executeUpdate();
             
@@ -87,14 +87,17 @@ public class ClientDAO {
             requete.setInt(1, idClient);
             //executer la requete
             rs=requete.executeQuery();
+           
+            while (rs.next())
+            {
              
             //On hydrate l'objet métier Client avec les résultats de la requête 
-                
+                unClient.setId(rs.getInt("id"));
                 unClient.setNom(rs.getString("nom"));
                 unClient.setPrenom(rs.getString("prenom"));
-                unClient.setNom(rs.getString("rue"));
+                unClient.setRue(rs.getString("rue"));
                 unClient.setCopos(rs.getString("copos"));
-                unClient.setNom(rs.getString("ville"));
+                unClient.setVille(rs.getString("ville"));
                 unClient.setMail(rs.getString("mail"));
                 unClient.setTitre (rs.getString("titre"));
                 
@@ -103,7 +106,7 @@ public class ClientDAO {
                 p.setNom(rs.getString("nom"));
                 
                 unClient.setUnPays(p);
-               
+            }
         }   
         catch (SQLException e) 
         {
@@ -153,5 +156,33 @@ public class ClientDAO {
         return lesClients ;    
     }
     
-    
+    public static Client  modifierClient(Connection connection, Client unClient){      
+        
+        try
+        {
+            //preparation de la requete 
+            requete=connection.prepareStatement(" UPDATE client SET nom = ?, prenom = ?, rue = ?, copos = ?, ville = ?, mail= ?, codePays= ?, titre = ? WHERE id = ?; ");
+      
+            requete.setString(1, unClient.getNom());
+            requete.setString(2, unClient.getPrenom());
+            requete.setString(3, unClient.getRue());
+            requete.setString(4, unClient.getCopos());
+            requete.setString(5, unClient.getVille());
+            requete.setString(6, unClient.getMail());
+            requete.setString(7, unClient.getUnPays().getCode());
+            requete.setString(8, unClient.getTitre());
+            requete.setInt(9, unClient.getId());
+            System.out.println(requete);
+            /* Exécution de la requête */
+            requete.executeUpdate();
+            
+            //System.out.println("requete " +requete);
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return unClient ; 
+    }
 }

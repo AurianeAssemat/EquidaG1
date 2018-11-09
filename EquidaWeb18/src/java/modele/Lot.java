@@ -15,6 +15,8 @@ public class Lot {
     private int id;
     private float prixDepart ;
     private Cheval cheval;
+    private Vendeur unVendeur ;
+    private Vente uneVente;
 
 
     public Lot() {
@@ -50,7 +52,21 @@ public class Lot {
         this.cheval = cheval;
     }
 
-    
-    
+    public Vendeur getUnVendeur() {
+        return unVendeur;
+    }
+
+    public void setUnVendeur(Vendeur unVendeur) {
+        this.unVendeur = unVendeur;
+    }
+
+    public Vente getUneVente() {
+        return uneVente;
+    }
+
+    public void setUneVente(Vente uneVente) {
+        this.uneVente = uneVente;
+    }
+
     
 }

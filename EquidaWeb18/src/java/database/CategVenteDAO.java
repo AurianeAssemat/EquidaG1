@@ -24,11 +24,8 @@ public class CategVenteDAO {
      public static ArrayList<CategVente>  getLesCategVentes(Connection connection){      
         ArrayList<CategVente> lesCategVentes = new  ArrayList<CategVente>();
         try
-        {
-            //preparation de la requete     
+        {   
             requete=connection.prepareStatement("select * from categvente");
-            
-            //executer la requete
             rs=requete.executeQuery();
             
             //On hydrate l'objet métier Client avec les résultats de la requête
