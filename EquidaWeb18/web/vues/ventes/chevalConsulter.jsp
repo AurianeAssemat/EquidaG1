@@ -9,19 +9,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <jsp:include page="/vues/Header.jsp" >
+        <jsp:param name="NomPage" value="Consulter Cheval" />
+    </jsp:include>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Consultation Cheval</title>
     </head>
     <body>
+        <jsp:include page="/vues/MenuNavigation.jsp" />
         <h1>INFOS CHEVAL</h1>
 
         <%
        Cheval unCheval = (Cheval)request.getAttribute("pCheval");
         %>
 
-
+        <img src="<%= request.getContextPath()%>/img/<%= unCheval.getId()%>.jpg">
         <table class="table table-bordered table-striped table-condensed">
+            
             <tr><td>ID :</td><td><% out.println(unCheval.getId());%></td></tr>
             <tr><td>NOM :</td><td><% out.println(unCheval.getNom());%></td></tr>
             <tr><td>SIRE :</td><td><%  out.println(unCheval.getSire());%></td>  </tr>
