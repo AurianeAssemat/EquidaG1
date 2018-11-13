@@ -164,6 +164,24 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesCategVente", lesCategVentes);
             this.getServletContext().getRequestDispatcher("/vues/VenteAjouter.jsp" ).forward( request, response );
         }
+        
+       /* if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
+        {  
+            Compte compte = (Compte)request.getSession().getAttribute("Compte");
+            if(compte != null){
+                int codeVente = Integer.parseInt(request.getParameter("codeVente"));
+                
+                VenteDAO.SupprimerUneVente(connection,codeVente);
+
+                
+                int codeAcheteur = compte.getUnClient().getId();
+                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                request.setAttribute("pLesChevaux", lesChevaux);
+                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+                
+            }
+        }
+       */
         if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
         {  
             Compte compte = (Compte)request.getSession().getAttribute("Compte");

@@ -202,9 +202,7 @@ public class VenteDAO {
 
            /* Exécution de la requête */
             requete.executeUpdate();
-            
-            
-            
+     
         }   
         catch (SQLException e) 
         {
@@ -213,7 +211,24 @@ public class VenteDAO {
         }
         return uneVente ;    
     }
+    
+    public static void  SupprimerUneVente(Connection connection,int codeVente){      
+      
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("UPDATE vente SET archiver = 1 WHERE vente.id = ?");
+            requete.setInt(1, codeVente);
+            //executer la requete
+            requete.executeUpdate();    
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        
+        
+    } 
+    
+    
 }
-
-    
-    

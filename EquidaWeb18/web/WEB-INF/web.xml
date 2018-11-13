@@ -80,6 +80,11 @@
         <url-pattern>/ServletVentes/SupprimerMesChevaux</url-pattern>
     </servlet-mapping>
     
+     <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/SupprimerUneVente</url-pattern>
+    </servlet-mapping>
+    
     <!--Servlet ajouter-->
     
     <servlet-mapping>
