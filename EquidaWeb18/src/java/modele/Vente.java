@@ -25,7 +25,7 @@ public class Vente {
 
     public Vente() {
     }
-
+    
     public Vente(int id, String nom, String dateDebutVente) {
         this.id = id;
         this.nom = nom;

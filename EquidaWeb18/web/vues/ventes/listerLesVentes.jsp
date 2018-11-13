@@ -70,57 +70,61 @@
                     <tbody>
                         <tr>
                             <%
-                                for (int i = 0; i < lesVentes.size(); i++) {
 
-                                    Vente uneVente = lesVentes.get(i);
-                                    out.println("<tr><td>");
-                                    out.println(uneVente.getId());
-                                    out.println("</a></td>");
+                            for(int i = 0; i < lesVentes.size();i++)
+                            {
 
-                                    out.println("<td>");
-                                    out.println(uneVente.getNom());
-                                    out.println("</td>");
 
-                                    out.println("<td>");
-                                    out.println(uneVente.getDateDebutVente());
-                                    out.println("</td>");
+                                Vente uneVente = lesVentes.get(i);
+                                out.println("<tr><td>");
+                                out.println(uneVente.getId());
+                                out.println("</a></td>");
 
-                                    out.println("<td>");
-                                    out.println(uneVente.getDateFinVente());
-                                    out.println("</td>");
+                                out.println("<td>");
+                                out.println(uneVente.getNom());
+                                out.println("</td>");
+                                                          
+                                out.println("<td>");
+                                out.println(uneVente.getDateDebutVente());
+                                out.println("</td>");
+                           
+                                out.println("<td>");
+                                out.println(uneVente.getDateFinVente());
+                                out.println("</td>");
+                         
+                                out.println("<td>");
+                                out.println(uneVente.getdateDebutInscrip());
+                                out.println("</td>");
+                     
+                                out.println("<td>");
+                                out.println(uneVente.getUnLieu().getVille() );
+                                out.println("</td>");
 
-                                    out.println("<td>");
-                                    out.println(uneVente.getdateDebutInscrip());
-                                    out.println("</td>");
+                                out.println("<td>");
+                                out.println(uneVente.getUneCategVente().getLibelle());
+                                out.println("</td>");
+                           
 
-                                    out.println("<td>");
-                                    out.println(uneVente.getUnLieu().getVille());
-                                    out.println("</td>");
+                                out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat="+ uneVente.getUneCategVente().getCode()+ "'>");
+                                out.println("Lister les clients interessés");
+                                out.println("</td>");
 
-                                    out.println("<td>");
-                                    out.println(uneVente.getUneCategVente().getLibelle());
-                                    out.println("</td>");
+                                out.println("<td><a href ='../ServletVentes/listerLesCourriel?codeVente="+ uneVente.getId()+ "'>");
+                                out.println("Lister les Couriels envoyés");
+                                out.println("</td>");      
+                           
+                                out.println("<td><a href ='../ServletVentes/listerLesChevaux?codeVente="+ uneVente.getId()+ "'>");
+                                out.println("Lister les Chevaux");
+                                out.println("</td>");
+                           
+                                 out.println("<td>");
+                                 out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerUneVente?codeVente="+ uneVente.getId()+ "'><i class=\"material-icons\">delete</i></a>");
+                                 out.println("</td>");
 
-                                    out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat=" + uneVente.getUneCategVente().getCode() + "'>");
-                                    out.println("Lister les clients interessés");
-                                    out.println("</td>");
-
-                                    out.println("<td><a href ='../ServletVentes/listerLesChevaux?codeVente=" + uneVente.getId() + "'>");
-                                    out.println("Catalogue");
-                                    out.println("</td>");
-                                    
-                                    out.println("<td><a href ='../ServletVentes/AjouterChevalVente?codeVente=" + uneVente.getId() + "'>");
-                                    out.println("Ahouter un cheval");
-                                    out.println("</td>");
-                                    
-                                    out.println("<td>");
-                                    out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerUneVente?codeVente=" + uneVente.getId() + "'><i class=\"material-icons\">delete</i></a>");
-                                    out.println("</td>");
-
-                                    out.println("<td>");
-                                    out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">create</i></a>");
-                                    out.println("</td>");
-                                }
+                                 out.println("<td>");
+                                 out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">create</i></a>");
+                                 out.println("</td>");
+                            }
                             %>
                         </tr>
                     </tbody>

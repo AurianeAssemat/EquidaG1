@@ -182,10 +182,34 @@ public class VenteDAO {
             /* Exécution de la requête */
             requete.executeUpdate();
 
-        } catch (SQLException e) {
+     
+        }   
+        catch (SQLException e) 
+        {
+
             e.printStackTrace();
             //out.println("Erreur lors de l’établissement de la connexion");
         }
         return uneVente;
     }
+    
+
+    public static void  SupprimerUneVente(Connection connection,int codeVente){      
+      
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("UPDATE vente SET archiver = 1 WHERE vente.id = ?");
+            requete.setInt(1, codeVente);
+            //executer la requete
+            requete.executeUpdate();    
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        
+        
+    } 
+   
 }
