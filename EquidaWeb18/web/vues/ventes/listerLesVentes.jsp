@@ -22,8 +22,8 @@
         <div class="container">
             <div class="row">
                 <%
-               ArrayList<Vente> lesVentes = (ArrayList)request.getAttribute("pLesVentes");
-               ArrayList<CategVente> lesCategVentes = (ArrayList)request.getAttribute("pLesCategVentes");
+                    ArrayList<Vente> lesVentes = (ArrayList) request.getAttribute("pLesVentes");
+                    ArrayList<CategVente> lesCategVentes = (ArrayList) request.getAttribute("pLesCategVentes");
                 %>
 
                 <form class="form-inline" action="listerLesVentes" method="GET">
@@ -31,14 +31,13 @@
                         <select name="codeCat" size="1">
                             <option value="">Toutes les ventes</option>
                             <%
-                            for(int i = 0; i < lesCategVentes.size();i++)
-                            {
-                                CategVente uneCategVente = lesCategVentes.get(i);
-                                out.print("<option value='");
-                                out.print(uneCategVente.getCode());
-                                out.print("'>");
-                                out.print(uneCategVente.getLibelle());
-                            }
+                                for (int i = 0; i < lesCategVentes.size(); i++) {
+                                    CategVente uneCategVente = lesCategVentes.get(i);
+                                    out.print("<option value='");
+                                    out.print(uneCategVente.getCode());
+                                    out.print("'>");
+                                    out.print(uneCategVente.getLibelle());
+                                }
                             %>
                         </select>
                         <label for="codeCat">Categorie : </label>
@@ -71,6 +70,7 @@
                     <tbody>
                         <tr>
                             <%
+
                             for(int i = 0; i < lesVentes.size();i++)
                             {
 
