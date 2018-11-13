@@ -4,8 +4,6 @@
     Author     : Zakina
 --%>
 
-<%@page import="java.time.LocalDate"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="modele.Vente"%>
 <%@page import="modele.Compte"%>
 <%@page import="java.util.ArrayList"%>
@@ -55,7 +53,7 @@
                     <%
                     boolean venteApresDateJour = false ;
                         
-                    for(int i=0; i<lesVentes.size(); i++){
+                    /*for(int i=0; i<lesVentes.size(); i++){
                         Vente uneVente = lesVentes.get(i);
                         //Date temp = new Date();
                         LocalDate dateJourld = java.time.LocalDate.now();
@@ -90,7 +88,7 @@
                             //s'il y a une vente pas afficher "pas de vente prévus"
                             venteApresDateJour = true ;
                         }
-                    }
+                    }*/
                     //Pas de Vente prévus
                     if (venteApresDateJour == false)
                     {

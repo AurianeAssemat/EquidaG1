@@ -27,7 +27,7 @@ public class TypeChevalDAO {
         ArrayList<TypeCheval> lesTypeChevaux = new ArrayList<TypeCheval>();
         try {
 
-            requete = connection.prepareStatement("select * from TypeCheval");
+            requete = connection.prepareStatement("select * from typecheval");
             //executer la requete
             rs = requete.executeQuery();
 
