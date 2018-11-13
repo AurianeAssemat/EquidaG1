@@ -47,7 +47,6 @@ public class EnchereDAO {
                 Enchere uneEnchere = new Enchere();
                 
                 uneEnchere.setNumero(rs.getInt("id"));
-                uneEnchere.setNumero(rs.getInt("numero"));
                 uneEnchere.setMontant(rs.getInt("montant"));
 
                 Lot unLot = new Lot();

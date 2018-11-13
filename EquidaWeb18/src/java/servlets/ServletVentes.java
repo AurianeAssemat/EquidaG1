@@ -248,6 +248,15 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesTypeCheval", lesTypeCheval);
             this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp").forward(request, response);
         }
+        
+        if (url.equals("/EquidaWeb18/ServletVentes/listerLesChevaux")) {
+            System.out.println("LISTER LES CHEVAUX");
+            String idVente = (String) request.getParameter("codeVente");
+
+            ArrayList<Lot> lesLots = LotDAO.getLesLots(connection, idVente);
+            request.setAttribute("pLesLots", lesLots);
+            getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
+        }
 
         if (url.equals("/EquidaWeb18/ServletVentes/listerLesEncheres")) {
             System.out.println("LISTER LES ENCHERES");
@@ -255,7 +264,7 @@ public class ServletVentes extends HttpServlet {
             String idVente = (String) request.getParameter("idVente");
 
             ArrayList<Enchere> lesEncheres = EnchereDAO.getLesEncheres(connection, idLot, idVente);
-             request.setAttribute("size", lesEncheres.size());
+            request.setAttribute("size", lesEncheres.size());
             request.setAttribute("pLesEncheres", lesEncheres);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesEncheres.jsp").forward(request, response);
         }
