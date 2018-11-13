@@ -14,13 +14,13 @@
     </head>
     <body>
         <h1>Infos client</h1>
-        
-         <%
-        Client unClient = (Client)request.getAttribute("pClient");
+
+        <%
+       Client unClient = (Client)request.getAttribute("pClient");
         %>
-        
-        
-         <table class="table table-bordered table-striped table-condensed">
+
+
+        <table class="table table-bordered table-striped table-condensed">
             <tr><td>NOM :</td><td><% out.println(unClient.getNom());%></td></tr>
             <tr><td>PRENOM :</td><td><%  out.println(unClient.getPrenom());%></td>  </tr>
             <tr><td>CIVILITE :</td><td><%  out.println(unClient.getTitre());%></td>  </tr>
@@ -30,13 +30,13 @@
             <tr><td>MAIL :</td><td><%  out.println(unClient.getMail());%></td>  </tr>
             <tr><td>PAYS :</td><td><%  out.println(unClient.getUnPays().getCode());%></td>  </tr>
             <tr><td> Catégories selectionnées</td><td>
-          <% for (int i=0; i<unClient.getLesCategVentes().size(); i++){
-               out.println(unClient.getLesCategVentes().get(i).getCode() + "</br>");
+                    <% for (int i=0; i<unClient.getLesCategVentes().size(); i++){
+                         out.println(unClient.getLesCategVentes().get(i).getCode() + "</br>");
              
-          }
-          %>
-              </td></tr>
+                    }
+                    %>
+                </td></tr>
         </table>
-        
+
     </body>
 </html>

@@ -18,36 +18,32 @@ import modele.TypeCheval;
  */
 public class TypeChevalDAO {
 
-    Connection connection=null;
-    static PreparedStatement requete=null;
-    static ResultSet rs=null;
-    
+    Connection connection = null;
+    static PreparedStatement requete = null;
+    static ResultSet rs = null;
 
-     public static ArrayList<TypeCheval>  getLesTypeChevaux(Connection connection){      
+    public static ArrayList<TypeCheval> getLesTypeChevaux(Connection connection) {
 
-        ArrayList<TypeCheval> lesTypeChevaux = new  ArrayList<TypeCheval>();
-        try
-        {
+        ArrayList<TypeCheval> lesTypeChevaux = new ArrayList<TypeCheval>();
+        try {
 
-            requete=connection.prepareStatement("select * from TypeCheval");
+            requete = connection.prepareStatement("select * from TypeCheval");
             //executer la requete
-            rs=requete.executeQuery();
-            
-            while ( rs.next() ) {  
-                
+            rs = requete.executeQuery();
+
+            while (rs.next()) {
+
                 TypeCheval unTypeCheval = new TypeCheval();
                 unTypeCheval.setId(rs.getString("id"));
                 unTypeCheval.setLibelle(rs.getString("libelle"));
                 unTypeCheval.setDescription(rs.getString("description"));
 
                 lesTypeChevaux.add(unTypeCheval);
-                
+
             }
-        }    
-        catch (SQLException e) 
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return lesTypeChevaux ;    
-    } 
+        return lesTypeChevaux;
+    }
 }

@@ -12,16 +12,17 @@ import java.util.ArrayList;
  * @author Zakina
  */
 public class Vente {
+
     private int id;
     private String nom;
     private String dateDebutVente;
     private CategVente uneCategVente;
     private Lieu unLieu;
-    private ArrayList<Courriel> lesCourriels ;
-    private ArrayList<Lot> lesLots ;
+    private ArrayList<Courriel> lesCourriels;
+    private ArrayList<Lot> lesLots;
     private String dateFinVente;
     private String dateDebutInscrip;
-    
+
     public Vente() {
     }
 
@@ -78,29 +79,29 @@ public class Vente {
     public void setLesCourriels(ArrayList<Courriel> lesCourriels) {
         this.lesCourriels = lesCourriels;
     }
-    
-    public void addUnCourriel(Courriel unCourriel){
-        if (lesCourriels == null){
+
+    public void addUnCourriel(Courriel unCourriel) {
+        if (lesCourriels == null) {
             lesCourriels = new ArrayList<Courriel>();
         }
         lesCourriels.add(unCourriel);
     }
 
-        public ArrayList<Lot> getLesLots() {
+    public ArrayList<Lot> getLesLots() {
         return lesLots;
     }
 
     public void setLesLots(ArrayList<Lot> lesLots) {
         this.lesLots = lesLots;
     }
-    
-    public void addUnLot(Lot unLot){
-        if (lesLots == null){
+
+    public void addUnLot(Lot unLot) {
+        if (lesLots == null) {
             lesLots = new ArrayList<Lot>();
         }
         lesLots.add(unLot);
     }
-    
+
     public String getDateFinVente() {
         return dateFinVente;
     }
@@ -116,6 +117,5 @@ public class Vente {
     public void setdateDebutInscrip(String dateDebutInscrip) {
         this.dateDebutInscrip = dateDebutInscrip;
     }
-    
-}
 
+}

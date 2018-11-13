@@ -5,19 +5,17 @@
  */
 package modele;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author slam
  */
 public class Lot {
-    private int id;
-    private float prixDepart ;
-    private Cheval cheval;
-    private Vendeur unVendeur ;
-    private Vente uneVente;
 
+    private int id;
+    private float prixDepart;
+    private Cheval cheval;
+    private Vendeur unVendeur;
+    private Vente uneVente;
 
     public Lot() {
     }
@@ -68,5 +66,4 @@ public class Lot {
         this.uneVente = uneVente;
     }
 
-    
 }

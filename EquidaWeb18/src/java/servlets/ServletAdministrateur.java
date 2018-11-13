@@ -5,14 +5,12 @@
  */
 package servlets;
 
-import database.ChevauxDAO;
 import database.CategVenteDAO;
-import database.TypeChevalDAO;
 import database.CourseDAO;
-import database.Utilitaire;
 import database.LieuDAO;
 import database.PaysDAO;
-
+import database.TypeChevalDAO;
+import database.Utilitaire;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -22,29 +20,25 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import modele.CategVente;
-import modele.TypeCheval;
 import modele.Course;
 import modele.Lieu;
 import modele.Pays;
+import modele.TypeCheval;
 
 /*
-   * Document   : ServletAdministrateur
-   * Created on : 06/11, 14:44:27
-   * Author     : Coco
-*/
-
+ * Document   : ServletAdministrateur
+ * Created on : 06/11, 14:44:27
+ * Author     : Coco
+ */
 public class ServletAdministrateur extends HttpServlet {
-    
-    Connection connection ;
-      
-        
+
+    Connection connection;
+
     @Override
-    public void init()
-    {     
-        ServletContext servletContext=getServletContext();
-        connection=(Connection)servletContext.getAttribute("connection");
+    public void init() {
+        ServletContext servletContext = getServletContext();
+        connection = (Connection) servletContext.getAttribute("connection");
     }
 
     /**
@@ -64,7 +58,7 @@ public class ServletAdministrateur extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletClient</title>");            
+            out.println("<title>Servlet ServletClient</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServletClient at " + request.getContextPath() + "</h1>");
@@ -73,115 +67,92 @@ public class ServletAdministrateur extends HttpServlet {
         }
     }
 
-
-        
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
-       String url = request.getRequestURI();
-       
-       //Les servlets "Ajouter"
-            
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/categVenteAjouter"))
-        {                   
+
+        String url = request.getRequestURI();
+
+        //Les servlets "Ajouter"
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/categVenteAjouter")) {
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
             request.setAttribute("pLesCategVentes", lesCategVentes);
-            this.getServletContext().getRequestDispatcher("/vues/categVenteAjouter.jsp" ).forward( request, response );
+            this.getServletContext().getRequestDispatcher("/vues/categVenteAjouter.jsp").forward(request, response);
         }
-         
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter"))
-        {  
+
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter")) {
             ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
             request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
             getServletContext().getRequestDispatcher("/vues/typeChevalAjouter.jsp").forward(request, response);
         }
-       
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter"))
-        {     
+
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter")) {
             ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
             request.setAttribute("pLesCourses", lesCourses);
             getServletContext().getRequestDispatcher("/vues/courseAjouter.jsp").forward(request, response);
         }
-       
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/lieuAjouter"))
-        {   
+
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/lieuAjouter")) {
             ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
             request.setAttribute("pLeslieux", lesLieux);
             getServletContext().getRequestDispatcher("/vues/lieuAjouter.jsp").forward(request, response);
         }
-        
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/paysAjouter"))
-        {   
+
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/paysAjouter")) {
             ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
             request.setAttribute("pLesPays", lesPays);
             getServletContext().getRequestDispatcher("/vues/paysAjouter.jsp").forward(request, response);
         }
-       
+
         //Les servlets "Lister"
-        
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval"))
-        {  
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval")) {
             ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
             request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
             getServletContext().getRequestDispatcher("/vues/params/listerParamTypeCheval.jsp").forward(request, response);
         }
-       
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCourse"))
-        {     
+
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCourse")) {
             ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
             request.setAttribute("pLesCourses", lesCourses);
             getServletContext().getRequestDispatcher("/vues/params/listerParamCourse.jsp").forward(request, response);
         }
-       
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamLieu"))
-        {    
+
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamLieu")) {
             ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
             request.setAttribute("pLesLieux", lesLieux);
             getServletContext().getRequestDispatcher("/vues/params/listerParamLieu.jsp").forward(request, response);
-        } 
-        
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCategVente"))
-        {   
+        }
+
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCategVente")) {
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
             request.setAttribute("pLesCategVentes", lesCategVentes);
-            this.getServletContext().getRequestDispatcher("/vues/params/listerParamCategVente.jsp" ).forward( request, response );
+            this.getServletContext().getRequestDispatcher("/vues/params/listerParamCategVente.jsp").forward(request, response);
         }
-        
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/listerParamPays"))
-        {   
+
+        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamPays")) {
             ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
             request.setAttribute("pLesPays", lesPays);
             getServletContext().getRequestDispatcher("/vues/params/listerParamPays.jsp").forward(request, response);
         }
-        
+
     }
-    
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    
     public String getServletInfo() {
         return "Short description";
     }
-    
-    
- public void destroy(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
-    {
-        try
-        {
+
+    public void destroy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
             //fermeture
             System.out.println("Connexion fermée");
-        }
-        catch (Exception e) 
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Erreur lors de l’établissement de la connexion");
-        }
-        finally
-        {
+        } finally {
             //Utilitaire.fermerConnexion(rs);
             //Utilitaire.fermerConnexion(requete);
             Utilitaire.fermerConnexion(connection);

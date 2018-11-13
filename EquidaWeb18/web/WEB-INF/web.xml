@@ -24,7 +24,7 @@
         <listener-class>database.InitConnexion</listener-class>
     </listener>
     
-<!--Servlet vente-->  
+    <!--Servlet vente-->  
   
     <servlet>
         <servlet-name>ServletVentes</servlet-name>
@@ -87,7 +87,7 @@
         <url-pattern>/ServletVentes/chevalAjouter</url-pattern>
     </servlet-mapping>
     
-<!--Servlet client --> 
+    <!--Servlet client --> 
        
     <servlet>
         <servlet-name>ServletClient</servlet-name>
@@ -124,7 +124,7 @@
         <url-pattern>/ServletClient/clientModif</url-pattern>
     </servlet-mapping>
     
-<!--Servlet accueil -->    
+    <!--Servlet accueil -->    
 
     <servlet>
         <servlet-name>ServletAccueil</servlet-name>
@@ -155,7 +155,7 @@
         <url-pattern>/ServletAccueil/Profil</url-pattern>
     </servlet-mapping>
           
-<!--Servlet administrateur-->   
+    <!--Servlet administrateur-->   
        
     <servlet>
         <servlet-name>ServletAdministrateur</servlet-name>
@@ -229,4 +229,4 @@
             30
         </session-timeout>
     </session-config>
-    </web-app>
+</web-app>

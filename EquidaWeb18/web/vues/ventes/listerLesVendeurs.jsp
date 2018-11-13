@@ -13,11 +13,11 @@
     <jsp:include page="/vues/Header.jsp" >
         <jsp:param name="NomPage" value="Liste des vendeurs" />
     </jsp:include>
-    
+
     <body>
-        
+
         <jsp:include page="/vues/MenuNavigation.jsp" />
-        
+
         <div class="container">
             <%
             ArrayList<Vendeur> lesVendeurs = (ArrayList)request.getAttribute("pLesVendeurs");
@@ -31,9 +31,9 @@
                         <th>Pays</th>
                         <th>Code Postal</th> 
                         <th>E-mail</th> 
-                        <br>
-                        <br>
-                    </tr>
+                <br>
+                <br>
+                </tr>
                 </thead>
                 <tbody>
                     <tr>
@@ -71,6 +71,6 @@
                 </tbody>
             </table>
         </div>
-        
+
     </body>
 </html>

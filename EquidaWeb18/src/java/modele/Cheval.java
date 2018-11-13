@@ -12,17 +12,18 @@ import java.util.ArrayList;
  * @author slam
  */
 public class Cheval {
+
     private int id;
-    private String nom ;
+    private String nom;
     private String sexe;
-    private String sire ;
+    private String sire;
     private Cheval pere;
     private Cheval mere;
     private TypeCheval typeCheval;
-    private ArrayList<Participer> lesParticipation ;
-    private ArrayList<Lot> lesLot ;
+    private ArrayList<Participer> lesParticipation;
+    private ArrayList<Lot> lesLot;
     private Client proprietaire;
-    
+
     public Cheval() {
     }
 
@@ -35,8 +36,6 @@ public class Cheval {
         this.mere = mere;
         this.typeCheval = typeCheval;
     }
-
-    
 
     public int getId() {
         return id;
@@ -101,22 +100,24 @@ public class Cheval {
     public void setLesParticipation(ArrayList<Participer> lesParticipation) {
         this.lesParticipation = lesParticipation;
     }
-    
-    public void addUneParticipation(Participer uneParticipation){
-        if (lesParticipation == null){
+
+    public void addUneParticipation(Participer uneParticipation) {
+        if (lesParticipation == null) {
             lesParticipation = new ArrayList<Participer>();
         }
         lesParticipation.add(uneParticipation);
     }
-     public ArrayList<Lot> getLesLot() {
+
+    public ArrayList<Lot> getLesLot() {
         return lesLot;
     }
 
     public void setLesLot(ArrayList<Lot> lesLot) {
         this.lesLot = lesLot;
     }
-    public void addUnLot(Lot unLot){
-        if (lesLot == null){
+
+    public void addUnLot(Lot unLot) {
+        if (lesLot == null) {
             lesLot = new ArrayList<Lot>();
         }
         lesLot.add(unLot);
