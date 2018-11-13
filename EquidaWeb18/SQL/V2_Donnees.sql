@@ -358,13 +358,13 @@ INSERT INTO `typecheval` (`id`, `libelle`, `description`) VALUES
 (6, 'Yearling', 'pur-sang anglais âgé d’un an');
 
 INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`) VALUES
-(1, 'Houri', 'M', '', NULL, NULL, 5),
-(2, 'Hussa', 'F', '', NULL, NULL, 5),
-(3, 'Valdack', 'M', '', 1, NULL, 5),
-(4, 'Trais d\'or', 'M', '', NULL, NULL, 6),
-(5, 'Herricka', 'F', '0808.000.020Z', 1, 2, 5),
-(6, 'Nuage', 'M', '', NULL, NULL, 6),
-(7, 'Desperado', 'M', '', NULL, NULL, 6);
+(1, 'Houri', 'M', '0808.185.585Z', NULL, NULL, 5),
+(2, 'Hussa', 'F', '0808.542.250Z', NULL, NULL, 5),
+(3, 'Valdack', 'M', '0808.158.285Z', 1, 2, 5),
+(4, 'Trais d\'or', 'M', '0808.000.554Z', 1, 2, 6),
+(5, 'Herricka', 'F', '0808.201.855Z', 1, 2, 5),
+(6, 'Nuage', 'M', '0808.980.128Z', 1, 2, 6),
+(7, 'Desperado', 'M', '0808.180.529Z', 1, 2, 6);
 
 INSERT INTO `lieu` (`id`, `ville`, `nbBoxes`, `commentaire`) VALUES
 (4, 'Paris', 40, ''),

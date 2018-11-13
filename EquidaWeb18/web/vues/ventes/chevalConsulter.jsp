@@ -36,6 +36,7 @@
                             <%
                             if(unCheval.getMere() != null){
                             out.println("<td>");
+                            out.println("<a href ='../ServletVentes/chevalConsulter?id="+ unCheval.getMere().getId() +"'>");
                             out.println(unCheval.getMere().getNom());
                             out.println("</td>");
                             
@@ -51,6 +52,7 @@
                 </td> 
             <tr><td>PERE :<% if(unCheval.getPere() != null){
                             out.println("<td>");
+                            out.println("<a href ='../ServletVentes/chevalConsulter?id="+ unCheval.getPere().getId() +"'>");
                             out.println(unCheval.getPere().getNom());
                             out.println("</td>");
 
