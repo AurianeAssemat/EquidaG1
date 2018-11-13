@@ -5,18 +5,17 @@
  */
 package modele;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author slam
  */
 public class Participer {
+
     private int id;
     private int place;
-    private Cheval unCheval ;
+    private Cheval unCheval;
     private Course uneCourse;
-    
+
     public Participer() {
     }
 
@@ -59,5 +58,4 @@ public class Participer {
         this.uneCourse = uneCourse;
     }
 
-    
 }

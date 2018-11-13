@@ -5,14 +5,14 @@ package modele;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Zakina
  */
 public class CategVente {
+
     private String code;
-    private String libelle ;
+    private String libelle;
 
     public CategVente() {
     }
@@ -37,6 +37,5 @@ public class CategVente {
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-    
-    
+
 }

@@ -24,7 +24,7 @@
         <listener-class>database.InitConnexion</listener-class>
     </listener>
     
-<!--Servlet vente-->  
+    <!--Servlet vente-->  
   
     <servlet>
         <servlet-name>ServletVentes</servlet-name>
@@ -92,7 +92,7 @@
         <url-pattern>/ServletVentes/chevalAjouter</url-pattern>
     </servlet-mapping>
     
-<!--Servlet client --> 
+    <!--Servlet client --> 
        
     <servlet>
         <servlet-name>ServletClient</servlet-name>
@@ -129,7 +129,7 @@
         <url-pattern>/ServletClient/clientModif</url-pattern>
     </servlet-mapping>
     
-<!--Servlet accueil -->    
+    <!--Servlet accueil -->    
 
     <servlet>
         <servlet-name>ServletAccueil</servlet-name>
@@ -139,6 +139,14 @@
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/ajouterVente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/creerMail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/envoyerMail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
@@ -160,7 +168,7 @@
         <url-pattern>/ServletAccueil/Profil</url-pattern>
     </servlet-mapping>
           
-<!--Servlet administrateur-->   
+    <!--Servlet administrateur-->   
        
     <servlet>
         <servlet-name>ServletAdministrateur</servlet-name>
@@ -226,6 +234,10 @@
         <url-pattern>/ServletAdministrateur/PaysAjouter</url-pattern>
     </servlet-mapping>
        
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/chevalConsulter</url-pattern>
+    </servlet-mapping>
 
     
     
@@ -234,4 +246,4 @@
             30
         </session-timeout>
     </session-config>
-    </web-app>
+</web-app>
