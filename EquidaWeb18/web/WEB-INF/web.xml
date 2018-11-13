@@ -221,6 +221,10 @@
         <url-pattern>/ServletAdministrateur/PaysAjouter</url-pattern>
     </servlet-mapping>
        
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/chevalConsulter</url-pattern>
+    </servlet-mapping>
 
     
     

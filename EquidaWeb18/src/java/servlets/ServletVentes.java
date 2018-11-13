@@ -174,6 +174,18 @@ public class ServletVentes extends HttpServlet {
                 getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
             }
         }
+        if(url.equals("/EquidaWeb18/ServletVentes/chevalConsulter"))
+        {                   
+            ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
+           request.setAttribute("pLesTypeCheval", lesTypeCheval); 
+           
+           int codeCheval = Integer.parseInt(request.getParameter("id"));
+           System.out.println("code "+codeCheval);
+           Cheval unCheval = ChevauxDAO.getUnCheval(connection, codeCheval );
+           unCheval.setId(codeCheval);
+           request.setAttribute("pCheval", unCheval);
+            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalConsulter.jsp" ).forward( request, response );
+        }
          
         if(url.equals("/EquidaWeb18/ServletVentes/SupprimerMesChevaux"))
         {  

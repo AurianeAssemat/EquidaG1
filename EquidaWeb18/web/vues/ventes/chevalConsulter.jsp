@@ -26,8 +26,10 @@
             <tr><td>SIRE :</td><td><%  out.println(unCheval.getSire());%></td>  </tr>
             <tr><td>SEXE :</td><td><%  out.println(unCheval.getSexe());%></td>  </tr>
             <tr><td>TYPE SELECTIONEES :</td><td><%  out.println(unCheval.getTypeCheval().getLibelle());%></td>  </tr>
-            <tr><td>MERE :</td><td><%  out.println(unCheval.getMere());%></td>  </tr>
-            <tr><td>PERE :</td><td><%  out.println(unCheval.getPere());%></td>  </tr>
+            <tr><td>MERE :</td><td><%  out.println(unCheval.getMere().getNom());%></td>  
+            <td>SIRE :</td><td><%  out.println(unCheval.getMere().getSire());%></td>  </tr>
+            <tr><td>PERE :</td><td><%  out.println(unCheval.getPere().getNom());%></td>  
+            <td>SIRE :</td><td><%  out.println(unCheval.getPere().getSire());%></td>  </tr>
             
               </td></tr>
         </table>
