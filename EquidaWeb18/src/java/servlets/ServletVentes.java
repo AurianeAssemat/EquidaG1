@@ -160,6 +160,26 @@ public class ServletVentes extends HttpServlet {
             
            getServletContext().getRequestDispatcher("/vues/ventes/creerMail.jsp").forward(request, response);
         }
+
+        
+       /* if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
+        {  
+            Compte compte = (Compte)request.getSession().getAttribute("Compte");
+            if(compte != null){
+                int codeVente = Integer.parseInt(request.getParameter("codeVente"));
+                
+                VenteDAO.SupprimerUneVente(connection,codeVente);
+
+                
+                int codeAcheteur = compte.getUnClient().getId();
+                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                request.setAttribute("pLesChevaux", lesChevaux);
+                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+                
+            }
+        }
+       */
+
         if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
         {  
            
@@ -176,7 +196,7 @@ public class ServletVentes extends HttpServlet {
            
            getServletContext().getRequestDispatcher("/vues/ventes/envoyerMail.jsp").forward(request, response);
         }
-        
+
         if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
         {  
             Compte compte = (Compte)request.getSession().getAttribute("Compte");
@@ -235,6 +255,7 @@ public class ServletVentes extends HttpServlet {
             String idVente = (String) request.getParameter("idVente");
 
             ArrayList<Enchere> lesEncheres = EnchereDAO.getLesEncheres(connection, idLot, idVente);
+             request.setAttribute("size", lesEncheres.size());
             request.setAttribute("pLesEncheres", lesEncheres);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesEncheres.jsp").forward(request, response);
         }

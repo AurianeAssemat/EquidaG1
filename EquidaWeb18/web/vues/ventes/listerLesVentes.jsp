@@ -74,6 +74,7 @@
                             for(int i = 0; i < lesVentes.size();i++)
                             {
 
+
                                 Vente uneVente = lesVentes.get(i);
                                 out.println("<tr><td>");
                                 out.println(uneVente.getId());

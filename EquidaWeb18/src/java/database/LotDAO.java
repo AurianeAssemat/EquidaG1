@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modele.Cheval;
 import modele.Course;
+import modele.Vente;
 import modele.Lot;
 import modele.Participer;
 import modele.TypeCheval;
@@ -119,7 +120,11 @@ public class LotDAO {
                 }
 
                 unLot.setCheval(unCheval);
-
+                
+                Vente uneVente = new Vente();
+                uneVente.setId(Integer.parseInt(codevente));
+                unLot.setUneVente(uneVente);
+                
                 lesLots.add(unLot);
             }
         } catch (SQLException e) {
