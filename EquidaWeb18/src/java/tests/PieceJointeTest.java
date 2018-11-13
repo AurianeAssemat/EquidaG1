@@ -5,20 +5,20 @@
  */
 package tests;
 
-import modele.PieceJointe;
 import modele.Courriel;
+import modele.PieceJointe;
 
 /**
  *
  * @author slam
  */
 public class PieceJointeTest {
+
     public static void main(String[] args) {
-        
+
         PieceJointe unePieceJointe = new PieceJointe(1, "test/image.png", "une description");
-        unePieceJointe.addUnCourriel(new Courriel(1, "05/09/2018", "un Objet","Un coirps"));     
+        unePieceJointe.addUnCourriel(new Courriel(1, "05/09/2018", "un Objet", "Un coirps"));
         System.out.println(unePieceJointe.getChemin() + "  " + unePieceJointe.getDescription());
-        
-        
+
     }
 }

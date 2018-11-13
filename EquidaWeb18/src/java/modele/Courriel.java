@@ -12,13 +12,14 @@ import java.util.ArrayList;
  * @author slam
  */
 public class Courriel {
+
     private int id;
-    private String date ;
+    private String date;
     private String objet;
-    private String corps ;
+    private String corps;
     private Vente uneVente;
-    private ArrayList<PieceJointe> lesPieceJointes ;
-    
+    private ArrayList<PieceJointe> lesPieceJointes;
+
     public Courriel() {
     }
 
@@ -29,8 +30,6 @@ public class Courriel {
         this.corps = corps;
     }
 
-    
-    
     public int getId() {
         return id;
     }
@@ -78,9 +77,9 @@ public class Courriel {
     public void setLesPieceJointes(ArrayList<PieceJointe> lesPieceJointes) {
         this.lesPieceJointes = lesPieceJointes;
     }
-    
-    public void addUnePieceJointe(PieceJointe unePieceJointe){
-        if (lesPieceJointes == null){
+
+    public void addUnePieceJointe(PieceJointe unePieceJointe) {
+        if (lesPieceJointes == null) {
             lesPieceJointes = new ArrayList<PieceJointe>();
         }
         lesPieceJointes.add(unePieceJointe);

@@ -11,11 +11,11 @@
     <jsp:include page="/vues/Header.jsp" >
         <jsp:param name="NomPage" value="Liste les ventes" />
     </jsp:include>
-    
+
     <body>
-        
+
         <jsp:include page="/vues/MenuNavigation.jsp" />
-        
+
         <div class="container">
             <div class="row">
                 <%
@@ -24,7 +24,7 @@
                 <div class="col s1 offset-s11"> 
                     <a class="btn-floating btn-large waves-effect waves-light red"href='../ServletClient/ajouterClient'><i class="material-icons">add</i></a>
                 </div> 
-                
+
                 <table  class="table table-bordered table-striped table-condensed">  
                     <thead>
                         <tr>             
@@ -38,68 +38,68 @@
                             <th>E-mail</th> 
                     <br>
                     <br>
-                        </tr>
+                    </tr>
                     </thead>
                     <tbody>
 
-                            <%
-                            for(int i = 0; i < lesClients.size();i++)
-                            {
+                        <%
+                        for(int i = 0; i < lesClients.size();i++)
+                        {
 
-                                Client unClient = lesClients.get(i);
+                            Client unClient = lesClients.get(i);
 
-                                out.println("<tr><td>");
-                                out.println(unClient.getNom());
-                                out.println("</td>");
+                            out.println("<tr><td>");
+                            out.println(unClient.getNom());
+                            out.println("</td>");
 
-                                out.println("<td>");
-                                out.println(unClient.getPrenom());
-                                out.println("</td>");
+                            out.println("<td>");
+                            out.println(unClient.getPrenom());
+                            out.println("</td>");
 
-                                out.println("<td>");
-                                if(unClient.getTitre() != null){
-                                    out.println(unClient.getTitre());
-                                }
-                                out.println("</td>");
-                                
-                                out.println("<td>");
-                                if(unClient.getVille() != null){
-                                    out.println(unClient.getVille());
-                                }
-                                out.println("</td>");
-                                           
-                                out.println("<td>");
-                                if(unClient.getRue() != null){
-                                    out.println(unClient.getRue());
-                                }
-                                out.println("</td>");
-
-                                out.println("<td>");
-                                out.println(unClient.getCopos());
-                                out.println("</td>");
-
-                                out.println("<td>");
-                                out.println(unClient.getUnPays().getNom());
-                                out.println("</td>");
-
-                                out.println("<td>");
-                                out.println(unClient.getMail());
-                                out.println("</td>");
-                                
-                                out.println("<td>");
-                               out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">delete</i></a>");
-                               out.println("</td>");
-                               
-                               out.println("<td>");
-                               out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletClient/clientModif?id="+ unClient.getId()+ "'><i class=\"material-icons\">create</i></a>");
-                               out.println("</td></tr>");
-                               
+                            out.println("<td>");
+                            if(unClient.getTitre() != null){
+                                out.println(unClient.getTitre());
                             }
-                            %>
+                            out.println("</td>");
+                                
+                            out.println("<td>");
+                            if(unClient.getVille() != null){
+                                out.println(unClient.getVille());
+                            }
+                            out.println("</td>");
+                                           
+                            out.println("<td>");
+                            if(unClient.getRue() != null){
+                                out.println(unClient.getRue());
+                            }
+                            out.println("</td>");
+
+                            out.println("<td>");
+                            out.println(unClient.getCopos());
+                            out.println("</td>");
+
+                            out.println("<td>");
+                            out.println(unClient.getUnPays().getNom());
+                            out.println("</td>");
+
+                            out.println("<td>");
+                            out.println(unClient.getMail());
+                            out.println("</td>");
+                                
+                            out.println("<td>");
+                           out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">delete</i></a>");
+                           out.println("</td>");
+                               
+                           out.println("<td>");
+                           out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletClient/clientModif?id="+ unClient.getId()+ "'><i class=\"material-icons\">create</i></a>");
+                           out.println("</td></tr>");
+                               
+                        }
+                        %>
                     </tbody>
                 </table>
             </div>
         </div>
->>>>>>> ddcaae51a8de572ced6a690fc840d4b458c986f9
+        >>>>>>> ddcaae51a8de572ced6a690fc840d4b458c986f9
     </body>
 </html>

@@ -5,18 +5,16 @@
  */
 package modele;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author slam
  */
 public class TypeCheval {
+
     private String id;
-    private String libelle ;
+    private String libelle;
     private String description;
 
-    
     public TypeCheval() {
     }
 
@@ -50,5 +48,4 @@ public class TypeCheval {
         this.description = description;
     }
 
-   
 }

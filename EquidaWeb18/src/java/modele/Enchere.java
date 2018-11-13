@@ -10,11 +10,11 @@ package modele;
  * @author Assemat - 19/10/2018
  */
 public class Enchere {
-    
-    private int numero ;
-    private int montant ;
-    private Lot unLot ;
-    private Acheteur unAcheteur ;
+
+    private int numero;
+    private int montant;
+    private Lot unLot;
+    private Acheteur unAcheteur;
 
     public Enchere() {
     }
@@ -55,7 +55,5 @@ public class Enchere {
     public void setUnAcheteur(Acheteur unAcheteur) {
         this.unAcheteur = unAcheteur;
     }
-    
-    
-    
+
 }
