@@ -204,6 +204,7 @@ public class ServletVentes extends HttpServlet {
             String idVente = (String)request.getParameter("idVente");
             
             ArrayList<Enchere> lesEncheres = EnchereDAO.getLesEncheres(connection, idLot, idVente);
+             request.setAttribute("size", lesEncheres.size());
             request.setAttribute("pLesEncheres", lesEncheres);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesEncheres.jsp").forward(request, response);
          }
