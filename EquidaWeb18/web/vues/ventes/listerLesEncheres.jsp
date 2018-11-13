@@ -19,13 +19,13 @@
     </head>
     <body>
         <h1>Liste des enchères</h1>
-        
+
         <%
         ArrayList<Enchere> lesEncheres = (ArrayList)request.getAttribute("pLesEncheres");
         %>
-        
+
         <table  class="table table-bordered table-striped table-condensed">  
-          <thead>
+            <thead>
                 <tr>
                     <th>Cheval</th>
                     <th>N° SIRE</th>>
@@ -33,7 +33,7 @@
                     <th>Mère</th>
             <br>
             <br>
-                </tr>
+            </tr>
             </thead>
             <tbody>
                 <tr>
@@ -59,9 +59,9 @@
                 </tr>
             </tbody>
         </table>
-        
+
         <table  class="table table-bordered table-striped table-condensed">  
-            
+
             <thead>
                 <tr>
                     <th>N°</th>
@@ -70,7 +70,7 @@
                     <th></th>
             <br>
             <br>
-                </tr>
+            </tr>
             </thead>
             <tbody>
                 <tr>
@@ -99,6 +99,6 @@
             </tbody>
         </table>
         <a href ='../ServletVentes/listerLesVentes'> Retour</a>
-        
+
     </body>
 </html>

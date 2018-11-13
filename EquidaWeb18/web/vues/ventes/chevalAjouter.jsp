@@ -11,6 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ajouter un cheval</title>
@@ -23,12 +24,14 @@
         %>
 
     
+
     <jsp:include page="/vues/Header.jsp" >
         <jsp:param name="NomPage" value="Ajouter un cheval" />
     </jsp:include>
-    
+
     <body>
         <jsp:include page="/vues/MenuNavigation.jsp" />
+
         <div class="container">
             <div class="row">
                 <%
@@ -38,21 +41,21 @@
                     for(int i = 0; i < form.getErreurs().size();i++)
                     {
                         out.println(form.getErreurs().get(i) + "<br/>");
+
                     }
-                }
                 %>
                 <form class="form-inline" action="chevalAjouter" method="POST">
-                    
-                    
-                    
+
+
+
                     <div class="row">
                         <div class="input-field col s12">
                             <input placeholder="Nom" id="nom" name="nom" type="text" class="validate">
                             <label for="nom">Nom</label>
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="row">    
                         <div class="input-field col s1">                 
                             <input id="choice_1" name="sexe" value="M" type="radio" checked/>   
@@ -69,7 +72,7 @@
                             <label for="sire">Sire</label>
                         </div>
                     </div>
-                    
+
                     <div class="row">    
                         <div class="input-field col s6">
                             <input placeholder="Sire du père" id="sirepere" name="sirepere" type="text" class="validate">
@@ -80,21 +83,24 @@
                             <label for="siremere">Sire de la mère</label>
                         </div>
                     </div>   
-                    
+
                     <div class="row">  
                         <div class="input-field col s12">
                             <select id='typ_id' name="typ_id">
                                 <option value="" disabled selected>Choose your option</option>
                                 <%
-                                    ArrayList<TypeCheval> lesTypeCheval = (ArrayList)request.getAttribute("pLesTypeCheval");
-                                    for (int i=0; i<lesTypeCheval.size();i++){
+                                    ArrayList<TypeCheval> lesTypeCheval = (ArrayList) request.getAttribute("pLesTypeCheval");
+                                    for (int i = 0; i < lesTypeCheval.size(); i++) {
                                         TypeCheval tc = lesTypeCheval.get(i);
-                                        out.println("<option value ='" + tc.getId() + "'>" + tc.getLibelle() + "</option>"); 
+                                        out.println("<option value ='" + tc.getId() + "'>" + tc.getLibelle() + "</option>");
 
                                     }
                                 %>
+
                                 <input type="submit" name="valider" id="valider" value="Valider"/>
                                 
+
+
                             </select>
                             <label>Type de cheval :</label>
                         </div>

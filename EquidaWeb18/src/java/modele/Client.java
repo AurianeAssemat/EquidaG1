@@ -12,17 +12,17 @@ import java.util.ArrayList;
  * @author Zakina
  */
 public class Client {
-    
+
     private int id;
     private String nom;
-    private String prenom ;
+    private String prenom;
     private String rue;
-    private String copos ;
+    private String copos;
     private String ville;
     private String mail;
     private String titre;
-    private Pays unPays ;
-    private ArrayList<CategVente> lesCategVentes ;
+    private Pays unPays;
+    private ArrayList<CategVente> lesCategVentes;
 
     public Client() {
     }
@@ -46,8 +46,6 @@ public class Client {
         this.mail = mail;
         this.titre = titre;
     }
-    
-    
 
     public String getTitre() {
         return titre;
@@ -112,7 +110,7 @@ public class Client {
     public void setMail(String mail) {
         this.mail = mail;
     }
-    
+
     public Pays getUnPays() {
         return unPays;
     }
@@ -128,9 +126,9 @@ public class Client {
     public void setLesCategVentes(ArrayList<CategVente> lesCategVentes) {
         this.lesCategVentes = lesCategVentes;
     }
-          
-    public void addUneCategVente(CategVente uneCategVente){
-        if (lesCategVentes == null){
+
+    public void addUneCategVente(CategVente uneCategVente) {
+        if (lesCategVentes == null) {
             lesCategVentes = new ArrayList<CategVente>();
         }
         lesCategVentes.add(uneCategVente);
