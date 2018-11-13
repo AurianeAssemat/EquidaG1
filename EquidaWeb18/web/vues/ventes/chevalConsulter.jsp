@@ -14,10 +14,10 @@
     </jsp:include>
     <body>
         <jsp:include page="/vues/MenuNavigation.jsp" />
-        
+
         <div class="container">
             <div class="row">
-                
+
 
                 <%
                     Cheval unCheval = (Cheval) request.getAttribute("pCheval");
@@ -33,8 +33,10 @@
                     <tr><td>TYPE SELECTIONEES :</td><td><%  out.println(unCheval.getTypeCheval().getLibelle());%></td>  </tr>
                     <tr><td>MERE :
                             <%
+
                                 if (unCheval.getMere() != null) {
                                     out.println("<td>");
+                                    out.println("<a href ='../ServletVentes/chevalConsulter?id=" + unCheval.getMere().getId() + "'>");
                                     out.println(unCheval.getMere().getNom());
                                     out.println("</td>");
 
@@ -47,23 +49,25 @@
                                     out.println("<td>" + "SIRE : Sire Inconnu");
                                     out.println("</td>");
                                 }%> 
-                    </td></tr>
-                    <tr><td>
+                        </td></tr>
+                        <tr><td>
                             PERE :<% if (unCheval.getPere() != null) {
-                            out.println("<td>");
-                            out.println(unCheval.getPere().getNom());
-                            out.println("</td>");
 
-                            out.println("<td>" + "SIRE :");
-                            out.println(unCheval.getPere().getSire());
-                            out.println("</td>");
-                        } else {
-                            out.println("<td>" + "Père inconnu");
-                            out.println("</td>");
-                            out.println("<td>" + "SIRE : Sire Inconnu");
-                            out.println("</td>");
-                        }%> 
-                    </td></tr>
+                                    out.println("<td>");
+                                    out.println("<a href ='../ServletVentes/chevalConsulter?id=" + unCheval.getPere().getId() + "'>");
+                                    out.println(unCheval.getPere().getNom());
+                                    out.println("</td>");
+
+                                    out.println("<td>" + "SIRE :");
+                                    out.println(unCheval.getPere().getSire());
+                                    out.println("</td>");
+                                } else {
+                                    out.println("<td>" + "Père inconnu");
+                                    out.println("</td>");
+                                    out.println("<td>" + "SIRE : Sire Inconnu");
+                                    out.println("</td>");
+                                }%> 
+                        </td></tr>
                 </table>
             </div>
         </div>  
