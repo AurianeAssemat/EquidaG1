@@ -70,7 +70,10 @@
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesCourriel</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/AjouterChevalVente</url-pattern>
     </servlet-mapping>
     
     <!--Servlet supprimer-->

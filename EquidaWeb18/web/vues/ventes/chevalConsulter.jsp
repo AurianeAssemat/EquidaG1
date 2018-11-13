@@ -27,10 +27,42 @@
             <tr><td>SIRE :</td><td><%  out.println(unCheval.getSire());%></td>  </tr>
             <tr><td>SEXE :</td><td><%  out.println(unCheval.getSexe());%></td>  </tr>
             <tr><td>TYPE SELECTIONEES :</td><td><%  out.println(unCheval.getTypeCheval().getLibelle());%></td>  </tr>
-            <tr><td>MERE :</td><td><%  out.println(unCheval.getMere().getNom());%></td>  
-            <td>SIRE :</td><td><%  out.println(unCheval.getMere().getSire());%></td>  </tr>
-            <tr><td>PERE :</td><td><%  out.println(unCheval.getPere().getNom());%></td>  
-            <td>SIRE :</td><td><%  out.println(unCheval.getPere().getSire());%></td>  </tr>
+            <tr><td>MERE :
+                            <%
+                            if(unCheval.getMere() != null){
+                            out.println("<td>");
+                            out.println(unCheval.getMere().getNom());
+                            out.println("</td>");
+                            
+                            out.println("<td>"+"SIRE :");
+                            out.println(unCheval.getMere().getSire());
+                            out.println("</td>");
+                        }else{
+                            out.println("<td>"+"Mère Inconnu");
+                            out.println("</td>");
+                            out.println("<td>"+"SIRE : Sire Inconnu");
+                            out.println("</td>");
+                        }%> 
+                </td> 
+            <tr><td>PERE :<% if(unCheval.getPere() != null){
+                            out.println("<td>");
+                            out.println(unCheval.getPere().getNom());
+                            out.println("</td>");
+
+                            out.println("<td>"+"SIRE :");
+                            out.println(unCheval.getPere().getSire());
+                            out.println("</td>");
+                        }else{
+                            out.println("<td>"+"Père inconnu");
+                            out.println("</td>");
+                            out.println("<td>"+"SIRE : Sire Inconnu");
+                            out.println("</td>");
+                        }%> </td>  
+            
+            
+            
+                        
+                        
             
               </td></tr>
         </table>
