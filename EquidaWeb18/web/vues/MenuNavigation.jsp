@@ -15,6 +15,9 @@
     LienMenu ventes = new LienMenu("../ServletVentes/listerLesVentes", "Ventes" );
     lien.add(ventes);
     
+    LienMenu mails = new LienMenu("../ServletVentes/creerMail", "Mails" );
+    lien.add(mails);
+    
     LienMenu MesChevaux = new LienMenu("../ServletVentes/listerMesChevaux", "Mes chevaux" );
     lien.add(MesChevaux);
     
