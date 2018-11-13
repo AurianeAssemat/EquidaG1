@@ -22,8 +22,8 @@
         <div class="container">
             <div class="row">
                 <%
-               ArrayList<Vente> lesVentes = (ArrayList)request.getAttribute("pLesVentes");
-               ArrayList<CategVente> lesCategVentes = (ArrayList)request.getAttribute("pLesCategVentes");
+                    ArrayList<Vente> lesVentes = (ArrayList) request.getAttribute("pLesVentes");
+                    ArrayList<CategVente> lesCategVentes = (ArrayList) request.getAttribute("pLesCategVentes");
                 %>
 
                 <form class="form-inline" action="listerLesVentes" method="GET">
@@ -31,14 +31,13 @@
                         <select name="codeCat" size="1">
                             <option value="">Toutes les ventes</option>
                             <%
-                            for(int i = 0; i < lesCategVentes.size();i++)
-                            {
-                                CategVente uneCategVente = lesCategVentes.get(i);
-                                out.print("<option value='");
-                                out.print(uneCategVente.getCode());
-                                out.print("'>");
-                                out.print(uneCategVente.getLibelle());
-                            }
+                                for (int i = 0; i < lesCategVentes.size(); i++) {
+                                    CategVente uneCategVente = lesCategVentes.get(i);
+                                    out.print("<option value='");
+                                    out.print(uneCategVente.getCode());
+                                    out.print("'>");
+                                    out.print(uneCategVente.getLibelle());
+                                }
                             %>
                         </select>
                         <label for="codeCat">Categorie : </label>
@@ -71,59 +70,57 @@
                     <tbody>
                         <tr>
                             <%
-                            for(int i = 0; i < lesVentes.size();i++)
-                            {
+                                for (int i = 0; i < lesVentes.size(); i++) {
 
-                                Vente uneVente = lesVentes.get(i);
-                                out.println("<tr><td>");
-                                out.println(uneVente.getId());
-                                out.println("</a></td>");
+                                    Vente uneVente = lesVentes.get(i);
+                                    out.println("<tr><td>");
+                                    out.println(uneVente.getId());
+                                    out.println("</a></td>");
 
-                                out.println("<td>");
-                                out.println(uneVente.getNom());
-                                out.println("</td>");
-                                                          
-                                out.println("<td>");
-                                out.println(uneVente.getDateDebutVente());
-                                out.println("</td>");
-                           
-                                out.println("<td>");
-                                out.println(uneVente.getDateFinVente());
-                                out.println("</td>");
-                         
-                                out.println("<td>");
-                                out.println(uneVente.getdateDebutInscrip());
-                                out.println("</td>");
-                     
-                                out.println("<td>");
-                                out.println(uneVente.getUnLieu().getVille() );
-                                out.println("</td>");
+                                    out.println("<td>");
+                                    out.println(uneVente.getNom());
+                                    out.println("</td>");
 
-                                out.println("<td>");
-                                out.println(uneVente.getUneCategVente().getLibelle());
-                                out.println("</td>");
-                           
+                                    out.println("<td>");
+                                    out.println(uneVente.getDateDebutVente());
+                                    out.println("</td>");
 
-                                out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat="+ uneVente.getUneCategVente().getCode()+ "'>");
-                                out.println("Lister les clients interessés");
-                                out.println("</td>");
+                                    out.println("<td>");
+                                    out.println(uneVente.getDateFinVente());
+                                    out.println("</td>");
 
-                                out.println("<td><a href ='../ServletVentes/listerLesCourriel?codeVente="+ uneVente.getId()+ "'>");
-                                out.println("Lister les Couriels envoyés");
-                                out.println("</td>");      
-                           
-                                out.println("<td><a href ='../ServletVentes/listerLesChevaux?codeVente="+ uneVente.getId()+ "'>");
-                                out.println("Lister les Chevaux");
-                                out.println("</td>");
-                           
-                                 out.println("<td>");
-                                 out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerUneVente?codeVente="+ uneVente.getId()+ "'><i class=\"material-icons\">delete</i></a>");
-                                 out.println("</td>");
+                                    out.println("<td>");
+                                    out.println(uneVente.getdateDebutInscrip());
+                                    out.println("</td>");
 
-                                 out.println("<td>");
-                                 out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">create</i></a>");
-                                 out.println("</td>");
-                            }
+                                    out.println("<td>");
+                                    out.println(uneVente.getUnLieu().getVille());
+                                    out.println("</td>");
+
+                                    out.println("<td>");
+                                    out.println(uneVente.getUneCategVente().getLibelle());
+                                    out.println("</td>");
+
+                                    out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat=" + uneVente.getUneCategVente().getCode() + "'>");
+                                    out.println("Lister les clients interessés");
+                                    out.println("</td>");
+
+                                    out.println("<td><a href ='../ServletVentes/listerLesChevaux?codeVente=" + uneVente.getId() + "'>");
+                                    out.println("Catalogue");
+                                    out.println("</td>");
+                                    
+                                    out.println("<td><a href ='../ServletVentes/AjouterChevalVente?codeVente=" + uneVente.getId() + "'>");
+                                    out.println("Ahouter un cheval");
+                                    out.println("</td>");
+                                    
+                                    out.println("<td>");
+                                    out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerUneVente?codeVente=" + uneVente.getId() + "'><i class=\"material-icons\">delete</i></a>");
+                                    out.println("</td>");
+
+                                    out.println("<td>");
+                                    out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">create</i></a>");
+                                    out.println("</td>");
+                                }
                             %>
                         </tr>
                     </tbody>

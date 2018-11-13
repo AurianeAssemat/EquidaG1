@@ -127,4 +127,30 @@ public class LotDAO {
         }
         return lesLots;
     }
+    
+    
+     public static Lot ajouterLot(Connection connection, Lot unLot) {
+        int idGenere = -1;
+        try {
+            //preparation de la requete
+            // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
+            // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
+            // supprimer ce paramètre en cas de requête sans auto_increment.
+
+            requete = connection.prepareStatement("INSERT INTO Lot ( vent_id, che_id, vend_id, prixDepart) VALUES (?,?,?,?);", requete.RETURN_GENERATED_KEYS);
+            requete.setInt(1, unLot.getUneVente().getId());
+            requete.setInt(2, unLot.getCheval().getId());
+            requete.setInt(3, unLot.getUnVendeur().getId());
+            requete.setFloat(4, unLot.getPrixDepart());
+
+            /* Exécution de la requête */
+            requete.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return null;
+    }
 }
