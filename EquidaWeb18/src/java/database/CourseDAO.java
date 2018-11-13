@@ -18,23 +18,21 @@ import modele.Course;
  */
 public class CourseDAO {
 
-    Connection connection=null;
-    static PreparedStatement requete=null;
-    static ResultSet rs=null;
-    
+    Connection connection = null;
+    static PreparedStatement requete = null;
+    static ResultSet rs = null;
 
-     public static ArrayList<Course>  getLesCourses(Connection connection){      
+    public static ArrayList<Course> getLesCourses(Connection connection) {
 
-        ArrayList<Course> lesCourses = new  ArrayList<Course>();
-        try
-        {
+        ArrayList<Course> lesCourses = new ArrayList<Course>();
+        try {
 
-            requete=connection.prepareStatement("select * from Course");
+            requete = connection.prepareStatement("select * from Course");
             //executer la requete
-            rs=requete.executeQuery();
-            
-            while ( rs.next() ) {  
-                
+            rs = requete.executeQuery();
+
+            while (rs.next()) {
+
                 Course uneCourse = new Course();
                 uneCourse.setId(rs.getInt("id"));
                 uneCourse.setNom(rs.getString("nom"));
@@ -42,13 +40,11 @@ public class CourseDAO {
                 uneCourse.setDate(rs.getString("date"));
 
                 lesCourses.add(uneCourse);
-                
+
             }
-        }    
-        catch (SQLException e) 
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return lesCourses ;    
-    } 
+        return lesCourses;
+    }
 }

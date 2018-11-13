@@ -24,7 +24,7 @@
         <listener-class>database.InitConnexion</listener-class>
     </listener>
     
-<!--Servlet vente-->  
+    <!--Servlet vente-->  
   
     <servlet>
         <servlet-name>ServletVentes</servlet-name>
@@ -42,11 +42,7 @@
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerMesChevaux</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/listerLesClients</url-pattern>
-    </servlet-mapping>
+   
     
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
@@ -65,7 +61,16 @@
     
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/chevalModif</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/listerLesClients</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesCourriel</url-pattern>
+
     </servlet-mapping>
     
     <!--Servlet supprimer-->
@@ -75,6 +80,11 @@
         <url-pattern>/ServletVentes/SupprimerMesChevaux</url-pattern>
     </servlet-mapping>
     
+     <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/SupprimerUneVente</url-pattern>
+    </servlet-mapping>
+    
     <!--Servlet ajouter-->
     
     <servlet-mapping>
@@ -82,7 +92,7 @@
         <url-pattern>/ServletVentes/chevalAjouter</url-pattern>
     </servlet-mapping>
     
-<!--Servlet client --> 
+    <!--Servlet client --> 
        
     <servlet>
         <servlet-name>ServletClient</servlet-name>
@@ -119,13 +129,25 @@
         <url-pattern>/ServletClient/clientModif</url-pattern>
     </servlet-mapping>
     
-<!--Servlet accueil -->    
+    <!--Servlet accueil -->    
 
     <servlet>
         <servlet-name>ServletAccueil</servlet-name>
         <servlet-class>servlets.ServletAccueil</servlet-class>
     </servlet>
     
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/ajouterVente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/creerMail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/envoyerMail</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
         <url-pattern>/ServletAccueil/Connexion</url-pattern>
@@ -138,15 +160,15 @@
     
     <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
-        <url-pattern>/ServletAccueil/Accueil</url-pattern>Deconnexion
+        <url-pattern>/ServletAccueil/Accueil</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>ServletAccueil</servlet-name>
-        <url-pattern>/ServletAccueil/Profil</url-pattern>Deconnexion
+        <url-pattern>/ServletAccueil/Profil</url-pattern>
     </servlet-mapping>
           
-<!--Servlet administrateur-->   
+    <!--Servlet administrateur-->   
        
     <servlet>
         <servlet-name>ServletAdministrateur</servlet-name>
@@ -212,12 +234,16 @@
         <url-pattern>/ServletAdministrateur/PaysAjouter</url-pattern>
     </servlet-mapping>
        
-    <!-- -->
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/chevalConsulter</url-pattern>
+    </servlet-mapping>
+
     
     
     <session-config>
         <session-timeout>
             30
         </session-timeout>
-    </session-config>/EquidaWeb18/ServletConnexion/Connexion
-    </web-app>
+    </session-config>
+</web-app>

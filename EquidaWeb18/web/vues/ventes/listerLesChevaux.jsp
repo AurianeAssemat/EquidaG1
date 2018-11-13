@@ -15,22 +15,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+
         <title>LISTE DES CHEVAUX</title>
     </head>
     <body>
         <h1>LISTE DES CHEVAUX</h1>
-        
-         <%
-        ArrayList<Lot> lesLots = (ArrayList)request.getAttribute("pLesLots");
+
+        <%
+       ArrayList<Lot> lesLots = (ArrayList)request.getAttribute("pLesLots");
         %>
-        
-        
+
+
         <table  class="table table-bordered table-striped table-condensed">  
             <thead>
                 <tr>             
-                    
-             
+
+
                     <th>Nom</th>
                     <th>Sexe</th>  
                     <th>Sire</th>
@@ -45,7 +45,7 @@
                     <th></th>
             <br>
             <br>
-                </tr>
+            </tr>
             </thead>
             <tbody>
                 <tr>

@@ -12,24 +12,24 @@
     <jsp:include page="/vues/Header.jsp" >
         <jsp:param name="NomPage" value="Liste les ventes" />
     </jsp:include>
-    
+
     <body>
-        
+
         <jsp:include page="/vues/MenuNavigation.jsp" />
-        
+
         <div class="container">
             <div class="row">
                 <%
                Compte compte = (Compte)request.getAttribute("pInformationPersonnelle");
-              %>
+                %>
 
-               <table  class="table table-bordered table-striped table-condensed">  
-                   <thead>
+                <table  class="table table-bordered table-striped table-condensed">  
+                    <thead>
                         <tr>
-                           <th>Nom de compte :</th>   
-                           <%
-                               out.println("<th>"+ compte.getLogin() +"</th>");
-                           %>
+                            <th>Nom de compte :</th>   
+                                <%
+                                    out.println("<th>"+ compte.getLogin() +"</th>");
+                                %>
                         </tr>
                         <%
                         if(compte.getUnClient().getTitre() != null){
@@ -38,27 +38,27 @@
                         %>
                         <tr>
                             <th>Nom :</th>     
-                            <%
-                                out.println("<th>"+ compte.getUnClient().getNom() +"</th>");
-                           %>
+                                <%
+                                    out.println("<th>"+ compte.getUnClient().getNom() +"</th>");
+                                %>
                         </tr>
                         <tr>
-                           <th>Prenom :</th>     
-                           <%
-                               out.println("<th>"+ compte.getUnClient().getPrenom() +"</th>");
-                           %>
+                            <th>Prenom :</th>     
+                                <%
+                                    out.println("<th>"+ compte.getUnClient().getPrenom() +"</th>");
+                                %>
                         </tr>
                         <%
                         if(compte.getUnClient().getRue() != null){
                             out.println("<tr><th>Adresse :</th>  <th>"+ compte.getUnClient().getRue() +"</th></tr>");
                         }
                         %>
-                       
+
                         <tr>
                             <th>Code Postal :</th>     
-                            <%
-                               out.println("<th>"+ compte.getUnClient().getCopos() +"</th>");
-                            %>
+                                <%
+                                   out.println("<th>"+ compte.getUnClient().getCopos() +"</th>");
+                                %>
                         </tr>
                         <%
                         if(compte.getUnClient().getVille() != null){
@@ -70,9 +70,9 @@
                             out.println("<tr><th>E-mail :</th>  <th>"+ compte.getUnClient().getMail() +"</th></tr>");
                         }
                         %>
-                        
-                   </tbody>
-               </table>
+
+                        </tbody>
+                </table>
             </div>
         </div>
     </body>

@@ -5,11 +5,9 @@
  */
 package servlets;
 
-import database.CategVenteDAO;
 import database.CompteDAO;
-import database.PaysDAO;
 import database.Utilitaire;
-
+import database.VenteDAO;
 import formulaires.ConnexionForm;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,28 +18,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.CategVente;
 import modele.Compte;
-import modele.Pays;
-
+import modele.Vente;
 
 /**
  *
- * @author Zakina
- * Servlet Client permettant d'excéuter les fonctionnalités relatives au clients
- * Fonctionnalités implémentées :
- *      ajouter un nouveau client
+ * @author Zakina Servlet Client permettant d'excéuter les fonctionnalités
+ * relatives au clients Fonctionnalités implémentées : ajouter un nouveau client
  */
 public class ServletAccueil extends HttpServlet {
-    
-    Connection connection ;
-      
-        
+
+    Connection connection;
+
     @Override
-    public void init()
-    {     
-        ServletContext servletContext=getServletContext();
-        connection=(Connection)servletContext.getAttribute("connection");
+    public void init() {
+        ServletContext servletContext = getServletContext();
+        connection = (Connection) servletContext.getAttribute("connection");
     }
 
     /**
@@ -61,7 +53,7 @@ public class ServletAccueil extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServletClient</title>");            
+            out.println("<title>Servlet ServletClient</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServletClient at " + request.getContextPath() + "</h1>");
@@ -82,32 +74,30 @@ public class ServletAccueil extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
-       String url = request.getRequestURI();
-       
-        if(url.equals("/EquidaWeb18/ServletAccueil/Connexion") && request.getSession().getAttribute("Compte") == null )
-        {                   
-            this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp" ).forward( request, response );
+
+        String url = request.getRequestURI();
+
+        if (url.equals("/EquidaWeb18/ServletAccueil/Connexion") && request.getSession().getAttribute("Compte") == null) {
+            this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp").forward(request, response);
         }
-       
-        if(url.equals("/EquidaWeb18/ServletAccueil/Deconnexion"))
-        {           
-            request.getSession().setAttribute("Compte",null);
-            this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp" ).forward( request, response );
+
+        if (url.equals("/EquidaWeb18/ServletAccueil/Deconnexion")) {
+
+            request.getSession().setAttribute("Compte", null);
+            response.sendRedirect("/EquidaWeb18/ServletAccueil/Accueil");
         }
-        
-        if(url.equals("/EquidaWeb18/ServletAccueil/Accueil"))
-        {                   
-            this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp" ).forward( request, response );
+
+        if (url.equals("/EquidaWeb18/ServletAccueil/Accueil")) {
+            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+            request.setAttribute("pLesVentes", lesVentes);
+            this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp").forward(request, response);
         }
-        
-        if(url.equals("/EquidaWeb18/ServletAccueil/Profil"))
-        {                   
-            Compte compte = (Compte)request.getSession().getAttribute("Compte");
+
+        if (url.equals("/EquidaWeb18/ServletAccueil/Profil")) {
+            Compte compte = (Compte) request.getSession().getAttribute("Compte");
             request.setAttribute("pInformationPersonnelle", compte);
-            
-            this.getServletContext().getRequestDispatcher("/vues/Profil.jsp" ).forward( request, response );
+
+            this.getServletContext().getRequestDispatcher("/vues/Profil.jsp").forward(request, response);
         }
     }
 
@@ -122,29 +112,27 @@ public class ServletAccueil extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               
-         /* Préparation de l'objet formulaire */
+
+        /* Préparation de l'objet formulaire */
         ConnexionForm form = new ConnexionForm();
-	
+
         Compte compte = form.Connexion(request);
-        if (form.getErreurs().isEmpty() ){
-            compte = CompteDAO.getUnCompte(connection, compte.getLogin(),compte.getMdp());
-            if(compte == null){
+        if (form.getErreurs().isEmpty()) {
+            compte = CompteDAO.getUnCompte(connection, compte.getLogin(), compte.getMdp());
+            if (compte == null) {
                 form.addErreur("Nom de compte ou mot de passe incorrect !");
             }
         }
-        request.setAttribute( "form", form );
-        
-        if (form.getErreurs().isEmpty() ){
-            request.getSession().setAttribute("Compte",compte);
-            this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp" ).forward( request, response );
-        }
-        else
-        { 
+        request.setAttribute("form", form);
+
+        if (form.getErreurs().isEmpty()) {
+            request.getSession().setAttribute("Compte", compte);
+            response.sendRedirect("/EquidaWeb18/ServletAccueil/Accueil");
+        } else {
             //request.setAttribute("pLesErreurs", form.getErreurs());
-            this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp" ).forward( request, response );
+            this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp").forward(request, response);
         }
-    
+
     }
 
     /**
@@ -156,20 +144,15 @@ public class ServletAccueil extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
- public void destroy(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
-    {
-        try
-        {
+
+    public void destroy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
             //fermeture
             System.out.println("Connexion fermée");
-        }
-        catch (Exception e) 
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Erreur lors de l’établissement de la connexion");
-        }
-        finally
-        {
+        } finally {
             //Utilitaire.fermerConnexion(rs);
             //Utilitaire.fermerConnexion(requete);
             Utilitaire.fermerConnexion(connection);

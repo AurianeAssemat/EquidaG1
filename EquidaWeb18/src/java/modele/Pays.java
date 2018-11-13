@@ -10,8 +10,8 @@ package modele;
  * @author Zakina
  */
 public class Pays {
-    
-    private String code ;
+
+    private String code;
     private String nom;
 
     public Pays() {
@@ -41,7 +41,5 @@ public class Pays {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
-    
-    
+
 }

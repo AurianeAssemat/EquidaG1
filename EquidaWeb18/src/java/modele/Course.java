@@ -12,12 +12,13 @@ import java.util.ArrayList;
  * @author slam
  */
 public class Course {
+
     private int id;
-    private String nom ;
+    private String nom;
     private String lieu;
-    private String date ;
-    private ArrayList<Participer> lesParticipant ;
-    
+    private String date;
+    private ArrayList<Participer> lesParticipant;
+
     public Course() {
     }
 
@@ -69,5 +70,4 @@ public class Course {
         this.lesParticipant = lesParticipant;
     }
 
-    
 }

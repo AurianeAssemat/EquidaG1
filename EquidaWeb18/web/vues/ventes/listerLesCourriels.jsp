@@ -10,15 +10,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+
         <title>LISTE LES COURRIELS POUR UNE VENTE</title>
     </head>
     <body>
         <h1>LISTE LES COURRIELS POUR UNE VENTE</h1>
-         <%
-        ArrayList<Courriel> lesCourriels = (ArrayList)request.getAttribute("pLesCourriels");
+        <%
+       ArrayList<Courriel> lesCourriels = (ArrayList)request.getAttribute("pLesCourriels");
         %>
         <table  class="table table-bordered table-striped table-condensed">  
             <thead>
@@ -28,10 +28,10 @@
                     <th>objet</th>
                     <th>corps</th>
                     <th>piece joint</th> 
-                    
+
             <br>
             <br>
-                </tr>
+            </tr>
             </thead>
             <tbody>
                 <tr>

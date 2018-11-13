@@ -5,18 +5,16 @@
  */
 package modele;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Zakina
  */
 public class Compte {
-    
+
     private int id;
     private String login;
-    private String mdp ;
-    private Client unClient ;
+    private String mdp;
+    private Client unClient;
 
     public Compte() {
     }
@@ -60,5 +58,4 @@ public class Compte {
         this.unClient = unClient;
     }
 
-   
 }
