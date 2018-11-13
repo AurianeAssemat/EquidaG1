@@ -22,8 +22,8 @@
         <div class="container">
             <div class="row">
                 <%
-               ArrayList<Vente> lesVentes = (ArrayList)request.getAttribute("pLesVentes");
-               ArrayList<CategVente> lesCategVentes = (ArrayList)request.getAttribute("pLesCategVentes");
+                    ArrayList<Vente> lesVentes = (ArrayList) request.getAttribute("pLesVentes");
+                    ArrayList<CategVente> lesCategVentes = (ArrayList) request.getAttribute("pLesCategVentes");
                 %>
 
                 <form class="form-inline" action="listerLesVentes" method="GET">
@@ -31,14 +31,13 @@
                         <select name="codeCat" size="1">
                             <option value="">Toutes les ventes</option>
                             <%
-                            for(int i = 0; i < lesCategVentes.size();i++)
-                            {
-                                CategVente uneCategVente = lesCategVentes.get(i);
-                                out.print("<option value='");
-                                out.print(uneCategVente.getCode());
-                                out.print("'>");
-                                out.print(uneCategVente.getLibelle());
-                            }
+                                for (int i = 0; i < lesCategVentes.size(); i++) {
+                                    CategVente uneCategVente = lesCategVentes.get(i);
+                                    out.print("<option value='");
+                                    out.print(uneCategVente.getCode());
+                                    out.print("'>");
+                                    out.print(uneCategVente.getLibelle());
+                                }
                             %>
                         </select>
                         <label for="codeCat">Categorie : </label>
@@ -50,7 +49,9 @@
                     </div>
                 </form>
                 <div class="col s1 offset-s4">  
-                    <a class="btn-floating btn-large waves-effect waves-light red" ><i class="material-icons">add</i></a>
+
+                    <a class="btn-floating btn-large waves-effect waves-light red"href='../ServletVentes/ajouterVente'><i class="material-icons">add</i></a>
+
                 </div>  
                 <table  class="table table-bordered table-striped table-condensed">  
                     <thead>
@@ -71,6 +72,7 @@
                     <tbody>
                         <tr>
                             <%
+
                             for(int i = 0; i < lesVentes.size();i++)
                             {
 

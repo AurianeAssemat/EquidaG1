@@ -37,7 +37,7 @@ public class EnchereDAO {
             //preparation de la requete     
             requete = connection.prepareStatement("select * from enchere, lot, cheval, acheteur, client where lot.id = enchere.lot_id AND lot.vent_id = enchere.lotvent_id AND acheteur.ach_id = enchere.ach_id AND client.id = acheteur.ach_id AND lot.che_id = cheval.id AND lot.id = ? AND lot.vent_id = ?");
             requete.setString(1, idlot);
-            requete.setString(1, idvente);
+            requete.setString(2, idvente);
             //executer la requete
             rs = requete.executeQuery();
 
@@ -45,8 +45,8 @@ public class EnchereDAO {
             while (rs.next()) {
 
                 Enchere uneEnchere = new Enchere();
-
-                uneEnchere.setNumero(rs.getInt("numero"));
+                
+                uneEnchere.setNumero(rs.getInt("id"));
                 uneEnchere.setMontant(rs.getInt("montant"));
 
                 Lot unLot = new Lot();
@@ -114,9 +114,9 @@ public class EnchereDAO {
                 uneEnchere.setUnLot(unLot);
 
                 Acheteur unAcheteur = new Acheteur();
-                unAcheteur.setId(rs.getInt("id"));
-                unAcheteur.setNom(rs.getString("nom"));
-                unAcheteur.setPrenom(rs.getString("prenom"));
+                unAcheteur.setId(rs.getInt("client.id"));
+                unAcheteur.setNom(rs.getString("client.nom"));
+                unAcheteur.setPrenom(rs.getString("client.prenom"));
                 uneEnchere.setUnAcheteur(unAcheteur);
 
                 lesEncheres.add(uneEnchere);

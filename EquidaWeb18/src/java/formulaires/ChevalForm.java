@@ -26,6 +26,14 @@ public class ChevalForm {
         return resultat;
     }
     
+    public void setErreurs(ArrayList<String> erreurs) {
+        this.erreurs = erreurs;
+    }
+    
+    public void addErreur(String message) {
+        getErreurs().add(message);
+    }
+    
     public void setResultat(String resultat) {
         this.resultat = resultat;
     }
@@ -87,7 +95,7 @@ public class ChevalForm {
         String typeCheval = getDataForm(request, "typ_id");
         if (typeCheval != null) {
             TypeCheval unTypeCheval = new TypeCheval();
-            unTypeCheval.setId(typeCheval);
+            unTypeCheval.setId(Integer.parseInt(typeCheval));
             unCheval.setTypeCheval(unTypeCheval);
         }else{
             addErreur("Il manque le type du cheval.");
