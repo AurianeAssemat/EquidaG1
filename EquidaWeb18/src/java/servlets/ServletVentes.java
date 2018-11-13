@@ -11,6 +11,12 @@ import database.ClientDAO;
 import database.CourrielDAO;
 import database.EnchereDAO;
 import database.LieuDAO;
+
+import formulaires.VenteForm;
+
+import database.LotDAO;
+import database.PieceJointeDAO;
+import formulaires.CourrielForm;
 import database.PaysDAO;
 import database.TypeChevalDAO;
 import database.Utilitaire;
@@ -29,9 +35,16 @@ import modele.CategVente;
 import modele.Cheval;
 import modele.Client;
 import modele.Compte;
+
 import modele.Courriel;
 import modele.Enchere;
 import modele.Lieu;
+
+
+import modele.Lot;
+
+import modele.PieceJointe;
+
 import modele.Pays;
 import modele.TypeCheval;
 import modele.Vente;
@@ -135,9 +148,40 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesCategVente", lesCategVentes);
             this.getServletContext().getRequestDispatcher("/vues/VenteAjouter.jsp").forward(request, response);
         }
-        if (url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux")) {
-            Compte compte = (Compte) request.getSession().getAttribute("Compte");
-            if (compte != null) {
+
+
+        if(url.equals("/EquidaWeb18/ServletVentes/creerMail"))
+        {  
+           ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+           request.setAttribute("pLesVentes", lesVentes);
+           
+           ArrayList<PieceJointe> lesPiecesJointes = PieceJointeDAO.getLesPiecesJointes(connection);
+           request.setAttribute("pLesPiecesJointes", lesPiecesJointes);
+            
+           getServletContext().getRequestDispatcher("/vues/ventes/creerMail.jsp").forward(request, response);
+        }
+        if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
+        {  
+           
+           String id = (String)request.getParameter("id");
+           
+           Courriel courriel = CourrielDAO.getCourriel(connection, id);
+           
+            System.out.println(courriel.getUneVente().getUneCategVente().getCode());
+           
+           ArrayList<Client> clients = VenteDAO.getLesClients(connection, courriel.getUneVente().getUneCategVente().getCode());
+           
+           request.setAttribute("pCourriel", courriel);
+           request.setAttribute("pClients", clients);
+           
+           getServletContext().getRequestDispatcher("/vues/ventes/envoyerMail.jsp").forward(request, response);
+        }
+        
+        if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
+        {  
+            Compte compte = (Compte)request.getSession().getAttribute("Compte");
+            if(compte != null){
+
                 int codeAcheteur = compte.getUnClient().getId();
                 ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
                 request.setAttribute("pLesChevaux", lesChevaux);
@@ -207,9 +251,48 @@ public class ServletVentes extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String url = request.getRequestURI();
 
-        if (url.equals("/EquidaWeb18/ServletVentes/ajouterVente")) {
+        String url = request.getRequestURI();
+        
+        if(url.equals("/EquidaWeb18/ServletVentes/creerMail")){
+        
+        
+        /* Préparation de l'objet formulaire */
+        CourrielForm form = new CourrielForm();
+        
+         /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute("form", form);
+        
+        Courriel courriel = form.ajouterCourriel(request);
+        
+        /* Stockage du formulaire et de l'objet dans l'objet request */
+        request.setAttribute("form", form);
+        
+        if (form.getErreurs().isEmpty()){
+            
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+            
+            CourrielDAO.ajouterCourriel(connection, courriel);
+            
+            response.sendRedirect("/EquidaWeb18/ServletVentes/envoyerMail?id=" + courriel.getId());
+        } else {
+           ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+           request.setAttribute("pLesVentes", lesVentes);
+           
+           ArrayList<PieceJointe> lesPiecesJointes = PieceJointeDAO.getLesPiecesJointes(connection);
+           request.setAttribute("pLesPiecesJointes", lesPiecesJointes);
+            
+           getServletContext().getRequestDispatcher("/vues/ventes/creerMail.jsp").forward(request, response);
+        }
+    }
+        
+        if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail")){
+          getServletContext().getRequestDispatcher("/vues/ventes/confirmationMail.jsp").forward(request, response);           
+        }
+
+
+        if(url.equals("/EquidaWeb18/ServletVentes/ajouterVente")){
+
             /* Préparation de l'objet formulaire */
             VenteForm form = new VenteForm();
 
