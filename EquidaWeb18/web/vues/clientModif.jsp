@@ -64,7 +64,7 @@
             </select>
             <br>
 
-            <label id="categ" name="categVente">CATEGORIE VENTE :</label>
+            <label id="categ" name="categVente">CATEGORIE VENTE : (séléctionner au moins une catégorie)</label>
             <select id="categ" name="categVente" multiple>
                 <%
                        ArrayList<CategVente> lesCategVente = (ArrayList)request.getAttribute("pLesCategVente");
