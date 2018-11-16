@@ -27,7 +27,7 @@ public class CourseDAO {
         ArrayList<Course> lesCourses = new ArrayList<Course>();
         try {
 
-            requete = connection.prepareStatement("select * from Course");
+            requete = connection.prepareStatement("select * from course");
             //executer la requete
             rs = requete.executeQuery();
 
