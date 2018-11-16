@@ -160,7 +160,7 @@ public class VenteDAO {
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
 
-            requete = connection.prepareStatement("INSERT INTO VENTE (id, nom, dateDebut, codeCategVente, lie_id, dateFinVente, dateDebutInscrip)\n"
+            requete = connection.prepareStatement("INSERT INTO vente (id, nom, dateDebut, codeCategVente, lie_id, dateFinVente, dateDebutInscrip)\n"
                     + "VALUES (?,?,?,?,?,?,?)");
             requete.setInt(1, uneVente.getId());
             requete.setString(2, uneVente.getNom());

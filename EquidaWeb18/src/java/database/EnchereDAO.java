@@ -46,24 +46,24 @@ public class EnchereDAO {
 
                 Enchere uneEnchere = new Enchere();
                 
-                uneEnchere.setNumero(rs.getInt("id"));
+                uneEnchere.setNumero(rs.getInt("enchere.id"));
                 uneEnchere.setMontant(rs.getInt("montant"));
 
                 Lot unLot = new Lot();
-                unLot.setId(rs.getInt("id"));
+                unLot.setId(rs.getInt("lot.id"));
                 unLot.setPrixDepart(rs.getFloat("prixDepart"));
 
                 Vente uneVente = new Vente();
                 uneVente.setId(rs.getInt("vent_id"));
 
                 Cheval unCheval = new Cheval();
-                unCheval.setId(rs.getInt("id"));
+                unCheval.setId(rs.getInt("cheval.id"));
                 unCheval.setNom(rs.getString("nom"));
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setSire(rs.getString("sire"));
 
                 if (rs.getString("typ_id") != "") {
-                    requete = connection.prepareStatement("select * from TypeCheval where id = ?");
+                    requete = connection.prepareStatement("select * from typecheval where id = ?");
                     requete.setString(1, rs.getString("typ_id"));
 
                     ResultSet rtc = requete.executeQuery();
@@ -71,7 +71,8 @@ public class EnchereDAO {
                     rtc.next();
 
                     TypeCheval unTypeCheval = new TypeCheval();
-                    unTypeCheval.setId(rtc.getString("id"));
+
+                    unTypeCheval.setId(rtc.getInt("typecheval.id"));
                     unTypeCheval.setLibelle(rtc.getString("libelle"));
                     unTypeCheval.setDescription(rtc.getString("description"));
 
@@ -79,7 +80,7 @@ public class EnchereDAO {
                 }
 
                 if (rs.getInt("pere") != 0) {
-                    requete = connection.prepareStatement("select * from Cheval where id = ?");
+                    requete = connection.prepareStatement("select * from cheval where id = ?");
                     requete.setString(1, rs.getString("pere"));
 
                     ResultSet rp = requete.executeQuery();
@@ -87,7 +88,7 @@ public class EnchereDAO {
                     rp.next();
 
                     Cheval unPere = new Cheval();
-                    unPere.setId(rp.getInt("id"));
+                    unPere.setId(rp.getInt("cheval.id"));
                     unPere.setNom(rp.getString("nom"));
                     unPere.setSexe(rp.getString("sexe"));
                     unPere.setSire(rp.getString("sire"));
@@ -95,7 +96,7 @@ public class EnchereDAO {
                 }
 
                 if (rs.getInt("mere") != 0) {
-                    requete = connection.prepareStatement("select * from Cheval where id = ?");
+                    requete = connection.prepareStatement("select * from cheval where id = ?");
                     requete.setString(1, rs.getString("mere"));
 
                     ResultSet rm = requete.executeQuery();
@@ -103,7 +104,7 @@ public class EnchereDAO {
                     rm.next();
 
                     Cheval uneMere = new Cheval();
-                    uneMere.setId(rm.getInt("id"));
+                    uneMere.setId(rm.getInt("cheval.id"));
                     uneMere.setNom(rm.getString("nom"));
                     uneMere.setSexe(rm.getString("sexe"));
                     uneMere.setSire(rm.getString("sire"));

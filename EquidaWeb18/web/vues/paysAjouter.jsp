@@ -1,6 +1,6 @@
 <%-- 
-    Document   : typeChevalAjouter
-    Created on : 19 oct. 2018, 16:10:14
+    Document   : paysAjouter
+    Created on : 6 nov. 2018, 14:56:39
     Author     : Coco
 --%>
 
@@ -9,9 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ajouter Un type de cheval</title>
+        <title>Ajouter un Pays</title>
     </head>
     <body>
         <h1>A toi d'ajouter la fonctionnalitée!</h1>
     </body>
 </html>
+

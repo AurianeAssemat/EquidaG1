@@ -45,11 +45,11 @@ public class LotDAO {
             //On hydrate l'objet métier Client avec les résultats de la requête
             while (rs.next()) {
                 Lot unLot = new Lot();
-                unLot.setId(rs.getInt("id"));
+                unLot.setId(rs.getInt("lot.id"));
                 unLot.setPrixDepart(rs.getFloat("prixDepart"));
 
                 Cheval unCheval = new Cheval();
-                unCheval.setId(rs.getInt("id"));
+                unCheval.setId(rs.getInt("cheval.id"));
                 unCheval.setNom(rs.getString("nom"));
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setSire(rs.getString("sire"));
@@ -63,7 +63,8 @@ public class LotDAO {
                     rtc.next();
 
                     TypeCheval unTypeCheval = new TypeCheval();
-                    unTypeCheval.setId(rtc.getString("id"));
+
+                    unTypeCheval.setId(rtc.getInt("typecheval.id"));
                     unTypeCheval.setLibelle(rtc.getString("libelle"));
                     unTypeCheval.setDescription(rtc.getString("description"));
 
@@ -79,7 +80,7 @@ public class LotDAO {
                     rp.next();
 
                     Cheval unPere = new Cheval();
-                    unPere.setId(rp.getInt("id"));
+                    unPere.setId(rp.getInt("cheval.id"));
                     unPere.setNom(rp.getString("nom"));
                     unPere.setSexe(rp.getString("sexe"));
                     unPere.setSire(rp.getString("sire"));
@@ -95,7 +96,7 @@ public class LotDAO {
                     rm.next();
 
                     Cheval uneMere = new Cheval();
-                    uneMere.setId(rm.getInt("id"));
+                    uneMere.setId(rm.getInt("cheval.id"));
                     uneMere.setNom(rm.getString("nom"));
                     uneMere.setSexe(rm.getString("sexe"));
                     uneMere.setSire(rm.getString("sire"));
@@ -109,7 +110,7 @@ public class LotDAO {
                     Course uneCourse = new Course();
                     uneCourse.setId(rco.getInt("course.id"));
                     uneCourse.setLieu(rco.getString("lieu"));
-                    uneCourse.setNom(rco.getString("nom"));
+                    uneCourse.setNom(rco.getString("course.nom"));
                     uneCourse.setDate(rco.getString("date"));
 
                     Participer uneParticipation = new Participer();

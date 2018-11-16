@@ -49,7 +49,9 @@
                     </div>
                 </form>
                 <div class="col s1 offset-s4">  
+
                     <a class="btn-floating btn-large waves-effect waves-light red"href='../ServletVentes/ajouterVente'><i class="material-icons">add</i></a>
+
                 </div>  
                 <table  class="table table-bordered table-striped table-condensed">  
                     <thead>
