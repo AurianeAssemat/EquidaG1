@@ -157,23 +157,17 @@ public class ServletVentes extends HttpServlet {
         }
 
         
-       /* if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
+        if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
         {  
-            Compte compte = (Compte)request.getSession().getAttribute("Compte");
-            if(compte != null){
-                int codeVente = Integer.parseInt(request.getParameter("codeVente"));
-                
-                VenteDAO.SupprimerUneVente(connection,codeVente);
+            
+            int codeVente = Integer.parseInt(request.getParameter("codeVente"));
+
+            VenteDAO.SupprimerUneVente(connection,codeVente);
+            
+            response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesVentes");
 
                 
-                int codeAcheteur = compte.getUnClient().getId();
-                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
-                request.setAttribute("pLesChevaux", lesChevaux);
-                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
-                
-            }
-        }
-       */
+        }      
 
         if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
         {  
@@ -241,7 +235,7 @@ public class ServletVentes extends HttpServlet {
 
             ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
             request.setAttribute("pLesTypeCheval", lesTypeCheval);
-            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp").forward(request, response);     
         }
         
         if (url.equals("/EquidaWeb18/ServletVentes/listerLesChevaux")) {

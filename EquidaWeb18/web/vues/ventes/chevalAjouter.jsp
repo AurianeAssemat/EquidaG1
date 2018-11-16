@@ -6,7 +6,6 @@
 
 <%@page import="modele.TypeCheval"%>
 <%@page import="modele.CategVente"%>
-<%@page import="modele.CategVente"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="formulaires.ChevalForm"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
