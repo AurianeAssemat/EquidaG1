@@ -158,4 +158,104 @@ public class LotDAO {
         }
         return null;
     }
+     
+     //methode pour récuperer un Lot
+     public static Lot getUnLot(Connection connection, String codevente) {
+        Lot leLot = new Lot();
+        try {
+            //preparation de la requete     
+            requete = connection.prepareStatement("select * from lot,cheval,typecheval where lot.che_id = cheval.id AND cheval.typ_id = typecheval.id AND vent_id = ?");
+            requete.setString(1, codevente);
+            //executer la requete
+            rs = requete.executeQuery();
+
+            //On hydrate l'objet métier Lot avec les résultats de la requête
+            while (rs.next()) {
+                Lot unLot = new Lot();
+                unLot.setId(rs.getInt("id"));
+                unLot.setPrixDepart(rs.getFloat("prixDepart"));
+
+                Cheval unCheval = new Cheval();
+                unCheval.setId(rs.getInt("id"));
+                unCheval.setNom(rs.getString("nom"));
+                unCheval.setSexe(rs.getString("sexe"));
+                unCheval.setSire(rs.getString("sire"));
+
+                if (rs.getString("typ_id") != "") {
+                    requete = connection.prepareStatement("select * from typecheval where id = ?");
+                    requete.setString(1, rs.getString("typ_id"));
+
+                    ResultSet rtc = requete.executeQuery();
+
+                    rtc.next();
+
+                    TypeCheval unTypeCheval = new TypeCheval();
+                    unTypeCheval.setId(rtc.getString("id"));
+                    unTypeCheval.setLibelle(rtc.getString("libelle"));
+                    unTypeCheval.setDescription(rtc.getString("description"));
+
+                    unCheval.setTypeCheval(unTypeCheval);
+                }
+
+                if (rs.getInt("pere") != 0) {
+                    requete = connection.prepareStatement("select * from cheval where id = ?");
+                    requete.setString(1, rs.getString("pere"));
+
+                    ResultSet rp = requete.executeQuery();
+
+                    rp.next();
+
+                    Cheval unPere = new Cheval();
+                    unPere.setId(rp.getInt("id"));
+                    unPere.setNom(rp.getString("nom"));
+                    unPere.setSexe(rp.getString("sexe"));
+                    unPere.setSire(rp.getString("sire"));
+                    unCheval.setPere(unPere);
+                }
+
+                if (rs.getInt("mere") != 0) {
+                    requete = connection.prepareStatement("select * from cheval where id = ?");
+                    requete.setString(1, rs.getString("mere"));
+
+                    ResultSet rm = requete.executeQuery();
+
+                    rm.next();
+
+                    Cheval uneMere = new Cheval();
+                    uneMere.setId(rm.getInt("id"));
+                    uneMere.setNom(rm.getString("nom"));
+                    uneMere.setSexe(rm.getString("sexe"));
+                    uneMere.setSire(rm.getString("sire"));
+                    unCheval.setMere(uneMere);
+                }
+                requete = connection.prepareStatement("select * from course,participer where cour_id = course.id AND che_id = ?");
+                requete.setString(1, rs.getString("id"));
+                //executer la requete
+                ResultSet rco = requete.executeQuery();
+                while (rco.next()) {
+                    Course uneCourse = new Course();
+                    uneCourse.setId(rco.getInt("course.id"));
+                    uneCourse.setLieu(rco.getString("lieu"));
+                    uneCourse.setNom(rco.getString("nom"));
+                    uneCourse.setDate(rco.getString("date"));
+
+                    Participer uneParticipation = new Participer();
+                    uneParticipation.setPlace(rco.getInt("place"));
+                    uneParticipation.setUneCourse(uneCourse);
+
+                    unCheval.addUneParticipation(uneParticipation);
+                }
+
+                unLot.setCheval(unCheval);
+                
+                Vente uneVente = new Vente();
+                uneVente.setId(Integer.parseInt(codevente));
+                unLot.setUneVente(uneVente);
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return leLot;
+    }
 }

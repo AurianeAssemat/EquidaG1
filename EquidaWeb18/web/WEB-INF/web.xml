@@ -94,6 +94,10 @@
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/chevalAjouter</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/ajouterEnchere</url-pattern>
+    </servlet-mapping>
     
     <!--Servlet client --> 
        

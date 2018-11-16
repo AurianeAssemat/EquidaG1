@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import database.AcheteurDAO;
 import database.CategVenteDAO;
 import database.ChevauxDAO;
 import database.ClientDAO;
@@ -31,6 +32,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modele.Acheteur;
 import modele.CategVente;
 import modele.Cheval;
 import modele.Client;
@@ -263,7 +265,22 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesEncheres", lesEncheres);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesEncheres.jsp").forward(request, response);
         }
-
+        
+        if (url.equals("/EquidaWeb18/ServletVentes/ajouterEnchere")) {
+            Compte compte = (Compte) request.getSession().getAttribute("Compte");
+            if (compte != null) {
+                
+                int codeAcheteur = compte.getUnClient().getId();
+                Acheteur unAcheteur = AcheteurDAO.getUnAcheteur(connection, codeAcheteur);
+                request.setAttribute("pUnAcheteur", unAcheteur);
+                
+                String idVente = (String) request.getParameter("idVente");
+                Lot unLot = LotDAO.getUnLot(connection, idVente);
+                request.setAttribute("pUnLot", unLot);
+                
+                this.getServletContext().getRequestDispatcher("/vues/ventes/enchereAjouter.jsp").forward(request, response);
+            }
+        }
         
         if (url.equals("/EquidaWeb18/ServletVentes/chevalModif")) {
             ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);

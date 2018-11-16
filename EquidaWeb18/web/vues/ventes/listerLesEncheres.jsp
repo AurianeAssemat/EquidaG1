@@ -63,20 +63,27 @@
                         if(enchere.getUnLot().getCheval().getMere() != null){
                             out.println("<td>");
                             out.println(enchere.getUnLot().getCheval().getMere().getNom());
-                            out.println("</td>");
+                            out.println("</td></tr>");
                         
                         }else{
                             out.println("<td>");
                             out.println("---");
-                            out.println("</td>");
+                            out.println("</td></tr>");
                         }
-                    
+                        
+                        int lotId = enchere.getUnLot().getId();
+                        int venteId = enchere.getUnLot().getUneVente().getId();
+                        System.out.println(lotId+""+venteId);
+                        
+                        out.println("<tr><td>");
+                        out.println("<a href='../ServletVentes/ajouterEnchere?idLot="+lotId+"&idVente="+venteId+"'>Encherir</a>");
+                        out.println("</td></tr>");
                     
                     %>
                 </tr>
             </tbody>
         </table>
-
+      
         <table  class="table table-bordered table-striped table-condensed">  
 
             <thead>
