@@ -102,9 +102,6 @@ public class TypeChevalDAO {
                 unTypeCheval.setId(idGenere);
             }
             
-            // ajout des enregistrement dans la table clientcategvente
-           
-            
         }   
         catch (SQLException e) 
         {

@@ -24,23 +24,34 @@
                 <%
 
                     TypeChevalForm form = (TypeChevalForm)request.getAttribute("form");
+                    
+                    if (form != null && form.getErreurs() != null) {
+                        for (int i = 0; i < form.getErreurs().size(); i++) {
+                            out.println(form.getErreurs().get(i) + "<br/>");
+                        }
+                    }
                 %>
 
             <form class="form-inline" action="typeChevalAjouter" method="POST">
-
-                    
-                    <label for="nom">Nom de la race : </label>
+                <div class="row">
+                    <div class="input-field col-s6">
+                        <label for="nom">Nom de la race : </label>
                         <input id="libelle" type="text" name="libelle"  size="35" maxlength="30">
-
+                    </div>
+                </div>
                     </br>
-
-                    <label for="typ_id">Description de la race : </label>
+                <div class="row">
+                    <div class="input-field col-s6">        
+                        <label for="typ_id">Description de la race : </label>
                         <input id="description" type="text" name="description"  size="55" maxlength="50">
-
+                    </div>
+                </div>
                     </br>
-
-                    <input type="submit" name="valider" id="valider" value="Valider"/>
-
+                <div class="row">
+                    <div class="input-field col-s6">  
+                        <button class="btn waves-effect waves-light" type="submit" name="valider">Ajouter cheval</button>
+                    </div>
+                </div>
             </form>       
         </div>
     </body>

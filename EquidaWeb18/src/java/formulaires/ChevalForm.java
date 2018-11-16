@@ -5,8 +5,6 @@
  */
 package formulaires;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import modele.Cheval;
@@ -20,31 +18,26 @@ import modele.TypeCheval;
 public class ChevalForm {
 
     private String resultat;
-    private Map<String, String> erreurs = new HashMap<String, String>();
+    private ArrayList<String> erreurs = new ArrayList<String>();
 
     public String getResultat() {
         return resultat;
     }
     
-    public void setErreurs(ArrayList<String> erreurs) {
-        this.erreurs = erreurs;
-    }
-    
-    public void addErreur(String message) {
-        getErreurs().add(message);
-    }
-    
     public void setResultat(String resultat) {
         this.resultat = resultat;
     }
-
-
-    public Map<String, String> getErreurs() {
+    
+    public ArrayList<String> getErreurs(){
         return erreurs;
     }
-   
-    public void setErreurs(Map<String, String> erreurs) {
+    
+    public void setErreurs(ArrayList<String> erreurs){
         this.erreurs = erreurs;
+    }
+    
+    public void addErreur(String message){
+        getErreurs().add(message);
     }
     
 

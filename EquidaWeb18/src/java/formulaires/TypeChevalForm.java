@@ -59,7 +59,7 @@ public class TypeChevalForm {
       
         TypeCheval unTypeCheval  = new TypeCheval();
          
-        String id = getDataForm( request, "id" );
+        //String id = getDataForm( request, "id" );
         
         String libelle = getDataForm( request, "libelle" );
         String description = getDataForm( request, "description" );
@@ -77,7 +77,7 @@ public class TypeChevalForm {
             resultat = "Échec de l'ajout.";
         }
          
-        unTypeCheval.setId(Integer.parseInt(id));
+        //unTypeCheval.setId(Integer.parseInt(id));
         unTypeCheval.setLibelle(libelle);
         unTypeCheval.setDescription(description);
      

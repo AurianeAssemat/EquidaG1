@@ -12,19 +12,6 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ajouter un cheval</title>
-    </head>
-    <body>
-        <h1>UN NOUVEAU CHEVAL</h1>
-        
-        <%       
-                ChevalForm form = (ChevalForm)request.getAttribute("form");
-        %>
-
-    
-
     <jsp:include page="/vues/Header.jsp" >
         <jsp:param name="NomPage" value="Ajouter un cheval" />
     </jsp:include>
@@ -35,13 +22,13 @@
         <div class="container">
             <div class="row">
                 <%
-                                         
-              
-                if(form != null && form.getErreurs() != null){
-                    for(int i = 0; i < form.getErreurs().size();i++)
-                    {
-                        out.println(form.getErreurs().get(i) + "<br/>");
 
+                    ChevalForm form = (ChevalForm) request.getAttribute("form");
+
+                    if (form != null && form.getErreurs() != null) {
+                        for (int i = 0; i < form.getErreurs().size(); i++) {
+                            out.println(form.getErreurs().get(i) + "<br/>");
+                        }
                     }
                 %>
                 <form class="form-inline" action="chevalAjouter" method="POST">
@@ -97,9 +84,6 @@
                                     }
                                 %>
 
-                                <input type="submit" name="valider" id="valider" value="Valider"/>
-                                
-
 
                             </select>
                             <label>Type de cheval :</label>
@@ -113,6 +97,5 @@
                 </form>
             </div>           
         </div>        
-
     </body>
 </html>

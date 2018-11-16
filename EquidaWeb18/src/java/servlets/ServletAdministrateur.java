@@ -85,13 +85,6 @@ public class ServletAdministrateur extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/vues/categVenteAjouter.jsp").forward(request, response);
         }
 
-
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter")) {
-            ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
-            request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
-            getServletContext().getRequestDispatcher("/vues/typeChevalAjouter.jsp").forward(request, response);
-        }
-
         if (url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter")) {
             ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
             request.setAttribute("pLesCourses", lesCourses);
@@ -159,6 +152,10 @@ public class ServletAdministrateur extends HttpServlet {
             //request.setAttribute("pLesTypeCheval", lesTypeCheval);
             this.getServletContext().getRequestDispatcher("/vues/typeChevaux/typeChevalAjouter.jsp" ).forward( request, response );
         }
+         
+         /*Consulter*/
+         
+        
         
     }
 
@@ -168,8 +165,10 @@ public class ServletAdministrateur extends HttpServlet {
         
         String url = request.getRequestURI();
         
-        if(url.equals("/EquidaWeb18/ServletVentes/typeChevalAjouter"))
+        if(url.equals("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter"))
         { 
+            
+            System.out.println("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter");
                 /* Préparation de l'objet formulaire */
            TypeChevalForm form = new TypeChevalForm();
 
@@ -184,42 +183,35 @@ public class ServletAdministrateur extends HttpServlet {
 
                // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
                TypeCheval typeChevalConsulter ;
-               System.out.println("avant modif");
-               if (unTypeCheval.getId() != 0 ){
-                   System.out.println("modif");
+               if (unTypeCheval.getId() != 0 )
+               {
                    typeChevalConsulter = TypeChevalDAO.ModifierTypeCheval(connection, unTypeCheval);
-
-
                }
 
                else 
                {
-                   System.out.println("ajout");
+
                    typeChevalConsulter = TypeChevalDAO.AjouterTypeCheval(connection, unTypeCheval);
                    //System.out.println(request);
                }
 
                    //verif l'insertion de données
-           TypeChevalDAO.getUnTypeCheval(connection, typeChevalConsulter.getId());
+                TypeChevalDAO.getUnTypeCheval(connection, typeChevalConsulter.getId());
 
                    //variable du client contenant toutes ces informations
            request.setAttribute( "pTypeCheval", typeChevalConsulter );
-           this.getServletContext().getRequestDispatcher("/vues/typeChevaux/TypeChevalConsulter.jsp" ).forward( request, response );
+           this.getServletContext().getRequestDispatcher("/vues/typeChevaux/typeChevalConsulter.jsp" ).forward( request, response );
 
            }
            else
            { 
                // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
 
-              this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp" ).forward( request, response );
+              this.getServletContext().getRequestDispatcher("/vues/typeChevaux/TypeChevalAjouter.jsp" ).forward( request, response );
            }
         }
     }
     
-    
-    
-        
-
     public String getServletInfo() {
         return "Short description";
     }
