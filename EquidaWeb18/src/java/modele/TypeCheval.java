@@ -11,24 +11,24 @@ package modele;
  */
 public class TypeCheval {
 
-    private String id;
-    private String libelle;
+    private int id;
+    private String libelle ;
     private String description;
 
     public TypeCheval() {
     }
 
-    public TypeCheval(String id, String libelle, String description) {
+    public TypeCheval(int id, String libelle, String description) {
         this.id = id;
         this.libelle = libelle;
         this.description = description;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

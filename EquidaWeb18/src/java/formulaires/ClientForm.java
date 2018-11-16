@@ -62,14 +62,16 @@ public class ClientForm {
         Client unClient = new Client();
 
         //int id = unClient.getId();
-        String id = getDataForm(request, "id");
-        String nom = getDataForm(request, "nom");
-        String prenom = getDataForm(request, "prenom");
-        String rue = getDataForm(request, "rue");
-        String copos = getDataForm(request, "copos");
-        String ville = getDataForm(request, "ville");
 
-        String pays = getDataForm(request, "codePays");
+        String id = getDataForm( request, "id" );
+        String nom = getDataForm( request, "nom" );
+        String prenom = getDataForm( request, "prenom");
+        String rue = getDataForm( request, "rue" );
+        String copos = getDataForm( request, "copos");
+        String ville = getDataForm( request, "ville" );
+  
+        String pays = getDataForm( request, "codePays" );
+
         Pays unPays = new Pays(pays);
 
         String titre = getDataForm(request, "civilite");

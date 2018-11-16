@@ -42,7 +42,7 @@ public class ChevauxDAO {
             requete.setString(3, unCheval.getSire());
 
             if (unCheval.getTypeCheval() != null) {
-                requete.setInt(4, Integer.parseInt(unCheval.getTypeCheval().getId()));
+                requete.setInt(4, unCheval.getTypeCheval().getId());
             } else {
                 requete.setString(4, null);
             }
@@ -109,7 +109,7 @@ public class ChevauxDAO {
                     rtc.next();
 
                     TypeCheval unTypeCheval = new TypeCheval();
-                    unTypeCheval.setId(rtc.getString("id"));
+                    unTypeCheval.setId(rtc.getInt("id"));
                     unTypeCheval.setLibelle(rtc.getString("libelle"));
                     unTypeCheval.setDescription(rtc.getString("description"));
 
@@ -201,7 +201,7 @@ public class ChevauxDAO {
                     rtc.next();
 
                     TypeCheval unTypeCheval = new TypeCheval();
-                    unTypeCheval.setId(rtc.getString("id"));
+                    unTypeCheval.setId(rtc.getInt("id"));
                     unTypeCheval.setLibelle(rtc.getString("libelle"));
                     unTypeCheval.setDescription(rtc.getString("description"));
 
@@ -295,7 +295,7 @@ public class ChevauxDAO {
                     rtc.next();
 
                     TypeCheval unTypeCheval = new TypeCheval();
-                    unTypeCheval.setId(rtc.getString("id"));
+                    unTypeCheval.setId(rtc.getInt("id"));
                     unTypeCheval.setLibelle(rtc.getString("libelle"));
                     unTypeCheval.setDescription(rtc.getString("description"));
 
@@ -373,7 +373,7 @@ public class ChevauxDAO {
             requete.setString(3, unCheval.getSire());
 
             if (unCheval.getTypeCheval() != null) {
-                requete.setInt(4, Integer.parseInt(unCheval.getTypeCheval().getId()));
+                requete.setInt(4, unCheval.getTypeCheval().getId());
             } else {
                 requete.setString(4, null);
             }

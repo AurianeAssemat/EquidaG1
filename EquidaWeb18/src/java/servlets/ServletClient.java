@@ -89,7 +89,9 @@ public class ServletClient extends HttpServlet {
 
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
             request.setAttribute("pLesCategVente", lesCategVentes);
-            this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp").forward(request, response);
+
+            this.getServletContext().getRequestDispatcher("/vues/clients/clientAjouter.jsp" ).forward( request, response );
+
         }
 
         //lister les clients en tant que directeur
@@ -98,8 +100,9 @@ public class ServletClient extends HttpServlet {
 
             ArrayList<Client> lesClients = ClientDAO.getLesClients(connection);
             request.setAttribute("pLesClients", lesClients);
-            getServletContext().getRequestDispatcher("/vues/listerLesClients.jsp").forward(request, response);
 
+            getServletContext().getRequestDispatcher("/vues/clients/listerLesClients.jsp").forward(request, response);
+            
         }
 
         if (url.equals("/EquidaWeb18/ServletClient/listerLesAcheteurs")) {
@@ -122,26 +125,28 @@ public class ServletClient extends HttpServlet {
 
         //System.out.println("URL=" + url);
         //MODIFICATION DE 1 CLIENT 
-        if (url.equals("/EquidaWeb18/ServletClient/clientModif")) {
 
-            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
-            request.setAttribute("pLesPays", lesPays);
-
-            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-            request.setAttribute("pLesCategVente", lesCategVentes);
-
-            System.out.println("param " + request.getParameter("id"));
-            int idClient = Integer.parseInt(request.getParameter("id"));
-            System.out.println("id client " + idClient);
-
-            Client unClient = ClientDAO.getUnClient(connection, idClient);
-            unClient.setId(idClient);
-            request.setAttribute("pClient", unClient);
-            //System.out.println("client " + unClient);
-            //Client clientModif = ClientDAO.modifUnClient(connection, idClient);
-
-            getServletContext().getRequestDispatcher("/vues/clientModif.jsp").forward(request, response);
-        }
+       if(url.equals("/EquidaWeb18/ServletClient/clientModif"))
+       {
+           
+           ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+           request.setAttribute("pLesPays", lesPays);
+           
+           ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+           request.setAttribute("pLesCategVente", lesCategVentes);
+           
+           System.out.println("param " + request.getParameter("id"));
+           int idClient = Integer.parseInt(request.getParameter("id"));
+           System.out.println("id client "+ idClient);
+           
+           Client unClient = ClientDAO.getUnClient(connection, idClient );
+           unClient.setId(idClient);
+           request.setAttribute("pClient", unClient);
+           //System.out.println("client " + unClient);
+           //Client clientModif = ClientDAO.modifUnClient(connection, idClient);
+           
+           getServletContext().getRequestDispatcher("/vues/clients/clientModif.jsp").forward(request, response);
+       }
 
     }
 
@@ -176,27 +181,35 @@ public class ServletClient extends HttpServlet {
                 System.out.println("modif");
                 clientConsult = ClientDAO.modifierClient(connection, unClient);
 
-            } else {
+
+            }else 
+            {
+
                 System.out.println("ajout");
                 clientConsult = ClientDAO.ajouterClient(connection, unClient);
                 //System.out.println(request);
             }
 
-            //verif l'insertion de données
-            ClientDAO.getUnClient(connection, clientConsult.getId());
+                
+                //verif l'insertion de données
+        ClientDAO.getUnClient(connection, clientConsult.getId());
 
-            //variable du client contenant toutes ces informations
-            request.setAttribute("pClient", clientConsult);
-            this.getServletContext().getRequestDispatcher("/vues/clientConsulter.jsp").forward(request, response);
+         //variable du client contenant toutes ces informations
+        request.setAttribute( "pClient", clientConsult );
+        this.getServletContext().getRequestDispatcher("/vues/clients/clientConsulter.jsp" ).forward( request, response );
+                
+        }
+        else
+        { 
 
-        } else {
-            // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
             ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
             request.setAttribute("pLesPays", lesPays);
 
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
             request.setAttribute("pLesCategVente", lesCategVentes);
-            this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp").forward(request, response);
+
+           this.getServletContext().getRequestDispatcher("/vues/clients/clientAjouter.jsp" ).forward( request, response );
+
         }
 
     }

@@ -36,7 +36,7 @@ public class VenteDAO {
         ArrayList<Vente> lesVentes = new ArrayList<Vente>();
         try {
             //preparation de la requete     
-            requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id order by dateDebut desc");
+            requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id And archiver != 1 order by dateDebut desc");
             //executer la requete
             rs = requete.executeQuery();
 
@@ -77,7 +77,7 @@ public class VenteDAO {
         ArrayList<Vente> lesVentes = new ArrayList<Vente>();
         try {
             //preparation de la requete     
-            requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id  AND codeCategVente= ? order by dateDebut desc");
+            requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id  AND codeCategVente= ?  And archiver != 1 order by dateDebut desc");
             requete.setString(1, codeCateg);
             //executer la requete
             rs = requete.executeQuery();

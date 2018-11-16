@@ -71,14 +71,32 @@
                                 out.println("</td>");
 
 
-                                
-
-
-                                
-                        
+                               
                                 out.println("<td>");
-                                out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerMesChevaux?codeCheval="+ unCheval.getId()+ "'><i class=\"material-icons\">delete</i></a>");
-                                out.println("</td>");
+                                if(unCheval.getLesParticipation() != null){
+                                    for(int j = 0; j < unCheval.getLesParticipation().size();j++)
+                                    {
+                                        out.println("Place n°");
+                                        out.println(unCheval.getLesParticipation().get(j).getPlace());
+                                        out.println(" dans la ");
+                                        out.println(unCheval.getLesParticipation().get(j).getUneCourse().getNom());
+                                        out.println(" à ");
+                                        out.println(unCheval.getLesParticipation().get(j).getUneCourse().getLieu());
+                                        out.println(" le ");
+                                        out.println(unCheval.getLesParticipation().get(j).getUneCourse().getDate());
+                                        out.println("<br/>");
+                                    }
+                                }else{
+                                      out.println("<td>");
+                                    out.println("</td>");  
+
+                                }
+                               
+                               out.println("<td>");
+                               out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerMesChevaux?codeCheval=" + unCheval.getId()+ "'><i class=\"material-icons\">delete</i></a>");
+                               out.println("</td>");
+
+
                                
                                 out.println("<td>");
                                 out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/chevalModif?id="+ unCheval.getId()+ "'><i class=\"material-icons\">create</i></a>");

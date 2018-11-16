@@ -45,6 +45,8 @@ public class CourseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return lesCourses;
     }
+
 }

@@ -42,8 +42,7 @@
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerMesChevaux</url-pattern>
     </servlet-mapping>
-   
-    
+      
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesChevaux</url-pattern>
@@ -95,7 +94,14 @@
         <url-pattern>/ServletVentes/chevalAjouter</url-pattern>
     </servlet-mapping>
     
-    <!--Servlet client --> 
+   <!-- Servlet consulter -->   
+     
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/chevalConsulter</url-pattern>
+    </servlet-mapping>
+    
+<!--Servlet client --> 
        
     <servlet>
         <servlet-name>ServletClient</servlet-name>
@@ -236,10 +242,12 @@
         <servlet-name>ServletAdministrateur</servlet-name>
         <url-pattern>/ServletAdministrateur/PaysAjouter</url-pattern>
     </servlet-mapping>
-       
+           
+    <!--Servlet consulter -->
+
     <servlet-mapping>
-        <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/chevalConsulter</url-pattern>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/typeChevalConsulter</url-pattern>
     </servlet-mapping>
 
     
