@@ -5,6 +5,10 @@
 --%>
 
 
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.lang.System"%>
+<%@page import="java.util.Date"%>
 <%@page import="modele.Vente"%>
 <%@page import="modele.CategVente"%>
 <%@page import="java.util.ArrayList"%>
@@ -22,6 +26,7 @@
         <div class="container">
             <div class="row">
                 <%
+                    SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
                     ArrayList<Vente> lesVentes = (ArrayList) request.getAttribute("pLesVentes");
                     ArrayList<CategVente> lesCategVentes = (ArrayList) request.getAttribute("pLesCategVentes");
                 %>
@@ -87,11 +92,14 @@
                                 out.println("<td>");
                                 out.println(uneVente.getDateDebutVente());
                                 out.println("</td>");
-                           
+                                
+                                String dateBase = uneVente.getDateDebutVente();
+                                Date date1 = sdf.parse(dateBase);
+                                
                                 out.println("<td>");
-                                out.println(uneVente.getDateFinVente());
+                                out.println(date1);
                                 out.println("</td>");
-                         
+                                                              
                                 out.println("<td>");
                                 out.println(uneVente.getdateDebutInscrip());
                                 out.println("</td>");
@@ -104,7 +112,7 @@
                                 out.println(uneVente.getUneCategVente().getLibelle());
                                 out.println("</td>");
                            
-
+                                    
                                 out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat="+ uneVente.getUneCategVente().getCode()+ "'>");
                                 out.println("Lister les clients interessés");
                                 out.println("</td>");
