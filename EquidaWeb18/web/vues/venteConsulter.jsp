@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Consultation Vente</title>
         <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="venteConsulter" value="Consulter une Vente" />
+            <jsp:param name="venteConsulter" value="Consulter une Vente" />
         </jsp:include>
     </head>
     <body>
@@ -16,7 +16,7 @@
                 <center><h1>Infos ventes</h1></center>
 
                 <%
-               Vente uneVente = (Vente)request.getAttribute("pVente");
+                    Vente uneVente = (Vente) request.getAttribute("pVente");
                 %>
 
 
