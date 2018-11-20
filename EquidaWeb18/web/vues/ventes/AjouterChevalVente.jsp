@@ -21,11 +21,9 @@
 
     <body>
         <jsp:include page="/vues/MenuNavigation.jsp" />
-
         <div class="container">
             <div class="row">
                 <%
-
                     ChevalVenteForm form = (ChevalVenteForm) request.getAttribute("form");
 
                     if (form != null && form.getErreurs() != null) {
@@ -47,22 +45,21 @@
 
                                     }
                                 %>
-
-
                             </select>
                             <label>Cheval :</label>
                         </div>
                     </div>
-
                     <div class="row">    
                         <div class="input-field col s12">
                             <input placeholder="prixdepart" id="prixdepart" name="prixdepart" type="number" class="validate">
                             <label for="prixdepart">Prix de départ :</label>
                         </div>
                     </div>
-                    
-                    <input name="vente" type="hidden" value='<% out.println( request.getAttribute("codeVente"));%>'>
-                                
+                    <div class="row">    
+                        <div class="input-field col s12">
+                            <input name="vente" type="hidden" value='<% out.println(request.getAttribute("codeVente"));%>'>
+                        </div>
+                    </div>
                     <button class="btn waves-effect waves-light" type="submit" >Ajouter
                         <i class="material-icons right">send</i>
                     </button>

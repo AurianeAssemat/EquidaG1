@@ -35,14 +35,12 @@
                 %>
                 <form class="form-inline" action="chevalModif" method="POST">
 
-
                     <div class="row">
                         <div class="input-field col s12">
                             <input placeholder="Nom" id="nom" name="nom" type="text" value="<% out.println(unCheval.getNom());%>" class="validate">
                             <label for="nom">Nom</label>
                         </div>
                     </div>
-
 
                     <div class="row">    
                         <div class="input-field col s1">                 
@@ -101,9 +99,11 @@
                             <label>Type de cheval :</label>
                         </div>
                     </div>
-
-                    <input name="id" type="hidden" value='<% out.println(unCheval.getId());%>'>
-                    
+                    <div class="row">  
+                        <div class="input-field col s12">
+                            <input name="id" type="hidden" value='<% out.println(unCheval.getId());%>'>
+                        </div>
+                    </div>
                     <button class="btn waves-effect waves-light" type="submit" >Modifier
                         <i class="material-icons right">send</i>
                     </button>

@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Vente Ajouter</title>
         <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="NomPage" value="Lister mes Chevaux" />
+            <jsp:param name="NomPage" value="Lister mes Chevaux" />
         </jsp:include>
     </head>
     <body>
@@ -23,74 +23,88 @@
         <div class="container">
             <div class="row">
                 <h1>NOUVELLE VENTE</h1>
-        
+
                 <%
-                        //Vente vente=(Vente)request.getAttribute("vente");
-                        VenteForm form = (VenteForm)request.getAttribute("form");
+                    //Vente vente=(Vente)request.getAttribute("vente");
+                    VenteForm form = (VenteForm) request.getAttribute("form");
 
-                        if(form != null && form.getErreurs() != null){
-                            for(int i = 0; i < form.getErreurs().size();i++)
-                            {
-                                out.println(form.getErreurs().get(i) + "<br/>");
-                            }
+                    if (form != null && form.getErreurs() != null) {
+                        for (int i = 0; i < form.getErreurs().size(); i++) {
+                            out.println(form.getErreurs().get(i) + "<br/>");
                         }
+                    }
 
-                    %>
+                %>
 
-                    <form class="form-inline" action="ajouterVente" method="POST">
-                        <label for="id">Id : </label>
-                        <input id="id" type="text" name="id"  size="30" maxlength="30">
-                        </br>
-                        </br>
+                <form class="form-inline" action="ajouterVente" method="POST">
+                    <div class="row">
+                        <div class="input-field col s12">
 
-                        <label for="nom">Nom : </label>
-                        <input id="nom" type="text" name="nom"  size="30" maxlength="30">
-                        </br>
-                        </br>
+                            <input id="id" type="text" name="id"  size="30" maxlength="30">
+                            <label for="id">Id : </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
 
-                        <label for="dtdebut">Date de début de la vente : </label>
-                        <input id="dtdebut"  type="text"  name="dtdebut" size="30" maxlength="10">      
-                         </br>
+                            <input id="nom" type="text" name="nom"  size="30" maxlength="30">
+                            <label for="nom">Nom : </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="dtdebut"  type="text"  name="dtdebut" type="text" class="datepicker">      
+                            <label for="dtdebut">Date de début de la vente : </label>
+                        </div>
+                    </div>
 
-                        <label for="dtfin">Date de fin de la vente : </label>
-                        <input id="dtfin"  type="text"  name="dtfin" size="30" maxlength="10">
-                         </br>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="dtfin"  type="text"  name="dtfin" type="text" class="datepicker">
+                            <label for="dtfin">Date de fin de la vente : </label>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="dtdebutinscrip"  type="text"  name="dtdebutinscrip" type="text" class="datepicker">
+                            <label for="dtdebutinscrip">Date de début des inscriptions : </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <select id="idLieu" name="idLieu" >
+                                <%                                ArrayList<Lieu> lesLieux = (ArrayList) request.getAttribute("pLesLieux");
+                                    for (int i = 0; i < lesLieux.size(); i++) {
+                                        Lieu l = lesLieux.get(i);
+                                        out.println("<option value='" + l.getId() + "'>" + l.getVille() + "</option>");
+                                    }
+                                %>
+                            </select>
+                            <label for="lieu">Lieu : </label>
+                        </div>
+                    </div>
 
-                        <label for="dtdebutinscrip">Date de début des inscriptions : </label>
-                        <input id="dtdebutinscrip"  type="text"  name="dtdebutinscrip" size="30" maxlength="10">
-                        </br>
+                    <div class="row">
+                        <div class="input-field col s12">
 
-                        <label for="lieu">Lieu : </label>
-                        <select id="idLieu" name="idLieu" >
-                            <%
-                                ArrayList<Lieu> lesLieux = (ArrayList)request.getAttribute("pLesLieux");
-                                for (int i=0; i<lesLieux.size();i++){
-                                    Lieu l = lesLieux.get(i);
-                                    out.println("<option value='" + l.getId()+"'>" + l.getVille()+"</option>" );
-                                }
-                            %>
-                        </select>
-                        </br>
-                        </br>
+                            <select name="categVente" size="5" >
+                                <%
+                                    ArrayList<CategVente> lesCategVente = (ArrayList) request.getAttribute("pLesCategVente");
+                                    for (int i = 0; i < lesCategVente.size(); i++) {
+                                        CategVente cv = lesCategVente.get(i);
+                                        out.println("<option value ='" + cv.getCode() + "'>" + cv.getLibelle() + "</option>");
 
-                        <label for="categvente">Categorie Vente : </label>
-                        <select name="categVente" size="5" multiple>
-                        <%
-                                ArrayList<CategVente> lesCategVente = (ArrayList)request.getAttribute("pLesCategVente");
-                                for (int i=0; i<lesCategVente.size();i++){
-                                    CategVente cv = lesCategVente.get(i);
-                                    out.println("<option value ='" + cv.getCode() + "'>" + cv.getLibelle() + "</option>"); 
-
-                                }
-                            %>
-                        </select>
-                        </br>
-
+                                    }
+                                %>
+                            </select>
+                            <label for="categvente">Categorie Vente : </label>
+                        </div>
+                    </div>
                     <input type="submit" name="valider" id="valider" value="Valider"/>
-                    </form>
-                </div>
+                </form>
             </div>
+        </div>
 
     </body>
 </html>
