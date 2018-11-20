@@ -324,7 +324,7 @@ public class ServletVentes extends HttpServlet {
             
             CourrielDAO.ajouterCourriel(connection, courriel);
             
-            response.sendRedirect("/EquidaWeb18/ServletVentes/envoyerMail?id=" + courriel.getId());
+            response.sendRedirect( "/EquidaWeb18/ServletVentes/envoyerMail?id=" + courriel.getId());
         } else {
            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
            request.setAttribute("pLesVentes", lesVentes);

@@ -5,11 +5,19 @@
  */
 package formulaires;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import modele.Courriel;
 import modele.Vente;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -66,33 +74,60 @@ public class CourrielForm {
         }
     }
     
-    public Courriel ajouterCourriel(HttpServletRequest request) {
+    public Courriel ajouterCourriel(HttpServletRequest request) throws ServletException, IOException {
       
         Courriel courriel = new Courriel();
         
-        String objet = getDataForm(request, "objet");
-        String corps = getDataForm(request, "corps");
-        
-        int venteId = Integer.parseInt(getDataForm(request, "venteId" ));
-        Vente vente = new Vente();
-        vente.setId(venteId);
-        
         try {
-            validationObjet(objet);
-        } catch (Exception e) {
-            addErreur(e.getMessage());
-        }
-        courriel.setObjet(objet);
-        
-        try {
-             validationCorps(corps);
-        } catch (Exception e) {
-            addErreur(e.getMessage());
-        }
-        courriel.setCorps(corps);
 
-        courriel.setUneVente(vente);
-      
+            List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+
+            for (FileItem item : items) {
+
+                if (item.isFormField()) {
+                    
+                    String nomChamp = item.getFieldName();
+                    
+                    if(nomChamp.equals("objet")) {
+                       String objet = item.getString();
+                       
+                       try {
+                            validationObjet(objet);
+                       } catch (Exception e) {
+                            addErreur(e.getMessage());
+                       }
+                       
+                       courriel.setObjet(objet);
+                    } else if (nomChamp.equals("corps")) {
+                        String corps = item.getString();
+                         
+                        try {
+                             validationCorps(corps);
+                        } catch (Exception e) {
+                            addErreur(e.getMessage());
+                        }
+                        courriel.setCorps(corps);
+                    } else if (nomChamp.equals("venteId")) {
+                        String venteId = item.getString();
+                        
+                        int idVente = Integer.parseInt(venteId);
+                        Vente vente = new Vente();
+                        vente.setId(idVente);
+                        
+                        courriel.setUneVente(vente);
+                    }
+                } else {
+                   InputStream contenuFichier = item.getInputStream();
+                }
+
+            }
+
+        } catch (FileUploadException e) {
+
+            throw new ServletException("Échec de l'analyse de la requête multipart.", e);
+
+        }
+        
         return courriel;
     }
 }
