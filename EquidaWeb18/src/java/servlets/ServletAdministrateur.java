@@ -154,6 +154,17 @@ public class ServletAdministrateur extends HttpServlet {
 
                 
         }
+        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUneCourse"))
+        {  
+            
+            int codeCourse =Integer.parseInt(request.getParameter("codeCourse"));
+
+            CourseDAO.SupprimerUneCourse(connection,codeCourse);
+            
+            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamCourse");
+
+                
+        }
 
         
         /*

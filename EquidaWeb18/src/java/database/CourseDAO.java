@@ -27,7 +27,7 @@ public class CourseDAO {
         ArrayList<Course> lesCourses = new ArrayList<Course>();
         try {
 
-            requete = connection.prepareStatement("select * from course");
+            requete = connection.prepareStatement("select * from course where archiver !=1");
             //executer la requete
             rs = requete.executeQuery();
 
@@ -133,7 +133,7 @@ public class CourseDAO {
         return unCourse ; 
 
     }
-     public static void  SupprimerUnCourse(Connection connection,int codeCourse){      
+     public static void  SupprimerUneCourse(Connection connection,int codeCourse){      
       
         try
         {
