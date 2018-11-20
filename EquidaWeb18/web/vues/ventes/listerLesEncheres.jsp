@@ -4,6 +4,7 @@
     Author     : author Assemat
 --%>
 
+<%@page import="modele.Vente"%>
 <%@page import="modele.Cheval"%>
 <%@page import="modele.Lot"%>
 <%@page import="modele.Enchere"%>
@@ -63,27 +64,33 @@
                         if(enchere.getUnLot().getCheval().getMere() != null){
                             out.println("<td>");
                             out.println(enchere.getUnLot().getCheval().getMere().getNom());
-                            out.println("</td></tr>");
+                            out.println("</td>");
                         
                         }else{
                             out.println("<td>");
                             out.println("---");
-                            out.println("</td></tr>");
+                            out.println("</td>");
                         }
                         
-                        int lotId = enchere.getUnLot().getId();
-                        int venteId = enchere.getUnLot().getUneVente().getId();
-                        System.out.println(lotId+""+venteId);
-                        
-                        out.println("<tr><td>");
-                        out.println("<a href='../ServletVentes/ajouterEnchere?idLot="+lotId+"&idVente="+venteId+"'>Encherir</a>");
-                        out.println("</td></tr>");
-                    
                     %>
                 </tr>
             </tbody>
         </table>
-      
+                
+                <p>
+                    <%
+                        // je dois recuperer l'id du lot et de la vente pour encherir sur un cheval (donc ajouter une enchere)  
+                        Lot unlot = enchere.getUnLot();
+                        int lotId = unlot.getId();
+                        System.out.println(lotId); //test de la recuperation de l'id du lot
+                        Vente unevente = unlot.getUneVente();
+                        int venteId = unevente.getId(); 
+                        System.out.println(venteId); //test de la recuperation de l'id de la vente
+                        
+                        out.println("<a href='../ServletVentes/ajouterEnchere?idLot="+lotId+"&idVente="+venteId+"'>Encherir</a>");
+                    %>
+                </p>
+                
         <table  class="table table-bordered table-striped table-condensed">  
 
             <thead>

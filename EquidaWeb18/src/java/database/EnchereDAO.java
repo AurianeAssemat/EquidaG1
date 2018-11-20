@@ -50,15 +50,16 @@ public class EnchereDAO {
                 uneEnchere.setMontant(rs.getInt("montant"));
 
                 Lot unLot = new Lot();
-                unLot.setId(rs.getInt("id"));
+                unLot.setId(rs.getInt("lot.id"));
                 unLot.setPrixDepart(rs.getFloat("prixDepart"));
 
                 Vente uneVente = new Vente();
                 uneVente.setId(rs.getInt("vent_id"));
+                unLot.setUneVente(uneVente);
 
                 Cheval unCheval = new Cheval();
-                unCheval.setId(rs.getInt("id"));
-                unCheval.setNom(rs.getString("nom"));
+                unCheval.setId(rs.getInt("cheval.id"));
+                unCheval.setNom(rs.getString("cheval.nom"));
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setSire(rs.getString("sire"));
 

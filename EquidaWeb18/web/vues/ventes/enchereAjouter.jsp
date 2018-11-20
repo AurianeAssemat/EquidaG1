@@ -37,25 +37,24 @@
                 <td><% unLot.getCheval().getSire(); %></td>
             </tr>
             
-        
-                <%
-
-                    EnchereForm form = (EnchereForm) request.getAttribute("form");
-
-                    if (form != null && form.getErreurs() != null) {
-                        for (int i = 0; i < form.getErreurs().size(); i++) {
-                            out.println(form.getErreurs().get(i) + "<br/>");
-                        }
-                    }
-                %>
-                
-        <form class="form-inline" action="enchereAjouter" method="POST">
-                    
-            <label for="montant">Montant : </label>
-            <input id="montant" type="number" name="montant">
-            <br>
             
-            <input type="submit" name="valider" id="valider" value="Valider"/>
-        </form>
+            <%
+                EnchereForm form = (EnchereForm) request.getAttribute("form");
+                
+                if (form != null && form.getErreurs() != null) {
+                    for (int i = 0; i < form.getErreurs().size(); i++) {
+                        out.println(form.getErreurs().get(i) + "<br/>");
+                    }
+                }
+            %>
+            
+            <form class="form-inline" action="enchereAjouter" method="POST">
+                
+                <label for="montant">Montant : </label>
+                <input id="montant" type="number" name="montant"/>
+                <br>
+                
+                <input type="submit" name="valider" id="valider" value="Valider"/>
+            </form>
     </body>
 </html>

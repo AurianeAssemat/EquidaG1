@@ -160,24 +160,25 @@ public class LotDAO {
     }
      
      //methode pour récuperer un Lot
-     public static Lot getUnLot(Connection connection, String codevente) {
+     public static Lot getUnLot(Connection connection, String idVente, String idLot) {
         Lot leLot = new Lot();
         try {
             //preparation de la requete     
-            requete = connection.prepareStatement("select * from lot,cheval,typecheval where lot.che_id = cheval.id AND cheval.typ_id = typecheval.id AND vent_id = ?");
-            requete.setString(1, codevente);
+            requete = connection.prepareStatement("select * from lot,cheval,typecheval where lot.che_id = cheval.id AND cheval.typ_id = typecheval.id AND vent_id = ? AND lot.id = ?");
+            requete.setString(1, idVente);
+            requete.setString(2, idLot);
             //executer la requete
             rs = requete.executeQuery();
 
             //On hydrate l'objet métier Lot avec les résultats de la requête
             while (rs.next()) {
                 Lot unLot = new Lot();
-                unLot.setId(rs.getInt("id"));
+                unLot.setId(rs.getInt("idlot"));
                 unLot.setPrixDepart(rs.getFloat("prixDepart"));
 
                 Cheval unCheval = new Cheval();
-                unCheval.setId(rs.getInt("id"));
-                unCheval.setNom(rs.getString("nom"));
+                unCheval.setId(rs.getInt("cheval.id"));
+                unCheval.setNom(rs.getString("cheval.nom"));
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setSire(rs.getString("sire"));
 
@@ -249,7 +250,7 @@ public class LotDAO {
                 unLot.setCheval(unCheval);
                 
                 Vente uneVente = new Vente();
-                uneVente.setId(Integer.parseInt(codevente));
+                uneVente.setId(Integer.parseInt(idVente));
                 unLot.setUneVente(uneVente);
                 
             }

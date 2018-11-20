@@ -56,13 +56,13 @@ public class EnchereForm {
         //int id = unClient.getId();
         int montant = Integer.parseInt(getDataForm(request, "montant"));
 
-    if (erreurs.isEmpty()) {
+        if (erreurs.isEmpty()) {
             resultat = "Succès de l'ajout.";
         } else {
             resultat = "Échec de l'ajout.";
         }
 
-        uneEnchere.setLot(unLot);
+        //uneEnchere.setLot(unLot);
         uneEnchere.setMontant(montant);
 
         return uneEnchere;

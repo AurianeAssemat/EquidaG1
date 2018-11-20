@@ -274,11 +274,14 @@ public class ServletVentes extends HttpServlet {
                 Acheteur unAcheteur = AcheteurDAO.getUnAcheteur(connection, codeAcheteur);
                 request.setAttribute("pUnAcheteur", unAcheteur);
                 
+                String idLot = (String) request.getParameter("idLot");
                 String idVente = (String) request.getParameter("idVente");
-                Lot unLot = LotDAO.getUnLot(connection, idVente);
+                Lot unLot = LotDAO.getUnLot(connection, idVente, idLot);
                 request.setAttribute("pUnLot", unLot);
                 
                 this.getServletContext().getRequestDispatcher("/vues/ventes/enchereAjouter.jsp").forward(request, response);
+            } else {
+                this.getServletContext().getRequestDispatcher("/vues/nonConnecte.jsp").forward(request, response);
             }
         }
         
