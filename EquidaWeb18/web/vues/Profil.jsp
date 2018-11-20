@@ -20,59 +20,60 @@
         <div class="container">
             <div class="row">
                 <%
-               Compte compte = (Compte)request.getAttribute("pInformationPersonnelle");
+                    Compte compte = (Compte) request.getAttribute("pInformationPersonnelle");
                 %>
+                <div class="row">
+                    <table  class="table table-bordered table-striped table-condensed">  
+                        <thead>
+                            <tr>
+                                <th>Nom de compte :</th>   
+                                    <%
+                                        out.println("<th>" + compte.getLogin() + "</th>");
+                                    %>
+                            </tr>
+                            <%
+                                if (compte.getUnClient().getTitre() != null) {
+                                    out.println("<tr><th>Civilité :</th>  <th>" + compte.getUnClient().getTitre() + "</th></tr>");
+                                }
+                            %>
+                            <tr>
+                                <th>Nom :</th>     
+                                    <%
+                                        out.println("<th>" + compte.getUnClient().getNom() + "</th>");
+                                    %>
+                            </tr>
+                            <tr>
+                                <th>Prenom :</th>     
+                                    <%
+                                        out.println("<th>" + compte.getUnClient().getPrenom() + "</th>");
+                                    %>
+                            </tr>
+                            <%
+                                if (compte.getUnClient().getRue() != null) {
+                                    out.println("<tr><th>Adresse :</th>  <th>" + compte.getUnClient().getRue() + "</th></tr>");
+                                }
+                            %>
 
-                <table  class="table table-bordered table-striped table-condensed">  
-                    <thead>
-                        <tr>
-                            <th>Nom de compte :</th>   
-                                <%
-                                    out.println("<th>"+ compte.getLogin() +"</th>");
-                                %>
-                        </tr>
-                        <%
-                        if(compte.getUnClient().getTitre() != null){
-                            out.println("<tr><th>Civilité :</th>  <th>"+ compte.getUnClient().getTitre() +"</th></tr>");
-                        }
-                        %>
-                        <tr>
-                            <th>Nom :</th>     
-                                <%
-                                    out.println("<th>"+ compte.getUnClient().getNom() +"</th>");
-                                %>
-                        </tr>
-                        <tr>
-                            <th>Prenom :</th>     
-                                <%
-                                    out.println("<th>"+ compte.getUnClient().getPrenom() +"</th>");
-                                %>
-                        </tr>
-                        <%
-                        if(compte.getUnClient().getRue() != null){
-                            out.println("<tr><th>Adresse :</th>  <th>"+ compte.getUnClient().getRue() +"</th></tr>");
-                        }
-                        %>
+                            <tr>
+                                <th>Code Postal :</th>     
+                                    <%
+                                        out.println("<th>" + compte.getUnClient().getCopos() + "</th>");
+                                    %>
+                            </tr>
+                            <%
+                                if (compte.getUnClient().getVille() != null) {
+                                    out.println("<tr><th>Ville :</th>  <th>" + compte.getUnClient().getVille() + "</th></tr>");
+                                }
+                            %>
+                            <%
+                                if (compte.getUnClient().getMail() != null && compte.getUnClient().getMail() != "") {
+                                    out.println("<tr><th>E-mail :</th>  <th>" + compte.getUnClient().getMail() + "</th></tr>");
+                                }
+                            %>
 
-                        <tr>
-                            <th>Code Postal :</th>     
-                                <%
-                                   out.println("<th>"+ compte.getUnClient().getCopos() +"</th>");
-                                %>
-                        </tr>
-                        <%
-                        if(compte.getUnClient().getVille() != null){
-                            out.println("<tr><th>Ville :</th>  <th>"+ compte.getUnClient().getVille() +"</th></tr>");
-                        }
-                        %>
-                        <%
-                        if(compte.getUnClient().getMail() != null &&compte.getUnClient().getMail() != "" ){
-                            out.println("<tr><th>E-mail :</th>  <th>"+ compte.getUnClient().getMail() +"</th></tr>");
-                        }
-                        %>
-
-                        </tbody>
-                </table>
+                            </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </body>

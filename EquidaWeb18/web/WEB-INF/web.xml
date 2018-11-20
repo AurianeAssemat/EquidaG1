@@ -7,12 +7,11 @@
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
         <param-value>jdbc:mysql://localhost/Equida18_G1</param-value>
-        <!--<param-value>jdbc:mysql://localhost/equida18_g1</param-value>-->
     </context-param>
     <context-param>
         <param-name>utilisateurjdbc</param-name>
         <param-value>root</param-value>
-       <!-- <param-value>root/param-value>-->
+
     </context-param>
     <context-param>
         <param-name>motdepassejdbc</param-name>
@@ -109,7 +108,15 @@
         <url-pattern>/ServletVentes/chevalConsulter</url-pattern>
     </servlet-mapping>
     
-<!--Servlet client --> 
+    <!--Servlet modifier-->
+    
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/venteModifier</url-pattern>
+    </servlet-mapping>
+    
+    <!--Servlet client --> 
+
        
     <servlet>
         <servlet-name>ServletClient</servlet-name>
@@ -146,6 +153,7 @@
         <url-pattern>/ServletClient/clientModif</url-pattern>
     </servlet-mapping>
     
+
     <!--Servlet accueil -->    
 
     <servlet>

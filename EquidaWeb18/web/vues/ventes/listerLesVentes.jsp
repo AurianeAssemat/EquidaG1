@@ -132,7 +132,7 @@
                                  out.println("</td>");
 
                                  out.println("<td>");
-                                 out.println("<a class=\"waves-effect waves-light btn-small\" ><i class=\"material-icons\">create</i></a>");
+                                 out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/venteModifier?codeVente="+ uneVente.getId()+ "' ><i class=\"material-icons\">create</i></a>");
                                  out.println("</td>");
                             }
                             %>

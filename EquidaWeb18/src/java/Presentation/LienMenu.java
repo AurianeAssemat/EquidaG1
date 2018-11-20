@@ -75,8 +75,8 @@ public class LienMenu {
         String render = "";
 
         if (!lesEnfants.isEmpty()) {
-            render += "<li><a class = \"dropdown-button\"  \n"
-                    + "               data-activates = \"" + nom + "\">" + nom + "<i class = \"material-icons\n"
+            render += "<li><a class = \"dropdown-trigger\"  \n"
+                    + "               data-target = \"" + nom + "\">" + nom + "<i class = \"material-icons\n"
                     + "               right\">arrow_drop_down</i></a></li>";
         } else {
             render += "<li><a href='" + lien + "'>" + nom + "</a></li>";

@@ -69,6 +69,7 @@
                                 }%> 
                         </td></tr>
                 </table>
+                <a href ='../ServletAccueil/Accueil'> Retour</a>
             </div>
         </div>  
     </body>
