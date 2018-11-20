@@ -130,7 +130,6 @@ public class ServletClient extends HttpServlet {
            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
            request.setAttribute("pLesPays", lesPays);
            
-           
            int idClient = Integer.parseInt(request.getParameter("id"));
            
            Client unClient = ClientDAO.getUnClient(connection, idClient );
@@ -138,6 +137,7 @@ public class ServletClient extends HttpServlet {
            
            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
            request.setAttribute("pLesCategVente", lesCategVentes);
+           
            ArrayList<CategVente> lesCategVentesClients = ClientDAO.getLesCategsClient(connection, idClient);
            unClient.setLesCategVentes(lesCategVentesClients);
            
@@ -171,30 +171,34 @@ public class ServletClient extends HttpServlet {
 
            // Appel au traitement et à la validation de la requête, et récupération du bean en résultant 
            Client unClient = form.ajouterClient(request);
-
            // Stockage du formulaire et de l'objet dans l'objet request 
            request.setAttribute("form", form);
+           
            if (form.getErreurs().isEmpty()) {
                // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
                
                
                Client clientConsult = ClientDAO.ajouterClient(connection, unClient);
-               ClientDAO.ajouterLesCategsClient(connection, unClient);
+               
+                if (unClient.getLesCategVentes() != null){;
+                    ClientDAO.ajouterLesCategsClient(connection, unClient);
+                }
                //verif l'insertion de données
                ClientDAO.getUnClient(connection, clientConsult.getId());
 
                //variable du client contenant toutes ces informations
                request.setAttribute("pClient", clientConsult);
-               this.getServletContext().getRequestDispatcher("/vues/clientConsulter.jsp").forward(request, response);
+               this.getServletContext().getRequestDispatcher("/vues/clients/clientConsulter.jsp").forward(request, response);
 
            } else {
                // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
                ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
                request.setAttribute("pLesPays", lesPays);
-
-               ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-               request.setAttribute("pLesCategVente", lesCategVentes);
-               this.getServletContext().getRequestDispatcher("/vues/clientAjouter.jsp").forward(request, response);
+                if (unClient.getLesCategVentes().size() != 0) {
+                    ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+                    request.setAttribute("pLesCategVente", lesCategVentes);
+                }
+               this.getServletContext().getRequestDispatcher("/vues/clients/clientAjouter.jsp").forward(request, response);
            }
         }
         
