@@ -10,14 +10,14 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import modele.TypeCheval;
+import modele.Pays;
 
 /**
  *
  * @author Coco
  */
 
-public class TypeChevalForm {
+public class PaysForm {
     private String resultat;
     private ArrayList< String> erreurs = new ArrayList< String>();
     
@@ -51,46 +51,48 @@ public class TypeChevalForm {
     }
     
     //méthode de validation du champ de saisie objet
-    private void validationLibelle(String libelle) throws Exception {
-        if (libelle == null) {
-            throw new Exception( "Le nom de la race ne doit pas être vide" );
-        } else if (libelle.length() < 3) {
-            throw new Exception( "Le nom de la race doit contenir au moins 3 caractères." );
+    private void validationCode(String code) throws Exception {
+        if (code == null) {
+            throw new Exception( "Le code du pays ne doit pas être vide" );
+        } else if (code.length() > 3) {
+            throw new Exception( "Le code du pays doit contenir 3 caractères." );
+        }else if (code.length() < 3) {
+            throw new Exception( "Le code du pays doit contenir 3 caractères." );
         }
     }
     
     //méthode de validation du champ de saisie corps
-    private void validationDescription(String description) throws Exception {
-        if (description == null) {
-            throw new Exception( "La description de la race ne doit pas être vide." );
-        } else if (description.length() < 10) {
-            throw new Exception( "La desription de la race doit contenir au moins 10 caractères." );
+    private void validationNom(String nom) throws Exception {
+        if (nom == null) {
+            throw new Exception( "Le nom du pays ne doit pas être vide." );
+        } else if (nom.length() < 3) {
+            throw new Exception( "Le nom du pays doit contenir au moins 10 caractères." );
         }
     }
     
-    public TypeCheval typeChevalAjouter(HttpServletRequest request) {
+    public Pays paysAjouter(HttpServletRequest request) {
       
-        TypeCheval typeCheval = new TypeCheval();
+        Pays pays = new Pays();
         
-        String libelle = getDataForm(request, "libelle");
-        String description = getDataForm(request, "description");
+        String code = getDataForm(request, "code");
+        String nom = getDataForm(request, "nom");
         
         
         try {
-            validationLibelle(libelle);
+            validationCode(code);
         } catch (Exception e) {
             addErreur(e.getMessage());
         }
-        typeCheval.setLibelle(libelle);
+        pays.setCode(code);
         
         try {
-             validationDescription(description);
+             validationNom(nom);
         } catch (Exception e) {
             addErreur(e.getMessage());
         }
-        typeCheval.setDescription(description);
+        pays.setNom(nom);
 
       
-        return typeCheval;
+        return pays;
     }
 }

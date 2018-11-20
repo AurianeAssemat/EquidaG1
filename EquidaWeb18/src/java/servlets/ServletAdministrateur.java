@@ -32,6 +32,8 @@ import modele.Pays;
 import modele.TypeCheval;
 
 import formulaires.TypeChevalForm;
+import formulaires.PaysForm;
+import formulaires.LieuVenteForm;
 /*
  * Document   : ServletAdministrateur
  * Created on : 06/11, 14:44:27
@@ -90,19 +92,7 @@ public class ServletAdministrateur extends HttpServlet {
             request.setAttribute("pLesCourses", lesCourses);
             getServletContext().getRequestDispatcher("/vues/courseAjouter.jsp").forward(request, response);
         }
-
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/lieuAjouter")) {
-            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
-            request.setAttribute("pLeslieux", lesLieux);
-            getServletContext().getRequestDispatcher("/vues/lieuAjouter.jsp").forward(request, response);
-        }
-
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/paysAjouter")) {
-            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
-            request.setAttribute("pLesPays", lesPays);
-            getServletContext().getRequestDispatcher("/vues/paysAjouter.jsp").forward(request, response);
-        }
-
+              
         //Les servlets "Lister"
         if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval")) {
             ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
@@ -187,6 +177,16 @@ public class ServletAdministrateur extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/vues/typeChevaux/typeChevalAjouter.jsp" ).forward( request, response );
         }
          
+         if(url.equals("/EquidaWeb18/ServletAdministrateur/paysAjouter"))
+        {                   
+            //ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.TypeChevalAjouter(connection);
+            //request.setAttribute("pLesTypeCheval", lesTypeCheval);
+            this.getServletContext().getRequestDispatcher("/vues/pays/paysAjouter.jsp" ).forward( request, response );
+        }
+        
+         if (url.equals("/EquidaWeb18/ServletAdministrateur/lieuVenteAjouter")) {
+            getServletContext().getRequestDispatcher("/vues/lieuVente/lieuVenteAjouter.jsp").forward(request, response);
+        }
          /*Consulter*/
          
         
@@ -217,16 +217,19 @@ public class ServletAdministrateur extends HttpServlet {
 
                // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
                TypeCheval typeChevalConsulter ;
+               System.out.println("avant modif");
                if (unTypeCheval.getId() != 0 )
                {
+                   System.out.println("modif");
                    typeChevalConsulter = TypeChevalDAO.ModifierTypeCheval(connection, unTypeCheval);
                }
 
                else 
                {
-
+                   System.out.println("ajout");
+                   
                    typeChevalConsulter = TypeChevalDAO.AjouterTypeCheval(connection, unTypeCheval);
-                   //System.out.println(request);
+                   System.out.println(request);
                }
 
                    //verif l'insertion de données
@@ -240,8 +243,110 @@ public class ServletAdministrateur extends HttpServlet {
            else
            { 
                // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+               System.out.println("elde form erreur");
 
-              this.getServletContext().getRequestDispatcher("/vues/typeChevaux/TypeChevalAjouter.jsp" ).forward( request, response );
+              this.getServletContext().getRequestDispatcher("/vues/typeChevaux/typeChevalAjouter.jsp" ).forward( request, response );
+           }
+        }
+        
+        if(url.equals("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter"))
+        { 
+            
+            System.out.println("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter");
+                /* Préparation de l'objet formulaire */
+           TypeChevalForm form = new TypeChevalForm();
+
+           /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+           TypeCheval unTypeCheval = form.typeChevalAjouter(request);
+
+           /* Stockage du formulaire et de l'objet dans l'objet request */
+           request.setAttribute( "form", form );
+           //request.setAttribute( "pClient", unClient );
+
+           if (form.getErreurs().isEmpty()){
+
+               // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+               TypeCheval typeChevalConsulter ;
+               System.out.println("avant modif");
+               if (unTypeCheval.getId() != 0 )
+               {
+                   System.out.println("modif");
+                   typeChevalConsulter = TypeChevalDAO.ModifierTypeCheval(connection, unTypeCheval);
+               }
+
+               else 
+               {
+                   System.out.println("ajout");
+                   
+                   typeChevalConsulter = TypeChevalDAO.AjouterTypeCheval(connection, unTypeCheval);
+                   System.out.println(request);
+               }
+
+                   //verif l'insertion de données
+                TypeChevalDAO.getUnTypeCheval(connection, typeChevalConsulter.getId());
+
+                   //variable du client contenant toutes ces informations
+           request.setAttribute( "pTypeCheval", typeChevalConsulter );
+           this.getServletContext().getRequestDispatcher("/vues/typeChevaux/typeChevalConsulter.jsp" ).forward( request, response );
+
+           }
+           else
+           { 
+               // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+               System.out.println("elde form erreur");
+
+              this.getServletContext().getRequestDispatcher("/vues/typeChevaux/typeChevalAjouter.jsp" ).forward( request, response );
+           }
+        }
+        
+        if(url.equals("/EquidaWeb18/ServletAdministrateur/lieuVenteAjouter"))
+        { 
+            
+            System.out.println("/EquidaWeb18/ServletAdministrateur/lieuVenteAjouter");
+                /* Préparation de l'objet formulaire */
+           LieuVenteForm form = new LieuVenteForm();
+
+           /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+           Lieu unLieuVente = form.lieuVenteAjouter(request);
+
+           /* Stockage du formulaire et de l'objet dans l'objet request */
+           request.setAttribute( "form", form );
+           //request.setAttribute( "pClient", unClient );
+
+           if (form.getErreurs().isEmpty()){
+
+               // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+               Lieu lieuVenteConsulter ;
+               System.out.println("avant modif");
+               
+               if (unLieuVente.getId() != 0 )
+               {
+                   System.out.println("modif");
+                   lieuVenteConsulter = LieuDAO.ModifierLieuVente(connection, unLieuVente);
+               }
+
+               else 
+               {
+                   System.out.println("ajout");
+                   
+                   lieuVenteConsulter = LieuDAO.AjouterLieuVente(connection, unLieuVente);
+                   System.out.println(request);
+               }
+
+                   //verif l'insertion de données
+                LieuDAO.getUnLieuVente(connection, lieuVenteConsulter.getId());
+
+                   //variable du client contenant toutes ces informations
+           request.setAttribute( "pLieuVente", lieuVenteConsulter );
+           this.getServletContext().getRequestDispatcher("/vues/lieuVente/lieuVenteConsulter.jsp" ).forward( request, response );
+
+           }
+           else
+           { 
+               // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+               System.out.println("elde form erreur");
+
+              this.getServletContext().getRequestDispatcher("/vues/lieuVente/lieuVenteAjouter.jsp" ).forward( request, response );
            }
         }
     }

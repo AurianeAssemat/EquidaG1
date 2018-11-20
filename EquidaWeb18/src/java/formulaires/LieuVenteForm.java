@@ -10,14 +10,14 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import modele.TypeCheval;
+import modele.Lieu;
 
 /**
  *
  * @author Coco
  */
 
-public class TypeChevalForm {
+public class LieuVenteForm {
     private String resultat;
     private ArrayList< String> erreurs = new ArrayList< String>();
     
@@ -51,46 +51,60 @@ public class TypeChevalForm {
     }
     
     //méthode de validation du champ de saisie objet
-    private void validationLibelle(String libelle) throws Exception {
-        if (libelle == null) {
-            throw new Exception( "Le nom de la race ne doit pas être vide" );
-        } else if (libelle.length() < 3) {
-            throw new Exception( "Le nom de la race doit contenir au moins 3 caractères." );
+    private void validationVille(String ville) throws Exception {
+        if (ville == null) {
+            throw new Exception( "La ville du lieu de vente ne doit pas être vide" );
+        } else if (ville.length() < 3) {
+            throw new Exception( "La ville du lieu de vente doit contenir au moins 3 caractères." );
         }
     }
     
     //méthode de validation du champ de saisie corps
-    private void validationDescription(String description) throws Exception {
-        if (description == null) {
-            throw new Exception( "La description de la race ne doit pas être vide." );
-        } else if (description.length() < 10) {
-            throw new Exception( "La desription de la race doit contenir au moins 10 caractères." );
+    private void validationNbBoxes(int nbBoxes) throws Exception {
+        if (nbBoxes < 0) {
+            throw new Exception( "Le nom de boxes doit être supérieur à 0" );
         }
     }
     
-    public TypeCheval typeChevalAjouter(HttpServletRequest request) {
-      
-        TypeCheval typeCheval = new TypeCheval();
+    private void validationCommentaire(String commentaire) throws Exception {
+        if (commentaire == null) {
+            throw new Exception( "Le commentaire du lieu de vente ne doit pas être vide" );
+        }else if (commentaire.length() < 4) {
+            throw new Exception( "Le commentaire du lieu de vente au moins doit contenir 4 caractères." );
+        }
         
-        String libelle = getDataForm(request, "libelle");
-        String description = getDataForm(request, "description");
+    }
+    
+    public Lieu lieuVenteAjouter(HttpServletRequest request) {
+      
+        Lieu lieuVente = new Lieu();
+        
+        String ville = getDataForm(request, "ville");
+        String commentaire = getDataForm(request, "commentaire");
+        int nbBoxes = Integer.parseInt(getDataForm(request, "nbBoxes"));
         
         
         try {
-            validationLibelle(libelle);
+            validationVille(ville);
         } catch (Exception e) {
             addErreur(e.getMessage());
         }
-        typeCheval.setLibelle(libelle);
+        lieuVente.setVille(ville);
         
         try {
-             validationDescription(description);
+             validationNbBoxes(nbBoxes);
         } catch (Exception e) {
             addErreur(e.getMessage());
         }
-        typeCheval.setDescription(description);
-
+        lieuVente.setNbBoxes(nbBoxes);
+        
+        try {
+             validationCommentaire(commentaire);
+        } catch (Exception e) {
+            addErreur(e.getMessage());
+        }
+        lieuVente.setCommentaire(commentaire);
       
-        return typeCheval;
+        return lieuVente;
     }
 }
