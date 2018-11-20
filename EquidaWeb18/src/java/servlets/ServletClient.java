@@ -8,6 +8,7 @@ package servlets;
 import database.AcheteurDAO;
 import database.CategVenteDAO;
 import database.ClientDAO;
+import database.CompteDAO;
 import database.PaysDAO;
 import database.Utilitaire;
 import database.VendeurDAO;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import modele.Acheteur;
 import modele.CategVente;
 import modele.Client;
+import modele.Compte;
 import modele.Pays;
 import modele.Vendeur;
 
@@ -180,24 +182,25 @@ public class ServletClient extends HttpServlet {
                
                Client clientConsult = ClientDAO.ajouterClient(connection, unClient);
                
-                if (unClient.getLesCategVentes() != null){;
+                if (unClient.getNom() != null || unClient.getPrenom() != null){
+                    Compte unCompte = CompteDAO.ajouterCompte(connection, unClient);
+                }
+                if (unClient.getLesCategVentes() != null){
                     ClientDAO.ajouterLesCategsClient(connection, unClient);
                 }
                //verif l'insertion de données
                ClientDAO.getUnClient(connection, clientConsult.getId());
-
                //variable du client contenant toutes ces informations
                request.setAttribute("pClient", clientConsult);
+               
                this.getServletContext().getRequestDispatcher("/vues/clients/clientConsulter.jsp").forward(request, response);
 
            } else {
                // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
                ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
                request.setAttribute("pLesPays", lesPays);
-                if (unClient.getLesCategVentes().size() != 0) {
-                    ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-                    request.setAttribute("pLesCategVente", lesCategVentes);
-                }
+                ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+                request.setAttribute("pLesCategVente", lesCategVentes);
                this.getServletContext().getRequestDispatcher("/vues/clients/clientAjouter.jsp").forward(request, response);
            }
         }
@@ -222,7 +225,7 @@ public class ServletClient extends HttpServlet {
               
                 //variable du client contenant toutes ces informations
                 request.setAttribute("pClient", clientConsult);
-                this.getServletContext().getRequestDispatcher("/vues/clientConsulter.jsp").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/vues/clients/clientConsulter.jsp").forward(request, response);
 
 
             } else {
@@ -241,7 +244,7 @@ public class ServletClient extends HttpServlet {
                 ArrayList<CategVente> lesCategVentesClient =ClientDAO.getLesCategsClient(connection, idClient);
                 unClient.setLesCategVentes(lesCategVentesClient);
                 request.setAttribute("pClient", unClient);
-                this.getServletContext().getRequestDispatcher("/vues/clientModif.jsp").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/vues/clients/clientModif.jsp").forward(request, response);
             }
         }
     }
