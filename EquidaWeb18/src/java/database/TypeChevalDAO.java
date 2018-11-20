@@ -5,6 +5,7 @@
  */
 package database;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +29,7 @@ public class TypeChevalDAO {
         ArrayList<TypeCheval> lesTypeChevaux = new ArrayList<TypeCheval>();
         try {
 
-            requete = connection.prepareStatement("select * from typecheval");
+            requete = connection.prepareStatement("select * from typecheval where archiver !=1");
             //executer la requete
             rs = requete.executeQuery();
 
@@ -135,4 +136,24 @@ public class TypeChevalDAO {
         return unTypeCheval ; 
 
     }
+     public static void  SupprimerUnTypeCheval(Connection connection,int codeTypeCheval){      
+      
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("UPDATE typecheval SET archiver = 1 WHERE typecheval.id = ?");
+           
+            requete.setInt(1, codeTypeCheval);
+            //executer la requete
+             
+            requete.executeUpdate();
+           
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        
+        
+    } 
 }

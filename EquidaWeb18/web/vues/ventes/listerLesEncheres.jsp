@@ -13,16 +13,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="NomPage" value="Lister les chevaux" />
-    </jsp:include>
-
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>LISTE DES ENCHERES</title>
+        <jsp:include page="/vues/Header.jsp" >
+            <jsp:param name="NomPage" value="Lister les Encheres" />
+        </jsp:include>
+    </head>
     <body>
-
         <jsp:include page="/vues/MenuNavigation.jsp" />
-
         <div class="container">
             <div class="row">
+                <h1>Liste des enchères</h1>
+
                 <%
                     ArrayList<Enchere> lesEncheres = (ArrayList) request.getAttribute("pLesEncheres");
                 %>
@@ -31,8 +34,13 @@
                     <thead>
                         <tr>
                             <th>Cheval</th>
-                            <th>N° SIRE</th>>
-                        </tr>
+                            <th>N° SIRE</th>
+                            <th>Père</th>
+                            <th>Mère</th>
+                    <br>
+                    <br>
+                    </tr>
+
                     </thead>
                     <tbody>
                         <tr>
@@ -55,6 +63,7 @@
                                     out.println("</td>");
 
                                 }
+
 
                             %>
                         </tr>
@@ -89,7 +98,9 @@
 
                                     out.println("<td>");
                                     out.println(uneEnchere.getMontant());
+
                                     out.println(" €</td>");
+
 
                                 }
 
@@ -97,6 +108,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <a href ='../ServletVentes/listerLesVentes'> Retour</a>
             </div>
         </div>
     </body>

@@ -150,7 +150,24 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesCategVente", lesCategVentes);
             this.getServletContext().getRequestDispatcher("/vues/VenteAjouter.jsp").forward(request, response);
         }
+        
+        if(url.equals("/EquidaWeb18/ServletVentes/venteModifier"))
+       {
+           ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+           request.setAttribute("pLesCategVente", lesCategVentes);
+           
+           ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+           request.setAttribute("pLesLieux", lesLieux);
 
+           int idVente = Integer.parseInt(request.getParameter("codeVente"));
+           
+           Vente uneVente = VenteDAO.getUneVente(connection, idVente );
+           uneVente.setId(idVente);
+           
+           request.setAttribute("pVente", uneVente);
+           
+           getServletContext().getRequestDispatcher("/vues/ventes/venteModifier.jsp").forward(request, response);
+       }
 
         if(url.equals("/EquidaWeb18/ServletVentes/creerMail"))
         {  
@@ -164,23 +181,17 @@ public class ServletVentes extends HttpServlet {
         }
 
         
-       /* if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
+        if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
         {  
-            Compte compte = (Compte)request.getSession().getAttribute("Compte");
-            if(compte != null){
-                int codeVente = Integer.parseInt(request.getParameter("codeVente"));
-                
-                VenteDAO.SupprimerUneVente(connection,codeVente);
+            
+            int codeVente = Integer.parseInt(request.getParameter("codeVente"));
+
+            VenteDAO.SupprimerUneVente(connection,codeVente);
+            
+            response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesVentes");
 
                 
-                int codeAcheteur = compte.getUnClient().getId();
-                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
-                request.setAttribute("pLesChevaux", lesChevaux);
-                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
-                
-            }
-        }
-       */
+        }      
 
         if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
         {  
@@ -248,7 +259,7 @@ public class ServletVentes extends HttpServlet {
 
             ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
             request.setAttribute("pLesTypeCheval", lesTypeCheval);
-            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp").forward(request, response);     
         }
         
         if (url.equals("/EquidaWeb18/ServletVentes/listerLesChevaux")) {
@@ -384,7 +395,39 @@ public class ServletVentes extends HttpServlet {
                 this.getServletContext().getRequestDispatcher("/vues/VenteAjouter.jsp").forward(request, response);
             }
         }
+        
+        if (url.equals("/EquidaWeb18/ServletVentes/venteModifier")) {
+            VenteForm form = new VenteForm();
 
+            /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+            Vente uneVente = form.ajouterVente(request);
+
+            /* Stockage du formulaire et de l'objet dans l'objet request */
+            request.setAttribute("form", form);
+            
+            System.out.println("erreurs "+form.getErreurs().isEmpty());
+            if (form.getErreurs().isEmpty()) {
+                
+                Vente venteVerif = VenteDAO.modifierVente(connection, uneVente);
+                request.setAttribute("pVente", venteVerif);
+
+                this.getServletContext().getRequestDispatcher("/vues/venteConsulter.jsp").forward(request, response);
+            }else {
+                // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+                ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+                request.setAttribute("pLesCategVente", lesCategVentes);
+
+                ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+                request.setAttribute("pLesLieux", lesLieux);
+                
+                int idVente = Integer.parseInt(request.getParameter("id"));
+                uneVente = VenteDAO.getUneVente(connection, idVente );
+                uneVente.setId(idVente);
+                request.setAttribute("pVente", uneVente);
+                
+                getServletContext().getRequestDispatcher("/vues/ventes/venteModifier.jsp").forward(request, response);
+            }
+        }
 
         if (url.equals("/EquidaWeb18/ServletVentes/chevalAjouter")) {
 

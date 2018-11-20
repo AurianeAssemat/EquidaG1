@@ -123,6 +123,29 @@ public class ServletAdministrateur extends HttpServlet {
             request.setAttribute("pLesPays", lesPays);
             getServletContext().getRequestDispatcher("/vues/params/listerParamPays.jsp").forward(request, response);
         }
+        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnTypeCheval"))
+        {  
+            
+            int codeTypeCheval = Integer.parseInt(request.getParameter("codeTypeCheval"));
+
+            TypeChevalDAO.SupprimerUnTypeCheval(connection,codeTypeCheval);
+            
+            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval");
+
+                
+        }
+        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUneCategVente"))
+        {  
+            
+            String codeCategVente =request.getParameter("codeCategVente");
+
+            CategVenteDAO.SupprimerUneCategVente(connection,codeCategVente);
+            
+            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamCategVente");
+
+                
+        }
+        
 
         
         /*
