@@ -1,5 +1,6 @@
 package database;
 
+import static database.TypeChevalDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ public class LieuDAO {
     public static ArrayList<Lieu> getLesLieux(Connection connection) {
         ArrayList<Lieu> lesLieux = new ArrayList<Lieu>();
         try {
-            requete = connection.prepareStatement("select * from lieu");
+            requete = connection.prepareStatement("select * from lieu where archiver !=1");
             rs = requete.executeQuery();
 
             while (rs.next()) {
@@ -36,6 +37,26 @@ public class LieuDAO {
         }
         return lesLieux;
     }
+    
+    
+    public static void  SupprimerUnLieu(Connection connection,int codeLieu){      
+        
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("UPDATE lieu SET archiver = 1 WHERE lieu.id = ?");
+           
+            requete.setInt(1, codeLieu);
+            //executer la requete
+             
+            requete.executeUpdate();
+        }
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+    
     
     public static Lieu  getUnLieuVente(Connection connection, int idLieuVente ){      
         Lieu unLieuVente = new  Lieu();
@@ -94,11 +115,14 @@ public class LieuDAO {
         catch (SQLException e) 
         {
             e.printStackTrace();
-            //out.println("Erreur lors de l’établissement de la connexion");
+
         }
-        return unLieuVente ;    
-    }
-    
+         return unLieuVente ; 
+       } 
+            //out.println("Erreur lors de l’établissement de la connexion");
+          
+ 
+
     public static Lieu  ModifierLieuVente(Connection connection, Lieu unLieuVente){      
         
         try

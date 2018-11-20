@@ -7,7 +7,9 @@
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
 
+
     <param-value>jdbc:mysql://localhost/equida18_g1</param-value>
+
         <param-value>jdbc:mysql://localhost/equida18_g1</param-value>
     </context-param>
     <context-param>
@@ -17,8 +19,10 @@
     </context-param>
     <context-param>
         <param-name>motdepassejdbc</param-name>
+
     <param-value/>
         
+
         <param-value></param-value>
     </context-param>
     <!--  écouteurs -->
@@ -96,6 +100,10 @@
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
         <url-pattern>/ServletAdministrateur/SupprimerUneCategVente</url-pattern>
+    </servlet-mapping>
+   <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/SupprimerUnLieu</url-pattern>
     </servlet-mapping>
     
     <!--Servlet ajouter-->
