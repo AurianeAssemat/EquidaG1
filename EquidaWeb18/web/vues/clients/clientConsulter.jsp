@@ -36,8 +36,10 @@
                     <tr><td>MAIL :</td><td><%  out.println(unClient.getMail());%></td>  </tr>
                     <tr><td>PAYS :</td><td><%  out.println(unClient.getUnPays().getCode());%></td>  </tr>
                     <tr><td> Catégories selectionnées</td><td>
-                            <% for (int i=0; i<unClient.getLesCategVentes().size(); i++){
+                            <% if(unClient.getLesCategVentes() != null) {
+                                for (int i=0; i<unClient.getLesCategVentes().size(); i++){
                                  out.println(unClient.getLesCategVentes().get(i).getCode() + "</br>");
+                                }
                             }
                             %>
                         </td></tr>

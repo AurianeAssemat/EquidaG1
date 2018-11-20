@@ -56,14 +56,7 @@ public class ClientDAO {
                 unClient.setId(idGenere);
             }
 
-            // ajout des enregistrement dans la table clientcategvente
-            for (int i = 0; i < unClient.getLesCategVentes().size(); i++) {
-                PreparedStatement requete2 = connection.prepareStatement("INSERT INTO clientcategvente (codeClient, codeCategVente )\n"
-                        + "VALUES (?,?)");
-                requete2.setInt(1, unClient.getId());
-                requete2.setString(2, unClient.getLesCategVentes().get(i).getCode());
-                requete2.executeUpdate();
-            }
+            
 
         } catch (SQLException e) {
             e.printStackTrace();

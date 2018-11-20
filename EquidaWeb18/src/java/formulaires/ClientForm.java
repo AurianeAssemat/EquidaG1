@@ -36,10 +36,12 @@ public class ClientForm {
     }
 
     public void setErreurs(Map<String, String> erreurs) {
+        
         this.erreurs = erreurs;
     }
     
     private void setErreur(String champ, String message) {
+        System.out.println("ererur" + champ + "   " + message);
         erreurs.put(champ, message);
     }
     
@@ -86,12 +88,14 @@ public class ClientForm {
 
         // Traitement de la liste à choix multiple
         //Pour chq catégorie selectionné, on instancie une nouvelle catégorie et on l'ajoute au client
-        CategVente uneCategVente;
+        
         String[] categVente = request.getParameterValues("categVente");
-        for (int i = 0; i < categVente.length; i++) {
-            uneCategVente = new CategVente();
-            uneCategVente.setCode(categVente[i]);
-            unClient.addUneCategVente(uneCategVente);
+        if (categVente != null){
+            for (int i = 0; i < categVente.length; i++) {
+                CategVente uneCategVente = new CategVente();
+                uneCategVente.setCode(categVente[i]);
+                unClient.addUneCategVente(uneCategVente);
+            }
         }
 
         try {
@@ -107,8 +111,9 @@ public class ClientForm {
         } else {
             resultat = "Échec de l'ajout.";
         }
-
-        unClient.setId(Integer.parseInt(id));
+        if(id != null ) {
+            unClient.setId(Integer.parseInt(id));
+        }
         unClient.setNom(nom);
         unClient.setPrenom(prenom);
         unClient.setRue(rue);
@@ -117,7 +122,7 @@ public class ClientForm {
         unClient.setTitre(titre);
         unClient.setMail(mail);
         unClient.setUnPays(unPays);
-
+        
         return unClient;
     }
 
