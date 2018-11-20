@@ -101,7 +101,7 @@ public class TypeChevalDAO {
                 idGenere = rs.getInt( 1 );
                 unTypeCheval.setId(idGenere);
             }
-            
+           
         }   
         catch (SQLException e) 
         {

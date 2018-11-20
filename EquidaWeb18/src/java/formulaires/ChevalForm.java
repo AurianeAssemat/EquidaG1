@@ -93,8 +93,6 @@ public class ChevalForm {
         }else{
             addErreur("Il manque le type du cheval.");
         }
-        
-        
 
         try {
             validationChampObligatoire(unCheval.getNom());

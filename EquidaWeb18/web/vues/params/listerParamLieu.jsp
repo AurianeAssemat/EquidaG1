@@ -22,7 +22,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s1 offset-s11">
-                    <a href='../ServletAdministrateur/lieuAjouter' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                    <a href='../ServletAdministrateur/lieuVenteAjouter' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
                 </div>
                 <%
                 ArrayList<Lieu> lesLieux = (ArrayList)request.getAttribute("pLesLieux");

@@ -7,17 +7,17 @@
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
         <!--<param-value>jdbc:mysql://localhost/Equida18_G1</param-value>-->
-        <param-value>jdbc:mysql://172.20.0.241/EQUIG1</param-value>
+        <param-value>jdbc:mysql://localhost/equida18_g1</param-value>
     </context-param>
     <context-param>
         <param-name>utilisateurjdbc</param-name>
         <!--<param-value>root</param-value>-->
-        <param-value>ADM_EQUIG1</param-value>
+        <param-value>root</param-value>
     </context-param>
     <context-param>
         <param-name>motdepassejdbc</param-name>
         <!--<param-value/>-->
-        <param-value>mpEquida01</param-value>
+        <param-value></param-value>
     </context-param>
     <!--  écouteurs -->
     <listener>
@@ -235,12 +235,12 @@
     
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
-        <url-pattern>/ServletAdministrateur/lieuAjouter</url-pattern>
+        <url-pattern>/ServletAdministrateur/lieuVenteAjouter</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
-        <url-pattern>/ServletAdministrateur/PaysAjouter</url-pattern>
+        <url-pattern>/ServletAdministrateur/paysAjouter</url-pattern>
     </servlet-mapping>
            
     <!--Servlet consulter -->
@@ -249,8 +249,21 @@
         <servlet-name>ServletAdministrateur</servlet-name>
         <url-pattern>/ServletAdministrateur/typeChevalConsulter</url-pattern>
     </servlet-mapping>
-
     
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/paysConsulter</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/lieuVenteConsulter</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/courseConsulter</url-pattern>
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>
