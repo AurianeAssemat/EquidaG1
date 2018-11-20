@@ -34,6 +34,7 @@ import modele.TypeCheval;
 import formulaires.TypeChevalForm;
 import formulaires.PaysForm;
 import formulaires.LieuVenteForm;
+import formulaires.CourseForm;
 /*
  * Document   : ServletAdministrateur
  * Created on : 06/11, 14:44:27
@@ -87,11 +88,7 @@ public class ServletAdministrateur extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/vues/categVenteAjouter.jsp").forward(request, response);
         }
 
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter")) {
-            ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
-            request.setAttribute("pLesCourses", lesCourses);
-            getServletContext().getRequestDispatcher("/vues/courseAjouter.jsp").forward(request, response);
-        }
+        
               
         //Les servlets "Lister"
         if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval")) {
@@ -174,7 +171,11 @@ public class ServletAdministrateur extends HttpServlet {
         }
         
          if (url.equals("/EquidaWeb18/ServletAdministrateur/lieuVenteAjouter")) {
-            getServletContext().getRequestDispatcher("/vues/lieuVente/lieuVenteAjouter.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/vues/lieuVente/lieuVenteAjouter.jsp").forward(request, response);
+        }
+         
+         if (url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter")) {
+            this.getServletContext().getRequestDispatcher("/vues/course/courseAjouter.jsp").forward(request, response);
         }
          /*Consulter*/
          
@@ -338,7 +339,52 @@ public class ServletAdministrateur extends HttpServlet {
               this.getServletContext().getRequestDispatcher("/vues/lieuVente/lieuVenteAjouter.jsp" ).forward( request, response );
            }
         }
+        
+        if(url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter"))
+        { 
+            
+            System.out.println("/EquidaWeb18/ServletAdministrateur/courseAjouter");
+                /* Préparation de l'objet formulaire */
+           CourseForm form = new CourseForm();
+
+           /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+           Course unCourse = form.courseAjouter(request);
+
+           /* Stockage du formulaire et de l'objet dans l'objet request */
+           request.setAttribute( "form", form );
+           //request.setAttribute( "pClient", unClient );
+
+           if (form.getErreurs().isEmpty()){
+
+               // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
+               Course courseConsulter ;
+               
+             
+                   System.out.println("ajout");
+                   
+                   courseConsulter = CourseDAO.AjouterCourse(connection, unCourse);
+                   System.out.println(request);
+               
+
+                   //verif l'insertion de données
+                CourseDAO.getUnCourse(connection, courseConsulter.getId());
+
+                   //variable du client contenant toutes ces informations
+           request.setAttribute( "pCourse", courseConsulter );
+           this.getServletContext().getRequestDispatcher("/vues/course/courseConsulter.jsp" ).forward( request, response );
+
+           }
+           else
+           { 
+               // il y a des erreurs. On réaffiche le formulaire avec des messages d'erreurs
+               System.out.println("elde form erreur");
+
+              this.getServletContext().getRequestDispatcher("/vues/course/courseAjouter.jsp" ).forward( request, response );
+           }
+        }
     }
+    
+    
     
     public String getServletInfo() {
         return "Short description";
