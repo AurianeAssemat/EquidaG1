@@ -93,6 +93,10 @@
         <servlet-name>ServletAdministrateur</servlet-name>
         <url-pattern>/ServletAdministrateur/SupprimerUneCategVente</url-pattern>
     </servlet-mapping>
+   <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/SupprimerUnLieu</url-pattern>
+    </servlet-mapping>
     
     <!--Servlet ajouter-->
     
