@@ -144,6 +144,18 @@ public class ServletAdministrateur extends HttpServlet {
 
                 
         }
+        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUneCategVente"))
+        {  
+            
+            String codeCategVente =request.getParameter("codeCategVente");
+
+            CategVenteDAO.SupprimerUneCategVente(connection,codeCategVente);
+            
+            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamCategVente");
+
+                
+        }
+        
 
         
         /*

@@ -29,7 +29,7 @@ public class TypeChevalDAO {
         ArrayList<TypeCheval> lesTypeChevaux = new ArrayList<TypeCheval>();
         try {
 
-            requete = connection.prepareStatement("select * from typecheval");
+            requete = connection.prepareStatement("select * from typecheval where archiver !=1");
             //executer la requete
             rs = requete.executeQuery();
 
@@ -146,7 +146,7 @@ public class TypeChevalDAO {
             requete.setInt(1, codeTypeCheval);
             //executer la requete
              
-             requete.executeUpdate();
+            requete.executeUpdate();
            
         }   
         catch (SQLException e) 
