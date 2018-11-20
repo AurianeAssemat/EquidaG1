@@ -6,7 +6,6 @@
     </context-param>
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
-<<<<<<< HEAD
         <!--<param-value>jdbc:mysql://localhost/Equida18_G1</param-value>-->
         <param-value>jdbc:mysql://localhost/equida18_g1</param-value>
     </context-param>
@@ -18,17 +17,6 @@
     <context-param>
         <param-name>motdepassejdbc</param-name>
         <!--<param-value/>-->
-=======
-        <param-value>jdbc:mysql://localhost/Equida18_G1</param-value>
-    </context-param>
-    <context-param>
-        <param-name>utilisateurjdbc</param-name>
-        <param-value>root</param-value>
-
-    </context-param>
-    <context-param>
-        <param-name>motdepassejdbc</param-name>
->>>>>>> 313430530670edce7907215121521ea2b67e8113
         <param-value></param-value>
     </context-param>
     <!--  écouteurs -->
