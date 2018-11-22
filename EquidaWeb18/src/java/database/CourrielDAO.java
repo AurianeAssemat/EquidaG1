@@ -109,7 +109,9 @@ public class CourrielDAO {
     // Méthode permettant d'insérer un courriel en base à partir de l'objet couriel passé en paramètre
     // Cette méthode renvoie l'objet courriel
     public static Courriel ajouterCourriel(Connection connection, Courriel courriel){
-        int idGenere = -1;
+        int idGenereCourriel = -1;
+        int idGenerePieceJointe = -1;
+        
         try
         {
             requete=connection.prepareStatement("INSERT INTO Courriel (objet, corps, ven_id) VALUES (?, ?, ?)");
@@ -123,8 +125,8 @@ public class CourrielDAO {
             // Récupération de id auto-généré par la bdd dans la table courriel
             rs = requete.getGeneratedKeys();
             while ( rs.next() ) {
-                idGenere = rs.getInt(1);
-                courriel.setId(idGenere);
+                idGenereCourriel = rs.getInt(1);
+                courriel.setId(idGenereCourriel);
             }
             
             // ajout des enregistrement dans la table clientcategvente
@@ -133,6 +135,15 @@ public class CourrielDAO {
                 requete2.setString(1, courriel.getLesPieceJointes().get(i).getChemin());
                 requete2.setString(2, "");
                 requete2.executeUpdate();
+                
+                rs = requete2.getGeneratedKeys();
+                while ( rs.next() ) {
+                    idGenerePieceJointe = rs.getInt(1);
+                    PreparedStatement requete3 = connection.prepareStatement("INSERT INTO joindre (pie_id, cou_id) VALUES (?, ?)");
+                    requete3.setString(1, Integer.toString(idGenerePieceJointe));
+                    requete3.setString(2, Integer.toString(idGenereCourriel));
+                    requete3.executeUpdate();
+                }
             }
         }   
         catch (SQLException e) 
