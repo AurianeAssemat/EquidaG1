@@ -96,6 +96,19 @@ public class CourrielDAO {
                   vente.setUneCategVente(categVente);
                   
                   courriel.setUneVente(vente);
+                  
+                  requete = connection.prepareStatement("select * from piecejointe ,joindre where `pie_id` = piecejointe.id AND `cou_id` = ?");
+                requete.setString(1, "" + courriel.getId());
+
+                ResultSet rsc = requete.executeQuery();
+                while (rsc.next()) {
+                    PieceJointe unePieceJointe = new PieceJointe();
+                    unePieceJointe.setId(rsc.getInt("id"));  // on aurait aussi pu prendre CodeCateg
+                    unePieceJointe.setChemin(rsc.getString("chemin"));
+                    unePieceJointe.setDescription(rsc.getString("description"));
+
+                    courriel.addUnePieceJointe(unePieceJointe);
+                }
              }
         }   
         catch (SQLException e) 
