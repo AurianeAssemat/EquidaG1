@@ -126,6 +126,14 @@ public class CourrielDAO {
                 idGenere = rs.getInt(1);
                 courriel.setId(idGenere);
             }
+            
+            // ajout des enregistrement dans la table clientcategvente
+            for (int i = 0; i < courriel.getLesPieceJointes().size(); i++) {
+                PreparedStatement requete2 = connection.prepareStatement("INSERT INTO piecejointe (chemin, description) VALUES (?, ?)");
+                requete2.setString(1, courriel.getLesPieceJointes().get(i).getChemin());
+                requete2.setString(2, "");
+                requete2.executeUpdate();
+            }
         }   
         catch (SQLException e) 
         {

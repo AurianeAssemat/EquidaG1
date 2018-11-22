@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import modele.Courriel;
+import modele.PieceJointe;
 import modele.Vente;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -153,6 +154,10 @@ public class CourrielForm {
                     } catch (Exception ex) {
                         Logger.getLogger(CourrielForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
+                    PieceJointe pieceJointe = new PieceJointe();
+                    pieceJointe.setChemin(fileName);
+                    courriel.addUnePieceJointe(pieceJointe);
                 }
 
             }
@@ -162,6 +167,7 @@ public class CourrielForm {
             throw new ServletException("Échec de l'analyse de la requête multipart.", e);
 
         }
+        
         
         return courriel;
     }
