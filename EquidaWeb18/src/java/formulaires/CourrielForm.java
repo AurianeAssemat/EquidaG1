@@ -5,11 +5,14 @@
  */
 package formulaires;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import modele.Courriel;
@@ -26,6 +29,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class CourrielForm {
     private String resultat;
     private ArrayList< String> erreurs = new ArrayList< String>();
+    
+    private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
+    private static final int MAX_FILE_SIZE      = 1024 * 1024 * 40; // 40MB
+    private static final int MAX_REQUEST_SIZE   = 1024 * 1024 * 50; // 50MB
     
     public String getResultat() {
         return resultat;
@@ -74,9 +81,29 @@ public class CourrielForm {
         }
     }
     
-    public Courriel ajouterCourriel(HttpServletRequest request) throws ServletException, IOException {
+    public Courriel ajouterCourriel(HttpServletRequest request, String uploadPath) throws ServletException, IOException {
+        
       
+        
         Courriel courriel = new Courriel();
+        
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        
+        factory.setSizeThreshold(MEMORY_THRESHOLD);
+        
+        factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
+        
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        
+        upload.setFileSizeMax(MAX_FILE_SIZE);
+         
+        // sets maximum size of request (include file + form data)
+        upload.setSizeMax(MAX_REQUEST_SIZE);
+        
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
         
         try {
 
@@ -117,7 +144,15 @@ public class CourrielForm {
                         courriel.setUneVente(vente);
                     }
                 } else {
-                   InputStream contenuFichier = item.getInputStream();
+                   String fileName = new File(item.getName()).getName();
+                   String filePath = uploadPath + File.separator + fileName;
+                   File storeFile = new File(filePath);
+                   
+                    try {
+                        item.write(storeFile);
+                    } catch (Exception ex) {
+                        Logger.getLogger(CourrielForm.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
 
             }

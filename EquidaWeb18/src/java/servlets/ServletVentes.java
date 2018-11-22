@@ -23,6 +23,7 @@ import database.VenteDAO;
 import formulaires.ChevalForm;
 import formulaires.ChevalVenteForm;
 import formulaires.VenteForm;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -51,6 +52,8 @@ import modele.Vente;
  * lister les clients d'une vente passée en paramètre
  */
 public class ServletVentes extends HttpServlet {
+    
+    private static final String UPLOAD_DIRECTORY = "upload";
 
     Connection connection;
 
@@ -313,7 +316,10 @@ public class ServletVentes extends HttpServlet {
          /* Stockage du formulaire et de l'objet dans l'objet request */
         request.setAttribute("form", form);
         
-        Courriel courriel = form.ajouterCourriel(request);
+         String uploadPath = getServletContext().getRealPath("")
+                 + UPLOAD_DIRECTORY;
+        
+        Courriel courriel = form.ajouterCourriel(request, uploadPath);
         
         /* Stockage du formulaire et de l'objet dans l'objet request */
         request.setAttribute("form", form);

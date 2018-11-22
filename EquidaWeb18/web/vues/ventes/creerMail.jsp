@@ -74,7 +74,7 @@
                         <div class="file-field input-field">
                             <div class="btn">
                               <span>File</span>
-                              <input type="file" multiple>
+                              <input type="file" name="file">
                             </div>
                             <div class="file-path-wrapper">
                               <input class="file-path validate" type="text" placeholder="Upload one or more files">
