@@ -13,8 +13,6 @@ import database.CourrielDAO;
 import database.EnchereDAO;
 import database.LieuDAO;
 import database.LotDAO;
-import formulaires.VenteForm;
-import database.LotDAO;
 import database.PieceJointeDAO;
 import formulaires.CourrielForm;
 import database.PaysDAO;
@@ -173,6 +171,8 @@ public class ServletVentes extends HttpServlet {
                 request.setAttribute("pLesChevaux", lesChevaux);
                 getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
                 
+            } else {
+                this.getServletContext().getRequestDispatcher("/vues/nonConnecte.jsp").forward(request, response);
             }
         }
        */
@@ -495,6 +495,8 @@ public class ServletVentes extends HttpServlet {
                     request.setAttribute("pLesChevaux", lesChevaux);
                     request.setAttribute("codeVente", request.getParameter("codeVente"));
                     getServletContext().getRequestDispatcher("/vues/ventes/AjouterChevalVente.jsp").forward(request, response);
+                } else {
+                this.getServletContext().getRequestDispatcher("/vues/nonConnecte.jsp").forward(request, response);
                 }
             }
         }

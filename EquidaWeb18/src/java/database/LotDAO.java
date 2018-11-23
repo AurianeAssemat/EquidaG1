@@ -161,7 +161,7 @@ public class LotDAO {
      
      //methode pour récuperer un Lot
      public static Lot getUnLot(Connection connection, String idVente, String idLot) {
-        Lot leLot = new Lot();
+        Lot unLot = new Lot();
         try {
             //preparation de la requete     
             requete = connection.prepareStatement("select * from lot,cheval,typecheval where lot.che_id = cheval.id AND cheval.typ_id = typecheval.id AND vent_id = ? AND lot.id = ?");
@@ -172,13 +172,12 @@ public class LotDAO {
 
             //On hydrate l'objet métier Lot avec les résultats de la requête
             while (rs.next()) {
-                Lot unLot = new Lot();
-                unLot.setId(rs.getInt("idlot"));
+                unLot.setId(Integer.parseInt(idLot));
                 unLot.setPrixDepart(rs.getFloat("prixDepart"));
 
                 Cheval unCheval = new Cheval();
                 unCheval.setId(rs.getInt("cheval.id"));
-                unCheval.setNom(rs.getString("cheval.nom"));
+                unCheval.setNom(rs.getString("nom"));
                 unCheval.setSexe(rs.getString("sexe"));
                 unCheval.setSire(rs.getString("sire"));
 
@@ -257,6 +256,6 @@ public class LotDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return leLot;
+        return unLot;
     }
 }

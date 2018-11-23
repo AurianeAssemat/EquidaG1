@@ -52,6 +52,7 @@ public class EnchereForm {
     public Enchere ajouterEnchere(HttpServletRequest request) {
 
         Enchere uneEnchere = new Enchere();
+        Lot unLot = new Lot();
 
         //int id = unClient.getId();
         int montant = Integer.parseInt(getDataForm(request, "montant"));
@@ -62,7 +63,7 @@ public class EnchereForm {
             resultat = "Échec de l'ajout.";
         }
 
-        //uneEnchere.setLot(unLot);
+        uneEnchere.setUnLot(unLot);
         uneEnchere.setMontant(montant);
 
         return uneEnchere;
