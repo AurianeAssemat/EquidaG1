@@ -18,15 +18,28 @@ import modele.TypeCheval;
 public class ChevalForm {
 
     private String resultat;
-    private ArrayList< String> erreurs = new ArrayList< String>();
+    private ArrayList<String> erreurs = new ArrayList<String>();
 
     public String getResultat() {
         return resultat;
     }
-
+    
     public void setResultat(String resultat) {
         this.resultat = resultat;
     }
+    
+    public ArrayList<String> getErreurs(){
+        return erreurs;
+    }
+    
+    public void setErreurs(ArrayList<String> erreurs){
+        this.erreurs = erreurs;
+    }
+    
+    public void addErreur(String message){
+        getErreurs().add(message);
+    }
+    
 
     //méthode de validation du champ de saisie nom
     private void validationChampObligatoire(String Champ) throws Exception {
@@ -75,13 +88,11 @@ public class ChevalForm {
         String typeCheval = getDataForm(request, "typ_id");
         if (typeCheval != null) {
             TypeCheval unTypeCheval = new TypeCheval();
-            unTypeCheval.setId(typeCheval);
+            unTypeCheval.setId(Integer.parseInt(typeCheval));
             unCheval.setTypeCheval(unTypeCheval);
         }else{
             addErreur("Il manque le type du cheval.");
         }
-        
-        
 
         try {
             validationChampObligatoire(unCheval.getNom());
@@ -105,15 +116,5 @@ public class ChevalForm {
         return unCheval;
     }
 
-    public ArrayList< String> getErreurs() {
-        return erreurs;
-    }
-
-    public void setErreurs(ArrayList< String> erreurs) {
-        this.erreurs = erreurs;
-    }
-
-    public void addErreur(String message) {
-        getErreurs().add(message);
-    }
 }
+

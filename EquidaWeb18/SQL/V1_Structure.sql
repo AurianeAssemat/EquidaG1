@@ -211,7 +211,7 @@ ALTER TABLE vente
 ADD dateDebutInscrip date ;
 
 ALTER TABLE vente 
-ADD archiver int(11) ;
+ADD archiver int(11) DEFAULT 0 ;
 
 
 CREATE TABLE lot (
@@ -239,3 +239,5 @@ CREATE TABLE enchere (
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE courriel CHANGE date date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+Alter TABLE categvente ADD archiver BINARY DEFAULT 0;

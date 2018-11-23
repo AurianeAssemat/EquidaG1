@@ -53,7 +53,7 @@
                                 out.println("</td>");
                         
                                 out.println("<td>");
-                                out.println("<a class=\"waves-effect waves-light btn-small\" href ='#' ><i class=\"material-icons\">delete</i></a>");
+                                out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletAdministrateur/SupprimerUneCategVente?codeCategVente="+ uneCategVente.getCode()+ "'><i class=\"material-icons\">delete</i></a>");
                                 out.println("</td>");
                            
                                 out.println("<td>");

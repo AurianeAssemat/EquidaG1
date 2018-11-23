@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="NomPage" value="Création du mail" />
+    <jsp:param name="NomPage" value="Création du mail" />
     </jsp:include>
     
     <body>

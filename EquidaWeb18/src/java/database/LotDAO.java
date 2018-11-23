@@ -63,7 +63,8 @@ public class LotDAO {
                     rtc.next();
 
                     TypeCheval unTypeCheval = new TypeCheval();
-                    unTypeCheval.setId(rtc.getString("typecheval.id"));
+
+                    unTypeCheval.setId(rtc.getInt("typecheval.id"));
                     unTypeCheval.setLibelle(rtc.getString("libelle"));
                     unTypeCheval.setDescription(rtc.getString("description"));
 
