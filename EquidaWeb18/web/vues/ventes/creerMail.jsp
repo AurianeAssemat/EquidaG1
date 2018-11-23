@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
     <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="NomPage" value="Création du mail" />
+    <jsp:param name="NomPage" value="Création du mail" />
     </jsp:include>
     
     <body>
@@ -42,7 +42,7 @@
  
                     
            <div class="row">
-                <form  action="creerMail" method="post" class="col s12">
+                <form  action="creerMail" method="post" class="col s12" enctype="multipart/form-data">
                     <div class="row">
                         <div class="input-field col-s6">
                             <label for="objet">Objet :</label>
@@ -71,19 +71,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col-s6">
-                            <select multiple>
-                                <%
-                                    ArrayList<PieceJointe> lesPieceJointes = (ArrayList)request.getAttribute("pLesPiecesJointes");
-                                    for (int i=0; i < lesPieceJointes.size(); i++){
-                                        PieceJointe pieceJointe = lesPieceJointes.get(i);
-                                        out.println("<option value ='" + pieceJointe.getId() + "'>" + pieceJointe.getDescription()+ "</option>"); 
-
-                                    }
-                                %>
-                            </select>
-                            <label>Pièces jointes :</label>
-                        </div>
+                        <div class="file-field input-field">
+                            <div class="btn">
+                              <span>File</span>
+                              <input type="file" name="file" multiple>
+                            </div>
+                            <div class="file-path-wrapper">
+                              <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                            </div>
+                          </div>
                     </div>
                     <div class="row">
                        <div class="input-field col-s6">
@@ -95,3 +91,4 @@
         </div>
     </body>
 </html>
+

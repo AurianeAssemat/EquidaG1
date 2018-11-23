@@ -34,6 +34,14 @@
                  out.println("Corps : " + courriel.getCorps()); 
                 %>
             </p>
+            <p>
+                <%
+                    for (int i=0; i < courriel.getLesPieceJointes().size(); i++){
+       
+                       out.println("<a href='" + request.getContextPath() + "/upload/" + courriel.getLesPieceJointes().get(i).getChemin() + "'>" + courriel.getLesPieceJointes().get(i).getChemin() + "</a>");      
+                    }
+                %>
+            </p>
            <div class="row">
                
                 <form  method="post" action="envoyerMail" class="col s12">

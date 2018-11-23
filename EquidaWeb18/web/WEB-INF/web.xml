@@ -6,18 +6,37 @@
     </context-param>
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
+
+        <!--<param-value>jdbc:mysql://localhost/Equida18_G1</param-value>-->
         <param-value>jdbc:mysql://localhost/Equida18_G1</param-value>
-        <!--<param-value>jdbc:mysql://172.20.0.241/EQUIG1</param-value>-->
     </context-param>
     <context-param>
         <param-name>utilisateurjdbc</param-name>
+        <!--<param-value>root</param-value>-->
+
+
+
+    <param-value>jdbc:mysql://localhost/equida18_g1</param-value>
+
+        <param-value>jdbc:mysql://localhost/equida18_g1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>utilisateurjdbc</param-name>
+    <param-value>root</param-value>
+
         <param-value>root</param-value>
-        <!--<param-value>ADM_EQUIG1</param-value>-->
     </context-param>
     <context-param>
         <param-name>motdepassejdbc</param-name>
-        <param-value/>
-        <!--<param-value>mpEquida01</param-value>-->
+
+        <!--<param-value/>-->
+
+
+    <param-value/>
+        
+
+
+        <param-value></param-value>
     </context-param>
     <!--  écouteurs -->
     <listener>
@@ -42,8 +61,7 @@
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerMesChevaux</url-pattern>
     </servlet-mapping>
-   
-    
+      
     <servlet-mapping>
         <servlet-name>ServletVentes</servlet-name>
         <url-pattern>/ServletVentes/listerLesChevaux</url-pattern>
@@ -88,6 +106,27 @@
         <url-pattern>/ServletVentes/SupprimerUneVente</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+
+        <url-pattern>/ServletAdministrateur/SupprimerUnPays</url-pattern>
+
+        <url-pattern>/ServletAdministrateur/SupprimerUnTypeCheval</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/SupprimerUneCategVente</url-pattern>
+    </servlet-mapping>
+   <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/SupprimerUnLieu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/SupprimerUneCourse</url-pattern>
+
+    </servlet-mapping>
+    
     <!--Servlet ajouter-->
     
     <servlet-mapping>
@@ -99,8 +138,22 @@
         <url-pattern>/ServletVentes/ajouterEnchere</url-pattern>
     </servlet-mapping>
     
+   <!-- Servlet consulter -->   
+     
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/chevalConsulter</url-pattern>
+    </servlet-mapping>
+    
+    <!--Servlet modifier-->
+    
+    <servlet-mapping>
+        <servlet-name>ServletVentes</servlet-name>
+        <url-pattern>/ServletVentes/venteModifier</url-pattern>
+    </servlet-mapping>
+    
     <!--Servlet client --> 
-       
+  
     <servlet>
         <servlet-name>ServletClient</servlet-name>
         <servlet-class>servlets.ServletClient</servlet-class>
@@ -233,20 +286,40 @@
     
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
-        <url-pattern>/ServletAdministrateur/lieuAjouter</url-pattern>
+        <url-pattern>/ServletAdministrateur/lieuVenteAjouter</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
-        <url-pattern>/ServletAdministrateur/PaysAjouter</url-pattern>
+        <url-pattern>/ServletAdministrateur/paysAjouter</url-pattern>
     </servlet-mapping>
-       
-    <servlet-mapping>
-        <servlet-name>ServletVentes</servlet-name>
-        <url-pattern>/ServletVentes/chevalConsulter</url-pattern>
-    </servlet-mapping>
+           
+    <!--Servlet consulter -->
 
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/typeChevalConsulter</url-pattern>
+    </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/paysConsulter</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/lieuVenteConsulter</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/courseConsulter</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/categVenteConsulter</url-pattern>
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>

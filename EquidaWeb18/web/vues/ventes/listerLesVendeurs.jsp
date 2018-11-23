@@ -19,58 +19,59 @@
         <jsp:include page="/vues/MenuNavigation.jsp" />
 
         <div class="container">
-            <%
-            ArrayList<Vendeur> lesVendeurs = (ArrayList)request.getAttribute("pLesVendeurs");
-            %>
-            <table  class="table table-bordered table-striped table-condensed">  
-                <thead>
-                    <tr>             
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th>Pays</th>
-                        <th>Code Postal</th> 
-                        <th>E-mail</th> 
-                <br>
-                <br>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <%
-                        for(int i = 0; i < lesVendeurs.size();i++)
-                        {
 
-                            Vendeur unVendeur = lesVendeurs.get(i);
-                            out.println("<tr><td>");
-                            out.println(unVendeur.getId());
-                            out.println("</a></td>");
-
-                             out.println("<td>");
-                             out.println(unVendeur.getNom());
-                            out.println("</td>");
-
-                            out.println("<td>");
-                            out.println(unVendeur.getPrenom());
-                            out.println("</td>");
-
-                            out.println("<td>");
-                            out.println(unVendeur.getUnPays().getNom());
-                            out.println("</td>");
-
-                            out.println("<td>");
-                            out.println(unVendeur.getCopos());
-                            out.println("</td>");
-
-                            out.println("<td>");
-                            out.println(unVendeur.getMail());
-                            out.println("</td>");
-                        }
-                        %>
+            <div class="row">
+                <%
+                    ArrayList<Vendeur> lesVendeurs = (ArrayList) request.getAttribute("pLesVendeurs");
+                %>
+                <table  class="table table-bordered table-striped table-condensed">  
+                    <thead>
+                        <tr>             
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Pays</th>
+                            <th>Code Postal</th> 
+                            <th>E-mail</th> 
+                    <br>
+                    <br>
                     </tr>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <%
+                                for (int i = 0; i < lesVendeurs.size(); i++) {
 
+                                    Vendeur unVendeur = lesVendeurs.get(i);
+                                    out.println("<tr><td>");
+                                    out.println(unVendeur.getId());
+                                    out.println("</a></td>");
+
+                                    out.println("<td>");
+                                    out.println(unVendeur.getNom());
+                                    out.println("</td>");
+
+                                    out.println("<td>");
+                                    out.println(unVendeur.getPrenom());
+                                    out.println("</td>");
+
+                                    out.println("<td>");
+                                    out.println(unVendeur.getUnPays().getNom());
+                                    out.println("</td>");
+
+                                    out.println("<td>");
+                                    out.println(unVendeur.getCopos());
+                                    out.println("</td>");
+
+                                    out.println("<td>");
+                                    out.println(unVendeur.getMail());
+                                    out.println("</td>");
+                                }
+                            %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </body>
 </html>
