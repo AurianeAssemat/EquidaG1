@@ -39,7 +39,7 @@
                     répartis dans de nombreux pays comme l’Irlande, la Turquie, ou encore le Japon.
                 </div>
                 <div class="row">
-                    <h3>Vente à venir</h3>
+                    <h3>Ventes à venir</h3>
                 </div>
             </div>
             <%                ArrayList<Vente> lesVentes = (ArrayList) request.getAttribute("pLesVentes");
@@ -116,7 +116,7 @@
                             //Pas de Vente prévus*/
                             if (venteApresDateJour == false) {
                                 out.println("<tr><td colspan =4 style='text-align:center';>");
-                                out.println("<h4><strong>Pas de vente prévus</strong></h4>");
+                                out.println("<h4><strong>Pas de vente prévue</strong></h4>");
                                 out.println("</td></tr>");
                             }
                         %>
@@ -124,6 +124,5 @@
                 </table>
             </div>
         </div>
-        <jsp:include page="/vues/footer.jsp"/>
     </body>
 </html>
