@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="NomPage" value="Liste des acheteur" />
+    <jsp:param name="NomPage" value="Liste des acheteur" />
     </jsp:include>
 
     <body>

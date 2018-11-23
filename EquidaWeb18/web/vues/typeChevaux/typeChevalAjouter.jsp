@@ -10,7 +10,7 @@
 
 <html>
     <jsp:include page="/vues/Header.jsp" >
-        <jsp:param name="NomPage" value="Liste les ventes" />
+        <jsp:param name="NomPage" value="Ajouter un type de cheval" />
     </jsp:include>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,16 +22,24 @@
             <h1>Un nouveau type de cheval</h1>
 
                 <%
-
-                    TypeChevalForm form = (TypeChevalForm)request.getAttribute("form");
-                    
-                    if (form != null && form.getErreurs() != null) {
-                        for (int i = 0; i < form.getErreurs().size(); i++) {
-                            out.println(form.getErreurs().get(i) + "<br/>");
+                TypeChevalForm form = (TypeChevalForm)request.getAttribute("form");
+            
+                if(form != null && form.getErreurs() != null){
+            %>
+            <div class="card-panel red lighten-1">
+                    <ul>
+                        <%
+                        for(int i = 0; i < form.getErreurs().size();i++)
+                        {
+                        
+                            out.println("<li>" + form.getErreurs().get(i) + "<li/>");
                         }
-                    }
-                %>
-
+                        %>
+                    </ul>
+            </div>
+            <%
+                }
+            %>
             <form class="form-inline" action="typeChevalAjouter" method="POST">
                 <div class="row">
                     <div class="input-field col-s6">
@@ -49,7 +57,7 @@
                     </br>
                 <div class="row">
                     <div class="input-field col-s6">  
-                        <button class="btn waves-effect waves-light" type="submit" name="valider">Ajouter cheval</button>
+                        <button class="btn waves-effect waves-light" type="submit" name="valider">Ajouter cheval<i class="material-icons right">send</i></button>
                     </div>
                 </div>
             </form>       

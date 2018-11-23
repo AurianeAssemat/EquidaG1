@@ -5,6 +5,7 @@
  */
 package database;
 
+import static database.TypeChevalDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ public class CategVenteDAO {
     public static ArrayList<CategVente> getLesCategVentes(Connection connection) {
         ArrayList<CategVente> lesCategVentes = new ArrayList<CategVente>();
         try {
-            requete = connection.prepareStatement("select * from categvente");
+            requete = connection.prepareStatement("select * from categvente where archiver!=1");
             rs = requete.executeQuery();
 
             //On hydrate l'objet métier Client avec les résultats de la requête
@@ -41,5 +42,24 @@ public class CategVenteDAO {
         }
         return lesCategVentes;
     }
-
+    public static void  SupprimerUneCategVente(Connection connection,String codeCategVente){      
+      
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("UPDATE categvente SET archiver = 1 WHERE categvente.code = ?");
+           
+            requete.setString(1, codeCategVente);
+            //executer la requete
+             
+            requete.executeUpdate();
+           
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        
+        
+    } 
 }

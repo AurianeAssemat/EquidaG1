@@ -36,7 +36,10 @@ public class VenteDAO {
         ArrayList<Vente> lesVentes = new ArrayList<Vente>();
         try {
             //preparation de la requete     
-                requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id AND archiver != 1 order by dateDebut desc");
+
+
+            requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id And vente.archiver != 1 order by dateDebut desc");
+
             //executer la requete
             rs = requete.executeQuery();
 
@@ -109,7 +112,48 @@ public class VenteDAO {
         }
         return lesVentes;
     }
-
+    
+     public static Vente  getUneVente(Connection connection, int idVente){      
+        Vente uneVente = new  Vente();
+        try
+        {
+            //preparation de la requete     
+            requete =connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id AND vente.id= ?");          
+            //insertion de l'id de la vente dans la requete
+            requete.setInt(1, idVente);
+            //executer la requete
+            rs=requete.executeQuery();
+            
+            //On hydrate l'objet métier Client avec les résultats de la requête
+            while ( rs.next() ) {  
+                uneVente.setId(rs.getInt("vente.id"));
+                uneVente.setNom(rs.getString("vente.nom"));
+                uneVente.setDateDebutVente(rs.getString("vente.dateDebut"));
+                uneVente.setDateFinVente(rs.getString("vente.dateFinVente"));
+                uneVente.setdateDebutInscrip(rs.getString("vente.dateDebutInscrip"));
+                
+                CategVente uneCateg = new CategVente();
+                uneCateg.setCode(rs.getString("categvente.code"));  // on aurait aussi pu prendre CodeCateg
+                uneCateg.setLibelle(rs.getString("categvente.libelle"));
+                
+                uneVente.setUneCategVente(uneCateg);
+                
+                
+                Lieu unLieu = new Lieu();
+                unLieu.setId(rs.getInt("lieu.id"));  
+                unLieu.setVille(rs.getString("lieu.ville"));
+                
+                uneVente.setUnLieu(unLieu);
+                
+            }
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        return uneVente ;    
+    }
+     
     /* @author Zakina - 22/06/2017
      /* Méthode permettant de lister les clients interessés par la catégorie de la vente selectionnée (passée en paramètre de la méthode)
      /* Pour chaque client, on récupère aussi le nom de son pays
@@ -206,9 +250,32 @@ public class VenteDAO {
         catch (SQLException e) 
         {
             e.printStackTrace();
-        }
-        
-        
-    } 
+        } 
+    }
    
+    public static Vente modifierVente(Connection connection, Vente uneVente) {
+        
+        try {
+            
+            //preparation de la requete 
+            requete = connection.prepareStatement("UPDATE vente SET nom = ?, dateDebut = ?, codeCategVente = ?, lie_id = ?, dateFinVente = ?, dateDebutInscrip= ? WHERE id = ?");
+            
+            requete.setString(1, uneVente.getNom());
+            requete.setString(2, uneVente.getDateDebutVente());
+            requete.setString(3, uneVente.getUneCategVente().getCode());
+            requete.setInt(4, uneVente.getUnLieu().getId());
+            requete.setString(5, uneVente.getDateFinVente());
+            requete.setString(6, uneVente.getdateDebutInscrip());
+            requete.setInt(7, uneVente.getId());
+            
+            /* Exécution de la requête */
+            requete.executeUpdate();
+            System.out.println(requete);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return uneVente;
+    }
 }

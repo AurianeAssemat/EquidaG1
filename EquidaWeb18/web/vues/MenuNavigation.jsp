@@ -57,8 +57,6 @@
 
 <div class="row">
 
-    <div class = "col s12 m12 l12">
-
         <%
         for(int i = 0; i < lien.size();i++){
             out.println(lien.get(i).getDropdownHTML());
@@ -92,5 +90,4 @@
                 </ul>
             </div>
         </nav>
-    </div>
 </div>
