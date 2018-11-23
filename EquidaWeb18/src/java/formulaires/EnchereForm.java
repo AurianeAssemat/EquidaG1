@@ -8,8 +8,10 @@ package formulaires;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import modele.Acheteur;
 import modele.Enchere;
 import modele.Lot;
+import modele.Vente;
 
 /**
  *
@@ -52,9 +54,13 @@ public class EnchereForm {
     public Enchere ajouterEnchere(HttpServletRequest request) {
 
         Enchere uneEnchere = new Enchere();
+        Acheteur unAcheteur = new Acheteur();
         Lot unLot = new Lot();
+        Vente uneVente = new Vente();
 
-        //int id = unClient.getId();
+        int idAcheteur = Integer.parseInt(getDataForm(request, "idacheteur"));
+        int idVente = Integer.parseInt(getDataForm(request, "idvente"));
+        int idLot = Integer.parseInt(getDataForm(request, "idlot"));
         int montant = Integer.parseInt(getDataForm(request, "montant"));
 
         if (erreurs.isEmpty()) {
@@ -63,9 +69,17 @@ public class EnchereForm {
             resultat = "Échec de l'ajout.";
         }
 
+        uneVente.setId(idVente);
+        
+        unLot.setId(idLot);
+        unLot.setUneVente(uneVente);
+        
+        unAcheteur.setId(idAcheteur);
+        
         uneEnchere.setUnLot(unLot);
+        uneEnchere.setUnAcheteur(unAcheteur);
         uneEnchere.setMontant(montant);
-
+        
         return uneEnchere;
     }
 }

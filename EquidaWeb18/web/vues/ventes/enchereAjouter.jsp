@@ -46,6 +46,10 @@
             
         <form class="form-inline" action="enchereAjouter" method="POST">
             
+            <input type="hidden" value="<%unAcheteur.getId();%>" id="idacheteur" name="idacheteur"/>
+            <input type="hidden" value="<%unLot.getId();%>" id="idlot" name="idlot"/>
+            <input type="hidden" value="<%unLot.getUneVente().getId();%>" id="idvente" name="idvente"/>
+            
             <label for="montant">Montant : </label>
             <input id="montant" type="number" name="montant"/>
             <br>

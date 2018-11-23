@@ -21,6 +21,7 @@ import database.Utilitaire;
 import database.VenteDAO;
 import formulaires.ChevalForm;
 import formulaires.ChevalVenteForm;
+import formulaires.EnchereForm;
 import formulaires.VenteForm;
 import java.io.IOException;
 import java.sql.Connection;
@@ -385,6 +386,39 @@ public class ServletVentes extends HttpServlet {
                 ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
                 request.setAttribute("pLesCategVente", lesCategVentes);
                 this.getServletContext().getRequestDispatcher("/vues/VenteAjouter.jsp").forward(request, response);
+            }
+        }
+        
+        if(url.equals("/EquidaWeb18/ServletVentes/ajouterEnchere")){
+
+            /* Préparation de l'objet formulaire */
+            EnchereForm form = new EnchereForm();
+
+            /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+            Enchere uneEnchere = form.ajouterEnchere(request);
+
+            request.setAttribute("form", form);
+            
+            System.out.println(uneEnchere.getNumero()+" "+uneEnchere.getUnAcheteur().getId()+" "+uneEnchere.getUnLot().getId()+" "+uneEnchere.getUnLot().getUneVente().getId());
+
+            if (form.getErreurs().isEmpty()) {
+
+                // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos de la vente
+                Enchere EnchereVerif = EnchereDAO.ajouterUneEnchere(connection, uneEnchere);
+
+                request.setAttribute("pEnchere", uneEnchere);
+                this.getServletContext().getRequestDispatcher("/vues/enchereConsulter.jsp").forward(request, response);
+            } else {
+                int codeAcheteur = uneEnchere.getUnAcheteur().getId();
+                Acheteur unAcheteur = AcheteurDAO.getUnAcheteur(connection, codeAcheteur);
+                request.setAttribute("pUnAcheteur", unAcheteur);
+                
+                String idLot = (String) request.getParameter("idLot");
+                String idVente = (String) request.getParameter("idVente");
+                Lot unLot = LotDAO.getUnLot(connection, idVente, idLot);
+                request.setAttribute("pUnLot", unLot);
+                
+                this.getServletContext().getRequestDispatcher("/vues/ventes/enchereAjouter.jsp").forward(request, response);
             }
         }
 
