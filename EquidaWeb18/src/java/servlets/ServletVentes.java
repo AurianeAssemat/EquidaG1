@@ -404,7 +404,7 @@ public class ServletVentes extends HttpServlet {
             if (form.getErreurs().isEmpty()) {
 
                 // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos de la vente
-                Enchere EnchereVerif = EnchereDAO.ajouterUneEnchere(connection, uneEnchere);
+                EnchereDAO.ajouterUneEnchere(connection, uneEnchere);
 
                 request.setAttribute("pEnchere", uneEnchere);
                 this.getServletContext().getRequestDispatcher("/vues/enchereConsulter.jsp").forward(request, response);
