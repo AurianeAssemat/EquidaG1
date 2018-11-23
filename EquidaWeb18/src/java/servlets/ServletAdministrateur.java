@@ -155,7 +155,20 @@ public class ServletAdministrateur extends HttpServlet {
          
          /*Consulter*/
          
-        
+         
+         
+        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnPays"))
+        {  
+            
+            String codePays = request.getParameter("codePays");
+
+            PaysDAO.SupprimerUnPays(connection,codePays);
+            
+            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamPays");
+
+                
+        }      
+
         
     }
 

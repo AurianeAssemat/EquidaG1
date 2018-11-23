@@ -213,6 +213,8 @@ ADD dateDebutInscrip date ;
 ALTER TABLE vente 
 ADD archiver int(11) DEFAULT 0 ;
 
+ALTER TABLE pays 
+ADD archiver int(11) DEFAULT 0 ;
 
 CREATE TABLE lot (
 	id int(11) AUTO_INCREMENT,

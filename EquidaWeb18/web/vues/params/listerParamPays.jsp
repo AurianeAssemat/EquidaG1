@@ -54,8 +54,8 @@
                                 out.println("</td>"); 
                         
                                 out.println("<td>");
-                                out.println("<a class=\"waves-effect waves-light btn-small\" href ='#' ><i class=\"material-icons\">delete</i></a>");
-                                out.println("</td>");
+                                 out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletAdministrateur/SupprimerUnPays?codePays="+ unPays.getCode()+ "'><i class=\"material-icons\">delete</i></a>");
+                                 out.println("</td>");
                            
                                 out.println("<td>");
                                 out.println("<a class=\"waves-effect waves-light btn-small\"  href ='#'><i class=\"material-icons\">create</i></a>");

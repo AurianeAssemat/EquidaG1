@@ -75,7 +75,7 @@
                         </br>
 
                         <label for="categvente">Categorie Vente : </label>
-                        <select name="categVente" size="5" multiple>
+                        <select name="categVente" size="5">
                         <%
                                 ArrayList<CategVente> lesCategVente = (ArrayList)request.getAttribute("pLesCategVente");
                                 for (int i=0; i<lesCategVente.size();i++){
