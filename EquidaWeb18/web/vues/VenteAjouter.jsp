@@ -85,15 +85,14 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="input-field col s12">
 
-                            <select name="categVente" size="5" >
-                                <%
-                                    ArrayList<CategVente> lesCategVente = (ArrayList) request.getAttribute("pLesCategVente");
-                                    for (int i = 0; i < lesCategVente.size(); i++) {
-                                        CategVente cv = lesCategVente.get(i);
-                                        out.println("<option value ='" + cv.getCode() + "'>" + cv.getLibelle() + "</option>");
+                        <label for="categvente">Categorie Vente : </label>
+                        <select name="categVente" size="5">
+                        <%
+                                ArrayList<CategVente> lesCategVente = (ArrayList)request.getAttribute("pLesCategVente");
+                                for (int i=0; i<lesCategVente.size();i++){
+                                    CategVente cv = lesCategVente.get(i);
+                                    out.println("<option value ='" + cv.getCode() + "'>" + cv.getLibelle() + "</option>"); 
 
                                     }
                                 %>

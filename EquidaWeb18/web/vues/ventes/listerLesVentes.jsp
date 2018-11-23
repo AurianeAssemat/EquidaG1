@@ -142,5 +142,6 @@
 
             </div>
         </div>
+        <jsp:include page="/vues/footer.jsp" />
     </body>
 </html>

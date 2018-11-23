@@ -24,7 +24,7 @@ import formulaires.VenteForm;
 import formulaires.ChevalForm;
 import formulaires.ChevalVenteForm;
 import formulaires.VenteForm;
-
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -58,6 +58,8 @@ import modele.TypeCheval;
  * lister les clients d'une vente passée en paramètre
  */
 public class ServletVentes extends HttpServlet {
+    
+    private static final String UPLOAD_DIRECTORY = "upload";
 
     Connection connection;
 
@@ -341,7 +343,10 @@ public class ServletVentes extends HttpServlet {
          /* Stockage du formulaire et de l'objet dans l'objet request */
         request.setAttribute("form", form);
         
-        Courriel courriel = form.ajouterCourriel(request);
+         String uploadPath = getServletContext().getRealPath("")
+                 + UPLOAD_DIRECTORY;
+        
+        Courriel courriel = form.ajouterCourriel(request, uploadPath);
         
         /* Stockage du formulaire et de l'objet dans l'objet request */
         request.setAttribute("form", form);
@@ -352,7 +357,7 @@ public class ServletVentes extends HttpServlet {
             
             CourrielDAO.ajouterCourriel(connection, courriel);
             
-            response.sendRedirect("/EquidaWeb18/ServletVentes/envoyerMail?id=" + courriel.getId());
+            response.sendRedirect( "/EquidaWeb18/ServletVentes/envoyerMail?id=" + courriel.getId());
         } else {
            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
            request.setAttribute("pLesVentes", lesVentes);

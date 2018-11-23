@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,7 +26,7 @@ public class PaysDAO {
     public static ArrayList<Pays> getLesPays(Connection connection) {
         ArrayList<Pays> lesPays = new ArrayList<Pays>();
         try {
-            requete = connection.prepareStatement("select * from pays");
+            requete = connection.prepareStatement("select * from pays where archiver != 1");
             rs = requete.executeQuery();
 
             while (rs.next()) {
@@ -121,4 +122,22 @@ public class PaysDAO {
 
     }
 
+    public static void  SupprimerUnPays (Connection connection,String codePays){      
+      
+        try
+        {
+            //preparation de la requete     
+            requete=connection.prepareStatement("UPDATE pays SET archiver = 1 WHERE pays.code = ?");
+            requete.setString(1, codePays);
+            //executer la requete
+            requete.executeUpdate();    
+        }   
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        
+        
+    } 
+    
 }

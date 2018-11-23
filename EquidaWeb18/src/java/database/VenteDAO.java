@@ -36,7 +36,10 @@ public class VenteDAO {
         ArrayList<Vente> lesVentes = new ArrayList<Vente>();
         try {
             //preparation de la requete     
-            requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id And archiver != 1 order by dateDebut desc");
+
+
+            requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id And vente.archiver != 1 order by dateDebut desc");
+
             //executer la requete
             rs = requete.executeQuery();
 
@@ -77,7 +80,7 @@ public class VenteDAO {
         ArrayList<Vente> lesVentes = new ArrayList<Vente>();
         try {
             //preparation de la requete     
-            requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id  AND codeCategVente= ?  And archiver != 1 order by dateDebut desc");
+            requete = connection.prepareStatement("select * from vente, categvente , lieu where codeCategVente=code AND vente.lie_id = lieu.id  AND codeCategVente= ?  AND archiver != 1 order by dateDebut desc");
             requete.setString(1, codeCateg);
             //executer la requete
             rs = requete.executeQuery();
@@ -201,14 +204,14 @@ public class VenteDAO {
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
 
-            requete = connection.prepareStatement("INSERT INTO vente (id, nom, dateDebut, codeCategVente, lie_id, dateFinVente, dateDebutInscrip)\n"
-                    + "VALUES (?,?,?,?,?,?,?)");
+            requete = connection.prepareStatement("INSERT INTO vente (id, nom, dateDebut, codeCategVente, lie_id, dateFinVente, dateDebutInscrip, archiver)\n"
+                    + "VALUES (?,?,?,?,?,?,?,?)");
             requete.setInt(1, uneVente.getId());
             requete.setString(2, uneVente.getNom());
             requete.setDate(3, java.sql.Date.valueOf(uneVente.getDateDebutVente()));
             requete.setDate(6, java.sql.Date.valueOf(uneVente.getDateFinVente()));
             requete.setDate(7, java.sql.Date.valueOf(uneVente.getdateDebutInscrip()));
-
+            requete.setInt(8, 0);
             if (uneVente.getUneCategVente() != null) {
                 requete.setString(4, uneVente.getUneCategVente().getCode());
             } else {
@@ -223,7 +226,6 @@ public class VenteDAO {
             /* Exécution de la requête */
             requete.executeUpdate();
 
-     
         }   
         catch (SQLException e) 
         {

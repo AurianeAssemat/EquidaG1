@@ -131,7 +131,7 @@ public class ClientDAO {
                 requete = connection.prepareStatement("INSERT INTO clientcategvente(codeClient, codeCategVente) VALUES(?,?);");
                 requete.setInt(1, unClient.getId());
                 requete.setString(2, unClient.getLesCategVentes().get(i).getCode());
-                rs = requete.executeQuery();
+                requete.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();

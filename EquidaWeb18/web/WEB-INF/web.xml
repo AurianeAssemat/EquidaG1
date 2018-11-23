@@ -7,6 +7,14 @@
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
 
+        <!--<param-value>jdbc:mysql://localhost/Equida18_G1</param-value>-->
+        <param-value>jdbc:mysql://localhost/Equida18_G1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>utilisateurjdbc</param-name>
+        <!--<param-value>root</param-value>-->
+
+
 
     <param-value>jdbc:mysql://localhost/equida18_g1</param-value>
 
@@ -15,13 +23,18 @@
     <context-param>
         <param-name>utilisateurjdbc</param-name>
     <param-value>root</param-value>
+
         <param-value>root</param-value>
     </context-param>
     <context-param>
         <param-name>motdepassejdbc</param-name>
 
+        <!--<param-value/>-->
+
+
     <param-value/>
         
+
 
         <param-value></param-value>
     </context-param>
@@ -95,6 +108,9 @@
     
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
+
+        <url-pattern>/ServletAdministrateur/SupprimerUnPays</url-pattern>
+
         <url-pattern>/ServletAdministrateur/SupprimerUnTypeCheval</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
@@ -108,6 +124,7 @@
     <servlet-mapping>
         <servlet-name>ServletAdministrateur</servlet-name>
         <url-pattern>/ServletAdministrateur/SupprimerUneCourse</url-pattern>
+
     </servlet-mapping>
     
     <!--Servlet ajouter-->
@@ -132,8 +149,7 @@
     </servlet-mapping>
     
     <!--Servlet client --> 
-
-       
+  
     <servlet>
         <servlet-name>ServletClient</servlet-name>
         <servlet-class>servlets.ServletClient</servlet-class>
@@ -169,7 +185,6 @@
         <url-pattern>/ServletClient/clientModif</url-pattern>
     </servlet-mapping>
     
-
     <!--Servlet accueil -->    
 
     <servlet>
