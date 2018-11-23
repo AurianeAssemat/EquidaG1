@@ -297,6 +297,11 @@
         <url-pattern>/ServletAdministrateur/courseConsulter</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>ServletAdministrateur</servlet-name>
+        <url-pattern>/ServletAdministrateur/categVenteConsulter</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

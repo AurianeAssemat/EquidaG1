@@ -10,14 +10,14 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import modele.Pays;
+import modele.CategVente;
 
 /**
  *
  * @author Coco
  */
 
-public class PaysForm {
+public class CategVenteForm {
     private String resultat;
     private ArrayList< String> erreurs = new ArrayList< String>();
     
@@ -53,29 +53,27 @@ public class PaysForm {
     //méthode de validation du champ de saisie objet
     private void validationCode(String code) throws Exception {
         if (code == null) {
-            throw new Exception( "Le code du pays ne doit pas être vide" );
-        } else if (code.length() > 3) {
-            throw new Exception( "Le code du pays doit contenir 3 caractères." );
-        }else if (code.length() < 3) {
-            throw new Exception( "Le code du pays doit contenir 3 caractères." );
+            throw new Exception( "Le code de la categorie de vente ne doit pas être vide" );
+        } else if (code.length() != 3) {
+            throw new Exception( "Le code de la categorie de vente doit contenir 3 caractères." );
         }
     }
     
     //méthode de validation du champ de saisie corps
-    private void validationNom(String nom) throws Exception {
-        if (nom == null) {
-            throw new Exception( "Le nom du pays ne doit pas être vide." );
-        } else if (nom.length() < 3) {
-            throw new Exception( "Le nom du pays doit contenir au moins 3 caractères." );
+    private void validationLibelle(String libelle) throws Exception {
+        if (libelle == null) {
+            throw new Exception( "Le libelle de la categorie de vente ne doit pas être vide." );
+        } else if (libelle.length() < 3) {
+            throw new Exception( "Le libelle de la categorie de vente doit contenir au moins 3 caractères." );
         }
     }
     
-    public Pays PaysAjouter(HttpServletRequest request) {
+    public CategVente CategVenteAjouter(HttpServletRequest request) {
       
-        Pays pays = new Pays();
+        CategVente categVente = new CategVente();
         
         String code = getDataForm(request, "code");
-        String nom = getDataForm(request, "nom");
+        String libelle = getDataForm(request, "libelle");
         
         
         try {
@@ -83,16 +81,16 @@ public class PaysForm {
         } catch (Exception e) {
             addErreur(e.getMessage());
         }
-        pays.setCode(code);
+        categVente.setCode(code);
         
         try {
-             validationNom(nom);
+             validationLibelle(libelle);
         } catch (Exception e) {
             addErreur(e.getMessage());
         }
-        pays.setNom(nom);
+        categVente.setLibelle(libelle);
 
       
-        return pays;
+        return categVente;
     }
 }
