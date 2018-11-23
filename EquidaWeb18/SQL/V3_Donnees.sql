@@ -324,18 +324,18 @@ INSERT INTO `lieu` (`ville`, `nbBoxes`,commentaire) VALUES
 ('Cherbourg',15, 'Vente d''élevage'),
 ('Bayeux',30, 'Vente d''été');
 
-INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, lie_id, dateFinVente, dateDebutInscrip, archiver) VALUES
-(30917, 'Garibaldi Princess', '2017-03-09', 'ELVG', 2, '2017-05-09', '2017-01-09', NULL),
-(32587, 'Vente des bords de Seine', '2018-10-19', 'AUT', 1, '2018-10-27', '2018-10-19', NULL),
-(36124, 'Vente remus de la tour', '2018-10-20', 'AUT', 3, '2018-10-31', '2018-10-24', NULL),
-(90217, 'Mixing brain', '2017-09-02', 'XFEV', 1, '2017-09-02', '2017-05-02', NULL),
-(130519, 'Vente des bord de Garonne', '2019-05-13', 'ETE', 9, '2019-05-15', '2019-05-06', NULL),
-(200319, 'Vente des Voges édition 7', '2019-03-20', 'ELVG', 5, '2019-03-22', '2019-03-13', NULL),
-(210219, 'Vente de la Méditérranée', '2019-02-21', 'XFEV', 7, '2019-02-24', '2019-02-14', NULL),
-(210717, 'Rapsberry Sailing', '2017-07-17', 'ETE', 2, '2017-07-17', '2017-02-17', NULL),
-(210817, 'Jelly Bay', '2017-08-17', 'ETE', 3, '2017-12-17', '2017-01-17', NULL),
-(230119, 'Vente Rhône-Alpes édition 5', '2019-01-23', 'XFEV', 6, '2019-01-25', '2019-01-16', NULL),
-(250217, 'Djezair Star', '2017-02-25', 'XFEV', 2, '2017-04-25', '2017-01-25', NULL);
+INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, lie_id, dateFinVente, dateDebutInscrip) VALUES
+(30917, 'Garibaldi Princess', '2017-03-09', 'ELVG', 2, '2017-05-09', '2017-01-09'),
+(32587, 'Vente des bords de Seine', '2018-10-19', 'AUT', 1, '2018-10-27', '2018-10-19'),
+(36124, 'Vente remus de la tour', '2018-10-20', 'AUT', 3, '2018-10-31', '2018-10-24'),
+(90217, 'Mixing brain', '2017-09-02', 'XFEV', 1, '2017-09-02', '2017-05-02'),
+(130519, 'Vente des bord de Garonne', '2019-05-13', 'ETE', 9, '2019-05-15', '2019-05-06'),
+(200319, 'Vente des Voges édition 7', '2019-03-20', 'ELVG', 5, '2019-03-22', '2019-03-13'),
+(210219, 'Vente de la Méditérranée', '2019-02-21', 'XFEV', 7, '2019-02-24', '2019-02-14'),
+(210717, 'Rapsberry Sailing', '2017-07-17', 'ETE', 2, '2017-07-17', '2017-02-17'),
+(210817, 'Jelly Bay', '2017-08-17', 'ETE', 3, '2017-12-17', '2017-01-17'),
+(230119, 'Vente Rhône-Alpes édition 5', '2019-01-23', 'XFEV', 6, '2019-01-25', '2019-01-16'),
+(250217, 'Djezair Star', '2017-02-25', 'XFEV', 2, '2017-04-25', '2017-01-25');
 
 INSERT INTO `courriel` (`date`, `objet`,corps) VALUES
 ('2018-08-05','Objet1', 'corps 1'),

@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS lieu (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+alter table lieu add archiver int DEFAULT 0;
 
 CREATE TABLE IF NOT EXISTS vente (
   id int(11) NOT NULL,
@@ -185,7 +186,6 @@ Alter Table cheval
 ADD CONSTRAINT FK_CLIent_Cheval FOREIGN KEY (cli_id) REFERENCES client(id);
 
 
-
 CREATE TABLE course (
 	id int(11),
 	nom varchar(50),
@@ -193,6 +193,8 @@ CREATE TABLE course (
 	date date,
 	PRIMARY KEY (id)	
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+alter table course add archiver int DEFAULT 0;
 
 CREATE TABLE participer (
 	che_id int(11) AUTO_INCREMENT,
