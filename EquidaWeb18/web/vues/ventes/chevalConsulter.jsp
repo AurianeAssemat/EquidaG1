@@ -30,7 +30,7 @@
                     <tr><td>NOM :</td><td><% out.println(unCheval.getNom());%></td></tr>
                     <tr><td>SIRE :</td><td><%  out.println(unCheval.getSire());%></td>  </tr>
                     <tr><td>SEXE :</td><td><%  out.println(unCheval.getSexe());%></td>  </tr>
-                    <tr><td>TYPE SELECTIONEES :</td><td><%  out.println(unCheval.getTypeCheval().getLibelle());%></td>  </tr>
+                    <tr><td>TYPE SELECTIONE :</td><td><%  out.println(unCheval.getTypeCheval().getLibelle());%></td>  </tr>
                     <tr><td>MERE :
                             <%
 
@@ -44,7 +44,7 @@
                                     out.println(unCheval.getMere().getSire());
                                     out.println("</td>");
                                 } else {
-                                    out.println("<td>" + "Mère Inconnu");
+                                    out.println("<td>" + "Mère Inconnue");
                                     out.println("</td>");
                                     out.println("<td>" + "SIRE : Sire Inconnu");
                                     out.println("</td>");
