@@ -95,11 +95,12 @@
                                 out.println(uneVente.getDateDebutVente());
                                 out.println("</td>");
                                 
-                                String dateBase = uneVente.getDateDebutVente();
-                                Date date1 = sdf.parse(dateBase);
+                                //String dateBase = uneVente.getDateDebutVente();
+                                //Date date1 = sdf.parse(dateBase);
                                 
                                 out.println("<td>");
-                                out.println(date1);
+                                //out.println(date1);
+                                out.println(uneVente.getDateFinVente());
                                 out.println("</td>");
                                                               
                                 out.println("<td>");

@@ -28,12 +28,8 @@
     </context-param>
     <context-param>
         <param-name>motdepassejdbc</param-name>
-
+    <param-value/>   
         <!--<param-value/>-->
-
-
-    <param-value/>
-        
 
 
         <param-value></param-value>
