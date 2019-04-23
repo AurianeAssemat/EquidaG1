@@ -11,6 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import modele.Client;
 import modele.Compte;
+
+import modele.Permission;
+import modele.Role;
+
 import java.security.*;
 
 /**
@@ -49,6 +53,31 @@ public class CompteDAO {
                 unCompte.setLogin(rs.getString("login"));
                 unCompte.setMdp(rs.getString("mdp"));
                 unCompte.setUnClient(unClient);
+                
+                
+                requete = connection.prepareStatement("select * from avoir ,role WHERE  com_id = ? AND rol_code = role.code");
+                requete.setInt(1, unCompte.getId());
+                
+                rs = requete.executeQuery();
+                
+                while (rs.next()) {
+                    Role unRole = new Role();
+                    unRole.setCode(rs.getString("role.code"));
+                    unRole.setNom(rs.getString("role.nom"));
+                    
+                    requete = connection.prepareStatement("select * from permissions ,donner  WHERE  rol_code = ? AND per_code = permissions.code");
+                    requete.setString(1, unRole.getCode());
+
+                    ResultSet rp = requete.executeQuery();
+                    while (rp.next()) {
+                        Permission permission = new Permission();
+                        permission.setCode(rp.getString("permissions.code"));
+                        permission.setNom(rp.getString("permissions.nom"));
+                        unRole.addUnePermission(permission);
+                    }
+                            
+                    unCompte.addUnRole(unRole);
+                }
             }
 
         } catch (SQLException e) {
