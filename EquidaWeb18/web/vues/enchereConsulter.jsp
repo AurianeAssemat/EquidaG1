@@ -29,5 +29,12 @@
             <tr><td>Acheteur :</td><td><% out.println(uneEnchere.getUnAcheteur().getId());%></td></tr>
             <tr><td>Montant :</td><td><% out.println(uneEnchere.getMontant());%></td></tr>
         </table>
+        
+        <p>
+            <% 
+            out.println("<a href='../ServletVentes/listerLesEncheres?idLot="+uneEnchere.getUnLot().getId()+"&idVente="+uneEnchere.getUnLot().getUneVente().getId()+"'>Retour à la liste des enchères</a>");
+            %>
+        </p>
+        
     </body>
 </html>
