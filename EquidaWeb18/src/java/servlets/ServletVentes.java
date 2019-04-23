@@ -451,6 +451,11 @@ public class ServletVentes extends HttpServlet {
 
                 // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos de la vente
                 EnchereDAO.ajouterUneEnchere(connection, uneEnchere);
+                
+                String idVente = String.valueOf(uneEnchere.getUnLot().getUneVente().getId());
+                String idLot = String.valueOf(uneEnchere.getUnLot().getId()) ;
+                Lot unLot = LotDAO.getUnLot(connection, idVente, idLot);
+                uneEnchere.setUnLot(unLot);
 
                 request.setAttribute("pEnchere", uneEnchere);
                 this.getServletContext().getRequestDispatcher("/vues/enchereConsulter.jsp").forward(request, response);

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ClientAjouter
+    Document   : Accueil
     Created on : 22/06, 16:35:27
-    Author     : Zakina
+    Author     : slam
 --%>
 
 <%@page import="modele.Vente"%>

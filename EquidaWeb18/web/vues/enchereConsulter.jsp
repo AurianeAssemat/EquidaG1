@@ -24,10 +24,10 @@
         %>
 
         <table class="table table-bordered table-striped table-condensed">
-            <tr><td>N° :</td><td><% out.println(uneEnchere.getNumero());%></td></tr>
-            <tr><td>Cheval concerné :</td><td><% out.println(uneEnchere.getUnLot().getCheval().getNom());%></td></tr>
-            <tr><td>Acheteur :</td><td><% out.println(uneEnchere.getUnAcheteur().getId());%></td></tr>
-            <tr><td>Montant :</td><td><% out.println(uneEnchere.getMontant());%></td></tr>
+            <tr><td>N° : </td><td><% out.println(uneEnchere.getNumero());%></td></tr>
+            <tr><td>Cheval concerné : </td><td><% out.println(uneEnchere.getUnLot().getCheval().getNom());%></td></tr>
+            <tr><td>Acheteur : </td><td><% out.println(uneEnchere.getUnAcheteur().getId());%></td></tr>
+            <tr><td>Montant : </td><td><% out.println(uneEnchere.getMontant());%></td></tr>
         </table>
         
         <p>

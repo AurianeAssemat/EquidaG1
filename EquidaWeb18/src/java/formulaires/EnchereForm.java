@@ -57,7 +57,7 @@ public class EnchereForm {
         Acheteur unAcheteur = new Acheteur();
         Lot unLot = new Lot();
         Vente uneVente = new Vente();
-
+        
         int idAcheteur = Integer.parseInt(getDataForm(request, "idacheteur"));
         int idVente = Integer.parseInt(getDataForm(request, "idvente"));
         int idLot = Integer.parseInt(getDataForm(request, "idlot"));
