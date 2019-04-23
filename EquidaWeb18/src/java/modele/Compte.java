@@ -5,6 +5,8 @@
  */
 package modele;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Zakina
@@ -15,6 +17,7 @@ public class Compte {
     private String login;
     private String mdp;
     private Client unClient;
+    private ArrayList<Role> lesRoles;
 
     public Compte() {
     }
@@ -58,4 +61,28 @@ public class Compte {
         this.unClient = unClient;
     }
 
+    public ArrayList<Role> getLesRoles() {
+        return lesRoles;
+    }
+
+    public void setLesRoles(ArrayList<Role> lesRoles) {
+        this.lesRoles = lesRoles;
+    }
+    
+    public void addUnRole(Role unRole) {
+        if (lesRoles == null) {
+            lesRoles = new ArrayList<Role>();
+        }
+        lesRoles.add(unRole);
+    }
+    
+     public boolean isPermission(String unePermission) {
+        for (int i=0; i<lesRoles.size(); i++) {
+            if (lesRoles.get(i).isPermission(unePermission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

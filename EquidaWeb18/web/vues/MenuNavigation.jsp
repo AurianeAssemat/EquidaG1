@@ -9,47 +9,49 @@
 <%
     ArrayList<LienMenu> lien = new ArrayList(){};
     
-    LienMenu accueil = new LienMenu("../ServletAccueil/Accueil", "Accueil" );
+    LienMenu accueil = new LienMenu("../ServletAccueil/Accueil", "Accueil", "" );
     lien.add(accueil);
     
-    LienMenu ventes = new LienMenu("../ServletVentes/listerLesVentes", "Ventes" );
+    LienMenu ventes = new LienMenu("../ServletVentes/listerLesVentes", "Ventes", "" );
     lien.add(ventes);
     
-    LienMenu mails = new LienMenu("../ServletVentes/creerMail", "Mails" );
+    LienMenu mails = new LienMenu("../ServletVentes/creerMail", "Mails", "AMAIL" );
     lien.add(mails);
     
-    LienMenu MesChevaux = new LienMenu("../ServletVentes/listerMesChevaux", "Mes chevaux" );
+    LienMenu MesChevaux = new LienMenu("../ServletVentes/listerMesChevaux", "Mes chevaux", "CMCHE"  );
     lien.add(MesChevaux);
     
-    LienMenu parametres = new LienMenu(null, "Paramètres");
+    LienMenu parametres = new LienMenu(null, "Paramètres", "CADMIN" );
     lien.add(parametres);
     
-    LienMenu paramTypeChevaux = new LienMenu("../ServletAdministrateur/listerParamTypeCheval", "Type chevaux");
+    LienMenu paramTypeChevaux = new LienMenu("../ServletAdministrateur/listerParamTypeCheval", "Type chevaux", "CADMIN" );
     parametres.addUnEnfant(paramTypeChevaux);
     
-    LienMenu paramCourse = new LienMenu("../ServletAdministrateur/listerParamCourse", "Courses");
+    LienMenu paramCourse = new LienMenu("../ServletAdministrateur/listerParamCourse", "Courses", "CADMIN" );
     parametres.addUnEnfant(paramCourse);
     
-    LienMenu paramCategVente = new LienMenu("../ServletAdministrateur/listerParamCategVente", "Categorie de vente");
+    LienMenu paramCategVente = new LienMenu("../ServletAdministrateur/listerParamCategVente", "Categorie de vente", "CADMIN" );
     parametres.addUnEnfant(paramCategVente);
     
-    LienMenu paramLieu = new LienMenu("../ServletAdministrateur/listerParamLieu", "Lieu de vente");
+    LienMenu paramLieu = new LienMenu("../ServletAdministrateur/listerParamLieu", "Lieu de vente", "CADMIN" );
     parametres.addUnEnfant(paramLieu);
     
-    LienMenu paramPays = new LienMenu("../ServletAdministrateur/listerParamPays", "Pays");
+    LienMenu paramPays = new LienMenu("../ServletAdministrateur/listerParamPays", "Pays", "CADMIN" );
     parametres.addUnEnfant(paramPays);
     
-    LienMenu client = new LienMenu(null, "Clients" );
+    LienMenu client = new LienMenu(null, "Clients" , "CCLI" );
     lien.add(client);
     
-    LienMenu clients = new LienMenu("../ServletClient/listerLesClients", "Clients" );
+    LienMenu clients = new LienMenu("../ServletClient/listerLesClients", "Clients" , "CCLI" );
     client.addUnEnfant(clients);
 
-    LienMenu vendeurs = new LienMenu("../ServletClient/listerLesVendeurs", "Vendeurs" );
+    LienMenu vendeurs = new LienMenu("../ServletClient/listerLesVendeurs", "Vendeurs" , "CVEN" );
     client.addUnEnfant(vendeurs);
     
-    LienMenu acheteurs = new LienMenu("../ServletClient/listerLesAcheteurs", "Acheteurs" );
+    LienMenu acheteurs = new LienMenu("../ServletClient/listerLesAcheteurs", "Acheteurs" , "CACHE" );
     client.addUnEnfant(acheteurs);
+    
+    Compte compte = (Compte)request.getSession().getAttribute("Compte");
     
 %>
 
@@ -59,7 +61,7 @@
 
         <%
         for(int i = 0; i < lien.size();i++){
-            out.println(lien.get(i).getDropdownHTML());
+            out.println(lien.get(i).getDropdownHTML(compte));
         }
         %>
 
@@ -68,13 +70,12 @@
                 <ul id = "nav-mobile" class = "right hide-on-med-and-down">  
                     <%
                     for(int i = 0; i < lien.size();i++){
-                        out.println(lien.get(i).getNavHTML());
+                        out.println(lien.get(i).getNavHTML(compte));
                     }
                     %>
                 </ul>
                 <ul>
                     <%
-                    Compte compte = (Compte)request.getSession().getAttribute("Compte");
                     if(compte != null){
                     
             

@@ -6,6 +6,7 @@
 package Presentation;
 
 import java.util.ArrayList;
+import modele.Compte;
 
 /**
  *
@@ -15,14 +16,16 @@ public class LienMenu {
 
     private String lien;
     private String nom;
+    private String droit;
     private ArrayList<LienMenu> lesEnfants = new ArrayList<LienMenu>();
 
     public LienMenu() {
     }
 
-    public LienMenu(String lien, String nom) {
+    public LienMenu(String lien, String nom, String droit) {
         this.lien = lien;
         this.nom = nom;
+        this.droit = droit;
     }
 
     public String getLien() {
@@ -41,6 +44,14 @@ public class LienMenu {
         this.nom = nom;
     }
 
+    public String getDroit() {
+        return droit;
+    }
+
+    public void setDroit(String droit) {
+        this.droit = droit;
+    }
+
     public ArrayList<LienMenu> getLesEnfant() {
         return lesEnfants;
     }
@@ -56,32 +67,32 @@ public class LienMenu {
         lesEnfants.add(unEnfant);
     }
 
-    public String getDropdownHTML() {
+    public String getDropdownHTML(Compte compte) {
         String render = "";
+        if (droit == "" || (compte != null && compte.isPermission(droit))) {
+            if (!lesEnfants.isEmpty()) {
+                render += "<ul id = \"" + nom + "\" class = \"dropdown-content\">\n";
+                for (int i = 0; i < lesEnfants.size(); i++) {
+                    render += "<li><a href = \"" + lesEnfants.get(i).getLien() + "\">" + lesEnfants.get(i).getNom() + "</a></li>\n";
+                }
 
-        if (!lesEnfants.isEmpty()) {
-            render += "<ul id = \"" + nom + "\" class = \"dropdown-content\">\n";
-            for (int i = 0; i < lesEnfants.size(); i++) {
-                render += "<li><a href = \"" + lesEnfants.get(i).getLien() + "\">" + lesEnfants.get(i).getNom() + "</a></li>\n";
+                render += "</ul>";
             }
-
-            render += "</ul>";
         }
-
         return render;
     }
 
-    public String getNavHTML() {
+    public String getNavHTML(Compte compte) {
         String render = "";
-
-        if (!lesEnfants.isEmpty()) {
-            render += "<li><a class = \"dropdown-trigger\"  \n"
-                    + "               data-target = \"" + nom + "\">" + nom + "<i class = \"material-icons\n"
-                    + "               right\">arrow_drop_down</i></a></li>";
-        } else {
-            render += "<li><a href='" + lien + "'>" + nom + "</a></li>";
+        if (droit == "" || (compte != null && compte.isPermission(droit))) {
+            if (!lesEnfants.isEmpty()) {
+                render += "<li><a class = \"dropdown-trigger\"  \n"
+                        + "               data-target = \"" + nom + "\">" + nom + "<i class = \"material-icons\n"
+                        + "               right\">arrow_drop_down</i></a></li>";
+            } else {
+                render += "<li><a href='" + lien + "'>" + nom + "</a></li>";
+            }
         }
-
         return render;
     }
 }
