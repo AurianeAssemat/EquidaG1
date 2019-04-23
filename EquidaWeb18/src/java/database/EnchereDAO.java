@@ -162,8 +162,7 @@ public class EnchereDAO {
             //On donne à l'enchere son id
             uneEnchere.setNumero(idEnchere);
             // Requete d'insertion des données en base
-            requete = connection.prepareStatement("INSERT INTO enchere ( id, lot_id, lotvent_id, ach_id, montant)\n"
-                    + "VALUES (?,?,?,?,?)");
+            requete = connection.prepareStatement("INSERT INTO enchere ( id, lot_id, lotvent_id, ach_id, montant) VALUES (?,?,?,?,?)");
             requete.setInt(1, uneEnchere.getNumero());
             requete.setInt(2, idlot);
             requete.setInt(3, idvente);

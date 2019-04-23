@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Enchere Ajouter</title>
+        <title>Ajouter une enchère</title>
     </head>
     <body>
         <h1>ENCHERIR SUR UN CHEVAL</h1>

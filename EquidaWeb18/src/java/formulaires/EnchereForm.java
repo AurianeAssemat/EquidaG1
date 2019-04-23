@@ -68,6 +68,7 @@ public class EnchereForm {
         } else {
             resultat = "Échec de l'ajout.";
         }
+        System.out.println(resultat);
 
         uneVente.setId(idVente);
         

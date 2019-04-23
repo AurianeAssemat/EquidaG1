@@ -1,7 +1,7 @@
 <%-- 
     Document   : listerLesEncheres
     Created on : 16 oct. 2018, 14:26:57
-    Author     : author Assemat
+    Author     : Assemat
 --%>
 
 <%@page import="modele.Vente"%>
@@ -42,7 +42,6 @@
                     <br>
                     <br>
                     </tr>
-
                     </thead>
                     <tbody>
                         <tr>
@@ -61,7 +60,6 @@
                                     out.println("<td>");
                                     out.println(enchere.getUnLot().getCheval().getSire());
                                     out.println("</td>");
-
                                     
                                 } else {
                                     out.println("<tr><td>");
@@ -70,13 +68,11 @@
 
                                 }
 
-
                             %>
                         </tr>
                     </tbody>
                 </table>
                         
-                         
                 <p>
                     <%
                         // je dois recuperer l'id du lot et de la vente pour encherir sur un cheval (donc ajouter une enchere)  
