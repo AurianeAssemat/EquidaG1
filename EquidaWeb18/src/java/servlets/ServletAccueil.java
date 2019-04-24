@@ -80,6 +80,10 @@ public class ServletAccueil extends HttpServlet {
         if (url.equals("/EquidaWeb18/ServletAccueil/Connexion") && request.getSession().getAttribute("Compte") == null) {
             this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp").forward(request, response);
         }
+        
+        if (url.equals("/EquidaWeb18/ServletAccueil/NoPermission")) {
+            this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+        }
 
         if (url.equals("/EquidaWeb18/ServletAccueil/Deconnexion")) {
 

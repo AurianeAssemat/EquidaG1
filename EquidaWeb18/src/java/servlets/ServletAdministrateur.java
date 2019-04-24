@@ -81,134 +81,176 @@ public class ServletAdministrateur extends HttpServlet {
             throws ServletException, IOException {
 
         String url = request.getRequestURI();
-              
-        //Les servlets "Lister"
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval")) {
-            ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
-            request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
-            getServletContext().getRequestDispatcher("/vues/params/listerParamTypeCheval.jsp").forward(request, response);
-        }
-
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCourse")) {
-            ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
-            request.setAttribute("pLesCourses", lesCourses);
-            getServletContext().getRequestDispatcher("/vues/params/listerParamCourse.jsp").forward(request, response);
-        }
-
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamLieu")) {
-            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
-            request.setAttribute("pLesLieux", lesLieux);
-            getServletContext().getRequestDispatcher("/vues/params/listerParamLieu.jsp").forward(request, response);
-        }
-
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCategVente")) {
-            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-            request.setAttribute("pLesCategVentes", lesCategVentes);
-            this.getServletContext().getRequestDispatcher("/vues/params/listerParamCategVente.jsp").forward(request, response);
-        }
-
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamPays")) {
-            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
-            request.setAttribute("pLesPays", lesPays);
-            getServletContext().getRequestDispatcher("/vues/params/listerParamPays.jsp").forward(request, response);
-        }
         
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnTypeCheval"))
-        {  
-            
-            int codeTypeCheval = Integer.parseInt(request.getParameter("codeTypeCheval"));
-
-            TypeChevalDAO.SupprimerUnTypeCheval(connection,codeTypeCheval);
-            
-            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval");
-
-                
-        }
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUneCategVente"))
-        {  
-            
-            String codeCategVente =request.getParameter("codeCategVente");
-
-            CategVenteDAO.SupprimerUneCategVente(connection,codeCategVente);
-            
-            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamCategVente");
-
-                
-        }
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnLieu"))
-        {  
-            
-            int codeLieu =Integer.parseInt(request.getParameter("codeLieu"));
-
-            LieuDAO.SupprimerUnLieu(connection,codeLieu);
-            
-            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamLieu");
-
-                
-        }
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUneCourse"))
-        {  
-            
-            int codeCourse =Integer.parseInt(request.getParameter("codeCourse"));
-
-            CourseDAO.SupprimerUneCourse(connection,codeCourse);
-            
-            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamCourse");
-
-                
-        }
-
+        Compte compte = (Compte) request.getSession().getAttribute("Compte");
+        if (compte != null) {
         
-        /*
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/supprimerParamCourse"))
-        {     
-            String codeCourse = (String)request.getParameter("codeCourse");
-            
-            ArrayList<Course> lesCourses = CourseDAO.DeleteUneCourse(connection, codeCourse);
-            request.setAttribute("pLesCourses", lesCourses);
-            getServletContext().getRequestDispatcher("/vues/params/listerParamCourse.jsp").forward(request, response);
-        }
-        */
-        
-        //Les servlets "Ajouter"
-        if (url.equals("/EquidaWeb18/ServletAdministrateur/categVenteAjouter")) {
-            this.getServletContext().getRequestDispatcher("/vues/categVente/categVenteAjouter.jsp").forward(request, response);
-        }
-        
-         if(url.equals("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter"))
-        {                   
-            this.getServletContext().getRequestDispatcher("/vues/typeChevaux/typeChevalAjouter.jsp" ).forward( request, response );
-        }
-         
-         if(url.equals("/EquidaWeb18/ServletAdministrateur/paysAjouter"))
-        {                   
-            this.getServletContext().getRequestDispatcher("/vues/pays/paysAjouter.jsp" ).forward( request, response );
-        }
-        
-         if (url.equals("/EquidaWeb18/ServletAdministrateur/lieuVenteAjouter")) {
-            this.getServletContext().getRequestDispatcher("/vues/lieuVente/lieuVenteAjouter.jsp").forward(request, response);
-        }
-         
-         if (url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter")) {
-            this.getServletContext().getRequestDispatcher("/vues/course/courseAjouter.jsp").forward(request, response);
-        }
-         /*Consulter*/
-         
-         
-         
-        if(url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnPays"))
-        {  
-            
-            String codePays = request.getParameter("codePays");
+            //Les servlets "Lister"
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval")) {
+                if (compte.isPermission("CADMIN")) {
+                    ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
+                    request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
+                    getServletContext().getRequestDispatcher("/vues/params/listerParamTypeCheval.jsp").forward(request, response);
 
-            PaysDAO.SupprimerUnPays(connection,codePays);
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCourse")) {
+                if (compte.isPermission("CADMIN")) {
+                    ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
+                    request.setAttribute("pLesCourses", lesCourses);
+                    getServletContext().getRequestDispatcher("/vues/params/listerParamCourse.jsp").forward(request, response);
+
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamLieu")) {
+                if (compte.isPermission("CADMIN")) {
+                    ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+                    request.setAttribute("pLesLieux", lesLieux);
+                    getServletContext().getRequestDispatcher("/vues/params/listerParamLieu.jsp").forward(request, response);
+
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCategVente")) {
+                if (compte.isPermission("CADMIN")) {
+
+                    ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+                    request.setAttribute("pLesCategVentes", lesCategVentes);
+                    this.getServletContext().getRequestDispatcher("/vues/params/listerParamCategVente.jsp").forward(request, response);
+
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamPays")) {
+                if (compte.isPermission("CADMIN")) {
+
+                    ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+                    request.setAttribute("pLesPays", lesPays);
+                    getServletContext().getRequestDispatcher("/vues/params/listerParamPays.jsp").forward(request, response);
+
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnTypeCheval")) {
+                if (compte.isPermission("SADMIN")) {
+                    int codeTypeCheval = Integer.parseInt(request.getParameter("codeTypeCheval"));
+                    TypeChevalDAO.SupprimerUnTypeCheval(connection, codeTypeCheval);
+                    response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval");
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
             
-            response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamPays");
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUneCategVente")) {
+                if (compte.isPermission("SADMIN")) {
 
-                
-        }      
+                    String codeCategVente = request.getParameter("codeCategVente");
+                    CategVenteDAO.SupprimerUneCategVente(connection, codeCategVente);
+                    response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamCategVente");
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+            
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnLieu")) {
+                if (compte.isPermission("SADMIN")) {
 
-        
+                    int codeLieu = Integer.parseInt(request.getParameter("codeLieu"));
+                    LieuDAO.SupprimerUnLieu(connection, codeLieu);
+                    response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamLieu");
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUneCourse")) {
+                if (compte.isPermission("SADMIN")) {
+                    int codeCourse = Integer.parseInt(request.getParameter("codeCourse"));
+                    CourseDAO.SupprimerUneCourse(connection, codeCourse);
+                    response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamCourse");
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+            
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnPays")) {
+                if (compte.isPermission("SADMIN")) {
+                    String codePays = request.getParameter("codePays");
+                    PaysDAO.SupprimerUnPays(connection, codePays);
+                    response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamPays");
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            //Les servlets "Ajouter"
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/categVenteAjouter")) {
+                if (compte.isPermission("AADMIN")) {
+                    ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+                    request.setAttribute("pLesCategVentes", lesCategVentes);
+                    this.getServletContext().getRequestDispatcher("/vues/categVenteAjouter.jsp").forward(request, response);
+
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter")) {
+                if (compte.isPermission("AADMIN")) {
+                    ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
+                    request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
+                    getServletContext().getRequestDispatcher("/vues/typeChevalAjouter.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter")) {
+                if (compte.isPermission("AADMIN")) {
+
+                    ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
+                    request.setAttribute("pLesCourses", lesCourses);
+                    getServletContext().getRequestDispatcher("/vues/courseAjouter.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/lieuAjouter")) {
+                if (compte.isPermission("AADMIN")) {
+
+                    ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+                    request.setAttribute("pLeslieux", lesLieux);
+                    getServletContext().getRequestDispatcher("/vues/lieuAjouter.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/paysAjouter")) {
+                if (compte.isPermission("AADMIN")) {
+
+                    ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+                    request.setAttribute("pLesPays", lesPays);
+                    getServletContext().getRequestDispatcher("/vues/paysAjouter.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
+                }
+            }
+        } else {
+            response.sendRedirect("/EquidaWeb18/ServletAccueil/Connexion");
+        }
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

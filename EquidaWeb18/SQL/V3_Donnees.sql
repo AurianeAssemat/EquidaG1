@@ -407,10 +407,9 @@ INSERT INTO `clientcategvente` (`codeClient`, `codeCategVente`) VALUES
 --
 
 INSERT INTO `compte` (`id`, `login`, `mdp`, `cli_id`) VALUES
-(1, 'aaa', 'c5fe25896e49ddfe996db7508cf00534', 1),
-(2, 'bbb', 'c5fe25896e49ddfe996db7508cf00534', 2),
-(3, 'vendeur', 'e3a52ab799d4bdecb23304d51e66b68a', 5);
-
+(1, 'cdeltour', '8815b7196884f2d17ffd001eca8f0d63', 1),
+(2, 'nfime', '8815b7196884f2d17ffd001eca8f0d63', 2),
+(3, 'sberezovski', '8815b7196884f2d17ffd001eca8f0d63', 5);
 
 --
 -- Déchargement des données de la table `lot`
@@ -434,3 +433,56 @@ INSERT INTO `enchere` (`id`, `lot_id`, `lotvent_id`, `ach_id`, `montant`) VALUES
 (1, 2, 210717, 9, 32000),
 (2, 1, 30917, 9, 20000),
 (2, 2, 210717, 7, 35000);
+
+
+INSERT INTO `role` (`code`, `nom`) VALUES
+('ADMIN', 'Administrateur'),
+('CLI', 'Client'),
+('DIR', 'Directeur Général'),
+('SAL', 'Salarié');
+
+INSERT INTO `permissions` (`code`, `nom`) VALUES
+('AADMI', 'Ajouter donnee admin'),
+('ACHE', 'Ajouter un cheval'),
+('ACHEV', 'Ajouter un cheval a une vente'),
+('ACLI', 'Ajouter un client'),
+('AMAIL', 'Ajouter un mail'),
+('AVENT', 'Ajouter une vente'),
+('CACHE', 'Consulter les acheteur'),
+('CADMI', 'Consulter donnee admin'),
+('CCLI', 'Consulter les client'),
+('CCOUR', 'Consulter les courriels'),
+('CMCHE', 'Consulter mes chevaux'),
+('CVEN', 'Consulter les vendeur'),
+('EMAIL', 'Envoyer un mail'),
+('MCHE', 'Modifier un cheval'),
+('SADMI', 'Supprimer donnée admin'),
+('SMCHE', 'Supprimer mes cheval'),
+('SVENT', 'Suprimer une vente'),
+('UCLI', 'Modifier un client'),
+('UVENT', 'Modifier une vente');
+
+INSERT INTO `avoir` (`com_id`, `rol_code`) VALUES
+(1, 'ADMIN'),
+(1, 'CLI'),
+(5, 'CLI'),
+(1, 'DIR');
+
+INSERT INTO `donner` (`per_code`, `rol_code`) VALUES
+('AADMI', 'ADMIN'),
+('CADMI', 'ADMIN'),
+('SADMI', 'ADMIN'),
+('ACHE', 'CLI'),
+('CMCHE', 'CLI'),
+('MCHE', 'CLI'),
+('SMCHE', 'CLI'),
+('ACLI', 'DIR'),
+('AMAIL', 'DIR'),
+('AVENT', 'DIR'),
+('CACHE', 'DIR'),
+('CCLI', 'DIR'),
+('CCOUR', 'DIR'),
+('CVEN', 'DIR'),
+('EMAIL', 'DIR'),
+('SVENT', 'DIR'),
+('UVENT', 'DIR');
