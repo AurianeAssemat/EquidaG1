@@ -58,12 +58,12 @@ public class CompteDAO {
                 requete = connection.prepareStatement("select * from avoir ,role WHERE  com_id = ? AND rol_code = role.code");
                 requete.setInt(1, unCompte.getId());
                 
-                rs = requete.executeQuery();
+                ResultSet rr = requete.executeQuery();
                 
-                while (rs.next()) {
+                while (rr.next()) {
                     Role unRole = new Role();
-                    unRole.setCode(rs.getString("role.code"));
-                    unRole.setNom(rs.getString("role.nom"));
+                    unRole.setCode(rr.getString("role.code"));
+                    unRole.setNom(rr.getString("role.nom"));
                     
                     requete = connection.prepareStatement("select * from permissions ,donner  WHERE  rol_code = ? AND per_code = permissions.code");
                     requete.setString(1, unRole.getCode());

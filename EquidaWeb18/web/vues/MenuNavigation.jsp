@@ -21,22 +21,22 @@
     LienMenu MesChevaux = new LienMenu("../ServletVentes/listerMesChevaux", "Mes chevaux", "CMCHE"  );
     lien.add(MesChevaux);
     
-    LienMenu parametres = new LienMenu(null, "Paramètres", "CADMIN" );
+    LienMenu parametres = new LienMenu(null, "Paramètres", "CADMI" );
     lien.add(parametres);
     
-    LienMenu paramTypeChevaux = new LienMenu("../ServletAdministrateur/listerParamTypeCheval", "Type chevaux", "CADMIN" );
+    LienMenu paramTypeChevaux = new LienMenu("../ServletAdministrateur/listerParamTypeCheval", "Type chevaux", "CADMI" );
     parametres.addUnEnfant(paramTypeChevaux);
     
-    LienMenu paramCourse = new LienMenu("../ServletAdministrateur/listerParamCourse", "Courses", "CADMIN" );
+    LienMenu paramCourse = new LienMenu("../ServletAdministrateur/listerParamCourse", "Courses", "CADMI" );
     parametres.addUnEnfant(paramCourse);
     
-    LienMenu paramCategVente = new LienMenu("../ServletAdministrateur/listerParamCategVente", "Categorie de vente", "CADMIN" );
+    LienMenu paramCategVente = new LienMenu("../ServletAdministrateur/listerParamCategVente", "Categorie de vente", "CADMI" );
     parametres.addUnEnfant(paramCategVente);
     
-    LienMenu paramLieu = new LienMenu("../ServletAdministrateur/listerParamLieu", "Lieu de vente", "CADMIN" );
+    LienMenu paramLieu = new LienMenu("../ServletAdministrateur/listerParamLieu", "Lieu de vente", "CADMI" );
     parametres.addUnEnfant(paramLieu);
     
-    LienMenu paramPays = new LienMenu("../ServletAdministrateur/listerParamPays", "Pays", "CADMIN" );
+    LienMenu paramPays = new LienMenu("../ServletAdministrateur/listerParamPays", "Pays", "CADMI" );
     parametres.addUnEnfant(paramPays);
     
     LienMenu client = new LienMenu(null, "Clients" , "CCLI" );
@@ -66,7 +66,7 @@
         %>
 
         <nav>
-            <div class = "nav-wrapper">
+            <div class = "nav-wrapper green darken-3">
                 <ul id = "nav-mobile" class = "right hide-on-med-and-down">  
                     <%
                     for(int i = 0; i < lien.size();i++){

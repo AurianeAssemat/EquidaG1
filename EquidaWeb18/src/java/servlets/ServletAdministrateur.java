@@ -87,7 +87,7 @@ public class ServletAdministrateur extends HttpServlet {
         
             //Les servlets "Lister"
             if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval")) {
-                if (compte.isPermission("CADMIN")) {
+                if (compte.isPermission("CADMI")) {
                     ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
                     request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
                     getServletContext().getRequestDispatcher("/vues/params/listerParamTypeCheval.jsp").forward(request, response);
@@ -98,7 +98,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
 
             if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCourse")) {
-                if (compte.isPermission("CADMIN")) {
+                if (compte.isPermission("CADMI")) {
                     ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
                     request.setAttribute("pLesCourses", lesCourses);
                     getServletContext().getRequestDispatcher("/vues/params/listerParamCourse.jsp").forward(request, response);
@@ -109,7 +109,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
 
             if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamLieu")) {
-                if (compte.isPermission("CADMIN")) {
+                if (compte.isPermission("CADMI")) {
                     ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
                     request.setAttribute("pLesLieux", lesLieux);
                     getServletContext().getRequestDispatcher("/vues/params/listerParamLieu.jsp").forward(request, response);
@@ -120,7 +120,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
 
             if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamCategVente")) {
-                if (compte.isPermission("CADMIN")) {
+                if (compte.isPermission("CADMI")) {
 
                     ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
                     request.setAttribute("pLesCategVentes", lesCategVentes);
@@ -132,7 +132,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
 
             if (url.equals("/EquidaWeb18/ServletAdministrateur/listerParamPays")) {
-                if (compte.isPermission("CADMIN")) {
+                if (compte.isPermission("CADMI")) {
 
                     ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
                     request.setAttribute("pLesPays", lesPays);
@@ -144,7 +144,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
 
             if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnTypeCheval")) {
-                if (compte.isPermission("SADMIN")) {
+                if (compte.isPermission("SADMI")) {
                     int codeTypeCheval = Integer.parseInt(request.getParameter("codeTypeCheval"));
                     TypeChevalDAO.SupprimerUnTypeCheval(connection, codeTypeCheval);
                     response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamTypeCheval");
@@ -154,7 +154,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
             
             if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUneCategVente")) {
-                if (compte.isPermission("SADMIN")) {
+                if (compte.isPermission("SADMI")) {
 
                     String codeCategVente = request.getParameter("codeCategVente");
                     CategVenteDAO.SupprimerUneCategVente(connection, codeCategVente);
@@ -165,7 +165,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
             
             if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnLieu")) {
-                if (compte.isPermission("SADMIN")) {
+                if (compte.isPermission("SADMI")) {
 
                     int codeLieu = Integer.parseInt(request.getParameter("codeLieu"));
                     LieuDAO.SupprimerUnLieu(connection, codeLieu);
@@ -175,7 +175,7 @@ public class ServletAdministrateur extends HttpServlet {
                 }
             }
             if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUneCourse")) {
-                if (compte.isPermission("SADMIN")) {
+                if (compte.isPermission("SADMI")) {
                     int codeCourse = Integer.parseInt(request.getParameter("codeCourse"));
                     CourseDAO.SupprimerUneCourse(connection, codeCourse);
                     response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamCourse");
@@ -185,7 +185,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
             
             if (url.equals("/EquidaWeb18/ServletAdministrateur/SupprimerUnPays")) {
-                if (compte.isPermission("SADMIN")) {
+                if (compte.isPermission("SADMI")) {
                     String codePays = request.getParameter("codePays");
                     PaysDAO.SupprimerUnPays(connection, codePays);
                     response.sendRedirect("/EquidaWeb18/ServletAdministrateur/listerParamPays");
@@ -196,7 +196,7 @@ public class ServletAdministrateur extends HttpServlet {
 
             //Les servlets "Ajouter"
             if (url.equals("/EquidaWeb18/ServletAdministrateur/categVenteAjouter")) {
-                if (compte.isPermission("AADMIN")) {
+                if (compte.isPermission("AADMI")) {
                     ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
                     request.setAttribute("pLesCategVentes", lesCategVentes);
                     this.getServletContext().getRequestDispatcher("/vues/categVenteAjouter.jsp").forward(request, response);
@@ -207,7 +207,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
 
             if (url.equals("/EquidaWeb18/ServletAdministrateur/typeChevalAjouter")) {
-                if (compte.isPermission("AADMIN")) {
+                if (compte.isPermission("AADMI")) {
                     ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
                     request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
                     getServletContext().getRequestDispatcher("/vues/typeChevalAjouter.jsp").forward(request, response);
@@ -217,7 +217,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
 
             if (url.equals("/EquidaWeb18/ServletAdministrateur/courseAjouter")) {
-                if (compte.isPermission("AADMIN")) {
+                if (compte.isPermission("AADMI")) {
 
                     ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
                     request.setAttribute("pLesCourses", lesCourses);
@@ -228,7 +228,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
 
             if (url.equals("/EquidaWeb18/ServletAdministrateur/lieuAjouter")) {
-                if (compte.isPermission("AADMIN")) {
+                if (compte.isPermission("AADMI")) {
 
                     ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
                     request.setAttribute("pLeslieux", lesLieux);
@@ -239,7 +239,7 @@ public class ServletAdministrateur extends HttpServlet {
             }
 
             if (url.equals("/EquidaWeb18/ServletAdministrateur/paysAjouter")) {
-                if (compte.isPermission("AADMIN")) {
+                if (compte.isPermission("AADMI")) {
 
                     ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
                     request.setAttribute("pLesPays", lesPays);

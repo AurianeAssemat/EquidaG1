@@ -407,9 +407,11 @@ INSERT INTO `clientcategvente` (`codeClient`, `codeCategVente`) VALUES
 --
 
 INSERT INTO `compte` (`id`, `login`, `mdp`, `cli_id`) VALUES
-(1, 'cdeltour', '8815b7196884f2d17ffd001eca8f0d63', 1),
-(2, 'nfime', '8815b7196884f2d17ffd001eca8f0d63', 2),
-(3, 'sberezovski', '8815b7196884f2d17ffd001eca8f0d63', 5);
+(1, 'cdeltour', 'ef826f96fe347d7dab72d2d0a0852128', 1),
+(2, 'nfime', '8269a266c2742488d018fdf6aa2d0347', 2),
+(3, 'fertau', 'e7c7dee2b1983495ea81249f002789f9', 3),
+(7, 'hvofur', 'f768479f54b922126087970ca235e929', 7),
+(30, 'ecadic', '159fe6d795cf16432b5f0100a1d34870', 30);
 
 --
 -- Déchargement des données de la table `lot`
@@ -464,8 +466,11 @@ INSERT INTO `permissions` (`code`, `nom`) VALUES
 
 INSERT INTO `avoir` (`com_id`, `rol_code`) VALUES
 (1, 'ADMIN'),
+(2, 'ADMIN'),
 (1, 'CLI'),
-(5, 'CLI'),
+(3, 'CLI'),
+(7, 'CLI'),
+(30, 'CLI'),
 (1, 'DIR');
 
 INSERT INTO `donner` (`per_code`, `rol_code`) VALUES
