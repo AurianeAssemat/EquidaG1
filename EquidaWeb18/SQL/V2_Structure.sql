@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS client (
   ville varchar(40) NOT NULL,
   mail varchar(60) DEFAULT NULL,
   codePays varchar(3) DEFAULT NULL,
+  titre varchar(20) DEFAULT NULL,
   PRIMARY KEY (id),
   CONSTRAINT FK_cli_pays FOREIGN KEY (codePays) REFERENCES pays (code)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
