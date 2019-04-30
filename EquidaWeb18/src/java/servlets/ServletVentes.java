@@ -9,6 +9,7 @@ import database.AcheteurDAO;
 import database.CategVenteDAO;
 import database.ChevauxDAO;
 import database.ClientDAO;
+import database.CompteDAO;
 import database.CourrielDAO;
 import database.EnchereDAO;
 import database.LieuDAO;
@@ -18,6 +19,7 @@ import database.PieceJointeDAO;
 import database.Utilitaire;
 import database.VenteDAO;
 import database.PaysDAO;
+import database.RoleDAO;
 import database.TypeChevalDAO;
 
 import formulaires.CourrielForm;
@@ -191,20 +193,20 @@ public class ServletVentes extends HttpServlet {
         if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
         {  
             Compte compte = (Compte)request.getSession().getAttribute("Compte");
-        
-            if(compte != null){
             
-            int codeVente = Integer.parseInt(request.getParameter("codeVente"));
-
-            VenteDAO.SupprimerUneVente(connection,codeVente);
+            if(compte != null && compte.isPermission("SVENT")) {
             
-            response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesVentes");
+                int codeVente = Integer.parseInt(request.getParameter("codeVente"));
+                VenteDAO.SupprimerUneVente(connection,codeVente);
+                response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesVentes");
 
-                int codeAcheteur = compte.getUnClient().getId();
-                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
-                request.setAttribute("pLesChevaux", lesChevaux);
-                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
-                
+                /*
+                    int codeAcheteur = compte.getUnClient().getId();
+                    ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                    request.setAttribute("pLesChevaux", lesChevaux);
+                    getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+                */
+
             } else {
                 this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
             }

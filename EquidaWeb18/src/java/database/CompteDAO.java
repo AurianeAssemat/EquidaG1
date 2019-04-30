@@ -93,7 +93,7 @@ public class CompteDAO {
             //preparation de la requete   
             requete = connection.prepareStatement("INSERT INTO compte(login, mdp, cli_id) VALUES(?,?,?) ");
 
-            String mdp = "MDP" + Client.getNom().toLowerCase();
+            String mdp = "mp" + Client.getNom().toLowerCase();
             requete.setString(1, Client.getNom().toLowerCase() + "." + Client.getPrenom().toLowerCase());
             requete.setString(2, encode(mdp));
             requete.setInt(3, Client.getId());
@@ -105,7 +105,7 @@ public class CompteDAO {
         }
         return unCompte;
     }
-
+    
     public static String encode(String key) {
         byte[] uniqueKey = key.getBytes();
         byte[] hash = null;
