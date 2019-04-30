@@ -206,7 +206,7 @@ public class ServletVentes extends HttpServlet {
                 getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
                 
             } else {
-                this.getServletContext().getRequestDispatcher("/vues/nonConnecte.jsp").forward(request, response);
+                this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
             }
         }
              

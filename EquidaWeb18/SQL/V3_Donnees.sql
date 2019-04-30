@@ -324,6 +324,14 @@ INSERT INTO `lieu` (`ville`, `nbBoxes`,commentaire) VALUES
 ('Cherbourg',15, 'Vente d''élevage'),
 ('Bayeux',30, 'Vente d''été');
 
+INSERT INTO `lieu` (`id`, `ville`, `nbBoxes`, `commentaire`) VALUES
+(4, 'Paris', 40, ''),
+(5, 'Strasbourg', 20, ''),
+(6, 'Lyon', 10, ''),
+(7, 'Marseille', 14, ''),
+(8, 'Dijon', 30, ''),
+(9, 'Bordeaux', 16, '');
+
 INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, lie_id, dateFinVente, dateDebutInscrip) VALUES
 (30917, 'Garibaldi Princess', '2017-03-09', 'ELVG', 2, '2017-05-09', '2017-01-09'),
 (32587, 'Vente des bords de Seine', '2018-10-19', 'AUT', 1, '2018-10-27', '2018-10-19'),
@@ -371,14 +379,6 @@ INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`) VAL
 (5, 'Herricka', 'F', '0808.201.855Z', 1, 2, 5),
 (6, 'Nuage', 'M', '0808.980.128Z', 1, 2, 6),
 (7, 'Desperado', 'M', '0808.180.529Z', 1, 2, 6);
-
-INSERT INTO `lieu` (`id`, `ville`, `nbBoxes`, `commentaire`) VALUES
-(4, 'Paris', 40, ''),
-(5, 'Strasbourg', 20, ''),
-(6, 'Lyon', 10, ''),
-(7, 'Marseille', 14, ''),
-(8, 'Dijon', 30, ''),
-(9, 'Bordeaux', 16, '');
 
 /* 3 */
 
