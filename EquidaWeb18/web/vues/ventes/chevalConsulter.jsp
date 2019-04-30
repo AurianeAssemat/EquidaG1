@@ -69,7 +69,7 @@
                                 }%> 
                         </td></tr>
                 </table>
-                <a href ='../ServletAccueil/Accueil'> Retour</a>
+                <a href ='../ServletVente/listerLesVentes'> Retour</a>
             </div>
         </div>  
     </body>

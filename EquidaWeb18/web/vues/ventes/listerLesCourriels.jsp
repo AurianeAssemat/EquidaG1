@@ -28,11 +28,11 @@
                 <table  class="table table-bordered table-striped table-condensed">  
                     <thead>
                         <tr>             
-                            <th>id</th>
-                            <th>date envoie</th>
-                            <th>objet</th>
-                            <th>corps</th>
-                            <th>piece joint</th> 
+                            <th>Id</th>
+                            <th>Date d'envoi</th>
+                            <th>Objet</th>
+                            <th>Corps</th>
+                            <th>Pièce(s) jointe(s)</th> 
 
                         </tr>
                     </thead>

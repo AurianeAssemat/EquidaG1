@@ -84,71 +84,90 @@ public class ServletClient extends HttpServlet {
             throws ServletException, IOException {
 
         String url = request.getRequestURI();
-        //ajout d'un client
-        if (url.equals("/EquidaWeb18/ServletClient/ajouterClient")) {
-            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
-            request.setAttribute("pLesPays", lesPays);
+        Compte compte = (Compte)request.getSession().getAttribute("Compte");
+        if (compte != null) {
+            //ajout d'un client
+            if (url.equals("/EquidaWeb18/ServletClient/ajouterClient")) {
+                if (compte.isPermission("ACLI")) {
+                    ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+                    request.setAttribute("pLesPays", lesPays);
 
-            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-            request.setAttribute("pLesCategVente", lesCategVentes);
+                    ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+                    request.setAttribute("pLesCategVente", lesCategVentes);
 
-            this.getServletContext().getRequestDispatcher("/vues/clients/clientAjouter.jsp" ).forward( request, response );
+                    this.getServletContext().getRequestDispatcher("/vues/clients/clientAjouter.jsp" ).forward( request, response );
 
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            //lister les clients en tant que directeur
+            if (url.equals("/EquidaWeb18/ServletClient/listerLesClients")) {
+                if(compte.isPermission("CCLI")) {
+                    ArrayList<Client> lesClients = ClientDAO.getLesClients(connection);
+                    request.setAttribute("pLesClients", lesClients);
+
+                    getServletContext().getRequestDispatcher("/vues/clients/listerLesClients.jsp").forward(request, response);
+
+                }else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletClient/listerLesAcheteurs")) {
+                if (compte.isPermission("CACHE")) {
+                    ArrayList<Acheteur> lesAcheteurs = AcheteurDAO.getLesAcheteurs(connection);
+
+                    request.setAttribute("pLesAcheteurs", lesAcheteurs);
+                    getServletContext().getRequestDispatcher("/vues/ventes/listerLesAcheteurs.jsp").forward(request, response);
+                }else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletClient/listerLesVendeurs")) {
+                if (compte.isPermission("CVEN")) {
+                    ArrayList<Vendeur> lesVendeurs = VendeurDAO.getLesVendeurs(connection);
+
+                    request.setAttribute("pLesVendeurs", lesVendeurs);
+                    getServletContext().getRequestDispatcher("/vues/ventes/listerLesVendeurs.jsp").forward(request, response);
+                }else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            //System.out.println("URL=" + url);
+            //MODIFICATION DE 1 CLIENT 
+
+
+           if(url.equals("/EquidaWeb18/ServletClient/clientModif"))
+           {
+               if (compte.isPermission("UCLI")) {
+                    ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+                    request.setAttribute("pLesPays", lesPays);
+
+                    int idClient = Integer.parseInt(request.getParameter("id"));
+
+                    Client unClient = ClientDAO.getUnClient(connection, idClient );
+                    unClient.setId(idClient);
+
+                    ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+                    request.setAttribute("pLesCategVente", lesCategVentes);
+
+                    ArrayList<CategVente> lesCategVentesClients = ClientDAO.getLesCategsClient(connection, idClient);
+                    unClient.setLesCategVentes(lesCategVentesClients);
+
+                    request.setAttribute("pClient", unClient);
+                    //System.out.println("client " + unClient);
+                    //Client clientModif = ClientDAO.modifUnClient(connection, idClient);
+
+                    getServletContext().getRequestDispatcher("/vues/clients/clientModif.jsp").forward(request, response);
+                }else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+           }
         }
-
-        //lister les clients en tant que directeur
-        if (url.equals("/EquidaWeb18/ServletClient/listerLesClients")) {
-            
-            ArrayList<Client> lesClients = ClientDAO.getLesClients(connection);
-            request.setAttribute("pLesClients", lesClients);
-
-            getServletContext().getRequestDispatcher("/vues/clients/listerLesClients.jsp").forward(request, response);
-            
-        }
-
-        if (url.equals("/EquidaWeb18/ServletClient/listerLesAcheteurs")) {
-            
-            ArrayList<Acheteur> lesAcheteurs = AcheteurDAO.getLesAcheteurs(connection);
-
-            request.setAttribute("pLesAcheteurs", lesAcheteurs);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesAcheteurs.jsp").forward(request, response);
-        }
-
-        if (url.equals("/EquidaWeb18/ServletClient/listerLesVendeurs")) {
-            
-            ArrayList<Vendeur> lesVendeurs = VendeurDAO.getLesVendeurs(connection);
-
-            request.setAttribute("pLesVendeurs", lesVendeurs);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesVendeurs.jsp").forward(request, response);
-        }
-
-        //System.out.println("URL=" + url);
-        //MODIFICATION DE 1 CLIENT 
-
-
-       if(url.equals("/EquidaWeb18/ServletClient/clientModif"))
-       {
-           
-           ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
-           request.setAttribute("pLesPays", lesPays);
-           
-           int idClient = Integer.parseInt(request.getParameter("id"));
-           
-           Client unClient = ClientDAO.getUnClient(connection, idClient );
-           unClient.setId(idClient);
-           
-           ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-           request.setAttribute("pLesCategVente", lesCategVentes);
-           
-           ArrayList<CategVente> lesCategVentesClients = ClientDAO.getLesCategsClient(connection, idClient);
-           unClient.setLesCategVentes(lesCategVentesClients);
-           
-           request.setAttribute("pClient", unClient);
-           //System.out.println("client " + unClient);
-           //Client clientModif = ClientDAO.modifUnClient(connection, idClient);
-           
-           getServletContext().getRequestDispatcher("/vues/clients/clientModif.jsp").forward(request, response);
-       }
 
 
     }

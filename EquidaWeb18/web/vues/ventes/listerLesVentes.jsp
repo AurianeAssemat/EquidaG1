@@ -4,6 +4,7 @@
     Author     : Zakina
 --%>
 
+<%@page import="modele.Compte"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.lang.System"%>
@@ -28,6 +29,7 @@
                     SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
                     ArrayList<Vente> lesVentes = (ArrayList) request.getAttribute("pLesVentes");
                     ArrayList<CategVente> lesCategVentes = (ArrayList) request.getAttribute("pLesCategVentes");
+                    Compte compte = (Compte)request.getSession().getAttribute("Compte");
                 %>
 
                 <form class="form-inline" action="listerLesVentes" method="GET">
@@ -53,8 +55,11 @@
                     </div>
                 </form>
                 <div class="col s1 offset-s4">  
+                    
+                    <% if (compte != null  && compte.isPermission("AVENT")) { %>
 
                     <a class="btn-floating btn-large waves-effect waves-light red"href='../ServletVentes/ajouterVente'><i class="material-icons">add</i></a>
+                    <% } %>
 
                 </div>  
                 <table  class="table table-bordered table-striped table-condensed">  
@@ -76,11 +81,9 @@
                     <tbody>
                         <tr>
                             <%
-
+                    
                             for(int i = 0; i < lesVentes.size();i++)
                             {
-
-
                                 Vente uneVente = lesVentes.get(i);
                                 out.println("<tr><td>");
                                 out.println(uneVente.getId());
@@ -94,10 +97,9 @@
                                 out.println(uneVente.getDateDebutVente());
                                 out.println("</td>");
                                 
+                                out.println("<td>");
                                 //String dateBase = uneVente.getDateDebutVente();
                                 //Date date1 = sdf.parse(dateBase);
-                                
-                                out.println("<td>");
                                 //out.println(date1);
                                 out.println(uneVente.getDateFinVente());
                                 out.println("</td>");
@@ -114,26 +116,34 @@
                                 out.println(uneVente.getUneCategVente().getLibelle());
                                 out.println("</td>");
                            
-                                    
-                                out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat="+ uneVente.getUneCategVente().getCode()+ "'>");
-                                out.println("Lister les clients interessés");
-                                out.println("</td>");
-
-                                out.println("<td><a href ='../ServletVentes/listerLesCourriel?codeVente="+ uneVente.getId()+ "'>");
-                                out.println("Lister les Couriels envoyés");
-                                out.println("</td>");      
-                           
                                 out.println("<td><a href ='../ServletVentes/listerLesChevaux?codeVente="+ uneVente.getId()+ "'>");
                                 out.println("Lister les Chevaux");
                                 out.println("</td>");
-                           
-                                 out.println("<td>");
-                                 out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerUneVente?codeVente="+ uneVente.getId()+ "'><i class=\"material-icons\">delete</i></a>");
-                                 out.println("</td>");
+                                
+                                if (compte != null){
+                                    if (compte.isPermission("CCLI")) {
+                                        out.println("<td><a href ='../ServletVentes/listerLesClients?codeCat="+ uneVente.getUneCategVente().getCode()+ "'>");
+                                        out.println("Lister les clients interessés");
+                                        out.println("</td>");
+                                    }
 
-                                 out.println("<td>");
-                                 out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/venteModifier?codeVente="+ uneVente.getId()+ "' ><i class=\"material-icons\">create</i></a>");
-                                 out.println("</td>");
+                                    if (compte.isPermission("CCOUR")) {
+                                        out.println("<td><a href ='../ServletVentes/listerLesCourriel?codeVente="+ uneVente.getId()+ "'>");
+                                        out.println("Lister les Couriels envoyés");
+                                        out.println("</td>");
+                                    }
+                                    if (compte.isPermission("SVENT")) {
+                                        out.println("<td>");
+                                        out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/SupprimerUneVente?codeVente="+ uneVente.getId()+ "'><i class=\"material-icons\">delete</i></a>");
+                                        out.println("</td>");
+
+                                    }
+                                    if (compte.isPermission("UVENT")) {
+                                        out.println("<td>");
+                                        out.println("<a class=\"waves-effect waves-light btn-small\" href ='../ServletVentes/venteModifier?codeVente="+ uneVente.getId()+ "' ><i class=\"material-icons\">create</i></a>");
+                                        out.println("</td>");
+                                    }
+                                }
                             }
                             %>
                         </tr>

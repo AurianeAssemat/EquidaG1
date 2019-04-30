@@ -115,7 +115,8 @@ public class ServletVentes extends HttpServlet {
             throws ServletException, IOException {
 
         String url = request.getRequestURI();
-
+        Compte compte = (Compte)request.getSession().getAttribute("Compte");
+        
         // Récup et affichage par date décroissante de toutes les ventes   
         if (url.equals("/EquidaWeb18/ServletVentes/listerLesVentes")) {
             String codeCat = (String) request.getParameter("codeCat");
@@ -132,154 +133,6 @@ public class ServletVentes extends HttpServlet {
             request.setAttribute("pLesCategVentes", lesCategVentes);
 
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesVentes.jsp").forward(request, response);
-        }
-
-        // Récup et affichage des clients interessés par une certaine catégorie de ventes
-        if (url.equals("/EquidaWeb18/ServletVentes/listerLesClients")) {
-            System.out.println("DANS LISTER LES CLIENTS");
-            String codeCat = (String) request.getParameter("codeCat");
-
-            ArrayList<Client> lesClients = VenteDAO.getLesClients(connection, codeCat);
-            request.setAttribute("pLesClients", lesClients);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesClients.jsp").forward(request, response);
-        }
-
-        if (url.equals("/EquidaWeb18/ServletVentes/listerLesCourriel")) {
-            String codeVente = (String) request.getParameter("codeVente");
-
-            ArrayList<Courriel> lesCourriels = CourrielDAO.getLesCourriels(connection, codeVente);
-            request.setAttribute("pLesCourriels", lesCourriels);
-            getServletContext().getRequestDispatcher("/vues/ventes/listerLesCourriels.jsp").forward(request, response);
-        }
-        if (url.equals("/EquidaWeb18/ServletVentes/ajouterVente")) {
-            ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
-            request.setAttribute("pLesLieux", lesLieux);
-
-            ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-            request.setAttribute("pLesCategVente", lesCategVentes);
-            this.getServletContext().getRequestDispatcher("/vues/VenteAjouter.jsp").forward(request, response);
-        }
-        
-        if(url.equals("/EquidaWeb18/ServletVentes/venteModifier"))
-       {
-           ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
-           request.setAttribute("pLesCategVente", lesCategVentes);
-           
-           ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
-           request.setAttribute("pLesLieux", lesLieux);
-
-           int idVente = Integer.parseInt(request.getParameter("codeVente"));
-           
-           Vente uneVente = VenteDAO.getUneVente(connection, idVente );
-           uneVente.setId(idVente);
-           
-           request.setAttribute("pVente", uneVente);
-           
-           getServletContext().getRequestDispatcher("/vues/ventes/venteModifier.jsp").forward(request, response);
-       }
-
-        if(url.equals("/EquidaWeb18/ServletVentes/creerMail"))
-        {  
-           ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
-           request.setAttribute("pLesVentes", lesVentes);
-           
-           ArrayList<PieceJointe> lesPiecesJointes = PieceJointeDAO.getLesPiecesJointes(connection);
-           request.setAttribute("pLesPiecesJointes", lesPiecesJointes);
-            
-           getServletContext().getRequestDispatcher("/vues/ventes/creerMail.jsp").forward(request, response);
-        }
-
-        
-        if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
-        {  
-            Compte compte = (Compte)request.getSession().getAttribute("Compte");
-            
-            if(compte != null && compte.isPermission("SVENT")) {
-            
-                int codeVente = Integer.parseInt(request.getParameter("codeVente"));
-                VenteDAO.SupprimerUneVente(connection,codeVente);
-                response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesVentes");
-
-                /*
-                    int codeAcheteur = compte.getUnClient().getId();
-                    ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
-                    request.setAttribute("pLesChevaux", lesChevaux);
-                    getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
-                */
-
-            } else {
-                this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
-            }
-        }
-             
-
-        if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
-        {  
-           
-           String id = (String)request.getParameter("id");
-           
-           Courriel courriel = CourrielDAO.getCourriel(connection, id);
-           
-            System.out.println(courriel.getUneVente().getUneCategVente().getCode());
-           
-           ArrayList<Client> clients = VenteDAO.getLesClients(connection, courriel.getUneVente().getUneCategVente().getCode());
-           
-           request.setAttribute("pCourriel", courriel);
-           request.setAttribute("pClients", clients);
-           
-           getServletContext().getRequestDispatcher("/vues/ventes/envoyerMail.jsp").forward(request, response);
-        }
-
-        if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
-        {  
-            Compte compte = (Compte)request.getSession().getAttribute("Compte");
-            if(compte != null){
-
-                int codeAcheteur = compte.getUnClient().getId();
-                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
-                request.setAttribute("pLesChevaux", lesChevaux);
-                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
-            }
-        }
-
-        if(url.equals("/EquidaWeb18/ServletVentes/chevalConsulter"))
-        {                   
-            ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
-           request.setAttribute("pLesTypeCheval", lesTypeCheval); 
-           
-           int codeCheval = Integer.parseInt(request.getParameter("id"));
-           System.out.println("code "+codeCheval);
-           Cheval unCheval = ChevauxDAO.getUnCheval(connection, codeCheval );
-           unCheval.setId(codeCheval);
-           request.setAttribute("pCheval", unCheval);
-            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalConsulter.jsp" ).forward( request, response );
-        }
-         
-        if(url.equals("/EquidaWeb18/ServletVentes/SupprimerMesChevaux"))
-        {  
-            Compte compte = (Compte)request.getSession().getAttribute("Compte");
-            if(compte != null){
-
-                int codeCheval = Integer.parseInt(request.getParameter("codeCheval"));
-
-                ChevauxDAO.DeleteUnChevaux(connection, codeCheval);
-
-                int codeAcheteur = compte.getUnClient().getId();
-                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
-                request.setAttribute("pLesChevaux", lesChevaux);
-                getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
-
-            }
-        }
-
-        if (url.equals("/EquidaWeb18/ServletVentes/chevalAjouter")) {
-
-            ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
-            request.setAttribute("pLesPays", lesPays);
-
-            ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
-            request.setAttribute("pLesTypeCheval", lesTypeCheval);
-            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp").forward(request, response);     
         }
         
         if (url.equals("/EquidaWeb18/ServletVentes/listerLesChevaux")) {
@@ -302,45 +155,219 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesEncheres.jsp").forward(request, response);
         }
         
-        if (url.equals("/EquidaWeb18/ServletVentes/ajouterEnchere")) {
-            Compte compte = (Compte) request.getSession().getAttribute("Compte");
-            if (compte != null) {
-                
-                int codeAcheteur = compte.getUnClient().getId();
-                Acheteur unAcheteur = AcheteurDAO.getUnAcheteur(connection, codeAcheteur);
-                request.setAttribute("pUnAcheteur", unAcheteur);
-                
-                String idLot = (String) request.getParameter("idLot");
-                String idVente = (String) request.getParameter("idVente");
-                Lot unLot = LotDAO.getUnLot(connection, idVente, idLot);
-                request.setAttribute("pUnLot", unLot);
-                
-                this.getServletContext().getRequestDispatcher("/vues/ventes/enchereAjouter.jsp").forward(request, response);
-            } else {
-                this.getServletContext().getRequestDispatcher("/vues/nonConnecte.jsp").forward(request, response);
-            }
-        }
-        
-        if (url.equals("/EquidaWeb18/ServletVentes/chevalModif")) {
+        if(url.equals("/EquidaWeb18/ServletVentes/chevalConsulter"))
+        {                   
             ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
-            request.setAttribute("pLesTypeCheval", lesTypeCheval);
+           request.setAttribute("pLesTypeCheval", lesTypeCheval); 
 
-            int codeCheval = Integer.parseInt(request.getParameter("id"));
-            Cheval unCheval = ChevauxDAO.getUnCheval(connection, codeCheval);
-            unCheval.setId(codeCheval);
-            request.setAttribute("pCheval", unCheval);
-
-            getServletContext().getRequestDispatcher("/vues/ventes/chevalModif.jsp").forward(request, response);
+           int codeCheval = Integer.parseInt(request.getParameter("id"));
+           System.out.println("code "+codeCheval);
+           Cheval unCheval = ChevauxDAO.getUnCheval(connection, codeCheval );
+           unCheval.setId(codeCheval);
+           request.setAttribute("pCheval", unCheval);
+            this.getServletContext().getRequestDispatcher("/vues/ventes/chevalConsulter.jsp" ).forward( request, response );
         }
         
-        if (url.equals("/EquidaWeb18/ServletVentes/AjouterChevalVente")) {
-            Compte compte = (Compte) request.getSession().getAttribute("Compte");
-            if (compte != null) {
-                int codeAcheteur = compte.getUnClient().getId();
-                ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
-                request.setAttribute("pLesChevaux", lesChevaux);
-                request.setAttribute("codeVente", request.getParameter("codeVente"));
-                getServletContext().getRequestDispatcher("/vues/ventes/AjouterChevalVente.jsp").forward(request, response);
+        if (compte != null) {
+            // Récup et affichage des clients interessés par une certaine catégorie de ventes
+            if (url.equals("/EquidaWeb18/ServletVentes/listerLesClients")) {
+                if(compte.isPermission("CCLI")) {
+                    System.out.println("DANS LISTER LES CLIENTS");
+                    String codeCat = (String) request.getParameter("codeCat");
+
+                    ArrayList<Client> lesClients = VenteDAO.getLesClients(connection, codeCat);
+                    request.setAttribute("pLesClients", lesClients);
+                    getServletContext().getRequestDispatcher("/vues/ventes/listerLesClients.jsp").forward(request, response);
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletVentes/listerLesCourriel")) {
+                if (compte.isPermission("CCOUR")) {
+                    String codeVente = (String) request.getParameter("codeVente");
+
+                    ArrayList<Courriel> lesCourriels = CourrielDAO.getLesCourriels(connection, codeVente);
+                    request.setAttribute("pLesCourriels", lesCourriels);
+                    getServletContext().getRequestDispatcher("/vues/ventes/listerLesCourriels.jsp").forward(request, response);
+                } else {
+                        this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+            
+            if (url.equals("/EquidaWeb18/ServletVentes/ajouterVente")) {
+                if (compte.isPermission("AVENT")) {
+                    ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+                    request.setAttribute("pLesLieux", lesLieux);
+
+                    ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+                    request.setAttribute("pLesCategVente", lesCategVentes);
+                    this.getServletContext().getRequestDispatcher("/vues/VenteAjouter.jsp").forward(request, response);
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if(url.equals("/EquidaWeb18/ServletVentes/venteModifier"))
+            {
+                if (compte.isPermission("UVENT")) {
+                    ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
+                    request.setAttribute("pLesCategVente", lesCategVentes);
+
+                    ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
+                    request.setAttribute("pLesLieux", lesLieux);
+
+                    int idVente = Integer.parseInt(request.getParameter("codeVente"));
+
+                    Vente uneVente = VenteDAO.getUneVente(connection, idVente );
+                    uneVente.setId(idVente);
+
+                    request.setAttribute("pVente", uneVente);
+
+                    getServletContext().getRequestDispatcher("/vues/ventes/venteModifier.jsp").forward(request, response);
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if(url.equals("/EquidaWeb18/ServletVentes/creerMail"))
+            {  
+                if (compte.isPermission("AMAIL")) {
+                    ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+                    request.setAttribute("pLesVentes", lesVentes);
+
+                    ArrayList<PieceJointe> lesPiecesJointes = PieceJointeDAO.getLesPiecesJointes(connection);
+                    request.setAttribute("pLesPiecesJointes", lesPiecesJointes);
+
+                    getServletContext().getRequestDispatcher("/vues/ventes/creerMail.jsp").forward(request, response);
+                }else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+
+            if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
+            {  
+                if(compte.isPermission("SVENT")) {
+                    int codeVente = Integer.parseInt(request.getParameter("codeVente"));
+                    VenteDAO.SupprimerUneVente(connection,codeVente);
+                    response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesVentes");
+                    /*
+                        int codeAcheteur = compte.getUnClient().getId();
+                        ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                        request.setAttribute("pLesChevaux", lesChevaux);
+                        getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+                    */
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+
+            if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
+            {  
+                if(compte.isPermission("EMAIL")) {
+                    String id = (String)request.getParameter("id");
+
+                    Courriel courriel = CourrielDAO.getCourriel(connection, id);
+
+                     System.out.println(courriel.getUneVente().getUneCategVente().getCode());
+
+                    ArrayList<Client> clients = VenteDAO.getLesClients(connection, courriel.getUneVente().getUneCategVente().getCode());
+
+                    request.setAttribute("pCourriel", courriel);
+                    request.setAttribute("pClients", clients);
+
+                    getServletContext().getRequestDispatcher("/vues/ventes/envoyerMail.jsp").forward(request, response);
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
+            {  
+                if(compte.isPermission("CMCHE")){
+
+                    int codeAcheteur = compte.getUnClient().getId();
+                    ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                    request.setAttribute("pLesChevaux", lesChevaux);
+                    getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if(url.equals("/EquidaWeb18/ServletVentes/SupprimerMesChevaux"))
+            {  
+                if(compte.isPermission("SMCHE")){
+                    int codeCheval = Integer.parseInt(request.getParameter("codeCheval"));
+                    ChevauxDAO.DeleteUnChevaux(connection, codeCheval);
+
+                    int codeAcheteur = compte.getUnClient().getId();
+                    ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                    request.setAttribute("pLesChevaux", lesChevaux);
+                    getServletContext().getRequestDispatcher("/vues/ventes/listerMesChevaux.jsp").forward(request, response);
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletVentes/chevalAjouter")) {
+                if (compte.isPermission("ACHE")) {
+                    ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
+                    request.setAttribute("pLesPays", lesPays);
+
+                    ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
+                    request.setAttribute("pLesTypeCheval", lesTypeCheval);
+                    this.getServletContext().getRequestDispatcher("/vues/ventes/chevalAjouter.jsp").forward(request, response);     
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletVentes/ajouterEnchere")) {
+                if (compte.isPermission("AENCH")) {
+                    int codeAcheteur = compte.getUnClient().getId();
+                    Acheteur unAcheteur = AcheteurDAO.getUnAcheteur(connection, codeAcheteur);
+                    request.setAttribute("pUnAcheteur", unAcheteur);
+
+                    String idLot = (String) request.getParameter("idLot");
+                    String idVente = (String) request.getParameter("idVente");
+                    Lot unLot = LotDAO.getUnLot(connection, idVente, idLot);
+                    request.setAttribute("pUnLot", unLot);
+
+                    this.getServletContext().getRequestDispatcher("/vues/ventes/enchereAjouter.jsp").forward(request, response);
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletVentes/chevalModif")) {
+                if (compte.isPermission("MCHE")) {
+                    ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
+                    request.setAttribute("pLesTypeCheval", lesTypeCheval);
+
+                    int codeCheval = Integer.parseInt(request.getParameter("id"));
+                    Cheval unCheval = ChevauxDAO.getUnCheval(connection, codeCheval);
+                    unCheval.setId(codeCheval);
+                    request.setAttribute("pCheval", unCheval);
+                    
+                    getServletContext().getRequestDispatcher("/vues/ventes/chevalModif.jsp").forward(request, response);
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
+            }
+
+            if (url.equals("/EquidaWeb18/ServletVentes/AjouterChevalVente")) {
+                if (compte.isPermission("ACHEV")) {
+                    int codeAcheteur = compte.getUnClient().getId();
+                    ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
+                    request.setAttribute("pLesChevaux", lesChevaux);
+                    request.setAttribute("codeVente", request.getParameter("codeVente"));
+                    getServletContext().getRequestDispatcher("/vues/ventes/AjouterChevalVente.jsp").forward(request, response);
+                } else {
+                    this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
+                }
             }
         }
     }

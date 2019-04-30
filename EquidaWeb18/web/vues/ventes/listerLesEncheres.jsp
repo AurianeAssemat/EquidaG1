@@ -4,6 +4,7 @@
     Author     : Assemat
 --%>
 
+<%@page import="modele.Compte"%>
 <%@page import="modele.Vente"%>
 <%@page import="modele.Cheval"%>
 <%@page import="modele.Lot"%>
@@ -30,6 +31,7 @@
 
                 <%
                     ArrayList<Enchere> lesEncheres = (ArrayList) request.getAttribute("pLesEncheres");
+                    Compte compte = (Compte)request.getSession().getAttribute("Compte");
                 %>
 
                 <table  class="table table-bordered table-striped table-condensed">  
@@ -46,7 +48,7 @@
                     <tbody>
                         <tr>
                             <%
-                                    Enchere enchere = new Enchere();
+                                Enchere enchere = new Enchere();
                                     
                                 if (lesEncheres.size() > 0) {
                                     
@@ -75,15 +77,18 @@
                         
                 <p>
                     <%
-                        // je dois recuperer l'id du lot et de la vente pour encherir sur un cheval (donc ajouter une enchere)  
-                        Lot unlot = enchere.getUnLot();
-                        int lotId = unlot.getId();
-                        System.out.println(lotId); //test de la recuperation de l'id du lot
-                        Vente unevente = unlot.getUneVente();
-                        int venteId = unevente.getId(); 
-                        System.out.println(venteId); //test de la recuperation de l'id de la vente
-                        
-                        out.println("<a href='../ServletVentes/ajouterEnchere?idLot="+lotId+"&idVente="+venteId+"'>Encherir</a>");
+                        if (compte != null  && compte.isPermission("AENCH")) {
+                            // je dois recuperer l'id du lot et de la vente pour encherir sur un cheval (donc ajouter une enchere)  
+                            Lot unlot = enchere.getUnLot();
+                            int lotId = unlot.getId();
+                            System.out.println(lotId); //test de la recuperation de l'id du lot
+                            Vente unevente = unlot.getUneVente();
+                            int venteId = unevente.getId(); 
+                            System.out.println(venteId); //test de la recuperation de l'id de la vente
+
+
+                            out.println("<a href='../ServletVentes/ajouterEnchere?idLot="+lotId+"&idVente="+venteId+"'>Encherir</a>");
+                        }
                     %>
                 </p>
 

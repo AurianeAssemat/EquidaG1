@@ -4,6 +4,7 @@
     Author     : Zakina
 --%>
 
+<%@page import="modele.Compte"%>
 <%@page import="modele.Client"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,6 +24,9 @@
                 <h1>LISTE DES CLIENTS POUR UNE CATEGORIE DE VENTE</h1>
                 <%
                     ArrayList<Client> lesClients = (ArrayList) request.getAttribute("pLesClients");
+                    Compte compte = (Compte)request.getSession().getAttribute("Compte");
+                    
+                    if (compte.isPermission("CCLI")) {
                 %>
                 <table  class="table table-bordered table-striped table-condensed">  
                     <thead>
@@ -40,32 +44,32 @@
                     <tbody>
                         <tr>
                             <%
-                                for (int i = 0; i < lesClients.size(); i++) {
+                                    for (int i = 0; i < lesClients.size(); i++) {
+                                        Client unClient = lesClients.get(i);
+                                        out.println("<tr><td>");
+                                        out.println(unClient.getId());
+                                        out.println("</a></td>");
 
-                                    Client unClient = lesClients.get(i);
-                                    out.println("<tr><td>");
-                                    out.println(unClient.getId());
-                                    out.println("</a></td>");
+                                        out.println("<td>");
+                                        out.println(unClient.getNom());
+                                        out.println("</td>");
 
-                                    out.println("<td>");
-                                    out.println(unClient.getNom());
-                                    out.println("</td>");
+                                        out.println("<td>");
+                                        out.println(unClient.getPrenom());
+                                        out.println("</td>");
 
-                                    out.println("<td>");
-                                    out.println(unClient.getPrenom());
-                                    out.println("</td>");
+                                        out.println("<td>");
+                                        out.println(unClient.getUnPays().getNom());
+                                        out.println("</td>");
 
-                                    out.println("<td>");
-                                    out.println(unClient.getUnPays().getNom());
-                                    out.println("</td>");
+                                        out.println("<td>");
+                                        out.println(unClient.getCopos());
+                                        out.println("</td>");
 
-                                    out.println("<td>");
-                                    out.println(unClient.getCopos());
-                                    out.println("</td>");
-
-                                    out.println("<td>");
-                                    out.println(unClient.getMail());
-                                    out.println("</td>");
+                                        out.println("<td>");
+                                        out.println(unClient.getMail());
+                                        out.println("</td>");
+                                    } 
                                 }
                             %>
                         </tr>
