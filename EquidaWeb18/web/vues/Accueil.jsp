@@ -7,8 +7,8 @@
 <%@page import="modele.Vente"%>
 <%@page import="modele.Compte"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.util.Date"%>
+<%//@page import="java.util.Calendar"%>
+<%//@page import="java.util.Date"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,8 +24,8 @@
         <div class="container">
             <div class="row">
                 <%
-                    Calendar c = Calendar.getInstance();
-                    Date date = c.getTime();
+                    //Calendar c = Calendar.getInstance();
+                    //Date date = c.getTime();
 
                 %>
 

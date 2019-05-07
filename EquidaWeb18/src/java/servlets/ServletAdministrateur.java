@@ -221,7 +221,7 @@ public class ServletAdministrateur extends HttpServlet {
 
                     ArrayList<Course> lesCourses = CourseDAO.getLesCourses(connection);
                     request.setAttribute("pLesCourses", lesCourses);
-                    getServletContext().getRequestDispatcher("/vues/courseAjouter.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/vues/course/courseAjouter.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
                 }
