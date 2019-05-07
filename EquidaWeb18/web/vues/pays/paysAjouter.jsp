@@ -20,7 +20,7 @@
     <body>
         <jsp:include page="/vues/MenuNavigation.jsp" />
         <div class="container">
-            <h1>Un nouveau type de cheval</h1>
+            <h1>Un nouveau pays</h1>
 
                 <%
                 PaysForm form = (PaysForm)request.getAttribute("form");

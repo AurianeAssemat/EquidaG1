@@ -199,7 +199,7 @@ public class ServletAdministrateur extends HttpServlet {
                 if (compte.isPermission("AADMI")) {
                     ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
                     request.setAttribute("pLesCategVentes", lesCategVentes);
-                    this.getServletContext().getRequestDispatcher("/vues/categVenteAjouter.jsp").forward(request, response);
+                    this.getServletContext().getRequestDispatcher("/vues/categVente/categVenteAjouter.jsp").forward(request, response);
 
                 } else {
                     response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
@@ -210,7 +210,7 @@ public class ServletAdministrateur extends HttpServlet {
                 if (compte.isPermission("AADMI")) {
                     ArrayList<TypeCheval> lesTypeChevaux = TypeChevalDAO.getLesTypeChevaux(connection);
                     request.setAttribute("pLesTypeChevaux", lesTypeChevaux);
-                    getServletContext().getRequestDispatcher("/vues/typeChevalAjouter.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/vues/typeChevaux/typeChevalAjouter.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
                 }
@@ -227,12 +227,12 @@ public class ServletAdministrateur extends HttpServlet {
                 }
             }
 
-            if (url.equals("/EquidaWeb18/ServletAdministrateur/lieuAjouter")) {
+            if (url.equals("/EquidaWeb18/ServletAdministrateur/lieuVenteAjouter")) {
                 if (compte.isPermission("AADMI")) {
 
                     ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
                     request.setAttribute("pLeslieux", lesLieux);
-                    getServletContext().getRequestDispatcher("/vues/lieuAjouter.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/vues/lieuVente/lieuVenteAjouter.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
                 }
@@ -243,7 +243,7 @@ public class ServletAdministrateur extends HttpServlet {
 
                     ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
                     request.setAttribute("pLesPays", lesPays);
-                    getServletContext().getRequestDispatcher("/vues/paysAjouter.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/vues/pays/paysAjouter.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("/EquidaWeb18/ServletAccueil/NoPermission");
                 }
