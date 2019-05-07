@@ -66,8 +66,8 @@ public class TypeChevalDAO {
              
             //On hydrate l'objet métier Client avec les résultats de la requête 
                 unTypeCheval.setId(rs.getInt("id"));
-                unTypeCheval.setLibelle(rs.getString("nom"));
-                unTypeCheval.setDescription(rs.getString("prenom"));
+                unTypeCheval.setLibelle(rs.getString("libelle"));
+                unTypeCheval.setDescription(rs.getString("description"));
                 
             }
         }   

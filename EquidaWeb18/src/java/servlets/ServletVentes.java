@@ -389,14 +389,6 @@ public class ServletVentes extends HttpServlet {
 
        String url = request.getRequestURI();
        
-       if(url.equals("/EquidaWeb18/ServletVentes/chevalAjouter"))
-        {                 
-            ChevalForm form = new ChevalForm();
-		
-            /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
-            Cheval unCheval = form.ajouterCheval(request);
-        }
-
         if(url.equals("/EquidaWeb18/ServletVentes/creerMail")){
         
         
@@ -534,7 +526,7 @@ public class ServletVentes extends HttpServlet {
                 getServletContext().getRequestDispatcher("/vues/ventes/venteModifier.jsp").forward(request, response);
             }
         }
-
+        
         if (url.equals("/EquidaWeb18/ServletVentes/chevalAjouter")) {
 
             ChevalForm form = new ChevalForm();
@@ -565,7 +557,9 @@ public class ServletVentes extends HttpServlet {
 
                 //verif l'insertion de données
                 ClientDAO.getUnClient(connection, chevalVerif.getId());
-
+                TypeCheval leTypeCheval = TypeChevalDAO.getUnTypeCheval(connection, unCheval.getTypeCheval().getId());
+                
+                unCheval.setTypeCheval(leTypeCheval);
 
                 request.setAttribute("pCheval", unCheval);
                 this.getServletContext().getRequestDispatcher("/vues/ventes/chevalConsulter.jsp").forward(request, response);
