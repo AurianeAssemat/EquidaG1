@@ -224,7 +224,7 @@ CREATE TABLE lot (
 	vent_id int(11),
 	che_id int(11),
 	vend_id int(11),
-	archiver int(11),
+	archiver int(11) DEFAULT 0,
 	prixDepart int,
 	PRIMARY KEY (id, vent_id),
 	FOREIGN KEY (vent_id) REFERENCES vente(id),

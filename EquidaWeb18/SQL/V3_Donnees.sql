@@ -325,7 +325,7 @@ INSERT INTO `lieu` (`ville`, `nbBoxes`,commentaire) VALUES
 ('Bayeux',30, 'Vente d''été');
 
 INSERT INTO `lieu` (`id`, `ville`, `nbBoxes`, `commentaire`) VALUES
-(4, 'Paris', 40, ''),
+(4, 'Paris', 40, 'Excellent palfrenier'),
 (5, 'Strasbourg', 20, ''),
 (6, 'Lyon', 10, ''),
 (7, 'Marseille', 14, ''),
@@ -345,10 +345,10 @@ INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, lie_id, dateFin
 (230119, 'Vente Rhône-Alpes édition 5', '2019-01-23', 'XFEV', 6, '2019-01-25', '2019-01-16'),
 (250217, 'Djezair Star', '2017-02-25', 'XFEV', 2, '2017-04-25', '2017-01-25');
 
-INSERT INTO `courriel` (`date`, `objet`,corps) VALUES
-('2018-08-05','Objet1', 'corps 1'),
-('2018-04-06','Objet2', 'corps 2'),
-('2018-02-08','Objet3', 'corps 3');
+INSERT INTO `courriel` (`date`, `objet`,corps, ven_id) VALUES
+('2018-08-05','Objet1', 'corps 1', 30917),
+('2018-04-06','Objet2', 'corps 2', 210717),
+('2018-02-08','Objet3', 'corps 3', 230119);
 
 INSERT INTO `piecejointe` (`chemin`, `description`) VALUES
 ('image/image.png','une image' ),
@@ -371,14 +371,14 @@ INSERT INTO `typecheval` (`id`, `libelle`, `description`) VALUES
 (5, 'pur-sang anglais', 'pur-sang anglais'),
 (6, 'Yearling', 'pur-sang anglais âgé d’un an');
 
-INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`) VALUES
-(1, 'Houri', 'M', '0808.185.585Z', NULL, NULL, 5),
-(2, 'Hussa', 'F', '0808.542.250Z', NULL, NULL, 5),
-(3, 'Valdack', 'M', '0808.158.285Z', 1, 2, 5),
-(4, 'Trais d\'or', 'M', '0808.000.554Z', 1, 2, 6),
-(5, 'Herricka', 'F', '0808.201.855Z', 1, 2, 5),
-(6, 'Nuage', 'M', '0808.980.128Z', 1, 2, 6),
-(7, 'Desperado', 'M', '0808.180.529Z', 1, 2, 6);
+INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`, cli_id) VALUES
+(1, 'Houri', 'M', '0808.185.585Z', NULL, NULL, 5, 6),
+(2, 'Hussa', 'F', '0808.542.250Z', NULL, NULL, 5, 3),
+(3, 'Valdack', 'M', '0808.158.285Z', 1, 2, 5, 4),
+(4, 'Trais d\'or', 'M', '0808.000.554Z', 1, 2, 6, 30),
+(5, 'Herricka', 'F', '0808.201.855Z', 1, 2, 5, 9),
+(6, 'Nuage', 'M', '0808.980.128Z', 1, 2, 6, 8),
+(7, 'Desperado', 'M', '0808.180.529Z', 1, 2, 6, 10);
 
 /* 3 */
 
@@ -417,12 +417,12 @@ INSERT INTO `compte` (`id`, `login`, `mdp`, `cli_id`) VALUES
 -- Déchargement des données de la table `lot`
 --
 
-INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `archiver`, `prixDepart`) VALUES
-(1, 30917, 7, 5, NULL, 15000),
-(1, 90217, 3, 18, NULL, 6000),
-(1, 210717, 6, 5, NULL, 1000),
-(2, 30917, 4, 15, NULL, 8000),
-(2, 210717, 1, 5, NULL, 18000);
+INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `prixDepart`) VALUES
+(1, 30917, 7, 5, 15000),
+(1, 90217, 3, 18, 6000),
+(1, 210717, 6, 5, 1000),
+(2, 30917, 4, 15, 8000),
+(2, 210717, 1, 5, 18000);
 
 --
 -- Déchargement des données de la table `enchere`
