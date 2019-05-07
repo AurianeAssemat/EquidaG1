@@ -92,8 +92,8 @@ public class ServletAccueil extends HttpServlet {
         }
 
         if (url.equals("/EquidaWeb18/ServletAccueil/Accueil")) {
-            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
-            request.setAttribute("pLesVentes", lesVentes);
+            //ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
+            //request.setAttribute("pLesVentes", lesVentes);
             this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp").forward(request, response);
         }
 

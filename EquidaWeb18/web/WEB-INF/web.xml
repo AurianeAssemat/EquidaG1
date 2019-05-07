@@ -6,20 +6,20 @@
     </context-param>
     <context-param>
         <param-name>urlconnexionjdbc</param-name>
-
+        <param-value>jdbc:mysql://172.20.0.241/EQUI_ATTG</param-value>
         <!--<param-value>jdbc:mysql://localhost/Equida18_G1</param-value>-->
-        <param-value>jdbc:mysql://localhost/Equida18_G1</param-value>
     </context-param>
     <context-param>
         <param-name>utilisateurjdbc</param-name>
-        <param-value>root</param-value>
+        <param-value>ADM_EQUIATTG</param-value>
+        <!--<param-value>root</param-value>-->
     </context-param>
     <context-param>
         <param-name>motdepassejdbc</param-name>
-    <param-value/>   
-        <!--<param-value/>-->
-
+        <param-value>mpAttg</param-value>
+    <!--<param-value/>-->
     </context-param>
+    
     <!--  écouteurs -->
     <listener>
         <listener-class>database.InitConnexion</listener-class>

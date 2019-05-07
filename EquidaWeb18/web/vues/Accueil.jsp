@@ -42,7 +42,7 @@
                     <h3>Ventes à venir</h3>
                 </div>
             </div>
-            <%                ArrayList<Vente> lesVentes = (ArrayList) request.getAttribute("pLesVentes");
+            <%                //ArrayList<Vente> lesVentes = (ArrayList) request.getAttribute("pLesVentes");
 
             %>
             <!--Affichage des ventes-->
