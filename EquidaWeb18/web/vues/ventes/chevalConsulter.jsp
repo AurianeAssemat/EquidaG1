@@ -4,6 +4,9 @@
     Author     : slam
 --%>
 
+<%@page import="modele.Compte"%>
+<%@page import="modele.Role" %>
+<%@page import="modele.Permission" %>
 <%@page import="modele.Cheval"%>
 <%@page import="modele.Client"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -21,6 +24,7 @@
 
                 <%
                     Cheval unCheval = (Cheval) request.getAttribute("pCheval");
+                    Compte compte = (Compte) request.getSession().getAttribute("compte");
                 %>
 
                 <img src="<%= request.getContextPath()%>/img/<%= unCheval.getId()%>.jpg">
@@ -69,7 +73,17 @@
                                 }%> 
                         </td></tr>
                 </table>
-                <a href ='../ServletVente/listerLesVentes'> Retour</a>
+                        <%
+                            //if (compte.isPermission("CMCHE")) {
+                        %>
+                                <!--<a href ='../ServletVente/listerMesChevaux'> Retour</a>-->
+                        <%
+                            //}else {
+                        %>
+                                <a href ='../ServletVentes/listerLesVentes'> Retour</a>
+                        <%
+                            //}
+                        %>
             </div>
         </div>  
     </body>

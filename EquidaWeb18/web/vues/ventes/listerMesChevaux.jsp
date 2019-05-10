@@ -5,6 +5,9 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
+<%@page import="modele.Compte"%>
+<%@page import="modele.Role" %>
+<%@page import="modele.Permission" %>
 <%@page import="modele.Lot"%>
 <%@page import="modele.Cheval"%>
 <%@page import="modele.Course"%>
