@@ -38,37 +38,43 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <%
-                                for (int i = 0; i < lesCourriels.size(); i++) {
+                            <% if (lesCourriels.size() > 0) {
+                                    for (int i = 0; i < lesCourriels.size(); i++) {
 
-                                    Courriel unCourriel = lesCourriels.get(i);
-                                    out.println("<tr><td>");
-                                    out.println(unCourriel.getId());
-                                    out.println("</a></td>");
+                                        Courriel unCourriel = lesCourriels.get(i);
+                                        out.println("<tr><td>");
+                                        out.println(unCourriel.getId());
+                                        out.println("</a></td>");
 
-                                    out.println("<td>");
-                                    out.println(unCourriel.getDate());
-                                    out.println("</td>");
+                                        out.println("<td>");
+                                        out.println(unCourriel.getDate());
+                                        out.println("</td>");
 
-                                    out.println("<td>");
-                                    out.println(unCourriel.getObjet());
-                                    out.println("</td>");
+                                        out.println("<td>");
+                                        out.println(unCourriel.getObjet());
+                                        out.println("</td>");
 
-                                    out.println("<td>");
-                                    out.println(unCourriel.getCorps());
-                                    out.println("</td>");
+                                        out.println("<td>");
+                                        out.println(unCourriel.getCorps());
+                                        out.println("</td>");
 
-                                    out.println("<td>");
-                                    if (unCourriel.getLesPieceJointes() != null) {
-                                        for (int j = 0; j < unCourriel.getLesPieceJointes().size(); j++) {
+                                        out.println("<td>");
+                                        if (unCourriel.getLesPieceJointes() != null) {
+                                            for (int j = 0; j < unCourriel.getLesPieceJointes().size(); j++) {
 
-                                            PieceJointe unePieceJointe = unCourriel.getLesPieceJointes().get(j);
+                                                PieceJointe unePieceJointe = unCourriel.getLesPieceJointes().get(j);
 
-                                            out.println(unePieceJointe.getChemin());
-                                            out.println("</br>");
+                                                out.println(unePieceJointe.getChemin());
+                                                out.println("</br>");
+                                            }
                                         }
+                                        out.println("</td></tr>");
                                     }
-                                    out.println("</td></tr>");
+                                }else {
+                                out.println("<td>");
+                                out.println("Pas de courriels pour cette vente");
+                                out.println("</td>");
+
                                 }
                             %>
                         </tr>
