@@ -50,38 +50,44 @@
                         <tr>
 
                             <%
-                                for (int i = 0; i < lesLots.size(); i++) {
+                                if (lesLots.size() >0 ) {
+                                    for (int i = 0; i < lesLots.size(); i++) {
 
-                                    Lot unLot = lesLots.get(i);
-                                    Cheval unCheval = unLot.getCheval();
+                                        Lot unLot = lesLots.get(i);
+                                        Cheval unCheval = unLot.getCheval();
 
+                                        out.println("<tr><td>");
+
+                                        out.println("<a href ='../ServletVentes/chevalConsulter?id=" + unCheval.getId() + "'>");
+
+                                        out.println(unCheval.getNom());
+                                        out.println("</td>");
+
+                                        out.println("<td>");
+                                        out.println(unCheval.getSexe());
+                                        out.println("</td>");
+
+                                        out.println("<td>");
+                                        out.println(unCheval.getSire());
+                                        out.println("</td>");
+
+                                        out.println("<td>");
+                                        out.println(unCheval.getTypeCheval().getLibelle());
+                                        out.println("</td>");
+
+                                        out.println("<td>");
+                                        out.println(unLot.getPrixDepart());
+                                        out.println(" €</td>");
+
+
+                                        out.println("<td><a href ='../ServletVentes/listerLesEncheres?idLot=" + unLot.getId() + "&idVente=" + unLot.getUneVente().getId() + "'>");
+                                        out.println("Lister les Encheres");
+                                        out.println("</td></tr>");
+                                    }
+                                }else {
                                     out.println("<tr><td>");
-
-                                    out.println("<a href ='../ServletVentes/chevalConsulter?id=" + unCheval.getId() + "'>");
-
-                                    out.println(unCheval.getNom());
-                                    out.println("</td>");
-
-                                    out.println("<td>");
-                                    out.println(unCheval.getSexe());
-                                    out.println("</td>");
-
-                                    out.println("<td>");
-                                    out.println(unCheval.getSire());
-                                    out.println("</td>");
-
-                                    out.println("<td>");
-                                    out.println(unCheval.getTypeCheval().getLibelle());
-                                    out.println("</td>");
-
-                                    out.println("<td>");
-                                    out.println(unLot.getPrixDepart());
-                                    out.println(" €</td>");
-
-
-                                    out.println("<td><a href ='../ServletVentes/listerLesEncheres?idLot=" + unLot.getId() + "&idVente=" + unLot.getUneVente().getId() + "'>"); //
-                                    out.println("Lister les Encheres");
-                                    out.println("</td></tr>");
+                                    out.println("Il n'y a pas de cheval (chevaux) pour cette vente");
+                                    out.println("</td></tr>");                                    
                                 }
 
                             %>
