@@ -32,6 +32,7 @@
                 <%
                     ArrayList<Enchere> lesEncheres = (ArrayList) request.getAttribute("pLesEncheres");
                     Compte compte = (Compte)request.getSession().getAttribute("Compte");
+                    Lot leLot = (Lot) request.getAttribute("pLeLot");
                 %>
 
                 <table  class="table table-bordered table-striped table-condensed">  
@@ -39,8 +40,6 @@
                         <tr>
                             <th>Cheval</th>
                             <th>N° SIRE</th>
-                            <th>Père</th>
-                            <th>Mère</th>
                     <br>
                     <br>
                     </tr>
@@ -64,8 +63,13 @@
                                     out.println("</td>");
                                     
                                 } else {
-                                    out.println("<tr><td>");
-                                    out.println("Il y a aucune enchère pour ce lot .");
+                                    out.println("<td>");
+                                    out.println("<a href ='../ServletVentes/chevalConsulter?id="+ leLot.getCheval().getId() +"'>");
+                                    out.println(leLot.getCheval().getNom());
+                                    out.println("</td>");
+
+                                    out.println("<td>");
+                                    out.println(leLot.getCheval().getSire());
                                     out.println("</td>");
 
                                 }
@@ -106,7 +110,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <%                        for (int i = 0; i < lesEncheres.size(); i++) {
+                            <%  if (lesEncheres.size() > 0) {
+                        
+                                    for (int i = 0; i < lesEncheres.size(); i++) {
 
                                     Enchere uneEnchere = lesEncheres.get(i);
 
@@ -124,6 +130,11 @@
                                     out.println(" €</td>");
 
 
+                                    }
+                                }else  {
+                                    out.println("<tr><td>");
+                                    out.println("Il y a aucune enchère pour ce lot .");
+                                    out.println("</td>");
                                 }
 
                             %>
