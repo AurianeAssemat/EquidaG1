@@ -49,8 +49,8 @@
                 <table class="table table-bordered table-striped table-condensed" >
                     <h2>Compte<h2>
                             <blockquote> <h5>Il est fortement conseiller de changer votre mot de passe a la première connexion</h5></blockquote>
-                        <tr><td>IDENTIFIANT DU COMPTE :</td><td> nom.prenom (en minuscule)</td>  </tr>
-                        <tr><td>MDP DU COMPTE :</td><td> MDP collé de votre nom (nom en minuscule)</td>  </tr>
+                        <tr><td>IDENTIFIANT DU COMPTE :</td><td> 1ère lettre du prenom + nom (en minuscule)</td>  </tr>
+                        <tr><td>MDP DU COMPTE :</td><td> mp collé de votre identifiant (en minuscule)</td>  </tr>
                 </table>
 
             </div>

@@ -92,9 +92,11 @@ public class CompteDAO {
         try {
             //preparation de la requete   
             requete = connection.prepareStatement("INSERT INTO compte(login, mdp, cli_id) VALUES(?,?,?) ");
+            String prenom = String.valueOf(Client.getPrenom().charAt(0));
+            String identifiant = prenom.toLowerCase()+ Client.getNom().toLowerCase();
 
-            String mdp = "mp" + Client.getNom().toLowerCase();
-            requete.setString(1, Client.getNom().toLowerCase() + "." + Client.getPrenom().toLowerCase());
+            String mdp = "mp" + identifiant;
+            requete.setString(1, identifiant);
             requete.setString(2, encode(mdp));
             requete.setInt(3, Client.getId());
             //executer la requete

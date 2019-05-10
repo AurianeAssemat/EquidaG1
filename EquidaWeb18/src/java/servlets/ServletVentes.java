@@ -632,7 +632,7 @@ public class ServletVentes extends HttpServlet {
                 // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
 
                 LotDAO.ajouterLot(connection, unLot);
-                response.sendRedirect("/EquidaWeb18/ServletAccueil/Accueil");
+                response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesVentes");
             } else {
                 Compte compte = (Compte) request.getSession().getAttribute("Compte");
                 if (compte != null) {

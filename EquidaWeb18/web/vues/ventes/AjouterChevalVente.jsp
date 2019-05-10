@@ -32,6 +32,7 @@
                         }
                     }
                 %>
+                
                 <form class="form-inline" action="AjouterChevalVente" method="POST">
                     <div class="row">  
                         <div class="input-field col s12">
@@ -57,7 +58,7 @@
                     </div>
                     <div class="row">    
                         <div class="input-field col s12">
-                            <input name="vente" type="hidden" value='<% out.println(request.getAttribute("codeVente"));%>'>
+                            <input id="idvente" name="idvente" type="hidden" value='<% out.println(request.getAttribute("codeVente"));%>'>
                         </div>
                     </div>
                     <button class="btn waves-effect waves-light" type="submit" >Ajouter

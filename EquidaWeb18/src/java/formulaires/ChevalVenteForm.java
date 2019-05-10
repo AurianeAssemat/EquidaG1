@@ -53,11 +53,11 @@ public class ChevalVenteForm {
 
         Lot unLot = new Lot();
         
-        String VenteId = getDataForm(request, "vente");
-        if (VenteId != null) {
-            Vente vente = new Vente();
-            vente.setId(Integer.parseInt(VenteId));
-            unLot.setUneVente(vente);
+        String venteId = String.valueOf(getDataForm(request, "idvente"));
+        if (venteId != null) {
+            Vente laVente = new Vente();
+            laVente.setId(Integer.parseInt(venteId));
+            unLot.setUneVente(laVente);
         }else{
             addErreur("Erreur vente");
         }

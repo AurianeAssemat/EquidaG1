@@ -4,6 +4,7 @@
     Author     : Zakina
 --%>
 
+<%@page import="modele.Compte"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modele.Lot"%>
 <%@page import="modele.Vente"%>
@@ -29,8 +30,17 @@
 
                 <%
                     ArrayList<Lot> lesLots = (ArrayList) request.getAttribute("pLesLots");
+                    Compte compte = (Compte)request.getSession().getAttribute("Compte");
                 %>
 
+                <div class="col s1 offset-s4">  
+                    
+                    <% if (compte != null  && compte.isPermission("ACHEV")) { %>
+
+                    <!--<a class="btn-floating btn-large waves-effect waves-light red" href='../ServletVentes/AjouterChevalVente'><i class="material-icons">add</i></a>-->
+                    <% } %>
+
+                </div>
 
                 <table  class="table table-bordered table-striped table-condensed">  
                     <thead>

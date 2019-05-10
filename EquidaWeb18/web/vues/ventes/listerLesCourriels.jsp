@@ -71,9 +71,9 @@
                                         out.println("</td></tr>");
                                     }
                                 }else {
-                                out.println("<td>");
+                                out.println("<tr><td>");
                                 out.println("Pas de courriels pour cette vente");
-                                out.println("</td>");
+                                out.println("</td></tr>");
 
                                 }
                             %>
