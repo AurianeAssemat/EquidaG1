@@ -67,7 +67,24 @@ import modele.TypeCheval;
 public class ServletVentes extends HttpServlet {
     
     private static final String UPLOAD_DIRECTORY = "upload";
-
+    public static final String URL_LISTERVENTES = "/EquidaWebATTG/ServletVentes/listerLesVentes";
+    public static final String URL_LISTERCHEVAUX = "/EquidaWebATTG/ServletVentes/listerLesChevaux";
+    public static final String URL_LISTERENCHERES = "/EquidaWebATTG/ServletVentes/listerLesEncheres";
+    public static final String URL_CONSULTERCHEVAL = "/EquidaWebATTG/ServletVentes/chevalConsulter";
+    public static final String URL_LISTERCLIENTS = "/EquidaWebATTG/ServletVentes/listerLesClients";
+    public static final String URL_LISTERCOURRIELS = "/EquidaWebATTG/ServletVentes/listerLesCourriel";
+    public static final String URL_AJOUTERVENTE = "/EquidaWebATTG/ServletVentes/ajouterVente";
+    public static final String URL_MODIFIERVENTE = "/EquidaWebATTG/ServletVentes/venteModifier";
+    public static final String URL_AJOUTERMAIL = "/EquidaWebATTG/ServletVentes/creerMail";
+    public static final String URL_SUPPRIMERVENTE = "/EquidaWebATTG/ServletVentes/SupprimerUneVente";
+    public static final String URL_ENVOYERMAIL = "/EquidaWebATTG/ServletVentes/envoyerMail";
+    public static final String URL_LISTERMESCHEVAUX = "/EquidaWebATTG/ServletVentes/listerMesChevaux";
+    public static final String URL_SUPPRIMERMESCHEVAUX = "/EquidaWebATTG/ServletVentes/SupprimerMesChevaux";
+    public static final String URL_AJOUTERCHEVAUX = "/EquidaWebATTG/ServletVentes/chevalAjouter";
+    public static final String URL_AJOUTERENCHERES = "/EquidaWebATTG/ServletVentes/ajouterEnchere";
+    public static final String URL_MODIFCHEVAL = "/EquidaWebATTG/ServletVentes/chevalModif";
+    public static final String URL_AJOUTERCHEVALVENTE = "/EquidaWebATTG/ServletVentes/AjouterChevalVente";
+    
     Connection connection;
 
     @Override
@@ -118,7 +135,7 @@ public class ServletVentes extends HttpServlet {
         Compte compte = (Compte)request.getSession().getAttribute("Compte");
         
         // Récup et affichage par date décroissante de toutes les ventes   
-        if (url.equals("/EquidaWebATTG/ServletVentes/listerLesVentes")) {
+        if (url.equals(URL_LISTERVENTES)) {
             String codeCat = (String) request.getParameter("codeCat");
             ArrayList<Vente> lesVentes;
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
@@ -135,7 +152,7 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesVentes.jsp").forward(request, response);
         }
         
-        if (url.equals("/EquidaWeb18/ServletVentes/listerLesChevaux")) {
+        if (url.equals(URL_LISTERCHEVAUX)) {
             System.out.println("LISTER LES CHEVAUX");
             String idVente = (String) request.getParameter("codeVente");
 
@@ -144,7 +161,7 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
         }
 
-        if (url.equals("/EquidaWeb18/ServletVentes/listerLesEncheres")) {
+        if (url.equals(URL_LISTERENCHERES)) {
             System.out.println("LISTER LES ENCHERES");
             String idLot = (String) request.getParameter("idLot");
             String idVente = (String) request.getParameter("idVente");
@@ -157,7 +174,7 @@ public class ServletVentes extends HttpServlet {
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesEncheres.jsp").forward(request, response);
         }
         
-        if(url.equals("/EquidaWeb18/ServletVentes/chevalConsulter"))
+        if(url.equals(URL_CONSULTERCHEVAL))
         {                   
             ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
            request.setAttribute("pLesTypeCheval", lesTypeCheval); 
@@ -172,7 +189,7 @@ public class ServletVentes extends HttpServlet {
         
         if (compte != null) {
             // Récup et affichage des clients interessés par une certaine catégorie de ventes
-            if (url.equals("/EquidaWeb18/ServletVentes/listerLesClients")) {
+            if (url.equals(URL_LISTERCLIENTS)) {
                 if(compte.isPermission("CCLI")) {
                     System.out.println("DANS LISTER LES CLIENTS");
                     String codeCat = (String) request.getParameter("codeCat");
@@ -185,7 +202,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
 
-            if (url.equals("/EquidaWeb18/ServletVentes/listerLesCourriel")) {
+            if (url.equals(URL_LISTERCOURRIELS)) {
                 if (compte.isPermission("CCOUR")) {
                     String codeVente = (String) request.getParameter("codeVente");
 
@@ -197,7 +214,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
             
-            if (url.equals("/EquidaWeb18/ServletVentes/ajouterVente")) {
+            if (url.equals(URL_AJOUTERVENTE)) {
                 if (compte.isPermission("AVENT")) {
                     ArrayList<Lieu> lesLieux = LieuDAO.getLesLieux(connection);
                     request.setAttribute("pLesLieux", lesLieux);
@@ -210,7 +227,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
 
-            if(url.equals("/EquidaWeb18/ServletVentes/venteModifier"))
+            if(url.equals(URL_MODIFIERVENTE))
             {
                 if (compte.isPermission("UVENT")) {
                     ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);
@@ -232,7 +249,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
 
-            if(url.equals("/EquidaWeb18/ServletVentes/creerMail"))
+            if(url.equals(URL_AJOUTERMAIL))
             {  
                 if (compte.isPermission("AMAIL")) {
                     ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
@@ -248,7 +265,7 @@ public class ServletVentes extends HttpServlet {
             }
 
 
-            if(url.equals("/EquidaWeb18/ServletVentes/SupprimerUneVente"))
+            if(url.equals(URL_SUPPRIMERVENTE))
             {  
                 if(compte.isPermission("SVENT")) {
                     int codeVente = Integer.parseInt(request.getParameter("codeVente"));
@@ -266,7 +283,7 @@ public class ServletVentes extends HttpServlet {
             }
 
 
-            if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail"))
+            if(url.equals(URL_ENVOYERMAIL))
             {  
                 if(compte.isPermission("EMAIL")) {
                     String id = (String)request.getParameter("id");
@@ -286,7 +303,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
 
-            if(url.equals("/EquidaWeb18/ServletVentes/listerMesChevaux"))
+            if(url.equals(URL_LISTERMESCHEVAUX))
             {  
                 if(compte.isPermission("CMCHE")){
 
@@ -299,7 +316,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
 
-            if(url.equals("/EquidaWeb18/ServletVentes/SupprimerMesChevaux"))
+            if(url.equals(URL_SUPPRIMERMESCHEVAUX))
             {  
                 if(compte.isPermission("SMCHE")){
                     int codeCheval = Integer.parseInt(request.getParameter("codeCheval"));
@@ -314,7 +331,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
 
-            if (url.equals("/EquidaWeb18/ServletVentes/chevalAjouter")) {
+            if (url.equals(URL_AJOUTERCHEVAUX)) {
                 if (compte.isPermission("ACHE")) {
                     ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
                     request.setAttribute("pLesPays", lesPays);
@@ -327,7 +344,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
 
-            if (url.equals("/EquidaWeb18/ServletVentes/ajouterEnchere")) {
+            if (url.equals(URL_AJOUTERENCHERES)) {
                 if (compte.isPermission("AENCH")) {
                     int codeAcheteur = compte.getUnClient().getId();
                     Acheteur unAcheteur = AcheteurDAO.getUnAcheteur(connection, codeAcheteur);
@@ -344,7 +361,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
 
-            if (url.equals("/EquidaWeb18/ServletVentes/chevalModif")) {
+            if (url.equals(URL_MODIFCHEVAL)) {
                 if (compte.isPermission("MCHE")) {
                     ArrayList<TypeCheval> lesTypeCheval = TypeChevalDAO.getLesTypeChevaux(connection);
                     request.setAttribute("pLesTypeCheval", lesTypeCheval);
@@ -360,7 +377,7 @@ public class ServletVentes extends HttpServlet {
                 }
             }
 
-            if (url.equals("/EquidaWeb18/ServletVentes/AjouterChevalVente")) {
+            if (url.equals(URL_AJOUTERCHEVALVENTE)) {
                 if (compte.isPermission("ACHEV")) {
                     int codeAcheteur = compte.getUnClient().getId();
                     ArrayList<Cheval> lesChevaux = ChevauxDAO.getLesChevaux(connection, "" + codeAcheteur);
@@ -391,7 +408,7 @@ public class ServletVentes extends HttpServlet {
 
        String url = request.getRequestURI();
        
-        if(url.equals("/EquidaWeb18/ServletVentes/creerMail")){
+        if(url.equals(URL_AJOUTERMAIL)){
         
         
         /* Préparation de l'objet formulaire */
@@ -414,7 +431,7 @@ public class ServletVentes extends HttpServlet {
             
             CourrielDAO.ajouterCourriel(connection, courriel);
             
-            response.sendRedirect( "/EquidaWeb18/ServletVentes/envoyerMail?id=" + courriel.getId());
+            response.sendRedirect( "/EquidaWeb1ATTG/ServletVentes/envoyerMail?id=" + courriel.getId());
         } else {
            ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
            request.setAttribute("pLesVentes", lesVentes);
@@ -426,12 +443,12 @@ public class ServletVentes extends HttpServlet {
         }
     }
         
-        if(url.equals("/EquidaWeb18/ServletVentes/envoyerMail")){
+        if(url.equals(URL_ENVOYERMAIL)){
           getServletContext().getRequestDispatcher("/vues/ventes/confirmationMail.jsp").forward(request, response);           
         }
 
 
-        if(url.equals("/EquidaWeb18/ServletVentes/ajouterVente")){
+        if(url.equals(URL_AJOUTERVENTE)){
 
             /* Préparation de l'objet formulaire */
             VenteForm form = new VenteForm();
@@ -458,7 +475,7 @@ public class ServletVentes extends HttpServlet {
             }
         }
         
-        if(url.equals("/EquidaWeb18/ServletVentes/ajouterEnchere")){
+        if(url.equals(URL_AJOUTERENCHERES)){
 
             /* Préparation de l'objet formulaire */
             EnchereForm form = new EnchereForm();
@@ -496,7 +513,7 @@ public class ServletVentes extends HttpServlet {
             }
         }
 
-        if (url.equals("/EquidaWeb18/ServletVentes/venteModifier")) {
+        if (url.equals(URL_MODIFIERVENTE)) {
             VenteForm form = new VenteForm();
 
             /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
@@ -529,7 +546,7 @@ public class ServletVentes extends HttpServlet {
             }
         }
         
-        if (url.equals("/EquidaWeb18/ServletVentes/chevalAjouter")) {
+        if (url.equals(URL_AJOUTERCHEVAUX)) {
 
             ChevalForm form = new ChevalForm();
 
@@ -575,7 +592,7 @@ public class ServletVentes extends HttpServlet {
             }
 
         }
-        if (url.equals("/EquidaWeb18/ServletVentes/chevalModif")) {
+        if (url.equals(URL_MODIFCHEVAL)) {
 
             ChevalForm form = new ChevalForm();
 
@@ -617,7 +634,7 @@ public class ServletVentes extends HttpServlet {
             }
         }
         
-        if (url.equals("/EquidaWeb18/ServletVentes/AjouterChevalVente")) {
+        if (url.equals(URL_AJOUTERCHEVALVENTE)) {
             ChevalVenteForm form = new ChevalVenteForm();
 
             /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
@@ -632,7 +649,7 @@ public class ServletVentes extends HttpServlet {
                 // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du client 
 
                 LotDAO.ajouterLot(connection, unLot);
-                response.sendRedirect("/EquidaWeb18/ServletVentes/listerLesVentes");
+                response.sendRedirect(URL_LISTERVENTES);
             } else {
                 Compte compte = (Compte) request.getSession().getAttribute("Compte");
                 if (compte != null) {

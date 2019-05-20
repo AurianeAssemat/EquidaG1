@@ -29,6 +29,11 @@ import modele.Vente;
 public class ServletAccueil extends HttpServlet {
 
     Connection connection;
+    public static final String URL_CONNEXION = "/EquidaWebATTG/ServletAccueil/Connexion";
+    public static final String URL_NOPERMISSION = "/EquidaWebATTG/ServletAccueil/NoPermission";
+    public static final String URL_DECONNEXION = "/EquidaWebATTG/ServletAccueil/Deconnexion";
+    public static final String URL_ACCUEIL = "/EquidaWebATTG/ServletAccueil/Accueil";
+    public static final String URL_PROFIL = "/EquidaWebATTG/ServletAccueil/Profil";
 
     @Override
     public void init() {
@@ -77,27 +82,27 @@ public class ServletAccueil extends HttpServlet {
 
         String url = request.getRequestURI();
 
-        if (url.equals("/EquidaWebATTG/ServletAccueil/Connexion") && request.getSession().getAttribute("Compte") == null) {
+        if (url.equals(URL_CONNEXION) && request.getSession().getAttribute("Compte") == null) {
             this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp").forward(request, response);
         }
         
-        if (url.equals("/EquidaWebATTG/ServletAccueil/NoPermission")) {
+        if (url.equals(URL_NOPERMISSION)) {
             this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
         }
 
-        if (url.equals("/EquidaWebATTG/ServletAccueil/Deconnexion")) {
+        if (url.equals(URL_DECONNEXION)) {
 
             request.getSession().setAttribute("Compte", null);
-            response.sendRedirect("/EquidaWeb1ATTG/ServletAccueil/Accueil");
+            response.sendRedirect(URL_ACCUEIL);
         }
 
-        if (url.equals("/EquidaWebATTG/ServletAccueil/Accueil")) {
+        if (url.equals(URL_ACCUEIL)) {
             //ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
             //request.setAttribute("pLesVentes", lesVentes);
             this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp").forward(request, response);
         }
 
-        if (url.equals("/EquidaWebATTG/ServletAccueil/Profil")) {
+        if (url.equals(URL_PROFIL)) {
             Compte compte = (Compte) request.getSession().getAttribute("Compte");
             request.setAttribute("pInformationPersonnelle", compte);
 
@@ -131,7 +136,7 @@ public class ServletAccueil extends HttpServlet {
 
         if (form.getErreurs().isEmpty()) {
             request.getSession().setAttribute("Compte", compte);
-            response.sendRedirect("/EquidaWeb18/ServletAccueil/Accueil");
+            response.sendRedirect(URL_ACCUEIL);
         } else {
             //request.setAttribute("pLesErreurs", form.getErreurs());
             this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp").forward(request, response);
