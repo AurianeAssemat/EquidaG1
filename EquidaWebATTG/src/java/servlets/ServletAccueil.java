@@ -27,6 +27,12 @@ import modele.Vente;
  * relatives au clients Fonctionnalités implémentées : ajouter un nouveau client
  */
 public class ServletAccueil extends HttpServlet {
+	
+	public static final String URL_CONNEXION = "/EquidaWebATTG/ServletAccueil/Connexion";
+	public static final String URL_NO_PERMISSION = "/EquidaWebATTG/ServletAccueil/NoPermission";
+	public static final String URL_DECONNEXION = "/EquidaWebATTG/ServletAccueil/Deconnexion";
+	public static final String URL_ACCUEIL = "/EquidaWebATTG/ServletAccueil/Accueil";
+	public static final String URL_PROFIL = "/EquidaWebATTG/ServletAccueil/Profil";
 
     Connection connection;
 
@@ -77,27 +83,27 @@ public class ServletAccueil extends HttpServlet {
 
         String url = request.getRequestURI();
 
-        if (url.equals("/EquidaWebATTG/ServletAccueil/Connexion") && request.getSession().getAttribute("Compte") == null) {
+        if (url.equals(URL_CONNEXION) && request.getSession().getAttribute("Compte") == null) {
             this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp").forward(request, response);
         }
         
-        if (url.equals("/EquidaWebATTG/ServletAccueil/NoPermission")) {
+        if (url.equals(URL_NO_PERMISSION)) {
             this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
         }
 
-        if (url.equals("/EquidaWebATTG/ServletAccueil/Deconnexion")) {
+        if (url.equals(URL_DECONNEXION)) {
 
             request.getSession().setAttribute("Compte", null);
-            response.sendRedirect("/EquidaWeb1ATTG/ServletAccueil/Accueil");
+            response.sendRedirect(URL_ACCUEIL);
         }
 
-        if (url.equals("/EquidaWebATTG/ServletAccueil/Accueil")) {
+        if (url.equals(URL_ACCUEIL)) {
             //ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
             //request.setAttribute("pLesVentes", lesVentes);
             this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp").forward(request, response);
         }
 
-        if (url.equals("/EquidaWebATTG/ServletAccueil/Profil")) {
+        if (url.equals(URL_PROFIL)) {
             Compte compte = (Compte) request.getSession().getAttribute("Compte");
             request.setAttribute("pInformationPersonnelle", compte);
 
