@@ -118,7 +118,7 @@ public class ServletVentes extends HttpServlet {
         Compte compte = (Compte)request.getSession().getAttribute("Compte");
         
         // Récup et affichage par date décroissante de toutes les ventes   
-        if (url.equals("/EquidaWeb18/ServletVentes/listerLesVentes")) {
+        if (url.equals("/EquidaWebATTG/ServletVentes/listerLesVentes")) {
             String codeCat = (String) request.getParameter("codeCat");
             ArrayList<Vente> lesVentes;
             ArrayList<CategVente> lesCategVentes = CategVenteDAO.getLesCategVentes(connection);

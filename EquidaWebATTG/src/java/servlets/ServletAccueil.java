@@ -77,27 +77,27 @@ public class ServletAccueil extends HttpServlet {
 
         String url = request.getRequestURI();
 
-        if (url.equals("/EquidaWeb18/ServletAccueil/Connexion") && request.getSession().getAttribute("Compte") == null) {
+        if (url.equals("/EquidaWebATTG/ServletAccueil/Connexion") && request.getSession().getAttribute("Compte") == null) {
             this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp").forward(request, response);
         }
         
-        if (url.equals("/EquidaWeb18/ServletAccueil/NoPermission")) {
+        if (url.equals("/EquidaWebATTG/ServletAccueil/NoPermission")) {
             this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
         }
 
-        if (url.equals("/EquidaWeb18/ServletAccueil/Deconnexion")) {
+        if (url.equals("/EquidaWebATTG/ServletAccueil/Deconnexion")) {
 
             request.getSession().setAttribute("Compte", null);
-            response.sendRedirect("/EquidaWeb18/ServletAccueil/Accueil");
+            response.sendRedirect("/EquidaWeb1ATTG/ServletAccueil/Accueil");
         }
 
-        if (url.equals("/EquidaWeb18/ServletAccueil/Accueil")) {
+        if (url.equals("/EquidaWebATTG/ServletAccueil/Accueil")) {
             //ArrayList<Vente> lesVentes = VenteDAO.getLesVentes(connection);
             //request.setAttribute("pLesVentes", lesVentes);
             this.getServletContext().getRequestDispatcher("/vues/Accueil.jsp").forward(request, response);
         }
 
-        if (url.equals("/EquidaWeb18/ServletAccueil/Profil")) {
+        if (url.equals("/EquidaWebATTG/ServletAccueil/Profil")) {
             Compte compte = (Compte) request.getSession().getAttribute("Compte");
             request.setAttribute("pInformationPersonnelle", compte);
 
