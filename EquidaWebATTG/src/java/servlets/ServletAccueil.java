@@ -27,14 +27,13 @@ import modele.Vente;
  * relatives au clients Fonctionnalités implémentées : ajouter un nouveau client
  */
 public class ServletAccueil extends HttpServlet {
+	public static final String URL_CONNEXION = "/EquidaWebATTG/ServletAccueil/Connexion";
+	public static final String URL_NO_PERMISSION = "/EquidaWebATTG/ServletAccueil/NoPermission";
+	public static final String URL_DECONNEXION = "/EquidaWebATTG/ServletAccueil/Deconnexion";
+	public static final String URL_ACCUEIL = "/EquidaWebATTG/ServletAccueil/Accueil";
+	public static final String URL_PROFIL = "/EquidaWebATTG/ServletAccueil/Profil";
 
     Connection connection;
-    public static final String URL_CONNEXION = "/EquidaWebATTG/ServletAccueil/Connexion";
-    public static final String URL_NOPERMISSION = "/EquidaWebATTG/ServletAccueil/NoPermission";
-    public static final String URL_DECONNEXION = "/EquidaWebATTG/ServletAccueil/Deconnexion";
-    public static final String URL_ACCUEIL = "/EquidaWebATTG/ServletAccueil/Accueil";
-    public static final String URL_PROFIL = "/EquidaWebATTG/ServletAccueil/Profil";
-
     @Override
     public void init() {
         ServletContext servletContext = getServletContext();
@@ -86,7 +85,8 @@ public class ServletAccueil extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/vues/clientConnexion.jsp").forward(request, response);
         }
         
-        if (url.equals(URL_NOPERMISSION)) {
+
+        if (url.equals(URL_NO_PERMISSION)) {
             this.getServletContext().getRequestDispatcher("/vues/NoPermissions.jsp").forward(request, response);
         }
 
