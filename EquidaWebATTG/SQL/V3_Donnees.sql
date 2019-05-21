@@ -511,3 +511,27 @@ INSERT INTO `donner` (`per_code`, `rol_code`) VALUES
 ('EMAIL', 'DIR'),
 ('SVENT', 'DIR'),
 ('UVENT', 'DIR');
+
+INSERT INTO `course` (`id`, `nom`, `lieu`, `date`, `archiver`) VALUES
+(1078, 'Grand Prix de Versaille', 'Stade Hippique de Versaille', '2014-06-12', 0),
+(1145, 'Course de la Prairie', 'Stade Hippique de Caen', '2015-08-22', 0),
+(1553, 'Course de la Garonne 2018', 'Champ de course de Bordeau', '2018-04-03', 0),
+(5648, 'Course des Alpes 2019', 'Stade hippique de Lyon', '2019-03-13', 0),
+(6105, 'Grand Prix de Méditérannée 2017', 'Stade hippique de Marseille', '2017-06-15', 0),
+(7831, 'Course des Alpes 2018', 'Stade hippique de Lyon', '2018-03-14', 0),
+(8520, 'Grand Prix de Méditérannée 2018', 'Stade hippique de Marseille', '2018-06-14', 0),
+(9852, 'Course de la Garonne 2017', 'Champ de course de Bordeaux', '2017-04-16', 0);
+
+INSERT INTO `participer` (`che_id`, `cour_id`, `place`) VALUES
+(1, 1078, 2),
+(1, 1145, 6),
+(2, 1145, 5),
+(3, 6105, 1),
+(3, 8520, 4),
+(4, 6105, 4),
+(6, 8520, 2),
+(6, 9852, 1),
+(7, 6105, 3),
+(8, 1145, 3),
+(10, 7831, 2),
+(11, 5648, 2);
