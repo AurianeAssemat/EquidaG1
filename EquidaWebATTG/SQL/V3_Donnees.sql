@@ -352,7 +352,7 @@ INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, lie_id, dateFin
 INSERT INTO `courriel` (`date`, `objet`,corps, ven_id) VALUES
 ('2017-02-07 08:24:37','Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 30917),
 ('2017-08-06 14:24:15','Erreur de date', 'Bonjour à tous.tes, il y a eu une erreur de date pour la vente pour la vente Jelly Bay : elle aura lieu le 17/08/2017 et non pas le 07/08/2017. Je vous souhaite une agréable journée.', 210717),
-('2018-02-08 17:09:37','Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 230119);
+('2018-02-08 17:09:37','Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 230119),
 ('2018-10-04 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 32587),
 ('2018-11-05 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 36124),
 ('2018-12-07 23:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 90217),
