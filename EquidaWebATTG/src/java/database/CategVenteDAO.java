@@ -26,7 +26,7 @@ public class CategVenteDAO {
     public static ArrayList<CategVente> getLesCategVentes(Connection connection) {
         ArrayList<CategVente> lesCategVentes = new ArrayList<CategVente>();
         try {
-            requete = connection.prepareStatement("select * from categvente where archiver!=1");
+            requete = connection.prepareStatement("select * from categvente where archiver !=1");
             rs = requete.executeQuery();
 
             //On hydrate l'objet métier Client avec les résultats de la requête

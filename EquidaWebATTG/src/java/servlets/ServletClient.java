@@ -87,7 +87,7 @@ public class ServletClient extends HttpServlet {
         Compte compte = (Compte)request.getSession().getAttribute("Compte");
         if (compte != null) {
             //ajout d'un client
-            if (url.equals("/EquidaWeb18/ServletClient/ajouterClient")) {
+            if (url.equals("/EquidaWebATTG/ServletClient/ajouterClient")) {
                 if (compte.isPermission("ACLI")) {
                     ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
                     request.setAttribute("pLesPays", lesPays);
@@ -103,7 +103,7 @@ public class ServletClient extends HttpServlet {
             }
 
             //lister les clients en tant que directeur
-            if (url.equals("/EquidaWeb18/ServletClient/listerLesClients")) {
+            if (url.equals("/EquidaWebATTG/ServletClient/listerLesClients")) {
                 if(compte.isPermission("CCLI")) {
                     ArrayList<Client> lesClients = ClientDAO.getLesClients(connection);
                     request.setAttribute("pLesClients", lesClients);
@@ -115,7 +115,7 @@ public class ServletClient extends HttpServlet {
                 }
             }
 
-            if (url.equals("/EquidaWeb18/ServletClient/listerLesAcheteurs")) {
+            if (url.equals("/EquidaWebATTG/ServletClient/listerLesAcheteurs")) {
                 if (compte.isPermission("CACHE")) {
                     ArrayList<Acheteur> lesAcheteurs = AcheteurDAO.getLesAcheteurs(connection);
 
@@ -126,7 +126,7 @@ public class ServletClient extends HttpServlet {
                 }
             }
 
-            if (url.equals("/EquidaWeb18/ServletClient/listerLesVendeurs")) {
+            if (url.equals("/EquidaWebATTG/ServletClient/listerLesVendeurs")) {
                 if (compte.isPermission("CVEN")) {
                     ArrayList<Vendeur> lesVendeurs = VendeurDAO.getLesVendeurs(connection);
 
@@ -141,7 +141,7 @@ public class ServletClient extends HttpServlet {
             //MODIFICATION DE 1 CLIENT 
 
 
-           if(url.equals("/EquidaWeb18/ServletClient/clientModif"))
+           if(url.equals("/EquidaWebATTG/ServletClient/clientModif"))
            {
                if (compte.isPermission("UCLI")) {
                     ArrayList<Pays> lesPays = PaysDAO.getLesPays(connection);
@@ -186,7 +186,7 @@ public class ServletClient extends HttpServlet {
 
         String url = request.getRequestURI();
 
-        if (url.equals("/EquidaWeb18/ServletClient/ajouterClient")){
+        if (url.equals("/EquidaWebATTG/ServletClient/ajouterClient")){
             // Préparation de l'objet formulaire
            ClientForm form = new ClientForm();
 
@@ -224,7 +224,7 @@ public class ServletClient extends HttpServlet {
            }
         }
         
-        if (url.equals("/EquidaWeb18/ServletClient/clientModif")){
+        if (url.equals("/EquidaWebATTG/ServletClient/clientModif")){
         
             // Préparation de l'objet formulaire
             ClientForm form = new ClientForm();

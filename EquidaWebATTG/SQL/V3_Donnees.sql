@@ -297,11 +297,12 @@ INSERT INTO `categvente` (`code`, `libelle`) VALUES
 ('AUT', 'Vente d\'automne'),
 ('ELVG', 'Vente d\'élevage'),
 ('ETE', 'Vente d\'été'),
-('XFEV', 'Vente mixte de février');
+('XFEV', 'Vente mixte de février'),
+('PRTP', 'Vente de Printemps');
 
 
 INSERT INTO `acheteur` (`ach_id`) VALUES
-(1),
+(4),
 (5),
 (10),
 (12),
@@ -310,13 +311,15 @@ INSERT INTO `acheteur` (`ach_id`) VALUES
 (9);
 
 INSERT INTO `vendeur` (`ven_id`) VALUES
+(3),
 (5),
 (6),
 (7),
 (15),
 (16),
 (17),
-(18);
+(18),
+(30);
 
 
 INSERT INTO `lieu` (`ville`, `nbBoxes`,commentaire) VALUES
@@ -333,6 +336,7 @@ INSERT INTO `lieu` (`id`, `ville`, `nbBoxes`, `commentaire`) VALUES
 (9, 'Bordeaux', 16, '');
 
 INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, lie_id, dateFinVente, dateDebutInscrip) VALUES
+(30619, 'Summer Sail', '2019-05-27', 'PRTP', 8, '2019-05-06', '2019-04-22'),
 (30917, 'Garibaldi Princess', '2017-03-09', 'ELVG', 2, '2017-05-09', '2017-01-09'),
 (32587, 'Vente des bords de Seine', '2018-10-19', 'AUT', 1, '2018-10-27', '2018-10-19'),
 (36124, 'Vente remus de la tour', '2018-10-20', 'AUT', 3, '2018-10-31', '2018-10-24'),
@@ -346,20 +350,20 @@ INSERT INTO `vente` (`id`, `nom`, `dateDebut`, `codeCategVente`, lie_id, dateFin
 (250217, 'Djezair Star', '2017-02-25', 'XFEV', 2, '2017-04-25', '2017-01-25');
 
 INSERT INTO `courriel` (`date`, `objet`,corps, ven_id) VALUES
-('2018-08-05','Objet1', 'corps 1', 30917),
-('2018-04-06','Objet2', 'corps 2', 210717),
-('2018-02-08','Objet3', 'corps 3', 230119);
+('2017-02-07 08:24:37','Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 30917),
+('2017-08-06 14:24:15','Erreur de date', 'Bonjour à tous.tes, il y a eu une erreur de date pour la vente pour la vente Jelly Bay : elle aura lieu le 17/08/2017 et non pas le 07/08/2017. Je vous souhaite une agréable journée.', 210717),
+('2018-02-08 17:09:37','Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 230119);
 
 INSERT INTO `piecejointe` (`chemin`, `description`) VALUES
-('image/image.png','une image' ),
-('document/text.txt','un text' ),
-('document/fichier.pdf','un pdf');
+('image/logo.png','Logo d\'Equida' ),
+('document/Congignes.pdf','Consignes de vente' ),
+('document/Calendrier_de_vente.pdf','Calendrier de vente');
 
 INSERT INTO `joindre` (`pie_id`, `cou_id`) VALUES
 (1,1),
 (1,2),
 (2,1),
-(2,2);
+(2,3);
 
 /* 2 */
 
@@ -369,7 +373,8 @@ INSERT INTO `typecheval` (`id`, `libelle`, `description`) VALUES
 (3, 'Inédit', 'pur-sang anglais de deux ans n’ayant pas encore participé à une course mais déjà travaillé sur le plan de la condition physique'),
 (4, 'poulinière', 'jument dédiée à la reproduction'),
 (5, 'pur-sang anglais', 'pur-sang anglais'),
-(6, 'Yearling', 'pur-sang anglais âgé d’un an');
+(6, 'Yearling', 'pur-sang anglais âgé d’un an'),
+(7, 'irlandais', 'chevaux de race irlandaise');
 
 INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`, cli_id) VALUES
 (1, 'Houri', 'M', '0808.185.585Z', NULL, NULL, 5, 6),
@@ -378,7 +383,12 @@ INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`, cli
 (4, 'Trais d\'or', 'M', '0808.000.554Z', 1, 2, 6, 30),
 (5, 'Herricka', 'F', '0808.201.855Z', 1, 2, 5, 9),
 (6, 'Nuage', 'M', '0808.980.128Z', 1, 2, 6, 8),
-(7, 'Desperado', 'M', '0808.180.529Z', 1, 2, 6, 10);
+(7, 'Desperado', 'M', '0808.180.529Z', 1, 2, 6, 10),
+(8, 'Tom', 'M', '0808.358.485Z', NULL, NULL, 2, 30),
+(9, 'Peche', 'F', '0808.458.915Z', 8, NULL, 7, 30),
+(10, 'Abricot', 'M', '0808.912.735Z', NULL, 9, 7, 30),
+(11, 'Poireau', 'M', '0808.618.153Z', NULL, NULL, 6, 3),
+(12, 'Laurier', 'M', '0808.792.254X', 10, 5, 5, 6);
 
 /* 3 */
 
@@ -418,9 +428,11 @@ INSERT INTO `compte` (`id`, `login`, `mdp`, `cli_id`) VALUES
 --
 
 INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `prixDepart`) VALUES
+(1, 30619, 2, 16, 28000),
 (1, 30917, 7, 5, 15000),
 (1, 90217, 3, 18, 6000),
 (1, 210717, 6, 5, 1000),
+(2, 30619, 5, 18, 40000),
 (2, 30917, 4, 15, 8000),
 (2, 210717, 1, 5, 18000);
 
@@ -429,12 +441,19 @@ INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `prixDepart`) VALUES
 --
 
 INSERT INTO `enchere` (`id`, `lot_id`, `lotvent_id`, `ach_id`, `montant`) VALUES
+(1, 1, 30619, 7, 30000),
 (1, 1, 30917, 10, 17000),
 (1, 1, 210717, 10, 8500),
+(1, 2, 30619, 10, 42000),
 (1, 2, 30917, 5, 9000),
 (1, 2, 210717, 9, 32000),
+(2, 1, 30619, 12, 35000),
 (2, 1, 30917, 9, 20000),
-(2, 2, 210717, 7, 35000);
+(2, 1, 210717, 5, 12000),
+(2, 2, 30619, 7, 45000),
+(2, 2, 210717, 7, 35000),
+(3, 1, 30917, 5, 25000),
+(3, 1, 210717, 5, 15000);
 
 
 INSERT INTO `role` (`code`, `nom`) VALUES
@@ -468,7 +487,6 @@ INSERT INTO `permissions` (`code`, `nom`) VALUES
 INSERT INTO `avoir` (`com_id`, `rol_code`) VALUES
 (1, 'ADMIN'),
 (2, 'ADMIN'),
-(1, 'CLI'),
 (3, 'CLI'),
 (7, 'CLI'),
 (30, 'CLI'),
