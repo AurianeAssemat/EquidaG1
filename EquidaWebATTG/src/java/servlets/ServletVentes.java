@@ -158,6 +158,7 @@ public class ServletVentes extends HttpServlet {
 
             ArrayList<Lot> lesLots = LotDAO.getLesLots(connection, idVente);
             request.setAttribute("pLesLots", lesLots);
+            request.setAttribute("pCodeVente", idVente);
             getServletContext().getRequestDispatcher("/vues/ventes/listerLesChevaux.jsp").forward(request, response);
         }
 

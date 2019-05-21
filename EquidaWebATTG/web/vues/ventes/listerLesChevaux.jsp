@@ -37,7 +37,7 @@
                     
                     <% if (compte != null  && compte.isPermission("ACHEV")) { %>
 
-                    <!--<a class="btn-floating btn-large waves-effect waves-light red" href='../ServletVentes/AjouterChevalVente'><i class="material-icons">add</i></a>-->
+                        <a class="btn-floating btn-large waves-effect waves-light red" href='../ServletVentes/AjouterChevalVente?codeVente=<% out.println(request.getAttribute("pCodeVente")); %>'><i class="material-icons">add</i></a>
                     <% } %>
 
                 </div>
