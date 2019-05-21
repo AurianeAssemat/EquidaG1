@@ -44,7 +44,7 @@
             <%
                 }
             %>
-            <form class="form-inline" action="courseModifier?id=<% out.println(unCourse.getId()); %>" method="POST">
+            <form class="form-inline" action="modifier?id=<% out.println(unCourse.getId()); %>" method="POST">
                 <div class="row">
                     <div class="input-field col-s6">
                         <label for="id">Id de la course : (4 caractères)</label>

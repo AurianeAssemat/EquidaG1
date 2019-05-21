@@ -5,8 +5,8 @@
  */
 package servlets;
 
-import database.ChevauxDAO;
 import database.CourseDAO;
+import formulaires.CourseForm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modele.Cheval;
 import modele.Course;
 
 /**
@@ -97,7 +96,32 @@ public class ServletCourse extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(request, response);
+		
+		String url = request.getRequestURI();
+		
+		if (url.equals(URL_MODIFER_COURSE)) {
+            CourseForm form = new CourseForm();
+			
+			/* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+            Course uneCourse = form.courseAjouter(request);
+
+            request.setAttribute("form", form);
+            
+            if (form.getErreurs().isEmpty()) {
+                
+                Course courseVerif = CourseDAO.ModifierCourse(connection, uneCourse);
+                request.setAttribute("pCourse", courseVerif);
+
+                response.sendRedirect("/EquidaWebATTG/ServletAdministrateur/listerParamCourse");
+            }else {            
+                int idCourse = Integer.parseInt(request.getParameter("id"));
+                uneCourse = CourseDAO.getUnCourse(connection, idCourse);
+               
+                request.setAttribute("pCourse", uneCourse);
+                
+                getServletContext().getRequestDispatcher("/vues/course/courseModifier.jsp").forward(request, response);
+            }
+        }
 	}
 
 	/**
