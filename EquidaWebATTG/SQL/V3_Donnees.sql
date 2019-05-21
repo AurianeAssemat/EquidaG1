@@ -353,6 +353,14 @@ INSERT INTO `courriel` (`date`, `objet`,corps, ven_id) VALUES
 ('2017-02-07 08:24:37','Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 30917),
 ('2017-08-06 14:24:15','Erreur de date', 'Bonjour à tous.tes, il y a eu une erreur de date pour la vente pour la vente Jelly Bay : elle aura lieu le 17/08/2017 et non pas le 07/08/2017. Je vous souhaite une agréable journée.', 210717),
 ('2018-02-08 17:09:37','Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 230119);
+('2018-10-04 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 32587),
+('2018-11-05 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 36124),
+('2018-12-07 23:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 90217),
+('2019-02-04 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 130519),
+('2019-04-05 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 200319),
+('2019-05-07 23:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 210219),
+('2019-09-07 23:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 210817),
+('2019-05-04 23:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 250217);
 
 INSERT INTO `piecejointe` (`chemin`, `description`) VALUES
 ('image/logo.png','Logo d\'Equida' ),
@@ -360,10 +368,23 @@ INSERT INTO `piecejointe` (`chemin`, `description`) VALUES
 ('document/Calendrier_de_vente.pdf','Calendrier de vente');
 
 INSERT INTO `joindre` (`pie_id`, `cou_id`) VALUES
-(1,1),
-(1,2),
-(2,1),
-(2,3);
+(1,3),
+(1,4),
+(2,4),
+(1,5),
+(2,5),
+(1,6),
+(2,6),
+(1,7),
+(2,7),
+(1,8),
+(2,8),
+(1,9),
+(2,9),
+(1,10),
+(2,10),
+(1,11),
+(2,11);
 
 /* 2 */
 
