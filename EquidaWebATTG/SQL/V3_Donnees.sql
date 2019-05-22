@@ -425,11 +425,6 @@ INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`, cli
 
 /* 3 */
 
-
---
--- Déchargement des données de la table `clientcategvente`
---
-
 INSERT INTO `clientcategvente` (`codeClient`, `codeCategVente`) VALUES
 (6, 'AUT'),
 (29, 'AUT'),
@@ -444,10 +439,6 @@ INSERT INTO `clientcategvente` (`codeClient`, `codeCategVente`) VALUES
 (49, 'ETE'),
 (50, 'ETE'),
 (6, 'XFEV');
-
---
--- Déchargement des données de la table `compte`
---
 
 INSERT INTO `compte` (`id`, `login`, `mdp`, `cli_id`) VALUES
 (1, 'cdeltour', 'ef826f96fe347d7dab72d2d0a0852128', 1),
@@ -481,10 +472,6 @@ INSERT INTO `compte` (`id`, `login`, `mdp`, `cli_id`) VALUES
 (29, 'bcacheux', '696327290d5dbc202f81de1aba2889f8', 29),
 (30, 'ecadic', '159fe6d795cf16432b5f0100a1d34870', 30);
 
---
--- Déchargement des données de la table `lot`
---
-
 INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `prixDepart`) VALUES
 (1, 30619, 2, 16, 28000),
 (1, 30917, 7, 5, 15000),
@@ -498,9 +485,16 @@ INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `prixDepart`) VALUES
 (3, 30619, 17, 14, 6000),
 (4, 30619, 14, 11, 2000);
 
---
--- Déchargement des données de la table `enchere`
---
+INSERT INTO `concerner` (`ven_id`, `typ_id`) VALUES
+(30619, 1),
+(130519, 2),
+(30619, 5),
+(90217, 5),
+(130519, 5),
+(210717, 5),
+(30917, 6),
+(210717, 6),
+(30619, 7);
 
 INSERT INTO `enchere` (`id`, `lot_id`, `lotvent_id`, `ach_id`, `montant`) VALUES
 (1, 1, 30619, 7, 30000),
