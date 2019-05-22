@@ -5,6 +5,7 @@
  */
 package database;
 
+import static database.EnchereDAO.requete;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -138,16 +139,36 @@ public class LotDAO {
      public static Lot ajouterLot(Connection connection, Lot unLot) {
         int idGenere = -1;
         try {
+            int idLot = 0;
+            int idvente = unLot.getUneVente().getId();
+            requete = connection.prepareStatement("select MAX(loy.id) AS idMax from  lot where AND lot.vent_id = ?");
+            requete.setInt(2, idvente);
+            //executer la requete
+            rs = requete.executeQuery();
+            
+            while (rs.next()) {
+                String idMaxL = rs.getString("idMax");
+                
+                //Si la requete retourne null, l'id de l'enchere vaudra 1.
+                //Sinon il sera égal à la valeur retournée + 1
+                if(idMaxL != null) {
+                    idLot = 1 + Integer.parseInt(idMaxL);
+                } else {
+                    idLot = 1;
+                }
+            }
             //preparation de la requete
             // id (clé primaire de la table client) est en auto_increment,donc on ne renseigne pas cette valeur
             // la paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
+            unLot.setId(idLot);
 
-            requete = connection.prepareStatement("INSERT INTO Lot ( vent_id, che_id, vend_id, prixDepart) VALUES (?,?,?,?);", requete.RETURN_GENERATED_KEYS);
-            requete.setInt(1, unLot.getUneVente().getId());
-            requete.setInt(2, unLot.getCheval().getId());
-            requete.setInt(3, unLot.getUnVendeur().getId());
-            requete.setFloat(4, unLot.getPrixDepart());
+            requete = connection.prepareStatement("INSERT INTO Lot ( id, vent_id, che_id, vend_id, prixDepart) VALUES (?,?,?,?,?);");
+            requete.setInt(1, unLot.getId());
+            requete.setInt(2, unLot.getUneVente().getId());
+            requete.setInt(3, unLot.getCheval().getId());
+            requete.setInt(4, unLot.getUnVendeur().getId());
+            requete.setFloat(5, unLot.getPrixDepart());
 
             /* Exécution de la requête */
             requete.executeUpdate();
