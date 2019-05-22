@@ -304,22 +304,27 @@ INSERT INTO `categvente` (`code`, `libelle`) VALUES
 INSERT INTO `acheteur` (`ach_id`) VALUES
 (4),
 (5),
-(10),
-(12),
 (7),
 (8),
-(9);
+(9),
+(10),
+(12);
 
 INSERT INTO `vendeur` (`ven_id`) VALUES
 (3),
 (5),
 (6),
 (7),
+(11),
+(14),
 (15),
 (16),
 (17),
 (18),
-(30);
+(27),
+(30),
+(31),
+(32);
 
 
 INSERT INTO `lieu` (`ville`, `nbBoxes`,commentaire) VALUES
@@ -353,14 +358,14 @@ INSERT INTO `courriel` (`date`, `objet`,corps, ven_id) VALUES
 ('2017-02-07 08:24:37','Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 30917),
 ('2017-08-06 14:24:15','Erreur de date', 'Bonjour à tous.tes, il y a eu une erreur de date pour la vente pour la vente Jelly Bay : elle aura lieu le 17/08/2017 et non pas le 07/08/2017. Je vous souhaite une agréable journée.', 210717),
 ('2018-02-08 17:09:37','Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 230119),
-('2018-10-04 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 32587),
-('2018-11-05 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 36124),
-('2018-12-07 23:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 90217),
-('2019-02-04 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 130519),
-('2019-04-05 22:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 200319),
-('2019-05-07 23:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 210219),
-('2019-09-07 23:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 210817),
-('2019-05-04 23:00:00', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 250217);
+('2018-10-04 12:10:25', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 32587),
+('2018-11-05 09:15:36', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 36124),
+('2018-12-07 13:59:23', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 90217),
+('2019-02-04 07:58:26', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 130519),
+('2019-04-05 14:26:58', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 200319),
+('2019-05-07 14:46:59', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 210219),
+('2019-09-07 17:36:45', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 210817),
+('2019-05-04 16:25:31', 'Consignes de la vente', 'Bonjour à tous.tes, voici les consignes de vente. Je vous souhaite une agréable journée.', 250217);
 
 INSERT INTO `piecejointe` (`chemin`, `description`) VALUES
 ('image/logo.png','Logo d\'Equida' ),
@@ -407,9 +412,16 @@ INSERT INTO `cheval` (`id`, `nom`, `sexe`, `sire`, `pere`, `mere`, `typ_id`, cli
 (7, 'Desperado', 'M', '0808.180.529Z', 1, 2, 6, 10),
 (8, 'Tom', 'M', '0808.358.485Z', NULL, NULL, 2, 30),
 (9, 'Peche', 'F', '0808.458.915Z', 8, NULL, 7, 30),
-(10, 'Abricot', 'M', '0808.912.735Z', NULL, 9, 7, 30),
-(11, 'Poireau', 'M', '0808.618.153Z', NULL, NULL, 6, 3),
-(12, 'Laurier', 'M', '0808.792.254X', 10, 5, 5, 6);
+(10, 'Abricot', 'M', '0808.912.735Z', 4, 9, 7, 30),
+(11, 'Poireau', 'M', '0808.618.153Z', 8, 5, 6, 3),
+(12, 'Laurier', 'M', '0808.792.254X', 10, 5, 5, 6),
+(13, 'Pomme', 'F', '0808.515.218F', NULL, 9, 4, 28),
+(14, 'Tomate', 'F', '0808.688.165F', 10, NULL, 7, 11),
+(15, 'Maria', 'F', '0808.674.846E', NULL, 13, 4, 31),
+(16, 'Semba', 'M', '0808.684.268D', NULL, NULL, 2, 32),
+(17, 'Ki Noko', 'M', '0808.654.987U', NULL, NULL, 1, 14),
+(18, 'Tama Go', 'F', '0808.684.258F', NULL, 13, 5, 17),
+(19, 'Apollo', 'M', '0808.158.164G', 3, NULL, 3, 27);
 
 /* 3 */
 
@@ -480,7 +492,11 @@ INSERT INTO `lot` (`id`, `vent_id`, `che_id`, `vend_id`, `prixDepart`) VALUES
 (1, 210717, 6, 5, 1000),
 (2, 30619, 5, 18, 40000),
 (2, 30917, 4, 15, 8000),
-(2, 210717, 1, 5, 18000);
+(2, 210717, 1, 5, 18000),
+(1, 130519, 18, 17, 3000),
+(2, 130519, 16, 32, 2540),
+(3, 30619, 17, 14, 6000),
+(4, 30619, 14, 11, 2000);
 
 --
 -- Déchargement des données de la table `enchere`
@@ -525,7 +541,7 @@ INSERT INTO `permissions` (`code`, `nom`) VALUES
 ('EMAIL', 'Envoyer un mail'),
 ('MCHE', 'Modifier un cheval'),
 ('SADMI', 'Supprimer donnée admin'),
-('SMCHE', 'Supprimer mes cheval'),
+('SMCHE', 'Supprimer mon cheval'),
 ('SVENT', 'Suprimer une vente'),
 ('UCLI', 'Modifier un client'),
 ('UVENT', 'Modifier une vente');
@@ -534,6 +550,7 @@ INSERT INTO `avoir` (`com_id`, `rol_code`) VALUES
 (1, 'ADMIN'),
 (2, 'ADMIN'),
 (3, 'CLI'),
+(4, 'CLI'),
 (5, 'CLI'),
 (6, 'CLI'),
 (7, 'CLI'),
@@ -567,6 +584,7 @@ INSERT INTO `donner` (`per_code`, `rol_code`) VALUES
 ('CADMI', 'ADMIN'),
 ('SADMI', 'ADMIN'),
 ('ACHE', 'CLI'),
+('ACHEV', 'CLI'),
 ('AENCH', 'CLI'),
 ('CMCHE', 'CLI'),
 ('MCHE', 'CLI'),
